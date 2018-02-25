@@ -1,21 +1,23 @@
 class DriversList {
 
     constructor() {
-        this._drivers = [];
+        this._drivers = {};
+        this._lastInsertId = 0;        
     }
 
     getAllDrivers() {
         var result = [];
-        for(var i=0; i < this._drivers; i++) {
-            var driver = this._drivers[i];
+        for (var id in this._drivers) {
+            var driver = this._drivers[id];
             result.push( driver.getInfo() );
-        }
-        return result;
+        }        
+        return result;        
     }
 
     addDriver(name, surname, phone) {
-    		var driver = new Driver(name, surname, phone);
-        this._drivers.push(driver);
+        var driver = new Driver(this._lastInsertId, name, surname, phone);
+        this._drivers[this._lastInsertId] = driver;
+        this._lastInsertId++;
     }
 
     getDriver(id) {
@@ -32,7 +34,7 @@ class DriversList {
     }
 
     deleteDriver(id) {
-    	//delete
+    	delete this._drivers[id];
     }
 
 }

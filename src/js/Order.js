@@ -1,15 +1,34 @@
+class OrderStatus {
+
+    static get NEW_ORDER() {
+        return 0;
+    }    
+
+    static get IN_PROGRESS() {
+        return 1;
+    }
+
+    static get COMPLETED() {
+        return 2;
+    }
+
+    static get CANCELLED() {
+        return 3;
+    }
+}
+
 class Order {
-    constructor(orderParams) {
-        this._geoService = geoService;
+    constructor(orderParams, geoService) {        
         this._clientName = orderParams.clientName;
         this._clientPhone = orderParams.clientPhone;
         this._dateOfCreation = new Date();
         this._dateOfCompletion = undefined;
         this._carFeedPoint = orderParams.carFeedPoint;
         this._destination = orderParams.destination;
-        this._distance = undefined;
+        this._distance = geoService.getDistance(this._carFeedPoint, this._destination);
         this._rate = orderParams.rate;
         this._id = orderParams.id;
+        this._status = OrderStatus.NEW_ORDER;
     }
 
     getDistance(startPosition, endPosition) {

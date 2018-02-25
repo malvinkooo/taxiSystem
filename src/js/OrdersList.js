@@ -1,17 +1,15 @@
 class OrdersList {
 
-    constructor() {
-        this._orders = [];
+    constructor(geoService) {
+        this._orders = [];  
     }
 
-    addOrder(orderParams) {
-        var order = new Order(orderParams);
-        var distance = order.getDistance;
-        order.setDistance(distance);
+    addOrder(orderParams, geoService) {
+        var order = new Order(orderParams, geoService);        
         this._orders.push(order)
     }
 
-    getAllorders() {
+    getAllOrders() {
         var result = [];
         for(var i=0; i < this.order; i++) {
             var order = this.order[i];

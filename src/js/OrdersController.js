@@ -1,15 +1,16 @@
 class OrdersController {
-    constructor(ui, orders) {
+    constructor(ui, orders, geoService) {
         this._ui = ui;
         this._orders = orders;
+        this._geoService = geoService;
     }
     
     selectMenuItemAddOrder() {
         this._ui.showAddOrderForm();
     }
 
-    addOrder(orderParams) {
-        this._orders.addOrder(orderParams);
+    addOrder(orderParams) {        
+        this._orders.addOrder(orderParams, geoService);
         this._ui.showSuccessNotification();
         var list = this._orders.getAllOrders();
         this.ui.showOrdersList(list);
