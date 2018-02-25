@@ -32,7 +32,13 @@ class Driver {
         this._name = name;
     }
 
-    //....
+    setSurname(surname) {
+        this._surname = surname;
+    }
+
+    setPhone(phone) {
+        this.phone = phone;
+    }
 
     getInfo() {
         return {
