@@ -10,7 +10,7 @@ class DriverStatus {
 
     static get BUSY() {
         return 2;
-    }    
+    }
 }
 
 
@@ -48,5 +48,9 @@ class Driver {
             currentLocation: this._currentLocation,
             status: this._status
         };
+    }
+
+    getStatus() {
+        return this._status;
     }
 }

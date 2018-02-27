@@ -1,20 +1,41 @@
 class CarsList {
 
     constructor() {
-        this._cars = [];
-    }
-
-    addCar(stateCarNumber, gasolineConsumptionRatio, brand) {
-        var car = new Car(stateCarNumber, gasolineConsumptionRatio, brand);
-        this._cars.push(car);
+        this._cars = {};
+        this._lastInsertId = 0;
     }
 
     getAllCars() {
         var result = [];
-        for(var i=0; i < this._cars; i++) {
-            var car = this._cars[i];
+        for(var id in this._cars) {
+            var car = this._cars[id];
             result.push( car.getInfo() );
         }
         return result;
+    }
+
+    addCar(stateCarNumber, gasolineConsumptionRatio, brand) {
+        var car = new Car(this._lastInsertId, stateCarNumber, gasolineConsumptionRatio, brand);
+        this._cars.push(car);
+        this._lastInsertId++;
+    }
+
+    getCar(id) {
+        return this._list[id].getInfo();
+    }
+
+    editCar(id, stateCarNumber, gasolineConsumptionRatio, brand) {
+        var car = this._list[id];
+        car.setStateCarNumber(stateCarNumber);
+        car.setGasolineConsumptionRatio(gasolineConsumptionRatio);
+        car.setBrand(brand);
+    }
+
+    deleteCar(id) {
+        //...
+    }
+
+    getCarsCount() {
+        return Object.keys(this._cars).length;
     }
 }

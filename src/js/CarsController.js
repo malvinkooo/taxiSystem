@@ -14,4 +14,33 @@ class CarsController {
         var list = this._cars.getAllCars();
         this._ui.showAllCars(list);
     }
+
+    selectMenuItemAllCars() {
+        var list = this._cars.getAllCars();
+        this._ui.showAllCars(list);
+    }
+
+    selectCar(id) {
+        var info = this._cars.getCar(id);
+        this._ui.showCarInfo(info);
+    }
+
+    selectMenuItemEditCar(id) {
+        var info = this._car.getCar(id);
+        this._ui.showEditCarform(info);
+    }
+
+    editCar(id, stateCarNumber, gasolineConsumptionRatio, brand) {
+        this._cats.editCar(id, stateCarNumber, gasolineConsumptionRatio, brand);
+        this._ui.showSuccessNotification();
+        var info = this._cars.getCar(id);
+        this._ui.showCarInfo(info);
+    }
+
+    deleteCar(id) {
+        this._cars.deleteCar(id);
+        this._ui.showSuccessNotification();
+        var list = this._cars.getAllCars();
+        this._ui.showAllCars(list);
+    }
 }

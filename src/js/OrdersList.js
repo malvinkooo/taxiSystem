@@ -1,18 +1,20 @@
 class OrdersList {
 
     constructor(geoService) {
-        this._orders = [];  
+        this._orders = {};
+        this._lastInsertId = 0;
     }
 
     addOrder(orderParams, geoService) {
-        var order = new Order(orderParams, geoService);        
-        this._orders.push(order)
+        var order = new Order(this._lastInsertId, orderParams, geoService);
+        this._orders.push(order);
+        this._lastInsertId++;
     }
 
     getAllOrders() {
         var result = [];
-        for(var i=0; i < this.order; i++) {
-            var order = this.order[i];
+        for(var id in this._orders) {
+            var order = this._orders[id];
             result.push( order.getInfo() );
         }
         return result;
@@ -29,5 +31,24 @@ class OrdersList {
 
     getOrder(id) {
         return this._orders[id].getInfo();
+    }
+
+    getOrdersCount() {
+        return Object.keys(this._orders).length;
+    }
+
+    getOrdersInProgressCount() {
+        var ordersInPtogressCount = 0;
+        for(var id in this._orders) {
+            var order = this._orders[id];
+            if(order.getstatus() === OrderStatus.IN_PROGRESS) {
+                ordersInPtogressCount++;
+            }
+        }
+        return ordersInPtogressCount;
+    }
+
+    getOrdersByDate(startdate, enddate) {
+        //....
     }
 }

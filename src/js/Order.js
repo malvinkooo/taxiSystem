@@ -2,7 +2,7 @@ class OrderStatus {
 
     static get NEW_ORDER() {
         return 0;
-    }    
+    }
 
     static get IN_PROGRESS() {
         return 1;
@@ -18,7 +18,7 @@ class OrderStatus {
 }
 
 class Order {
-    constructor(orderParams, geoService) {        
+    constructor(orderParams, geoService) {
         this._clientName = orderParams.clientName;
         this._clientPhone = orderParams.clientPhone;
         this._dateOfCreation = new Date();
@@ -33,6 +33,10 @@ class Order {
 
     getDistance(startPosition, endPosition) {
         return geoService.getDistance(this._carFeedPoint, this._destination);
+    }
+
+    getStatus() {
+        return this._status;
     }
 
     setDistance(distance) {

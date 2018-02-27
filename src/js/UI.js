@@ -44,8 +44,23 @@ class UI {
     	//....
     }
 
-    showAllCars() {
+    showAllCars(list) {
     	//...
     }
 
+    showCarInfo(info) {
+        //...
+    }
+
+    showStatsPage(driversCount, freeDriversCount, carsCount, ordersCount, ordersInProgressCount) {
+        //...
+    }
+
+    showReportOptionsForm() {
+        //...
+    }
+
+    showReport(data) {
+        //...
+    }
 }

@@ -2,16 +2,17 @@ class DriversList {
 
     constructor() {
         this._drivers = {};
-        this._lastInsertId = 0;        
+        this._lastInsertId = 0;
     }
 
     getAllDrivers() {
         var result = [];
         for (var id in this._drivers) {
+            //почему нельзя перебирать не включи а сразу водителей?
             var driver = this._drivers[id];
             result.push( driver.getInfo() );
-        }        
-        return result;        
+        }
+        return result;
     }
 
     addDriver(name, surname, phone) {
@@ -35,6 +36,21 @@ class DriversList {
 
     deleteDriver(id) {
     	delete this._drivers[id];
+    }
+
+    getDriverscount() {
+        return Object.keys(this._drivers).length;
+    }
+
+    getFreeDriversCount() {
+        var freeDriversCount = 0;
+        for(var id in this._drivers) {
+            var driver = this._drivers[id];
+            if(driver.getStatus() === DriverStatus.FREE) {
+                freeDriversCount++:
+            }
+        }
+        return freeDriversCount;
     }
 
 }
