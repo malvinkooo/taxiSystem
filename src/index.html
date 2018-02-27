@@ -1,10 +1,85 @@
-<html>
-    <head> 
-        Taxi System       
-    </head>    
-    <body>
-        <button id="menuItemAllDrivers">Показать всех водителей</button>
-        <div id="driversList"></div>
-        <div id="driverInfo"></div>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Taxi System</title>
+	<link rel="stylesheet" type="text/css" href="libs/semantic/semantic.min.css">
+</head>
+<body>
+<div class="ui container">
+	<!-- header -->
+	<h2 class="ui center aligned icon header">
+	  <i class="circular car icon"></i>
+	  Taxi System
+	</h2>
+	<!-- header -->
+	<!-- main tabs menu -->
+	<div class="ui four item menu main-tabs">
+  		<a class="active item" data-tab="orders">Заказы</a>
+  		<a class="item" data-tab="cars">Машины</a>
+  		<a class="item" data-tab="drivers">Водители</a>
+  		<a class="item" data-tab="stat">Статистика</a>
+	</div>
+	<!-- main tabs menu -->
+	<!-- main tabs -->
+	<div class="ui segment tab active" data-tab="orders">
+		<!-- seconadary/orders menu -->
+		<div class="ui secondary  menu">
+	  		<a class="active item" data-tab="allOrders">
+	    		Все заказы
+	  		</a>
+	  		<a class="item" data-tab="addOrder">
+	    		Добавить новый заказ
+	  		</a>
+	  		<!-- search -->
+	  		<div class="right menu">
+	    		<div class="item">
+	      				<div class="ui icon input">
+	        				<input type="text" placeholder="Search...">
+	        				<i class="search link icon"></i>
+	      				</div>
+	    		</div>
+	    		<a class="ui item">
+	      			Logout
+	    		</a>
+	  		</div>
+	  		<!-- search -->
+		</div>
+		<!-- seconadary/orders menu -->
+		<!-- secondary/orders tabs -->
+		<div class="ui tab active" data-tab="allOrders">
+	  		<p>
+	  			1Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem odio recusandae saepe mollitia fuga corporis aut quod sint hic. Veritatis et quaerat cupiditate eos possimus temporibus impedit facere exercitationem vitae.
+	  		</p>
+	  	</div>
+	  	<div class="ui tab" data-tab="addOrder">
+	  		<p>
+	  			2Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem odio recusandae saepe mollitia fuga corporis aut quod sint hic. Veritatis et quaerat cupiditate eos possimus temporibus impedit facere exercitationem vitae.
+	  		</p>
+	  	</div>
+	  	<!-- secondary/orders tabs -->
+	</div>
+	<div class="ui segment tab" data-tab="cars">
+		<p>
+			2Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis ipsum recusandae eos a voluptatum est quidem velit, at nostrum optio adipisci nihil vitae accusantium molestiae illo quibusdam nisi suscipit blanditiis!
+		</p>
+	</div>
+	<div class="ui segment tab" data-tab="drivers">
+		<p>
+			3Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores molestiae sed iste, accusantium, deserunt eos debitis. Ut iure molestias labore eos nesciunt incidunt fugit unde odio blanditiis voluptatem, esse tempora.
+		</p>
+	</div>
+	<div class="ui segment tab" data-tab="stat">
+		<p>
+			4Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat provident libero cupiditate odit natus maiores aspernatur, odio quod nulla, et fugit placeat quam commodi optio, saepe aperiam ut aliquam a!
+		</p>
+	</div>
+	<!-- main tabs -->
+</div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="libs/semantic/semantic.min.js"></script>
+<script>
+	$('.main-tabs .item, .secondary.menu .item').tab();
+</script>
+</body>
 </html>
