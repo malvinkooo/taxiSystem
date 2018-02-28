@@ -17,7 +17,7 @@ class UI {
     }
 
     showSuccessNotification() {
-
+        $('.ui.tab.active form.ui.form').addClass('success');
     }
 
     showDriverEdirForm (info) {
@@ -40,12 +40,10 @@ class UI {
     	//..
     }
 
-    showAddCarForm() {
-    	//....
-    }
-
-    showAllCars(list) {
-    	//...
+    showAllCars(list) {        
+        console.log(list);
+        //$('.ui.tab.active').removeClass('active');
+        $('[data-tab=allCars]').addClass('active');
     }
 
     showCarInfo(info) {
