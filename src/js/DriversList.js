@@ -47,7 +47,7 @@ class DriversList {
         for(var id in this._drivers) {
             var driver = this._drivers[id];
             if(driver.getStatus() === DriverStatus.FREE) {
-                freeDriversCount++:
+                freeDriversCount++;
             }
         }
         return freeDriversCount;

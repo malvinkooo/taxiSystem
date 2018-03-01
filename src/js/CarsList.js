@@ -16,7 +16,7 @@ class CarsList {
 
     addCar(stateCarNumber, gasolineConsumptionRatio, brand) {
         var car = new Car(this._lastInsertId, stateCarNumber, gasolineConsumptionRatio, brand);
-        this._cars.push(car);
+        this._cars[this._lastInsertId] = car;
         this._lastInsertId++;
     }
 
@@ -32,7 +32,7 @@ class CarsList {
     }
 
     deleteCar(id) {
-        //...
+        delete this._cars[id];
     }
 
     getCarsCount() {

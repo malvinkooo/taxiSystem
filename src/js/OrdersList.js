@@ -48,7 +48,14 @@ class OrdersList {
         return ordersInPtogressCount;
     }
 
-    getOrdersByDate(startdate, enddate) {
-        //....
+    getOrdersByCreationDate(startdate, enddate) {
+        var result = [];
+        for(var key in this._orders) {
+            var date = this._orders[key].getDateOfCreation();
+            if(date >== startdate && date <== enddate) {
+                result.push(this._orders[key]);
+            }
+        }
+        return result;
     }
 }

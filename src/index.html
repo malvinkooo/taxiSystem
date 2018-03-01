@@ -17,14 +17,14 @@
 		<!-- header -->
 		<!-- main tabs menu -->
 		<div class="ui four item menu main-tabs">
-			<a class="item" data-tab="orders">Заказы</a>
-			<a class="active item" data-tab="cars">Машины</a>
+			<a class="item active" data-tab="orders">Заказы</a>
+			<a class="item" data-tab="cars">Машины</a>
 			<a class="item" data-tab="drivers">Водители</a>
 			<a class="item" data-tab="stat">Статистика</a>
 		</div>
 		<!-- main tabs menu -->
 		<!-- main tabs -->
-		<div class="ui segment tab" data-tab="orders">
+		<div class="ui segment tab active" data-tab="orders">
 			<!-- seconadary/orders menu -->
 			<div class="ui secondary  menu">
 				<a class="active item" data-tab="allOrders">
@@ -50,10 +50,50 @@
 			<!-- seconadary/orders menu -->
 			<!-- secondary/orders tabs -->
 			<div class="ui tab active" data-tab="allOrders">
-				<p>
-					1Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem odio recusandae saepe mollitia fuga corporis aut quod sint
-					hic. Veritatis et quaerat cupiditate eos possimus temporibus impedit facere exercitationem vitae.
-				</p>
+				<table class="ui selectable celled table">
+					<thead>
+				    	<tr>
+				    		<th>Имя</th>
+				    		<th>Фамилия</th>
+				    		<th>Моб.телефон</th>
+				 		</tr>
+					</thead>
+				  	<tbody>
+				    	<tr>
+				      		<td>Вася</td>
+				      		<td>Иванов</td>
+				      		<td>0524566545</td>
+				    	</tr>
+				    	<tr>
+				      		<td>Петя</td>
+				      		<td>Петров</td>
+				      		<td>0524566545</td>
+				    	</tr>
+				    	<tr>
+				      		<td>Маша</td>
+				      		<td>Василенко</td>
+				      		<td>0524566545</td>
+				    	</tr>
+				  	</tbody>
+				  	<tfoot>
+				    	<tr>
+				    		<th colspan="3">
+				      			<div class="ui right floated pagination menu">
+				        			<a class="icon item">
+				          				<i class="left chevron icon"></i>
+				        			</a>
+				        			<a class="item">1</a>
+				        			<a class="item">2</a>
+				        			<a class="item">3</a>
+				        			<a class="item">4</a>
+				        			<a class="icon item">
+				          				<i class="right chevron icon"></i>
+				        			</a>
+				      			</div>
+				    		</th>
+				  		</tr>
+					</tfoot>
+				</table>
 			</div>
 			<div class="ui tab" data-tab="addOrder">
 				<p>
@@ -63,7 +103,7 @@
 			</div>
 			<!-- secondary/orders tabs -->
 		</div>
-		<div class="ui segment tab active" data-tab="cars">
+		<div class="ui segment tab" data-tab="cars">
 			<!-- seconadary/cars menu -->
 			<div class="ui secondary  menu">
 				<a class="active item" data-tab="allCars">
@@ -85,7 +125,7 @@
 			</div>
 			<!-- seconadary/cars menu -->
 			<!-- secondary/cars tabs -->
-			<div class="ui tab active" data-tab="allCars">
+			<div class="ui tab" data-tab="allCars">
 				<p>
 					1Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem odio recusandae saepe mollitia fuga corporis aut quod sint
 					hic. Veritatis et quaerat cupiditate eos possimus temporibus impedit facere exercitationem vitae.
@@ -109,7 +149,7 @@
 						<div class="header">Автомобиль добавлен</div>
 						<p>You're all signed up for the newsletter.</p>
 					</div>
-					<div class="ui submit button">Добавить</div>					
+					<div class="ui submit button">Добавить</div>
 				</form>
 			</div>
 			<!-- secondary/cars tabs -->
@@ -135,22 +175,6 @@
 	<script src="js/CarsController.js"></script>
 	<script src="js/Car.js"></script>
 	<script src="js/CarsList.js"></script>
-	<script>
-		$('.main-tabs .item, .secondary.menu .item').tab();
-
-		var ui = new UI();
-		var carsList = new CarsList();
-		var carsController = new CarsController(ui, carsList);
-
-		$('#addCarForm div.ui.submit.button').click(function() {
-			$(this).addClass('disabled');
-			var brand = $('#addCarForm input[name=brand]').val();
-			var stateCarNumber = $('#addCarForm input[name=stateCarNumber]').val();
-			var gasolineConsumptionRatio = $('#addCarForm input[name=gasolineConsumptionRatio]').val();
-			carsController.addCar(stateCarNumber, stateCarNumber, gasolineConsumptionRatio);
-		});
-
-	</script>
+	<script src="js/main.js"></script>
 </body>
-
 </html>

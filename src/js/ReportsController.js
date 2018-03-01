@@ -19,7 +19,7 @@ class ReportsController {
     }
 
     generateReport(type, startDate, endDate) {
-        var orders = this._orders.getOrdersByDate(startDate, endDate);
+        var orders = this._orders.getOrdersByCreationDate(startDate, endDate);
         var data = this._reportGenerator.generateReport(orders);
         this._ui.showReport(data);
     }

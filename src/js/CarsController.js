@@ -10,7 +10,7 @@ class CarsController {
         setTimeout(function(){
             var list = this._cars.getAllCars();
             this._ui.showAllCars(list);
-        }.bind(this), 1000);         
+        }.bind(this), 1000);
     }
 
     selectMenuItemAllCars() {
@@ -29,7 +29,7 @@ class CarsController {
     }
 
     editCar(id, stateCarNumber, gasolineConsumptionRatio, brand) {
-        this._cats.editCar(id, stateCarNumber, gasolineConsumptionRatio, brand);
+        this._cars.editCar(id, stateCarNumber, gasolineConsumptionRatio, brand);
         this._ui.showSuccessNotification();
         var info = this._cars.getCar(id);
         this._ui.showCarInfo(info);

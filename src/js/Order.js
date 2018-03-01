@@ -32,7 +32,7 @@ class Order {
     }
 
     getDistance(startPosition, endPosition) {
-        return geoService.getDistance(this._carFeedPoint, this._destination);
+        return this._distance;
     }
 
     getStatus() {
@@ -74,5 +74,9 @@ class Order {
             distance: this._distance,
             rate: this._rate
         };
+    }
+
+    getDateOfCreation() {
+        return this._dateOfCreation;
     }
 }
