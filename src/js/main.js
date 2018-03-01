@@ -1,64 +1,21 @@
-class UI {
-   constructor() {
+$('.main-tabs .item, .secondary.menu .item').tab();
 
-    }
+        var ui = new UI();
+        var carsList = new CarsList();
+        var carsController = new CarsController(ui, carsList);
 
+        $('#addCarForm div.ui.submit.button').click(function() {
+            $(this).addClass('disabled');
+            var brand = $('#addCarForm input[name=brand]').val();
+            var stateCarNumber = $('#addCarForm input[name=stateCarNumber]').val();
+            var gasolineConsumptionRatio = $('#addCarForm input[name=gasolineConsumptionRatio]').val();
+            carsController.addCar(stateCarNumber, stateCarNumber, gasolineConsumptionRatio);
+        });
 
-    showDriversList(list) {
-        // display data in DOM
-    }
-
-    showDriverInfo(info) {
-        // display driver info via DOM
-    }
-
-    showAddDriverForm() {
-
-    }
-
-    showSuccessNotification() {
-        $('.ui.tab.active form.ui.form').addClass('success');
-    }
-
-    showDriverEdirForm (info) {
-
-    }
-
-    showAddOrderForm() {
-
-    }
-
-    showOrdersList(list) {
-        // display data in DOM
-    }
-
-    showOrderInfo(info) {
-    	//...
-    }
-
-    showOrderEditForm(info) {
-    	//..
-    }
-
-    showAllCars(list) {        
-        console.log(list);
-        //$('.ui.tab.active').removeClass('active');
-        $('[data-tab=allCars]').addClass('active');
-    }
-
-    showCarInfo(info) {
-        //...
-    }
-
-    showStatsPage(driversCount, freeDriversCount, carsCount, ordersCount, ordersInProgressCount) {
-        //...
-    }
-
-    showReportOptionsForm() {
-        //...
-    }
-
-    showReport(data) {
-        //...
-    }
-}
+        var a = {
+            'a': 12,
+            'b': 3
+        };
+        for (var c in a) {
+            console.log(a[c]);
+        }
