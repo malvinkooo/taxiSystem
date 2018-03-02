@@ -52,8 +52,8 @@
 				    	<tr>
 				    		<th>Имя клиента</th>
 				    		<th>Моб.номер</th>
-				    		<th>Адрес подачи машины</th>
-				    		<th>Цель</th>
+				    		<th>Откуда</th>
+				    		<th>Куда</th>
 				    		<th>Расстояние</th>
 				    		<th>Тариф</th>
 				    		<th>Статус</th>
@@ -69,7 +69,7 @@
 				      	<td>Марсельская</td>
 				      	<td>5км</td>
 				      	<td>0.4</td>
-				      	<td>В обработке</td>
+				      	<td>Обрабатывается</td>
 				      	<td>12.02.2017</td>
 				      	<td>-</td>
 				    	</tr>
@@ -80,7 +80,7 @@
 				      	<td>Марсельская</td>
 				      	<td>5км</td>
 				      	<td>0.4</td>
-				      	<td>В обработке</td>
+				      	<td>Обрабатывается</td>
 				      	<td>12.02.2017</td>
 				      	<td>-</td>
 				    	</tr>
@@ -91,7 +91,7 @@
 				      	<td>Марсельская</td>
 				      	<td>5км</td>
 				      	<td>0.4</td>
-				      	<td>В обработке</td>
+				      	<td>Обрабатывается</td>
 				      	<td>12.02.2017</td>
 				      	<td>-</td>
 				    	</tr>
@@ -130,29 +130,33 @@
 			</div>
 			<div class="ui tab active" data-tab="addOrder">
 				<!-- add order form -->
-				<form class="ui form">
+				<form class="ui form" id="addOrderForm">
 					<div class="fields three">
 						<div class="field">
-					   	<label>Имя</label>
-					   	<input type="text" name="first-name" placeholder="Имя">
+					   		<label>Имя</label>
+					   		<input type="text" name="first-name" placeholder="Имя">
 					  	</div>
 					  	<div class="field">
-					   	<label>Фамилия</label>
-					   	<input type="text" name="last-name" placeholder="Фамилия">
+					   		<label>Фамилия</label>
+					   		<input type="text" name="last-name" placeholder="Фамилия">
 						</div>
 						<div class="field">
-					   	<label>Контактный номер</label>
-					   	<input type="text" name="last-name" placeholder="Контактный номер">
+					   		<label>Контактный номер</label>
+					   		<input type="text" name="last-name" placeholder="Контактный номер">
 					 	</div>
 					</div>
-					<div class="fields two">
+					<div class="fields three">
 						<div class="field">
-					   	<label>Адрес подачи машины</label>
-					   	<input type="text" name="car-feed-point" placeholder="Адрес подачи машины">
+					   		<label>Откуда</label>
+					   		<input type="text" name="car-feed-point" placeholder="Адрес подачи машины">
 					  	</div>
 					  	<div class="field">
-					   	<label>Цель</label>
-					   	<input type="text" name="goal" placeholder="Цель">
+					   		<label>Куда</label>
+					   		<input type="text" name="goal" placeholder="Цель">
+						</div>
+						<div class="field">
+					   		<label>Тариф</label>
+					   		<input type="number" name="rate" min="1" step="0.1" placeholder="Цель" value="1">
 						</div>
 					</div>
 				  <button class="ui red button" type="submit">Добавить</button>
@@ -353,7 +357,7 @@
  				 <!-- total orders -->
 			</div>
 			<div class="ui tab" data-tab="addDriver">
-				<form id="addCarForm" class="ui form">
+				<form id="addDriverForm" class="ui form">
 					<div class="field">
 						<label>Имя</label>
 						<input type="text" name="driver-name" placeholder="Имя">

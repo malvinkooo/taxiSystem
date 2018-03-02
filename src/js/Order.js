@@ -31,7 +31,7 @@ class Order {
         this._status = OrderStatus.NEW_ORDER;
     }
 
-    getDistance(startPosition, endPosition) {
+    getDistance() {
         return this._distance;
     }
 

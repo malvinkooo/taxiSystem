@@ -11,11 +11,3 @@ $('.main-tabs .item, .secondary.menu .item').tab();
             var gasolineConsumptionRatio = $('#addCarForm input[name=gasolineConsumptionRatio]').val();
             carsController.addCar(stateCarNumber, stateCarNumber, gasolineConsumptionRatio);
         });
-
-        var a = {
-            'a': 12,
-            'b': 3
-        };
-        for (var c in a) {
-            console.log(a[c]);
-        }
