@@ -32,6 +32,14 @@ class Order {
         this._status = OrderStatus.NEW_ORDER;
     }
 
+    getDriver() {
+        return this._driver;
+    }
+
+    setDriver(driver) {
+        this._driver = driver;
+    }
+
     getDistance() {
         return this._distance;
     }
