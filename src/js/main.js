@@ -11,3 +11,5 @@ $('.main-tabs .item, .secondary.menu .item').tab();
             var gasolineConsumptionRatio = $('#addCarForm input[name=gasolineConsumptionRatio]').val();
             carsController.addCar(stateCarNumber, stateCarNumber, gasolineConsumptionRatio);
         });
+        $('select.dropdown').dropdown();
+        $('.ui.checkbox').checkbox();

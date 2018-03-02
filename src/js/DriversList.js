@@ -53,4 +53,17 @@ class DriversList {
         return freeDriversCount;
     }
 
+    getRandomFreeDriver() {
+        var result = [];
+        for(var key in this._drivers) {
+            var driver = this._drivers[key];
+            var driverCurrentStatus = driver.getStatus();
+            if(driverCurrentStatus === DriverStatus.FREE) {
+                result.push(driver);
+            }
+        }
+        var rand = Math.floor(Math.random() * result.length);
+        return result[rand];
+    }
+
 }

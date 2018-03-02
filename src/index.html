@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<title>Taxi System</title>
 	<link rel="stylesheet" type="text/css" href="libs/semantic/semantic.min.css">
+	<link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
@@ -47,7 +48,7 @@
 			<!-- seconadary/orders menu -->
 			<!-- secondary/orders tabs -->
 			<div class="ui tab" data-tab="allOrders">
-				<table class="ui selectable celled table">
+				<table class="ui selectable celled table red">
 					<thead>
 				    	<tr>
 				    		<th>Имя клиента</th>
@@ -159,7 +160,31 @@
 					   		<input type="number" name="rate" min="1" step="0.1" placeholder="Цель" value="1">
 						</div>
 					</div>
-				  <button class="ui red button" type="submit">Добавить</button>
+					<div class="fields two">
+						<div class="field">
+							<div class="ui form">
+  								<div class="field">
+    								<label>Выбрать водителя</label>
+    								<select class="ui search dropdown">
+      									<option value="">Выбрать водителя</option>
+      									<option value="Василиса Пупкина">Василиса Пупкина</option>
+      									<option value="Василиса Пупкина">Василиса Пупкина</option>
+      									<option value="Василиса Пупкина">Василиса Пупкина</option>
+      									<option value="Василиса Пупкина">Василиса Пупкина</option>
+      									<option value="Василиса Пупкина">Василиса Пупкина</option>
+      									<option value="Василиса Пупкина">Василиса Пупкина</option>
+    								</select>
+  								</div>
+							</div>
+						</div>
+						<div class="ui checkbox field">
+							<input type="checkbox" name="isSetDriverAutomatically">
+							<label>Назначить водителя автоматически</label>
+						</div>
+					</div>
+					<div class="field">
+						<button class="ui red button" type="submit">Добавить</button>
+					</div>
 				</form>
 				<!-- add order form -->
 			</div>
@@ -188,7 +213,7 @@
 			<!-- seconadary/cars menu -->
 			<!-- secondary/cars tabs -->
 			<div class="ui tab active" data-tab="allCars">
-				<table class="ui selectable celled table">
+				<table class="ui selectable celled table blue">
 					<thead>
 				    	<tr>
 				    		<th>Марка</th>
@@ -291,7 +316,7 @@
 			<!-- seconadary/cars menu -->
 			<!-- secondary/cars tabs -->
 			<div class="ui tab active" data-tab="allDrivers">
-				<table class="ui selectable celled table">
+				<table class="ui selectable celled table green">
 					<thead>
 				    	<tr>
 				    		<th>Имя</th>

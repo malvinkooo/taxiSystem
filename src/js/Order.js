@@ -19,6 +19,7 @@ class OrderStatus {
 
 class Order {
     constructor(orderParams, geoService) {
+        this._driver = orderParams.driver;
         this._clientName = orderParams.clientName;
         this._clientPhone = orderParams.clientPhone;
         this._dateOfCreation = new Date();

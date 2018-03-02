@@ -1,15 +1,19 @@
 class OrdersController {
-    constructor(ui, orders, geoService) {
+    constructor(ui, orders, drivers, geoService) {
         this._ui = ui;
         this._orders = orders;
+        this._drivers = drivers;
         this._geoService = geoService;
     }
-    
+
     selectMenuItemAddOrder() {
         this._ui.showAddOrderForm();
     }
 
-    addOrder(orderParams) {        
+    addOrder(orderParams) {
+        if(/*isSetDriverAutomatically === checked*/) {
+            orderParams.driver = this._drivers.getRandomFreeDriver();
+        }
         this._orders.addOrder(orderParams, geoService);
         this._ui.showSuccessNotification();
         var list = this._orders.getAllOrders();
