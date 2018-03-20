@@ -1,9 +1,15 @@
-//$('.main-tabs .item, .secondary.menu .item').tab();
+$('.main-tabs .item, .secondary.menu .item').tab();
 
-var carsList = new CarsList();
-var carsController = new CarsController(carsList);
-window.ui = new UI(null, carsController, null, null);
+        var ui = new UI();
+        var carsList = new CarsList();
+        var carsController = new CarsController(ui, carsList);
 
-
-//$('select.dropdown').dropdown();
-//$('.ui.checkbox').checkbox();
+        $('#addCarForm div.ui.submit.button').click(function() {
+            $(this).addClass('disabled');
+            var brand = $('#addCarForm input[name=brand]').val();
+            var stateCarNumber = $('#addCarForm input[name=stateCarNumber]').val();
+            var gasolineConsumptionRatio = $('#addCarForm input[name=gasolineConsumptionRatio]').val();
+            carsController.addCar(stateCarNumber, stateCarNumber, gasolineConsumptionRatio);
+        });
+        $('select.dropdown').dropdown();
+        $('.ui.checkbox').checkbox();

@@ -17,10 +17,10 @@
 		</h2>
 		<!-- header -->
 		<!-- main tabs menu -->
-		<div id="mainMenu" class="ui four item menu main-tabs">
+		<div class="ui four item menu main-tabs">
 			<a class="item" data-tab="orders">Заказы</a>
 			<a class="item" data-tab="cars">Машины</a>
-			<a class="item" data-tab="drivers">Водители</a>
+			<a class="item active" data-tab="drivers">Водители</a>
 			<a class="item" data-tab="stat">Статистика</a>
 		</div>
 		<!-- main tabs menu -->
@@ -31,7 +31,7 @@
 				<a class="item" data-tab="allOrders">
 					Все заказы
 				</a>
-				<a class="item" data-tab="addOrder">
+				<a class="item active" data-tab="addOrder">
 					Добавить новый заказ
 				</a>
 				<!-- search -->
@@ -129,7 +129,7 @@
 				</div>
  				 <!-- total orders -->
 			</div>
-			<div class="ui tab" data-tab="addOrder">
+			<div class="ui tab active" data-tab="addOrder">
 				<!-- add order form -->
 				<form class="ui form" id="addOrderForm">
 					<div class="fields three">
@@ -192,8 +192,8 @@
 		</div>
 		<div class="ui segment tab" data-tab="cars">
 			<!-- seconadary/cars menu -->
-			<div class="ui secondary menu">
-				<a class="item" data-tab="allCars">
+			<div class="ui secondary  menu">
+				<a class="active item" data-tab="allCars">
 					Все машины
 				</a>
 				<a class="item" data-tab="addCar">
@@ -212,7 +212,7 @@
 			</div>
 			<!-- seconadary/cars menu -->
 			<!-- secondary/cars tabs -->
-			<div class="ui tab" data-tab="allCars">
+			<div class="ui tab active" data-tab="allCars">
 				<table class="ui selectable celled table blue">
 					<thead>
 				    	<tr>
@@ -293,10 +293,10 @@
 			</div>
 			<!-- secondary/cars tabs -->
 		</div>
-		<div class="ui segment tab" data-tab="drivers">
+		<div class="ui segment tab active" data-tab="drivers">
 			<!-- seconadary/cars menu -->
 			<div class="ui secondary menu">
-				<a class="item" data-tab="allDrivers">
+				<a class="active item" data-tab="allDrivers">
 					Все водители
 				</a>
 				<a class="item" data-tab="addDriver">
@@ -315,7 +315,7 @@
 			</div>
 			<!-- seconadary/cars menu -->
 			<!-- secondary/cars tabs -->
-			<div class="ui tab" data-tab="allDrivers">
+			<div class="ui tab active" data-tab="allDrivers">
 				<table class="ui selectable celled table green">
 					<thead>
 				    	<tr>
@@ -414,12 +414,10 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	 crossorigin="anonymous"></script>
 	<script src="libs/semantic/semantic.min.js"></script>
-	<script src="js/views/AddCarForm.js"></script>
-	<script src="js/views/MainMenuBar.js"></script>
 	<script src="js/UI.js"></script>
 	<script src="js/CarsController.js"></script>
-	<script src="js/models/Car.js"></script>
-	<script src="js/models/CarsList.js"></script>
+	<script src="js/Car.js"></script>
+	<script src="js/CarsList.js"></script>
 	<script src="js/main.js"></script>
 </body>
 </html>

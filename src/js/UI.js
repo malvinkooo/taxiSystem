@@ -1,19 +1,8 @@
 class UI {
+   constructor() {
 
-   constructor(ordersController, carsController, driversController, reportController) {
-       var htmlAddCarForm = $('#addCarForm');
-       var htmlMenuBar = $('#mainMenu');
-
-       this._mainMenu = new MainMenuBar(htmlMenuBar, ordersController, 
-            carsController, driversController, reportController);
-
-       this._addCarForm = new AddCarForm(htmlAddCarForm, carsController);
-       this._activeView = null;
-   }
-
-    showMenuCars() {
-        
     }
+
 
     showDriversList(list) {
         // display data in DOM
@@ -28,7 +17,7 @@ class UI {
     }
 
     showSuccessNotification() {
-        this._activeView.showSuccessNotification();        
+        $('.ui.tab.active form.ui.form').addClass('success');
     }
 
     showDriverEdirForm (info) {
