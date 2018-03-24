@@ -1,8 +1,12 @@
 class UI {
    constructor() {
-
+       this._mainMenu = new MainMenu($('#mainMenu'));
+       this._ordersTab = new OrdersTab($('[data-tab=orders]'));       
     }
-
+    
+    setOrdersController(ordersController) {        
+        this._ordersTab.setOrdersController(ordersController);
+    }
 
     showDriversList(list) {
         // display data in DOM
@@ -28,8 +32,8 @@ class UI {
 
     }
 
-    showOrdersList(list) {
-        // display data in DOM
+    showOrdersList(list) {        
+        this._ordersTab.showOrdersList(list);
     }
 
     showOrderInfo(info) {

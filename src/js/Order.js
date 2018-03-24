@@ -1,24 +1,24 @@
 class OrderStatus {
 
     static get NEW_ORDER() {
-        return 0;
+        return "Новый";
     }
 
     static get IN_PROGRESS() {
-        return 1;
+        return "Выполняется";
     }
 
     static get COMPLETED() {
-        return 2;
+        return "Выполнен";
     }
 
     static get CANCELLED() {
-        return 3;
+        return "Отменен";
     }
 }
 
 class Order {
-    constructor(orderParams, geoService) {
+    constructor(id, orderParams, geoService) {
         this._driver = orderParams.driver;
         this._clientName = orderParams.clientName;
         this._clientPhone = orderParams.clientPhone;
@@ -28,7 +28,7 @@ class Order {
         this._destination = orderParams.destination;
         this._distance = geoService.getDistance(this._carFeedPoint, this._destination);
         this._rate = orderParams.rate;
-        this._id = orderParams.id;
+        this._id = id;
         this._status = OrderStatus.NEW_ORDER;
     }
 
@@ -81,7 +81,9 @@ class Order {
             carFeedPoint: this._carFeedPoint,
             destination: this._destination,
             distance: this._distance,
-            rate: this._rate
+            rate: this._rate,
+            status: this._status,
+            driver: this._driver
         };
     }
 

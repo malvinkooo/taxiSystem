@@ -11,13 +11,13 @@ class OrdersController {
     }
 
     addOrder(orderParams) {
-        if(/*isSetDriverAutomatically === checked*/) {
+        if(orderParams.isSetDriverAutomatically === 'true') {
             orderParams.driver = this._drivers.getRandomFreeDriver();
         }
         this._orders.addOrder(orderParams, geoService);
         this._ui.showSuccessNotification();
         var list = this._orders.getAllOrders();
-        this.ui.showOrdersList(list);
+        this._ui.showOrdersList(list);
     }
 
     selectMenuItemAllOrders() {

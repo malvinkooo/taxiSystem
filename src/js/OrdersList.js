@@ -1,13 +1,13 @@
 class OrdersList {
 
-    constructor(geoService) {
+    constructor() {
         this._orders = {};
         this._lastInsertId = 0;
     }
 
     addOrder(orderParams, geoService) {
         var order = new Order(this._lastInsertId, orderParams, geoService);
-        this._orders.push(order);
+        this._orders[this._lastInsertId] = order;
         this._lastInsertId++;
     }
 
@@ -52,7 +52,7 @@ class OrdersList {
         var result = [];
         for(var key in this._orders) {
             var date = this._orders[key].getDateOfCreation();
-            if(date >== startdate && date <== enddate) {
+            if(date >= startdate && date <= enddate) {
                 result.push(this._orders[key]);
             }
         }

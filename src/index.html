@@ -17,21 +17,21 @@
 		</h2>
 		<!-- header -->
 		<!-- main tabs menu -->
-		<div class="ui four item menu main-tabs">
-			<a class="item" data-tab="orders">Заказы</a>
+		<div id="mainMenu" class="ui four item menu main-tabs">
+			<a class="item active" data-tab="orders">Заказы</a>
 			<a class="item" data-tab="cars">Машины</a>
-			<a class="item active" data-tab="drivers">Водители</a>
+			<a class="item" data-tab="drivers">Водители</a>
 			<a class="item" data-tab="stat">Статистика</a>
 		</div>
 		<!-- main tabs menu -->
 		<!-- main tabs -->
-		<div class="ui segment tab" data-tab="orders">
+		<div class="ui segment tab active" data-tab="orders">
 			<!-- seconadary/orders menu -->
-			<div class="ui secondary  menu">
-				<a class="item" data-tab="allOrders">
+			<div class="ui secondary menu">
+				<a class="item active" data-tab="allOrders">
 					Все заказы
 				</a>
-				<a class="item active" data-tab="addOrder">
+				<a class="item" data-tab="addOrder">
 					Добавить новый заказ
 				</a>
 				<!-- search -->
@@ -47,7 +47,7 @@
 			</div>
 			<!-- seconadary/orders menu -->
 			<!-- secondary/orders tabs -->
-			<div class="ui tab" data-tab="allOrders">
+			<div class="ui tab active" data-tab="allOrders">
 				<table class="ui selectable celled table red">
 					<thead>
 				    	<tr>
@@ -59,11 +59,12 @@
 				    		<th>Тариф</th>
 				    		<th>Статус</th>
 				    		<th>Дата открытия заявки</th>
-				    		<th>Дата завершения заказа</th>
+							<th>Дата завершения заказа</th>
+							<th>Водитель</th>
 				 		</tr>
 					</thead>
 				  	<tbody>
-				    	<tr>
+				    	<!-- <tr>
 				      	<td>Вася Иванов</td>
 				      	<td>0524566545</td>
 				      	<td>Днепропетровская дорога</td>
@@ -95,12 +96,12 @@
 				      	<td>Обрабатывается</td>
 				      	<td>12.02.2017</td>
 				      	<td>-</td>
-				    	</tr>
+				    	</tr> -->
 				  	</tbody>
   					<!-- pagination -->
 				  	<tfoot>
 				    	<tr>
-				    		<th colspan="9">
+				    		<th colspan="10">
 				      			<div class="ui right floated pagination menu">
 				        			<a class="icon item">
 				          				<i class="left chevron icon"></i>
@@ -119,41 +120,37 @@
 					<!-- pagination -->
 				</table>
 				<!-- total orders -->
-				<div class="ui compact segments">
+				<!-- <div class="ui compact segments">
   					<div class="ui red segment">
     						<p>Всего в системе зарегестрированов заказов:</p>
   						</div>
   					<div class="ui segment">
     					<p>3</p>
   					</div>
-				</div>
+				</div> -->
  				 <!-- total orders -->
 			</div>
-			<div class="ui tab active" data-tab="addOrder">
+			<div class="ui tab" data-tab="addOrder">
 				<!-- add order form -->
 				<form class="ui form" id="addOrderForm">
-					<div class="fields three">
+					<div class="fields two">
 						<div class="field">
 					   		<label>Имя</label>
-					   		<input type="text" name="first-name" placeholder="Имя">
-					  	</div>
-					  	<div class="field">
-					   		<label>Фамилия</label>
-					   		<input type="text" name="last-name" placeholder="Фамилия">
-						</div>
+					   		<input type="text" name="clientName" placeholder="Имя">
+					  	</div>					  	
 						<div class="field">
 					   		<label>Контактный номер</label>
-					   		<input type="text" name="last-name" placeholder="Контактный номер">
+					   		<input type="text" name="clientPhone" placeholder="Контактный номер">
 					 	</div>
 					</div>
 					<div class="fields three">
 						<div class="field">
 					   		<label>Откуда</label>
-					   		<input type="text" name="car-feed-point" placeholder="Адрес подачи машины">
+					   		<input type="text" name="carFeedPoint" placeholder="Адрес подачи машины">
 					  	</div>
 					  	<div class="field">
 					   		<label>Куда</label>
-					   		<input type="text" name="goal" placeholder="Цель">
+					   		<input type="text" name="destination" placeholder="Адрес назначения">
 						</div>
 						<div class="field">
 					   		<label>Тариф</label>
@@ -165,7 +162,7 @@
 							<div class="ui form">
   								<div class="field">
     								<label>Выбрать водителя</label>
-    								<select class="ui search dropdown">
+    								<select name="driver" class="ui search dropdown">
       									<option value="">Выбрать водителя</option>
       									<option value="Василиса Пупкина">Василиса Пупкина</option>
       									<option value="Василиса Пупкина">Василиса Пупкина</option>
@@ -178,12 +175,12 @@
 							</div>
 						</div>
 						<div class="ui checkbox field">
-							<input type="checkbox" name="isSetDriverAutomatically">
+							<input type="checkbox" name="isSetDriverAutomatically" value="true">
 							<label>Назначить водителя автоматически</label>
 						</div>
 					</div>
 					<div class="field">
-						<button class="ui red button" type="submit">Добавить</button>
+						<button id="addOrderButton" class="ui red button" type="submit">Добавить</button>
 					</div>
 				</form>
 				<!-- add order form -->
@@ -193,7 +190,7 @@
 		<div class="ui segment tab" data-tab="cars">
 			<!-- seconadary/cars menu -->
 			<div class="ui secondary  menu">
-				<a class="active item" data-tab="allCars">
+				<a class="item" data-tab="allCars">
 					Все машины
 				</a>
 				<a class="item" data-tab="addCar">
@@ -212,7 +209,7 @@
 			</div>
 			<!-- seconadary/cars menu -->
 			<!-- secondary/cars tabs -->
-			<div class="ui tab active" data-tab="allCars">
+			<div class="ui tab" data-tab="allCars">
 				<table class="ui selectable celled table blue">
 					<thead>
 				    	<tr>
@@ -293,7 +290,7 @@
 			</div>
 			<!-- secondary/cars tabs -->
 		</div>
-		<div class="ui segment tab active" data-tab="drivers">
+		<div class="ui segment tab" data-tab="drivers">
 			<!-- seconadary/cars menu -->
 			<div class="ui secondary menu">
 				<a class="active item" data-tab="allDrivers">
@@ -315,7 +312,7 @@
 			</div>
 			<!-- seconadary/cars menu -->
 			<!-- secondary/cars tabs -->
-			<div class="ui tab active" data-tab="allDrivers">
+			<div class="ui tab" data-tab="allDrivers">
 				<table class="ui selectable celled table green">
 					<thead>
 				    	<tr>
@@ -414,10 +411,19 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	 crossorigin="anonymous"></script>
 	<script src="libs/semantic/semantic.min.js"></script>
+	<script src="js/MainMenu.js"></script>
+	<script src="js/AddOrderForm.js"></script>
+	<script src="js/OrdersTable.js"></script>
+	<script src="js/OrdersTab.js"></script>
 	<script src="js/UI.js"></script>
-	<script src="js/CarsController.js"></script>
+	<script src="js/Order.js"></script>
+	<script src="js/OrdersList.js"></script>
+	<script src="js/DriversList.js"></script>
+	<script src="js/GeoService.js"></script>
+	<script src="js/OrdersController.js"></script>
+	<!-- <script src="js/CarsController.js"></script>
 	<script src="js/Car.js"></script>
-	<script src="js/CarsList.js"></script>
+	<script src="js/CarsList.js"></script> -->
 	<script src="js/main.js"></script>
 </body>
 </html>
