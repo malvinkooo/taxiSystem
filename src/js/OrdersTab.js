@@ -7,8 +7,9 @@ class OrdersTab {
     }
 
     showOrdersList(list) {
-        $.tab('change tab', 'allOrders');        
-        this._ordersTable.show(list);
+        $.tab('change tab', 'allOrders');
+        this._ordersTabElement.find('[data-tab="allOrders"]').trigger('click');
+        this._ordersTable.showOrdersList(list);
     }
 
     setOrdersController(ordersController) {

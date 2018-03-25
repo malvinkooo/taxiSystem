@@ -4,7 +4,7 @@ class OrdersTable {
         this._tbody = this._ordersTableElement.find('table tbody');
     }    
 
-    show(list) {
+    showOrdersList(list) {
         this._tbody.html('');
         for(var i=0; i < list.length; i++) {
             var row = list[i];

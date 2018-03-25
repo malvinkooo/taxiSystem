@@ -17,6 +17,7 @@ class AddOrderForm {
             orderParams[$(elements[i]).attr('name')] = $(elements[i]).val();
         }            
         this._ordersController.addOrder(orderParams);
+        this._addOrderFormElement.find('form')[0].reset();
         return false;
     }
 
