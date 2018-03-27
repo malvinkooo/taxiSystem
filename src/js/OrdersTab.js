@@ -14,5 +14,10 @@ class OrdersTab {
 
     setOrdersController(ordersController) {
         this._addOrderForm.setOrdersController(ordersController);
-    }    
+        this._ordersTable.setOrdersController(ordersController);
+    }
+
+    showOrderInfo(info) {
+        this._ordersTable.showOrderInfo(info);
+    }
 }

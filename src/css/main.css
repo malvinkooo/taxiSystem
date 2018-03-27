@@ -1,3 +1,7 @@
 #addOrderForm .checkbox.field {
 	padding-top: 30px;
 }
+.ui.ribbon.label {
+	left: calc(0rem - 1.2em);
+	margin-bottom: -7px;
+}

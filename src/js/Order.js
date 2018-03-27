@@ -74,6 +74,7 @@ class Order {
 
     getInfo() {
         return {
+            id: this._id,
             clientName: this._clientName,
             clientPhone: this._clientPhone,
             dateOfCreation: this._dateOfCreation,

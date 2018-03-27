@@ -26,7 +26,7 @@ class OrdersController {
     }
 
     selectOrder(id) {
-        var info = this._orders[id].getInfo();
+        var info = this._orders.getOrder(id);
         this._ui.showOrderInfo(info);
     }
 

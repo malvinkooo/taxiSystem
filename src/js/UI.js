@@ -1,10 +1,10 @@
 class UI {
    constructor() {
        this._mainMenu = new MainMenu($('#mainMenu'));
-       this._ordersTab = new OrdersTab($('[data-tab=orders]'));       
+       this._ordersTab = new OrdersTab($('[data-tab=orders]'));
     }
-    
-    setOrdersController(ordersController) {        
+
+    setOrdersController(ordersController) {
         this._ordersTab.setOrdersController(ordersController);
     }
 
@@ -29,22 +29,22 @@ class UI {
     }
 
     showAddOrderForm() {
-
+        //...
     }
 
-    showOrdersList(list) {        
+    showOrdersList(list) {
         this._ordersTab.showOrdersList(list);
     }
 
     showOrderInfo(info) {
-    	//...
+    	this._ordersTab.showOrderInfo(info);
     }
 
     showOrderEditForm(info) {
     	//..
     }
 
-    showAllCars(list) {        
+    showAllCars(list) {
         console.log(list);
         //$('.ui.tab.active').removeClass('active');
         $('[data-tab=allCars]').addClass('active');

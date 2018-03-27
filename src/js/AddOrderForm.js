@@ -11,11 +11,11 @@ class AddOrderForm {
     }
 
     _onAddOrderButtonClick() {
-        var orderParams = {};        
+        var orderParams = {};
         var elements = this._addOrderFormElement.find('input, select');
         for(var i=0; i < elements.length; i++) {
             orderParams[$(elements[i]).attr('name')] = $(elements[i]).val();
-        }            
+        }
         this._ordersController.addOrder(orderParams);
         this._addOrderFormElement.find('form')[0].reset();
         return false;
