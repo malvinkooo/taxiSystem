@@ -9,6 +9,7 @@ class OrdersTable {
 
     setOrdersController(ordersController) {
         this._ordersController = ordersController;
+        this._orderPoup.setOrdersController(ordersController);
     }
 
     showOrdersList(list) {
@@ -34,7 +35,6 @@ class OrdersTable {
     }
 
     _onOrderRowClick(e) {
-        console.dir(e.currentTarget.dataset.orderId);
         var orderId = e.currentTarget.dataset.orderId;
         this._ordersController.selectOrder(orderId);
     }

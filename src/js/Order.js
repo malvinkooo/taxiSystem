@@ -23,7 +23,7 @@ class Order {
         this._clientName = orderParams.clientName;
         this._clientPhone = orderParams.clientPhone;
         this._dateOfCreation = new Date();
-        this._dateOfCompletion = undefined;
+        this._dateOfCompletion = "-";
         this._carFeedPoint = orderParams.carFeedPoint;
         this._destination = orderParams.destination;
         this._distance = geoService.getDistance(this._carFeedPoint, this._destination);

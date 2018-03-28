@@ -5,3 +5,10 @@
 	left: calc(0rem - 1.2em);
 	margin-bottom: -7px;
 }
+.ui.orderModal .ui.grid {
+	margin-right: 0;
+	margin-left: 0;
+}
+.ui.horizontal.segments>.segment {
+	min-width: 50%;
+}

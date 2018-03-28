@@ -31,7 +31,7 @@ class OrdersController {
     }
 
     selectEditOrder(id) {
-        var info = this._orders[id].getInfo();
+        var info = this._orders.getOrder(id);
         this._ui.showOrderEditForm(info);
     }
 

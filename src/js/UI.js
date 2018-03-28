@@ -41,7 +41,7 @@ class UI {
     }
 
     showOrderEditForm(info) {
-    	//..
+    	//показать попап для редактирования заказа
     }
 
     showAllCars(list) {

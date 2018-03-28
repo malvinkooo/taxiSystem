@@ -17,7 +17,7 @@ ordersList.addOrder({
     clientPhone: '872498742',
     carFeedPoint: 'Поселок Котовского',
     destination: 'Сухой Лиман',
-    rate: 1
+    rate: 1.5
 }, geoService);
 
 var driversList = new DriversList();
