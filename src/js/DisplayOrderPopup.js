@@ -1,7 +1,7 @@
-class OrderPopup {
-    constructor(orderPopupElement) {
-        this._orderPopupElement = orderPopupElement;
-        this._orderPopupElement.find(".edit-order").click(this._onEditOrderButtonClick.bind(this));
+class DisplayOrderPopup {
+    constructor(displayOrderPopupElement) {
+        this._displayOrderPopupElement = displayOrderPopupElement;
+        this._displayOrderPopupElement.find(".edit-order").click(this._onEditOrderButtonClick.bind(this));
     }
 
     setOrdersController(ordersController) {
@@ -10,9 +10,9 @@ class OrderPopup {
 
     showOrderInfo(info) {
         for (var key in info) {
-        	this._orderPopupElement.find(".order-"+key+"").html(info[key]);
+        	this._displayOrderPopupElement.find(".order-"+key+"").html(info[key]);
         }
-        this._orderPopupElement
+        this._displayOrderPopupElement
         	.modal("show")
         	.find(".edit-order")
         	.attr("data-order-id", info.id);

@@ -2,14 +2,15 @@ class OrdersTable {
     constructor(ordersTableElement) {
         this._ordersTableElement = ordersTableElement;
         this._ordersController = null;
-        this._orderPoup = new OrderPopup($(".orderModal"));
+        this._displayOrderPoup = new DisplayOrderPopup(this._ordersTableElement.find(".displayOrderModal"));
+        this._editOrderPopup = new EditOrderPopup(this._ordersTableElement.find(".editOrderModal"));
         this._tbody = this._ordersTableElement.find('table tbody');
         this._tbody.on("click", "tr", this._onOrderRowClick.bind(this));
     }
 
     setOrdersController(ordersController) {
         this._ordersController = ordersController;
-        this._orderPoup.setOrdersController(ordersController);
+        this._displayOrderPoup.setOrdersController(ordersController);
     }
 
     showOrdersList(list) {
@@ -31,7 +32,11 @@ class OrdersTable {
     }
 
     showOrderInfo(info) {
-        this._orderPoup.showOrderInfo(info);
+        this._displayOrderPoup.showOrderInfo(info);
+    }
+
+    showEditOrderform(info) {
+        this._editOrderPopup.showEditOrderForm(info);
     }
 
     _onOrderRowClick(e) {

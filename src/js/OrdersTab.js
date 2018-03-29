@@ -20,4 +20,8 @@ class OrdersTab {
     showOrderInfo(info) {
         this._ordersTable.showOrderInfo(info);
     }
+
+    showEditOrderForm(info) {
+        this._ordersTable.showEditOrderform(info);
+    }
 }
