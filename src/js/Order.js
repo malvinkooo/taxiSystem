@@ -15,6 +15,24 @@ class OrderStatus {
     static get CANCELLED() {
         return "Отменен";
     }
+
+    static get statusList() {
+        return [
+            "Новый",
+            'Выполняется',
+            'Выполнен',
+            'Отменен'
+        ];
+    }
+
+    static get colorsList() {
+        return {
+            "Новый": "green",
+            'Выполняется': "orange",
+            'Выполнен': "blue",
+            'Отменен': "grey"
+        };
+    }
 }
 
 class Order {
@@ -48,6 +66,10 @@ class Order {
         return this._status;
     }
 
+    setStatus(status) {
+        this._status = status;
+    }
+
     setDistance(distance) {
         this._distance = distance;
     }
@@ -57,7 +79,7 @@ class Order {
     }
 
     setClientPhone(clientPhone) {
-        this._clientPhone = clientName;
+        this._clientPhone = clientPhone;
     }
 
     setDateOfComplention() {

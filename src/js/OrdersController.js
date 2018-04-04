@@ -35,10 +35,10 @@ class OrdersController {
         this._ui.showOrderEditForm(info);
     }
 
-    editOrder(id, orderParams) {
-        this._orders.editOrder(id, orderParams);
-        this.ui.showSuccessNotification();
-        var info = this._orders.getOrder(id);
-        this.ui.showOrderInfo(info);
+    editOrder(orderParams) {
+        this._orders.editOrder(orderParams);
+        // this.ui.showSuccessNotification();
+        var info = this._orders.getOrder(orderParams.id);
+        this._ui.showOrderInfo(info);
     }
 }

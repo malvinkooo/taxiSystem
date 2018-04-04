@@ -98,9 +98,7 @@
  				<!-- total orders -->
  				<!-- display order popup -->
 				<div class="ui modal displayOrderModal">
-					<a class="ui blue ribbon label order-status">
-						<!-- Статус -->
-					</a>
+					<a class="ui ribbon label order-status"></a>
 	  				<i class="close icon"></i>
 	  				<div class="header order-number">
 	    				Заказ #<span class="order-id">000000</span>
@@ -218,13 +216,9 @@
 	  					<div class="ui fields">
 	  						<div class="field">
 								<div class="current-status">
-									<p>Текущий статус:<a class="ui button red order-status">завершен</a></p>
+									<p>Текущий статус:<a class="ui button order-status">завершен</a></p>
 								</div>
-	  							<select class="ui fluid dropdown">
-								    <option value="">Изменить статус:</option>
-								    <option value="AL">Alabama</option>
-								    <option value="AK">Alaska</option>
-								</select>
+	  							<select class="ui fluid dropdown status-list"></select>
 	  						</div>
 	  					</div>
 						<div class="fields two">
@@ -262,7 +256,7 @@
 							</div>
 							<div class="field">
 						   		<label>Тариф</label>
-						   		<input class="order-rate" type="number" name="rate" min="1" step="0.1" placeholder="Цель" value="1">
+						   		<input class="order-rate" type="number" name="rate" min="1" step="0.1" value="1">
 							</div>
 						</div>
 					</form>

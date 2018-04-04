@@ -11,10 +11,12 @@ class OrdersTable {
     setOrdersController(ordersController) {
         this._ordersController = ordersController;
         this._displayOrderPoup.setOrdersController(ordersController);
+        this._editOrderPopup.setOrdersController(ordersController);;
     }
 
     showOrdersList(list) {
         this._tbody.html('');
+        var statusColorsList = OrderStatus.colorsList;
         for(var i=0; i < list.length; i++) {
             var row = list[i];
             $('<tr data-order-id='+ row.id +'><td>'+ row.clientName +
@@ -23,8 +25,8 @@ class OrdersTable {
                 '</td><td>' + row.destination +
                 '</td><td>' + row.distance +
                 '</td><td>' + row.rate +
-                '</td><td>' + row.status +
-                '</td><td>' + row.dateOfCreation +
+                '</td><td><button class="ui button '+statusColorsList[row.status]+'">' + row.status +
+                '</button></td><td>' + row.dateOfCreation +
                 '</td><td>' + row.dateOfCompletion +
                 '</td><td>' + row.driver +
                 '</td></tr>').appendTo(this._tbody);

@@ -20,13 +20,14 @@ class OrdersList {
         return result;
     }
 
-    editOrder(id, orderParams) {
-        var order = this._orders[id];
-        order.setClientname(orderParams.clientname);
+    editOrder(orderParams) {
+        var order = this._orders[orderParams.id];
+        order.setClientname(orderParams.clientName);
         order.setClientPhone(orderParams.clientPhone);
-        order.setDateofCompletion();
+        // order.setDateofCompletion();
         order.setCarFeedPoint(orderParams.carFeedPoint);
         order.setRate(orderParams.rate);
+        order.setStatus(orderParams.status);
     }
 
     getOrder(id) {
