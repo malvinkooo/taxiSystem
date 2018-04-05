@@ -82,8 +82,8 @@ class Order {
         this._clientPhone = clientPhone;
     }
 
-    setDateOfComplention() {
-        this._dateOfCompletion = new Date();
+    setDateOfComplention(dateOfCompletion) {
+        this._dateOfCompletion = dateOfCompletion;
     }
 
     setCarFeedPoint(carFeedPoint) {

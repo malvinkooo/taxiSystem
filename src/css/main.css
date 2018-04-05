@@ -30,3 +30,6 @@
 .calendar-field input {
 	width: auto;
 }
+.status-wrap {
+	width: 160px;
+}

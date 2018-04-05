@@ -11,7 +11,7 @@ class EditOrderPopup {
                 +statusList[i]+
             "</option>");
         }
-        this._statusListSelectElement.dropdown();
+        this._statusListSelectElement.dropdown({showOnFocus: false});
         this._editOrderPopupElement.find(".submit").click(this._onEditFormSubmit.bind(this));
     }
 
@@ -21,7 +21,6 @@ class EditOrderPopup {
 
     showEditOrderForm(info) {
         this._lastOrder = info;
-        var statusColorsList = OrderStatus.colorsList;
         for (var j in statusColorsList) {
             this._editOrderPopupElement
                 .find(".status")
@@ -32,8 +31,6 @@ class EditOrderPopup {
             this._editOrderPopupElement.find("." + key).val(info[key]);
         }
         this._editOrderPopupElement.find(".id").html(info['id']);
-        this._editOrderPopupElement.find(".status")
-            .addClass(statusColorsList[info['status']]).html(info['status']);
         this._editOrderPopupElement.find(".driver").html(info['driver']);
         this._editOrderPopupElement.modal("show");
     }

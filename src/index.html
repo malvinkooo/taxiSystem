@@ -196,12 +196,12 @@
 						</div>
 					</div>
 					<div class="actions">
-					    <div class="ui black button edit-order">
+					    <div class="ui blue button left labeled icon edit-order">
+					    	<i class="edit icon"></i>
 					    	Редактировать
 					    </div>
-					    <div class="ui positive right labeled icon button">
+					    <div class="ui black button">
 					    	Закрыть
-					    	<i class="checkmark icon"></i>
 					    </div>
 					</div>
 				</div>
@@ -214,10 +214,7 @@
 	  				</div>
 	  				<form class="ui form" id="editOrderForm">
 	  					<div class="ui fields">
-	  						<div class="field">
-								<div class="current-status">
-									<p>Текущий статус:<a class="ui button status">завершен</a></p>
-								</div>
+	  						<div class="field status-wrap">
 	  							<select class="ui fluid dropdown status-list" name="status"></select>
 	  						</div>
 	  					</div>
@@ -245,9 +242,8 @@
 							<div class="field">
 								<div class="ui form">
 	  								<div class="field">
-	    								<label>Текущий водитель: <span class="driver"></span></label>
+	    								<label>Водитель:</label>
 	    								<select class="ui fluid dropdown" name="driver">
-										    <option value="">Назначить другого водителя:</option>
 										    <option value="Пупкин">Пупкин</option>
 										    <option value="Пупкин">Пупкин</option>
 										</select>
@@ -261,12 +257,11 @@
 						</div>
 					</form>
 					<div class="actions">
-					    <div class="ui black button submit">
+					    <div class="ui button submit green">
 					    	Сохранить
 					    </div>
-					    <div class="ui positive right labeled icon button">
+					    <div class="ui black button">
 					    	Закрыть
-					    	<i class="checkmark icon"></i>
 					    </div>
 					</div>
 				</div>
