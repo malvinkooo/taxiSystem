@@ -98,23 +98,23 @@
  				<!-- total orders -->
  				<!-- display order popup -->
 				<div class="ui modal displayOrderModal">
-					<a class="ui ribbon label order-status"></a>
+					<a class="ui ribbon label status"></a>
 	  				<i class="close icon"></i>
 	  				<div class="header order-number">
-	    				Заказ #<span class="order-id">000000</span>
+	    				Заказ #<span class="id">000000</span>
 	  				</div>
 	    			<div class="ui grid">
 						<div class="eight wide column">
 							<div class="ui horizontal segments">
 	  							<div class="ui segment">
 	    							<p><i class="hand point left outline icon"></i>Откуда:</p>
-	    							<p class="order-carFeedPoint">
+	    							<p class="carFeedPoint">
 										<!-- Пос. Котовского -->
 	    							</p>
 	  							</div>
 	  							<div class="ui segment">
 	    							<p><i class="hand point right outline icon"></i>Куда:</p>
-	    							<p class="order-destination">
+	    							<p class="destination">
 										<!-- Сухой Лиман -->
 	    							</p>
 	  							</div>
@@ -123,12 +123,12 @@
 	  							<div class="ui segment">
 	    							<p><i class="sync icon"></i>Расстояние:</p>
 	    							<p>
-										<span class="order-distance">15</span>км
+										<span class="distance">15</span>км
 	    							</p>
 	  							</div>
 	  							<div class="ui segment">
 	    							<p><i class="chart line icon"></i>Тариф:</p>
-	    							<p class="order-rate">
+	    							<p class="rate">
 										<!-- 1 -->
 	    							</p>
 	  							</div>
@@ -136,13 +136,13 @@
 							<div class="ui horizontal segments">
 	  							<div class="ui segment">
 	    							<p><i class="clock outline icon"></i>Открыт:</p>
-	    							<p class="order-dateOfCreation">
+	    							<p class="dateOfCreation">
 										<!-- 12.02.2016 -->
 	    							</p>
 	  							</div>
 	  							<div class="ui segment">
 	    							<p><i class="clock icon"></i>Завершен:</p>
-	    							<p class="order-dateOfCompletion">
+	    							<p class="dateOfCompletion">
 										<!-- 12.02.2017 -->
 	    							</p>
 	  							</div>
@@ -153,20 +153,20 @@
 	  							<div class="card" style="width: 100%">
 	    							<div class="content">
 	      								<img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
-	      								<div class="header order-driver">
+	      								<div class="header driver">
 	        								<!-- Водитель -->
 	      								</div>
-	      								<div class="meta order-driver-status">
+	      								<div class="meta driver-status">
 	        								New Member
 	     								</div>
 	      								<div class="description">
 	      									<p>
 	      										<i class="phone icon"></i>
-	      										<span class="order-driverPhone">
+	      										<span class="driverPhone">
 	      											<!-- 0965544545 -->
 	      										</span>
 	      									</p>
-	        								<p class="order-driver-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus saepe blanditiis corrupti ipsum dolorem numquam ea dignissimos nostrum aliquid! Ducimus odio, quos qui! Reiciendis perferendis dolorum quasi facere aut esse.</p>
+	        								<p class="driver-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus saepe blanditiis corrupti ipsum dolorem numquam ea dignissimos nostrum aliquid! Ducimus odio, quos qui! Reiciendis perferendis dolorum quasi facere aut esse.</p>
 	      								</div>
 	    							</div>
 	    							<!-- <div class="extra content"></div> -->
@@ -174,16 +174,16 @@
 	  							<div class="card" style="width: 100%;margin-bottom: 30px">
 	    							<div class="content">
 	      								<img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
-	      								<div class="header order-clientName">
+	      								<div class="header clientName">
 	        								<!-- Клиент -->
 	      								</div>
-	      								<div class="meta order-client-status">
+	      								<div class="meta client-status">
 	        								New Member
 	     								</div>
 	      								<div class="description">
 	      									<p>
 	      										<i class="phone icon"></i>
-	      										<span class="order-clientPhone">
+	      										<span class="clientPhone">
 	      											<!-- 0965544545 -->
 	      										</span>
 	      									</p>
@@ -210,43 +210,43 @@
 				<div class="ui modal editOrderModal">
 	  				<i class="close icon"></i>
 	  				<div class="header order-number">
-	    				Редактировать заказ #<span class="order-id"></span>
+	    				Редактировать заказ #<span class="id"></span>
 	  				</div>
 	  				<form class="ui form" id="editOrderForm">
 	  					<div class="ui fields">
 	  						<div class="field">
 								<div class="current-status">
-									<p>Текущий статус:<a class="ui button order-status">завершен</a></p>
+									<p>Текущий статус:<a class="ui button status">завершен</a></p>
 								</div>
-	  							<select class="ui fluid dropdown status-list"></select>
+	  							<select class="ui fluid dropdown status-list" name="status"></select>
 	  						</div>
 	  					</div>
 						<div class="fields two">
 							<div class="field">
 						   		<label>Имя</label>
-						   		<input type="text" name="clientName" placeholder="Имя" class="order-clientName">
+						   		<input type="text" name="clientName" placeholder="Имя" class="clientName">
 						  	</div>
 							<div class="field">
 						   		<label>Контактный номер</label>
-						   		<input type="text" name="clientPhone" placeholder="Контактный номер" class="order-clientPhone">
+						   		<input type="text" name="clientPhone" placeholder="Контактный номер" class="clientPhone">
 						 	</div>
 						</div>
 						<div class="fields two">
 							<div class="field">
 						   		<label>Откуда</label>
-						   		<input type="text" name="carFeedPoint" placeholder="Адрес подачи машины" class="order-carFeedPoint">
+						   		<input type="text" name="carFeedPoint" placeholder="Адрес подачи машины" class="carFeedPoint">
 						  	</div>
 						  	<div class="field">
 						   		<label>Куда</label>
-						   		<input type="text" name="destination" placeholder="Адрес назначения" class="order-destination">
+						   		<input type="text" name="destination" placeholder="Адрес назначения" class="destination">
 							</div>
 						</div>
 						<div class="fields two">
 							<div class="field">
 								<div class="ui form">
 	  								<div class="field">
-	    								<label>Текущий водитель: <span class="order-driver"></span></label>
-	    								<select class="ui fluid dropdown">
+	    								<label>Текущий водитель: <span class="driver"></span></label>
+	    								<select class="ui fluid dropdown" name="driver">
 										    <option value="">Назначить другого водителя:</option>
 										    <option value="Пупкин">Пупкин</option>
 										    <option value="Пупкин">Пупкин</option>
@@ -256,7 +256,7 @@
 							</div>
 							<div class="field">
 						   		<label>Тариф</label>
-						   		<input class="order-rate" type="number" name="rate" min="1" step="0.1" value="1">
+						   		<input class="rate" type="number" name="rate" min="1" step="0.1" value="1">
 							</div>
 						</div>
 					</form>

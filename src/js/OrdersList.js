@@ -22,10 +22,11 @@ class OrdersList {
 
     editOrder(orderParams) {
         var order = this._orders[orderParams.id];
-        order.setClientname(orderParams.clientName);
+        order.setClientName(orderParams.clientName);
         order.setClientPhone(orderParams.clientPhone);
-        // order.setDateofCompletion();
+        order.setDateOfComplention(orderParams.dateOfCompletion);
         order.setCarFeedPoint(orderParams.carFeedPoint);
+        order.setDestination(orderParams.destination);
         order.setRate(orderParams.rate);
         order.setStatus(orderParams.status);
     }

@@ -6,6 +6,7 @@ class DisplayOrderPopup {
         this._displayOrderPopupElement.modal({
             onHide: this._onDisplayOrderPopupClose.bind(this)
         });
+        this._lastOrderId = null;
     }
 
     setOrdersController(ordersController) {
@@ -13,6 +14,7 @@ class DisplayOrderPopup {
     }
 
     showOrderInfo(info) {
+        this._lastOrderId = info.id;
         var statusColorsList = OrderStatus.colorsList;
         for (var j in statusColorsList) {
             this._displayOrderPopupElement
@@ -20,20 +22,16 @@ class DisplayOrderPopup {
                 .removeClass(statusColorsList[j]);
         }
         for (var key in info) {
-        	this._displayOrderPopupElement.find(".order-"+key+"").html(info[key]);
+        	this._displayOrderPopupElement.find("."+key+"").html(info[key]);
         }
+        this._displayOrderPopupElement.modal("show");
         this._displayOrderPopupElement
-        	.modal("show")
-        	.find(".edit-order")
-        	.attr("data-order-id", info.id);
-        this._displayOrderPopupElement
-            .find(".order-status")
+            .find(".status")
             .addClass(statusColorsList[info.status]);
     }
 
     _onEditOrderButtonClick(e){
-    	var orderId = e.currentTarget.dataset.orderId;
-    	this._ordersController.selectEditOrder(orderId);
+    	this._ordersController.selectEditOrder(this._lastOrderId);
     }
 
     _onDisplayOrderPopupClose() {

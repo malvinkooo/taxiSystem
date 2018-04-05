@@ -74,7 +74,7 @@ class Order {
         this._distance = distance;
     }
 
-    setClientname(clientName) {
+    setClientName(clientName) {
         this._clientName = clientName;
     }
 
@@ -88,6 +88,10 @@ class Order {
 
     setCarFeedPoint(carFeedPoint) {
         this._carFeedPoint = carFeedPoint;
+    }
+
+    setDestination(destination) {
+        this._destination = destination;
     }
 
     setRate(rate) {

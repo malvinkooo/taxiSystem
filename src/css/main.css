@@ -17,7 +17,7 @@
 #editOrderForm {
 	padding: 20px;
 }
-#editOrderForm .order-status.ui.button {
+#editOrderForm .status.ui.button {
 	margin-left: 10px;
     padding: 5px 15px;
 }
