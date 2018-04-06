@@ -21,11 +21,6 @@ class EditOrderPopup {
 
     showEditOrderForm(info) {
         this._lastOrder = info;
-        for (var j in statusColorsList) {
-            this._editOrderPopupElement
-                .find(".status")
-                .removeClass(statusColorsList[j]);
-        }
         this._statusListSelectElement.dropdown('set selected',[info['status']]);
         for(var key in info) {
             this._editOrderPopupElement.find("." + key).val(info[key]);
