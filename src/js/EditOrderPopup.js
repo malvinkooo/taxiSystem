@@ -38,9 +38,9 @@ class EditOrderPopup {
         }
         orderParams['id'] = this._lastOrder.id;
         if(orderParams['status'] === OrderStatus.COMPLETED && orderParams['status'] !== this._lastOrder['status']){
-            console.log(orderParams['status'] !== this._lastOrder['status']);
-            console.log(orderParams['status'] === OrderStatus.COMPLETED);
             orderParams['dateOfCompletion'] = new Date();
+        } else if(orderParams['status'] !== OrderStatus.COMPLETED) {
+            orderParams['dateOfCompletion'] = '-';
         }
         this._ordersController.editOrder(orderParams);
     }
