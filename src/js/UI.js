@@ -41,11 +41,10 @@ class UI {
     }
 
     showOrderEditForm(info) {
-    	//..
+        this._ordersTab.showEditOrderForm(info);
     }
 
     showAllCars(list) {
-        console.log(list);
         //$('.ui.tab.active').removeClass('active');
         $('[data-tab=allCars]').addClass('active');
     }

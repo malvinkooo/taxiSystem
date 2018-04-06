@@ -1,19 +1,37 @@
 class OrderStatus {
 
     static get NEW_ORDER() {
-        return "Новый";
+        return 'Новый';
     }
 
     static get IN_PROGRESS() {
-        return "Выполняется";
+        return 'Выполняется';
     }
 
     static get COMPLETED() {
-        return "Выполнен";
+        return 'Выполнен';
     }
 
     static get CANCELLED() {
-        return "Отменен";
+        return 'Отменен';
+    }
+
+    static get statusList() {
+        return [
+            'Новый',
+            'Выполняется',
+            'Выполнен',
+            'Отменен'
+        ];
+    }
+
+    static get colorsList() {
+        return {
+            'Новый': 'green',
+            'Выполняется': 'orange',
+            'Выполнен': 'blue',
+            'Отменен': 'grey'
+        };
     }
 }
 
@@ -23,7 +41,7 @@ class Order {
         this._clientName = orderParams.clientName;
         this._clientPhone = orderParams.clientPhone;
         this._dateOfCreation = new Date();
-        this._dateOfCompletion = undefined;
+        this._dateOfCompletion = "-";
         this._carFeedPoint = orderParams.carFeedPoint;
         this._destination = orderParams.destination;
         this._distance = geoService.getDistance(this._carFeedPoint, this._destination);
@@ -48,24 +66,32 @@ class Order {
         return this._status;
     }
 
+    setStatus(status) {
+        this._status = status;
+    }
+
     setDistance(distance) {
         this._distance = distance;
     }
 
-    setClientname(clientName) {
+    setClientName(clientName) {
         this._clientName = clientName;
     }
 
     setClientPhone(clientPhone) {
-        this._clientPhone = clientName;
+        this._clientPhone = clientPhone;
     }
 
-    setDateOfComplention() {
-        this._dateOfCompletion = new Date();
+    setDateOfComplention(dateOfCompletion) {
+        this._dateOfCompletion = dateOfCompletion;
     }
 
     setCarFeedPoint(carFeedPoint) {
         this._carFeedPoint = carFeedPoint;
+    }
+
+    setDestination(destination) {
+        this._destination = destination;
     }
 
     setRate(rate) {

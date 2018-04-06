@@ -64,39 +64,6 @@
 				 		</tr>
 					</thead>
 				  	<tbody>
-				    	<!-- <tr>
-				      	<td>Вася Иванов</td>
-				      	<td>0524566545</td>
-				      	<td>Днепропетровская дорога</td>
-				      	<td>Марсельская</td>
-				      	<td>5км</td>
-				      	<td>0.4</td>
-				      	<td>Обрабатывается</td>
-				      	<td>12.02.2017</td>
-				      	<td>-</td>
-				    	</tr>
-				    	<tr>
-				      	<td>Вася Иванов</td>
-				      	<td>0524566545</td>
-				      	<td>Днепропетровская дорога</td>
-				      	<td>Марсельская</td>
-				      	<td>5км</td>
-				      	<td>0.4</td>
-				      	<td>Обрабатывается</td>
-				      	<td>12.02.2017</td>
-				      	<td>-</td>
-				    	</tr>
-				    	<tr>
-				      	<td>Вася Иванов</td>
-				      	<td>0524566545</td>
-				      	<td>Днепропетровская дорога</td>
-				      	<td>Марсельская</td>
-				      	<td>5км</td>
-				      	<td>0.4</td>
-				      	<td>Обрабатывается</td>
-				      	<td>12.02.2017</td>
-				      	<td>-</td>
-				    	</tr> -->
 				  	</tbody>
   					<!-- pagination -->
 				  	<tfoot>
@@ -128,7 +95,177 @@
     					<p>3</p>
   					</div>
 				</div> -->
- 				 <!-- total orders -->
+ 				<!-- total orders -->
+ 				<!-- display order popup -->
+				<div class="ui modal displayOrderModal">
+					<a class="ui ribbon label status"></a>
+	  				<i class="close icon"></i>
+	  				<div class="header order-number">
+	    				Заказ #<span class="id">000000</span>
+	  				</div>
+	    			<div class="ui grid">
+						<div class="eight wide column">
+							<div class="ui horizontal segments">
+	  							<div class="ui segment">
+	    							<p><i class="hand point left outline icon"></i>Откуда:</p>
+	    							<p class="carFeedPoint">
+										<!-- Пос. Котовского -->
+	    							</p>
+	  							</div>
+	  							<div class="ui segment">
+	    							<p><i class="hand point right outline icon"></i>Куда:</p>
+	    							<p class="destination">
+										<!-- Сухой Лиман -->
+	    							</p>
+	  							</div>
+							</div>
+							<div class="ui horizontal segments">
+	  							<div class="ui segment">
+	    							<p><i class="sync icon"></i>Расстояние:</p>
+	    							<p>
+										<span class="distance">15</span>км
+	    							</p>
+	  							</div>
+	  							<div class="ui segment">
+	    							<p><i class="chart line icon"></i>Тариф:</p>
+	    							<p class="rate">
+										<!-- 1 -->
+	    							</p>
+	  							</div>
+							</div>
+							<div class="ui horizontal segments">
+	  							<div class="ui segment">
+	    							<p><i class="clock outline icon"></i>Открыт:</p>
+	    							<p class="dateOfCreation">
+										<!-- 12.02.2016 -->
+	    							</p>
+	  							</div>
+	  							<div class="ui segment">
+	    							<p><i class="clock icon"></i>Завершен:</p>
+	    							<p class="dateOfCompletion">
+										<!-- 12.02.2017 -->
+	    							</p>
+	  							</div>
+							</div>
+						</div>
+						<div class="eight wide column">
+							<div class="ui cards" style="margin-top: .1rem">
+	  							<div class="card" style="width: 100%">
+	    							<div class="content">
+	      								<img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
+	      								<div class="header driver">
+	        								<!-- Водитель -->
+	      								</div>
+	      								<div class="meta driver-status">
+	        								New Member
+	     								</div>
+	      								<div class="description">
+	      									<p>
+	      										<i class="phone icon"></i>
+	      										<span class="driverPhone">
+	      											<!-- 0965544545 -->
+	      										</span>
+	      									</p>
+	        								<p class="driver-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus saepe blanditiis corrupti ipsum dolorem numquam ea dignissimos nostrum aliquid! Ducimus odio, quos qui! Reiciendis perferendis dolorum quasi facere aut esse.</p>
+	      								</div>
+	    							</div>
+	    							<!-- <div class="extra content"></div> -->
+	  							</div>
+	  							<div class="card" style="width: 100%;margin-bottom: 30px">
+	    							<div class="content">
+	      								<img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
+	      								<div class="header clientName">
+	        								<!-- Клиент -->
+	      								</div>
+	      								<div class="meta client-status">
+	        								New Member
+	     								</div>
+	      								<div class="description">
+	      									<p>
+	      										<i class="phone icon"></i>
+	      										<span class="clientPhone">
+	      											<!-- 0965544545 -->
+	      										</span>
+	      									</p>
+	        								<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus saepe blanditiis corrupti ipsum dolorem numquam ea dignissimos nostrum aliquid! Ducimus odio, quos qui! Reiciendis perferendis dolorum quasi facere aut esse.</p> -->
+	      								</div>
+	    							</div>
+	    							<!-- <div class="extra content"></div> -->
+	  							</div>
+							</div>
+						</div>
+					</div>
+					<div class="actions">
+					    <div class="ui blue button left labeled icon edit-order">
+					    	<i class="edit icon"></i>
+					    	Редактировать
+					    </div>
+					    <div class="ui button black cancel actions">
+					    	Закрыть
+					    </div>
+					</div>
+				</div>
+				<!-- display order popup -->
+				<!-- display order popup -->
+				<div class="ui modal editOrderModal">
+	  				<i class="close icon"></i>
+	  				<div class="header order-number">
+	    				Редактировать заказ #<span class="id"></span>
+	  				</div>
+	  				<form class="ui form" id="editOrderForm">
+	  					<div class="ui fields">
+	  						<div class="field status-wrap">
+	  							<select class="ui fluid dropdown status-list" name="status"></select>
+	  						</div>
+	  					</div>
+						<div class="fields two">
+							<div class="field">
+						   		<label>Имя</label>
+						   		<input type="text" name="clientName" placeholder="Имя" class="clientName">
+						  	</div>
+							<div class="field">
+						   		<label>Контактный номер</label>
+						   		<input type="text" name="clientPhone" placeholder="Контактный номер" class="clientPhone">
+						 	</div>
+						</div>
+						<div class="fields two">
+							<div class="field">
+						   		<label>Откуда</label>
+						   		<input type="text" name="carFeedPoint" placeholder="Адрес подачи машины" class="carFeedPoint">
+						  	</div>
+						  	<div class="field">
+						   		<label>Куда</label>
+						   		<input type="text" name="destination" placeholder="Адрес назначения" class="destination">
+							</div>
+						</div>
+						<div class="fields two">
+							<div class="field">
+								<div class="ui form">
+	  								<div class="field">
+	    								<label>Водитель:</label>
+	    								<select class="ui fluid dropdown" name="driver">
+										    <option value="Пупкин">Пупкин</option>
+										    <option value="Пупкин">Пупкин</option>
+										</select>
+	  								</div>
+								</div>
+							</div>
+							<div class="field">
+						   		<label>Тариф</label>
+						   		<input class="rate" type="number" name="rate" min="1" step="0.1" value="1">
+							</div>
+						</div>
+					</form>
+					<div class="actions">
+					    <div class="ui button submit green">
+					    	Сохранить
+					    </div>
+					    <div class="ui cancel actions button">
+					    	Закрыть
+					    </div>
+					</div>
+				</div>
+				<!-- display order popup -->
 			</div>
 			<div class="ui tab" data-tab="addOrder">
 				<!-- add order form -->
@@ -400,112 +537,6 @@
 				</form>
 			</div>
 			<!-- secondary/cars tabs -->
-			<!-- order popup -->
-			<style>
-				.ui.orderModal .ui.grid {
-					margin-right: 0;
-					margin-left: 0;
-				}
-			</style>
-			<div class="ui modal orderModal">
-				<a class="ui blue ribbon label order-status">Статус</a>
-  				<i class="close icon"></i>
-  				<div class="header order-number">
-    				Заказ #<span>000000</span>
-  				</div>
-    			<div class="ui grid">
-					<div class="eight wide column">
-						<div class="ui horizontal segments">
-  							<div class="ui segment">
-    							<p><i class="hand point left outline icon"></i>Откуда:</p>
-    							<p>
-									Пос. Котовского
-    							</p>
-  							</div>
-  							<div class="ui segment">
-    							<p><i class="hand point right outline icon"></i>Куда:</p>
-    							<p>
-									Сухой Лиман
-    							</p>
-  							</div>
-						</div>
-						<div class="ui horizontal segments">
-  							<div class="ui segment">
-    							<p><i class="sync icon"></i>Расстояние:</p>
-    							<p>
-									<span>15</span>км
-    							</p>
-  							</div>
-  							<div class="ui segment">
-    							<p><i class="chart line icon"></i>Тариф:</p>
-    							<p>
-									1
-    							</p>
-  							</div>
-						</div>
-						<div class="ui horizontal segments">
-  							<div class="ui segment">
-    							<p><i class="clock outline icon"></i>Открыт:</p>
-    							<p>
-									12.02.2016
-    							</p>
-  							</div>
-  							<div class="ui segment">
-    							<p><i class="clock icon"></i>Завершен:</p>
-    							<p>
-									12.02.2017
-    							</p>
-  							</div>
-						</div>
-					</div>
-					<div class="eight wide column">
-						<div class="ui cards" style="margin-top: .1rem">
-  							<div class="card" style="width: 100%">
-    							<div class="content">
-      								<img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
-      								<div class="header order-driver">
-        								Водитель
-      								</div>
-      								<div class="meta order-driver-status">
-        								New Member
-     								</div>
-      								<div class="description">
-      									<p><i class="phone icon"></i><span>0965544545</span></p>
-        								<p class="order-driver-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus saepe blanditiis corrupti ipsum dolorem numquam ea dignissimos nostrum aliquid! Ducimus odio, quos qui! Reiciendis perferendis dolorum quasi facere aut esse.</p>
-      								</div>
-    							</div>
-    							<!-- <div class="extra content"></div> -->
-  							</div>
-  							<div class="card" style="width: 100%;margin-bottom: 30px">
-    							<div class="content">
-      								<img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
-      								<div class="header order-client-name">
-        								Клиент
-      								</div>
-      								<div class="meta order-client-status">
-        								New Member
-     								</div>
-      								<div class="description">
-      									<p><i class="phone icon"></i><span>0965544545</span></p>
-        								<p class="order-driver-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus saepe blanditiis corrupti ipsum dolorem numquam ea dignissimos nostrum aliquid! Ducimus odio, quos qui! Reiciendis perferendis dolorum quasi facere aut esse.</p>
-      								</div>
-    							</div>
-    							<!-- <div class="extra content"></div> -->
-  							</div>
-						</div>
-					</div>
-				</div>
-				<div class="actions">
-				    <div class="ui black deny button">
-				    	Редактировать
-				    </div>
-				    <div class="ui positive right labeled icon button">
-				    	Закрыть
-				    	<i class="checkmark icon"></i>
-				    </div>
-				</div>
-			</div>
-			<!-- order popup -->
 		</div>
 		<div class="ui segment tab" data-tab="stat">
 			<p>
@@ -514,13 +545,15 @@
 		</div>
 		<!-- main tabs -->
 	</div>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-	 crossorigin="anonymous"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	 crossorigin="anonymous"></script> -->
+	 <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
 	<script src="libs/semantic/semantic.min.js"></script>
 	<script src="js/MainMenu.js"></script>
 	<script src="js/AddOrderForm.js"></script>
 	<script src="js/OrdersTable.js"></script>
-	<script src="js/OrderPopup.js"></script>
+	<script src="js/DisplayOrderPopup.js"></script>
+	<script src="js/EditOrderPopup.js"></script>
 	<script src="js/OrdersTab.js"></script>
 	<script src="js/UI.js"></script>
 	<script src="js/Order.js"></script>

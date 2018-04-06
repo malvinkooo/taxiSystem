@@ -31,14 +31,14 @@ class OrdersController {
     }
 
     selectEditOrder(id) {
-        var info = this._orders[id].getInfo();
+        var info = this._orders.getOrder(id);
         this._ui.showOrderEditForm(info);
     }
 
-    editOrder(id, orderParams) {
-        this._orders.editOrder(id, orderParams);
-        this.ui.showSuccessNotification();
-        var info = this._orders.getOrder(id);
-        this.ui.showOrderInfo(info);
+    editOrder(orderParams) {
+        this._orders.editOrder(orderParams);
+        // this.ui.showSuccessNotification();
+        var info = this._orders.getOrder(orderParams.id);
+        this._ui.showOrderInfo(info);
     }
 }
