@@ -11,7 +11,7 @@ class OrdersTable {
     setOrdersController(ordersController) {
         this._ordersController = ordersController;
         this._displayOrderPoup.setOrdersController(ordersController);
-        this._editOrderPopup.setOrdersController(ordersController);;
+        this._editOrderPopup.setOrdersController(ordersController);
     }
 
     showOrdersList(list) {

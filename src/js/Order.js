@@ -1,24 +1,24 @@
 class OrderStatus {
 
     static get NEW_ORDER() {
-        return "Новый";
+        return 'Новый';
     }
 
     static get IN_PROGRESS() {
-        return "Выполняется";
+        return 'Выполняется';
     }
 
     static get COMPLETED() {
-        return "Выполнен";
+        return 'Выполнен';
     }
 
     static get CANCELLED() {
-        return "Отменен";
+        return 'Отменен';
     }
 
     static get statusList() {
         return [
-            "Новый",
+            'Новый',
             'Выполняется',
             'Выполнен',
             'Отменен'
@@ -27,10 +27,10 @@ class OrderStatus {
 
     static get colorsList() {
         return {
-            "Новый": "green",
-            'Выполняется': "orange",
-            'Выполнен': "blue",
-            'Отменен': "grey"
+            'Новый': 'green',
+            'Выполняется': 'orange',
+            'Выполнен': 'blue',
+            'Отменен': 'grey'
         };
     }
 }

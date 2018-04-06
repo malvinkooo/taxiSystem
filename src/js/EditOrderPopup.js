@@ -37,9 +37,9 @@ class EditOrderPopup {
             orderParams[$(elements[i]).attr('name')] = $(elements[i]).val();
         }
         orderParams['id'] = this._lastOrder.id;
-        if(orderParams['status'] === 'Выполнен' && orderParams['status'] !== this._lastOrder['status']){
+        if(orderParams['status'] === OrderStatus.COMPLETED && orderParams['status'] !== this._lastOrder['status']){
             console.log(orderParams['status'] !== this._lastOrder['status']);
-            console.log(orderParams['status'] === 'Выполнен');
+            console.log(orderParams['status'] === OrderStatus.COMPLETED);
             orderParams['dateOfCompletion'] = new Date();
         }
         this._ordersController.editOrder(orderParams);
