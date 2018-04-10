@@ -15,11 +15,11 @@ class DriverStatus {
 
 
 class Driver {
-    constructor(id, name, surname, phone) {
+    constructor(id, driverParams) {
         this._id = id;
-        this._name = name;
-        this._surname = surname;
-        this._phone = phone;
+        this._name = driverParams.name;
+        this._surname = driverParams.surname;
+        this._phone = driverParams.phone;
         this._currentLocation = undefined;
         this._status = DriverStatus.FREE;
     }

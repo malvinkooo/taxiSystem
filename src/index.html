@@ -460,29 +460,7 @@
 				    		<th>Текущее место пребывания</th>
 				 		</tr>
 					</thead>
-				  	<tbody>
-				    	<tr>
-				      	<td>Вася</td>
-				      	<td>Пупкин</td>
-				      	<td>015288424</td>
-				      	<td>На заказе</td>
-				      	<td>ул. Канатная</td>
-				    	</tr>
-				    	<tr>
-				      	<td>Вася</td>
-				      	<td>Пупкин</td>
-				      	<td>015288424</td>
-				      	<td>На заказе</td>
-				      	<td>ул. Канатная</td>
-				    	</tr>
-				    	<tr>
-				      	<td>Вася</td>
-				      	<td>Пупкин</td>
-				      	<td>015288424</td>
-				      	<td>На заказе</td>
-				      	<td>ул. Канатная</td>
-				    	</tr>
-				  	</tbody>
+				  	<tbody></tbody>
   					<!-- pagination -->
 				  	<tfoot>
 				    	<tr>
@@ -505,35 +483,34 @@
 					<!-- pagination -->
 				</table>
 				<!-- total orders -->
-				<div class="ui compact segments">
+				<!-- <div class="ui compact segments">
   					<div class="ui green segment">
     						<p>Всего в системе водителей:</p>
   						</div>
   					<div class="ui segment">
     					<p>3</p>
   					</div>
-				</div>
+				</div> -->
  				 <!-- total orders -->
 			</div>
 			<div class="ui tab" data-tab="addDriver">
 				<form id="addDriverForm" class="ui form">
 					<div class="field">
 						<label>Имя</label>
-						<input type="text" name="driver-name" placeholder="Имя">
+						<input type="text" name="name" placeholder="Имя">
 					</div>
 					<div class="field">
 						<label>Фамилия</label>
-						<input type="text" name="driver-surname" placeholder="Фамилия">
+						<input type="text" name="surname" placeholder="Фамилия">
 					</div>
 					<div class="field">
 						<label>Моб. номер</label>
-						<input type="number" name="driver-phone" placeholder="7475454">
+						<input type="text" name="phone" placeholder="7475454">
 					</div>
 					<div class="ui success message">
 						<div class="header">Автомобиль добавлен</div>
-						<p>You're all signed up for the newsletter.</p>
 					</div>
-					<div class="ui submit green button">Добавить</div>
+					<div class="ui submit green button" id="addDriverButton">Добавить</div>
 				</form>
 			</div>
 			<!-- secondary/cars tabs -->
@@ -547,20 +524,25 @@
 	</div>
 	<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	 crossorigin="anonymous"></script> -->
-	 <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+	<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
 	<script src="libs/semantic/semantic.min.js"></script>
 	<script src="js/MainMenu.js"></script>
 	<script src="js/AddOrderForm.js"></script>
-	<script src="js/OrdersTable.js"></script>
+	<script src="js/AddDriverForm.js"></script>
 	<script src="js/DisplayOrderPopup.js"></script>
 	<script src="js/EditOrderPopup.js"></script>
-	<script src="js/OrdersTab.js"></script>
 	<script src="js/UI.js"></script>
+	<script src="js/OrdersTab.js"></script>
+	<script src="js/DriversTab.js"></script>
+	<script src="js/OrdersTable.js"></script>
+	<script src="js/DriversTable.js"></script>
 	<script src="js/Order.js"></script>
+	<script src="js/Driver.js"></script>
 	<script src="js/OrdersList.js"></script>
 	<script src="js/DriversList.js"></script>
 	<script src="js/GeoService.js"></script>
 	<script src="js/OrdersController.js"></script>
+	<script src="js/DriversController.js"></script>
 	<!-- <script src="js/CarsController.js"></script>
 	<script src="js/Car.js"></script>
 	<script src="js/CarsList.js"></script> -->

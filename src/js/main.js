@@ -1,6 +1,7 @@
 var ui = new UI();
 var geoService = new GeoService();
 var ordersList = new OrdersList();
+var driversList = new DriversList();
 
 ordersList.addOrder({
     clientName: 'Hlieb',
@@ -20,9 +21,15 @@ ordersList.addOrder({
     rate: 1.5
 }, geoService);
 
-var driversList = new DriversList();
+driversList.addDriver({
+    name:'Петр',
+    surname: 'Иванов',
+    phone: '1245757'});
+
 var ordersController = new OrdersController(ui, ordersList, driversList, geoService);
+var driversController = new DriversController(ui, driversList);
 ui.setOrdersController(ordersController);
+ui.setDriversController(driversController);
 ordersController.selectMenuItemAllOrders();
 //$('.main-tabs .item, .secondary.menu .item').tab();
 // var carsList = new CarsList();
