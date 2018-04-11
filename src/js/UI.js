@@ -19,7 +19,7 @@ class UI {
     }
 
     showDriverInfo(info) {
-        // display driver info via DOM
+        this._driversTab.showDriverInfo(info);
     }
 
     showAddDriverForm() {

@@ -7,6 +7,7 @@ class DriversTab {
     }
 
     setDriversController(driversController){
+        this._driversTable.setDriversController(driversController);
         this._addDriverForm.setDriversController(driversController);
     }
 
@@ -14,5 +15,9 @@ class DriversTab {
         $.tab('change tab', 'allDrivers');
         this._driversTabElement.find('.item[data-tab="allDrivers"]').trigger('click');
         this._driversTable.showDriversList(list);
+    }
+
+    showDriverInfo(info) {
+        this._driversTable.showDriverInfo(info);
     }
 }

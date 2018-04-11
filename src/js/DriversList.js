@@ -8,7 +8,6 @@ class DriversList {
     getAllDrivers() {
         var result = [];
         for (var id in this._drivers) {
-            //почему нельзя перебирать не включи а сразу водителей?
             var driver = this._drivers[id];
             result.push( driver.getInfo() );
         }
