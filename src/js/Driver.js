@@ -1,15 +1,15 @@
 class DriverStatus {
 
     static get ABSENT() {
-        return 0;
+        return "Отсутствует";
     }
 
     static get FREE() {
-        return 1;
+        return "Свободен";
     }
 
     static get BUSY() {
-        return 2;
+        return "На заказе";
     }
 }
 

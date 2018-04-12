@@ -16,5 +16,6 @@ class AddDriverForm{
             driverParams[$(elements[i]).attr('name')] = $(elements[i]).val();
         }
         this._driversController.addDriver(driverParams);
+        this._addDriverFormElement.find("form")[0].reset();
     }
 }
