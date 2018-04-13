@@ -2,14 +2,20 @@ class UI {
    constructor() {
        this._mainMenu = new MainMenu($('#mainMenu'));
        this._ordersTab = new OrdersTab($('[data-tab=orders]'));
+       this._driversTab = new DriversTab($('.tab[data-tab=drivers]'));
     }
 
     setOrdersController(ordersController) {
         this._ordersTab.setOrdersController(ordersController);
     }
 
+    setDriversController(driversController) {
+        this._mainMenu.setDriversController(driversController);
+        this._driversTab.setDriversController(driversController);
+    }
+
     showDriversList(list) {
-        // display data in DOM
+        this._driversTab.showDriversList(list);
     }
 
     showDriverInfo(info) {
@@ -46,7 +52,7 @@ class UI {
 
     showAllCars(list) {
         //$('.ui.tab.active').removeClass('active');
-        $('[data-tab=allCars]').addClass('active');
+        // $('[data-tab=allCars]').addClass('active');
     }
 
     showCarInfo(info) {

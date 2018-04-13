@@ -39,9 +39,9 @@ class DriversController {
  *
  */
 
-    addDriver(name, surname, phone){
-        this._driversList.addDriver(name, surname, phone);
-        this._ui.showSuccessNotification();
+    addDriver(driverParams){
+        console.log(driverParams);
+        this._driversList.addDriver(driverParams);
         var list = this._driversList.getAllDrivers();
         this._ui.showDriversList(list);
     }

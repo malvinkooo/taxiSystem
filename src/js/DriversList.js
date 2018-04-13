@@ -15,8 +15,8 @@ class DriversList {
         return result;
     }
 
-    addDriver(name, surname, phone) {
-        var driver = new Driver(this._lastInsertId, name, surname, phone);
+    addDriver(driverParams) {
+        var driver = new Driver(this._lastInsertId, driverParams);
         this._drivers[this._lastInsertId] = driver;
         this._lastInsertId++;
     }
