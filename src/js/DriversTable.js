@@ -13,13 +13,14 @@ class DriversTable {
 
     showDriversList(list){
        this._tbody.html("");
+       var statusColorsList = DriverStatus.colorsList;
        for (var i = 0; i < list.length; i++) {
             var row = list[i];
             $('<tr data-driver-id='+row.id+'><td>'+row.name+
             '</td><td>'+row.surname+
             '</td><td>'+row.phone+
-            '</td><td>'+row.status+
-            '</td><td>'+row.currentLocation+
+            '</td><td><button class="ui button driver-status '+statusColorsList[row.status]+'">'+row.status+
+            '</button></td><td>'+row.currentLocation+
             '</td></tr>').appendTo(this._tbody)
        }
     }
