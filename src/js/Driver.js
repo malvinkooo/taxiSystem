@@ -11,6 +11,14 @@ class DriverStatus {
     static get BUSY() {
         return "На заказе";
     }
+
+    static get colorsList() {
+        return {
+            'Отсутствует': 'grey',
+            'Свободен': 'green',
+            'На заказе': 'red',
+        };
+    }
 }
 
 
