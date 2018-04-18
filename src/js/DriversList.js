@@ -26,17 +26,17 @@ class DriversList {
     }
 
     editDriver(driverParams) {
-    	var driver = this._drivers[driverParams.id];
-    	driver.setName(driverParams.name);
-    	driver.setSurname(driverParams.surname);
-    	driver.setPhone(driverParams.phone);
+        var driver = this._drivers[driverParams.id];
+        driver.setName(driverParams.name);
+        driver.setSurname(driverParams.surname);
+        driver.setPhone(driverParams.phone);
         driver.setStatus(driverParams.status);
         driver.setCurrentLocation(driverParams.currentLocation);
-    	return driver.getInfo();
+        return driver.getInfo();
     }
 
     deleteDriver(id) {
-    	delete this._drivers[id];
+        delete this._drivers[id];
     }
 
     getDriverscount() {
