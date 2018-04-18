@@ -33,7 +33,8 @@
 .status-wrap {
 	width: 160px;
 }
-.ui.button.driver-status {
+.ui.button.driver-status,
+.ui.button.order-status {
 	margin: 0 auto;
 	display: block;
 }

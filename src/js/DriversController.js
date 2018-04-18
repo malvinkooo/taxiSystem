@@ -48,13 +48,12 @@ class DriversController {
 
     selectEditDriver(id) {
         var info = this._driversList.getDriver(id);
-        this._ui.showDriverEdirForm(info);
+        this._ui.showEditDriverForm(info);
     }
 
-    editDriver(id, name, surname, phone) {
-        var info = this._driversList.editDriver(id, name, surname, phone);
-        this._ui.showSuccessNotification();
-        this._ui.shorDriverInfo(info);
+    editDriver(driverParams) {
+        var info = this._driversList.editDriver(driverParams);
+        this._ui.showDriverInfo(info);
     }
 
     selectDeleteDriver(id) {

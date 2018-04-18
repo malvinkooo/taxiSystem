@@ -22,7 +22,8 @@ class UI {
         this._driversTab.showDriverInfo(info);
     }
 
-    showAddDriverForm() {
+    showEditDriverForm(info) {
+        this._driversTab.showEditDriverForm(info);
 
     }
 

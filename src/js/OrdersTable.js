@@ -25,7 +25,7 @@ class OrdersTable {
                 '</td><td>' + row.destination +
                 '</td><td>' + row.distance +
                 '</td><td>' + row.rate +
-                '</td><td><button class="ui button '+statusColorsList[row.status]+'">' + row.status +
+                '</td><td><button class="ui button order-status '+statusColorsList[row.status]+'">' + row.status +
                 '</button></td><td>' + row.dateOfCreation +
                 '</td><td>' + row.dateOfCompletion +
                 '</td><td>' + row.driver +

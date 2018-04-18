@@ -25,16 +25,18 @@ class DriversList {
         return driver.getInfo();
     }
 
-    editDriver(id, name, surname, phone) {
-    	var driver = this._drivers[id];
-    	driver.setName(name);
-    	driver.setSurname(surname);
-    	driver.setPhone(phone);
-    	return driver.getInfo();
+    editDriver(driverParams) {
+        var driver = this._drivers[driverParams.id];
+        driver.setName(driverParams.name);
+        driver.setSurname(driverParams.surname);
+        driver.setPhone(driverParams.phone);
+        driver.setStatus(driverParams.status);
+        driver.setCurrentLocation(driverParams.currentLocation);
+        return driver.getInfo();
     }
 
     deleteDriver(id) {
-    	delete this._drivers[id];
+        delete this._drivers[id];
     }
 
     getDriverscount() {
