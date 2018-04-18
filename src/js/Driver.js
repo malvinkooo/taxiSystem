@@ -11,6 +11,14 @@ class DriverStatus {
     static get BUSY() {
         return "На заказе";
     }
+
+    static get colorsList() {
+        return {
+            'Отсутствует': 'grey',
+            'Свободен': 'green',
+            'На заказе': 'red',
+        };
+    }
 }
 
 
@@ -42,6 +50,7 @@ class Driver {
 
     getInfo() {
         return {
+            id: this._id,
             name: this._name,
             surname: this._surname,
             phone: this._phone,

@@ -33,3 +33,7 @@
 .status-wrap {
 	width: 160px;
 }
+.ui.button.driver-status {
+	margin: 0 auto;
+	display: block;
+}
