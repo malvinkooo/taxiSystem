@@ -4,11 +4,14 @@ class DriversTable {
         this._driversController = null;
         this._tbody = this._driversTableElement.find('table tbody');
         this._displayDriverPopup = new DisplayDriverPopup(this._driversTableElement.find(".displayDriverModal"));
+        this._editDriverPopup = new EditDriverPopup(this._driversTableElement.find(".editDriverModal"));
         this._tbody.on("click", "tr", this._onDriverRowClick.bind(this));
     }
 
     setDriversController(driversController){
         this._driversController = driversController;
+        this._displayDriverPopup.setDriversController(driversController);
+        this._editDriverPopup.setDriversController(driversController);
     }
 
     showDriversList(list){
@@ -27,6 +30,10 @@ class DriversTable {
 
     showDriverInfo(info) {
         this._displayDriverPopup.showDriverInfo(info);
+    }
+
+    showEditDriverForm(info) {
+        this._editDriverPopup.showEditDriverForm(info);
     }
 
     _onDriverRowClick(e) {

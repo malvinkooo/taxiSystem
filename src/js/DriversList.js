@@ -25,11 +25,13 @@ class DriversList {
         return driver.getInfo();
     }
 
-    editDriver(id, name, surname, phone) {
-    	var driver = this._drivers[id];
-    	driver.setName(name);
-    	driver.setSurname(surname);
-    	driver.setPhone(phone);
+    editDriver(driverParams) {
+    	var driver = this._drivers[driverParams.id];
+    	driver.setName(driverParams.name);
+    	driver.setSurname(driverParams.surname);
+    	driver.setPhone(driverParams.phone);
+        driver.setStatus(driverParams.status);
+        driver.setCurrentLocation(driverParams.currentLocation);
     	return driver.getInfo();
     }
 

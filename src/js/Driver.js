@@ -12,6 +12,14 @@ class DriverStatus {
         return "На заказе";
     }
 
+    static get statusList() {
+        return [
+            'Отсутствует',
+            'Свободен',
+            'На заказе',
+        ];
+    }
+
     static get colorsList() {
         return {
             'Отсутствует': 'grey',
@@ -48,6 +56,10 @@ class Driver {
         this.phone = phone;
     }
 
+    setCurrentLocation(currentLocation) {
+        this._currentLocation = currentLocation;
+    }
+
     getInfo() {
         return {
             id: this._id,
@@ -61,5 +73,9 @@ class Driver {
 
     getStatus() {
         return this._status;
+    }
+
+    setStatus(status) {
+        this._status = status;
     }
 }

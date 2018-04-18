@@ -20,4 +20,8 @@ class DriversTab {
     showDriverInfo(info) {
         this._driversTable.showDriverInfo(info);
     }
+
+    showEditDriverForm(info) {
+        this._driversTable.showEditDriverForm(info);
+    }
 }
