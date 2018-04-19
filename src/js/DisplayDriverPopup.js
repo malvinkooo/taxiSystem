@@ -2,6 +2,7 @@ class DisplayDriverPopup {
     constructor(displayDriverPopupElement) {
         this._displayDriverPopupElement = displayDriverPopupElement;
         this._driversController = null;
+        this._lastDriverId = null;
         this._displayDriverPopupElement.find(".edit-driver").click(this._onEditDriverButtonClick.bind(this));
         this._displayDriverPopupElement.modal({
             onHide: this._onDisplayDriverPopupClose.bind(this)
@@ -14,6 +15,7 @@ class DisplayDriverPopup {
     }
 
     showDriverInfo(info) {
+        this._lastDriverId = info.id;
     	var statusDriversList = DriverStatus.colorsList;
     	for(var color in statusDriversList){
     		this._displayDriverPopupElement.find(".status").removeClass(statusDriversList[color]);
@@ -21,29 +23,26 @@ class DisplayDriverPopup {
         for(var key in info){
         	this._displayDriverPopupElement.find("." + key).html(info[key]);
         }
-        this._displayDriverPopupElement.find(".edit-driver").attr("data-driver-id", info.id);
-        this._displayDriverPopupElement.find(".delete-driver").attr("data-driver-id", info.id);
         this._displayDriverPopupElement.find(".status").addClass(statusDriversList[info.status]);
         this._displayDriverPopupElement.modal("show");
     }
 
-    _onEditDriverButtonClick(e) {
-        var driverId = e.target.dataset.driverId;
-        this._driversController.selectEditDriver(driverId);
+    _onEditDriverButtonClick() {
+        this._driversController.selectEditDriver(this._lastDriverId);
     }
 
     _onDisplayDriverPopupClose() {
         this._driversController.selectMenuItemAllDrivers();
     }
 
-    _onDeleteDriverButtonClick(e) {
-        var driverId = e.target.dataset;
-        console.log(driverId);
+    _onDeleteDriverButtonClick() {
         var questionBox = new QuestionMessageBox("Вы действительно хотите удалить водителя?");
-        questionBox.show(function(){
-            console.log("Driver has been deleted");
-        }, function(){
-            this._driversController.selectDriver(driverId);
-        });
+        questionBox.show((function(){
+            this._driversController.selectDeleteDriver(this._lastDriverId);
+            questionBox.hide();
+        }).bind(this), (function(){
+            questionBox.hide();
+            this._driversController.selectDriver(this._lastDriverId);
+        }).bind(this));
     }
 }
