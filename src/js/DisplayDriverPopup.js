@@ -38,10 +38,8 @@ class DisplayDriverPopup {
     _onDeleteDriverButtonClick() {
         var questionBox = new QuestionMessageBox("Вы действительно хотите удалить водителя?");
         questionBox.show((function(){
-            this._driversController.selectDeleteDriver(this._lastDriverId);
-            questionBox.hide();
-        }).bind(this), (function(){
-            questionBox.hide();
+            this._driversController.selectDeleteDriver(this._lastDriverId);            
+        }).bind(this), (function(){            
             this._driversController.selectDriver(this._lastDriverId);
         }).bind(this));
     }
