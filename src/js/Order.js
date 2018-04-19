@@ -50,6 +50,10 @@ class Order {
         this._status = OrderStatus.NEW_ORDER;
     }
 
+    getOrder() {
+        return this;
+    }
+
     getDriver() {
         return this._driver;
     }
@@ -62,6 +66,10 @@ class Order {
         return this._distance;
     }
 
+    setDistance(distance) {
+        this._distance = distance;
+    }
+
     getStatus() {
         return this._status;
     }
@@ -70,48 +78,52 @@ class Order {
         this._status = status;
     }
 
-    setDistance(distance) {
-        this._distance = distance;
+    getClientName() {
+        return this._clientName;
     }
 
     setClientName(clientName) {
         this._clientName = clientName;
     }
 
+    getClientPhone() {
+        return this._clientPhone;
+    }
+
     setClientPhone(clientPhone) {
         this._clientPhone = clientPhone;
+    }
+
+    getDateOfCompletion() {
+        return this._dateOfCompletion;
     }
 
     setDateOfComplention(dateOfCompletion) {
         this._dateOfCompletion = dateOfCompletion;
     }
 
+    getCarFeedPoint() {
+        return this._carFeedPoint;
+    }
+
     setCarFeedPoint(carFeedPoint) {
         this._carFeedPoint = carFeedPoint;
+    }
+
+    getDestination() {
+        return this._destination;
     }
 
     setDestination(destination) {
         this._destination = destination;
     }
 
-    setRate(rate) {
-        this._rate = rate;
+    getRate() {
+        return this._rate;
     }
 
-    getInfo() {
-        return {
-            id: this._id,
-            clientName: this._clientName,
-            clientPhone: this._clientPhone,
-            dateOfCreation: this._dateOfCreation,
-            dateOfCompletion: this._dateOfCompletion,
-            carFeedPoint: this._carFeedPoint,
-            destination: this._destination,
-            distance: this._distance,
-            rate: this._rate,
-            status: this._status,
-            driver: this._driver
-        };
+    setRate(rate) {
+        this._rate = rate;
     }
 
     getDateOfCreation() {

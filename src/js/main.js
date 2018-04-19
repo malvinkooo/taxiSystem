@@ -24,7 +24,13 @@ ordersList.addOrder({
 driversList.addDriver({
     name:'Петр',
     surname: 'Иванов',
-    phone: '1245757'});
+    phone: '1245757'
+});
+driversList.addDriver({
+    name:'Василий',
+    surname: 'Жуков',
+    phone: '06547851'
+});
 
 var ordersController = new OrdersController(ui, ordersList, driversList, geoService);
 var driversController = new DriversController(ui, driversList);

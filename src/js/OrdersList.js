@@ -15,7 +15,7 @@ class OrdersList {
         var result = [];
         for(var id in this._orders) {
             var order = this._orders[id];
-            result.push( order.getInfo() );
+            result.push( order.getOrder() );
         }
         return result;
     }
@@ -32,7 +32,7 @@ class OrdersList {
     }
 
     getOrder(id) {
-        return this._orders[id].getInfo();
+        return this._orders[id].getOrder();
     }
 
     getOrdersCount() {
