@@ -43,12 +43,12 @@ class UI {
         this._ordersTab.showOrdersList(list);
     }
 
-    showOrderInfo(info) {
-    	this._ordersTab.showOrderInfo(info);
+    showOrder(order) {
+    	this._ordersTab.showOrder(order);
     }
 
-    showOrderEditForm(info) {
-        this._ordersTab.showEditOrderForm(info);
+    showEditOrderForm(order) {
+        this._ordersTab.showEditOrderForm(order);
     }
 
     showAllCars(list) {

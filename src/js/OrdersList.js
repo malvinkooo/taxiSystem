@@ -14,8 +14,7 @@ class OrdersList {
     getAllOrders() {
         var result = [];
         for(var id in this._orders) {
-            var order = this._orders[id];
-            result.push( order.getOrder() );
+            result.push(this._orders[id]);
         }
         return result;
     }
@@ -29,10 +28,11 @@ class OrdersList {
         order.setDestination(orderParams.destination);
         order.setRate(orderParams.rate);
         order.setStatus(orderParams.status);
+        return order;
     }
 
     getOrder(id) {
-        return this._orders[id].getOrder();
+        return this._orders[id];
     }
 
     getOrdersCount() {

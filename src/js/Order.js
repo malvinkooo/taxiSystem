@@ -50,16 +50,16 @@ class Order {
         this._status = OrderStatus.NEW_ORDER;
     }
 
-    getOrder() {
-        return this;
-    }
-
     getDriver() {
         return this._driver;
     }
 
     setDriver(driver) {
         this._driver = driver;
+    }
+
+    getId() {
+        return this._id;
     }
 
     getDistance() {

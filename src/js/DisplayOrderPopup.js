@@ -13,21 +13,28 @@ class DisplayOrderPopup {
         this._ordersController = ordersController;
     }
 
-    showOrderInfo(info) {
-        this._lastOrderId = info.id;
+    showOrder(order) {
+        this._lastOrderId = order.getId();
         var statusColorsList = OrderStatus.colorsList;
         for (var j in statusColorsList) {
             this._displayOrderPopupElement
                 .find(".order-status")
                 .removeClass(statusColorsList[j]);
         }
-        for (var key in info) {
-        	this._displayOrderPopupElement.find("."+key+"").html(info[key]);
-        }
+        this._displayOrderPopupElement.find(".status").html(order.getStatus());
+        this._displayOrderPopupElement.find(".id").html(order.getId());
+        this._displayOrderPopupElement.find(".carFeedPoint").html(order.getCarFeedPoint());
+        this._displayOrderPopupElement.find(".clientName").html(order.getClientName());
+        this._displayOrderPopupElement.find(".clientPhone").html(order.getClientPhone());
+        this._displayOrderPopupElement.find(".dateOfCreation").html(order.getDateOfCreation());
+        this._displayOrderPopupElement.find(".dateOfCompletion").html(order.getDateOfCompletion());
+        this._displayOrderPopupElement.find(".destination").html(order.getDestination());
+        this._displayOrderPopupElement.find(".distance").html(order.getDistance());
+        this._displayOrderPopupElement.find(".rate").html(order.getRate());
         this._displayOrderPopupElement.modal("show");
         this._displayOrderPopupElement
             .find(".status")
-            .addClass(statusColorsList[info.status]);
+            .addClass(statusColorsList[order.getStatus()]);
     }
 
     _onEditOrderButtonClick(e){

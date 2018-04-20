@@ -60,17 +60,6 @@ class Driver {
         this._currentLocation = currentLocation;
     }
 
-    getInfo() {
-        return {
-            id: this._id,
-            name: this._name,
-            surname: this._surname,
-            phone: this._phone,
-            currentLocation: this._currentLocation,
-            status: this._status
-        };
-    }
-
     getStatus() {
         return this._status;
     }

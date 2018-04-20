@@ -19,7 +19,7 @@ class OrdersTable {
         var statusColorsList = OrderStatus.colorsList;
         for(var i=0; i < list.length; i++) {
             var order = list[i];
-            $('<tr data-order-id='+ order.id +'><td>'+ order.getClientName() +
+            $('<tr data-order-id='+ order.getId() +'><td>'+ order.getClientName() +
                 '</td><td>' + order.getClientPhone() +
                 '</td><td>' + order.getCarFeedPoint() +
                 '</td><td>' + order.getDestination() +
@@ -33,12 +33,12 @@ class OrdersTable {
         }
     }
 
-    showOrderInfo(info) {
-        this._displayOrderPoup.showOrderInfo(info);
+    showOrder(order) {
+        this._displayOrderPoup.showOrder(order);
     }
 
-    showEditOrderform(info) {
-        this._editOrderPopup.showEditOrderForm(info);
+    showEditOrderform(order) {
+        this._editOrderPopup.showEditOrderForm(order);
     }
 
     _onOrderRowClick(e) {
