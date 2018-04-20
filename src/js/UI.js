@@ -18,12 +18,12 @@ class UI {
         this._driversTab.showDriversList(list);
     }
 
-    showDriverInfo(info) {
-        this._driversTab.showDriverInfo(info);
+    showDriver(driver) {
+        this._driversTab.showDriver(driver);
     }
 
-    showEditDriverForm(info) {
-        this._driversTab.showEditDriverForm(info);
+    showEditDriverForm(driver) {
+        this._driversTab.showEditDriverForm(driver);
 
     }
 

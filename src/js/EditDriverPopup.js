@@ -19,13 +19,14 @@ class EditDriverPopup {
         this._driversController = driversController;
     }
 
-    showEditDriverForm(info) {
-        this._lastDriverId = info.id;
-        for(var key in info){
-            this._editDriverPopupElement.find("." + key).val(info[key]);
-        }
-        this._editDriverPopupElement.find(".id").html(info.id);
-        this._statusListSelectElement.dropdown('set selected',[info['status']]);
+    showEditDriverForm(driver) {
+        this._lastDriverId = driver.getId();
+        this._editDriverPopupElement.find(".name").val(driver.getName());
+        this._editDriverPopupElement.find(".surname").val(driver.getSurname());
+        this._editDriverPopupElement.find(".phone").val(driver.getPhone());
+        this._editDriverPopupElement.find(".currentLocation").val(driver.getCurrentLocation());
+        this._editDriverPopupElement.find(".id").html(driver.getId());
+        this._statusListSelectElement.dropdown('set selected', driver.getStatus());
         this._editDriverPopupElement.modal("show");
     }
 

@@ -40,6 +40,10 @@ class Driver {
         this._status = DriverStatus.FREE;
     }
 
+    getId() {
+        return this._id;
+    }
+
     getName() {
         return this._name;
     }
@@ -48,12 +52,24 @@ class Driver {
         this._name = name;
     }
 
+    getSurname() {
+        return this._surname;
+    }
+
     setSurname(surname) {
         this._surname = surname;
     }
 
+    getPhone() {
+        return this._phone;
+    }
+
     setPhone(phone) {
-        this.phone = phone;
+        this._phone = phone;
+    }
+
+    getCurrentLocation() {
+        return this._currentLocation;
     }
 
     setCurrentLocation(currentLocation) {

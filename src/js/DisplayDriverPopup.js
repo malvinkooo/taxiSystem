@@ -12,16 +12,18 @@ class DisplayDriverPopup {
         this._driversController = driversController;
     }
 
-    showDriverInfo(info) {
+    showDriver(driver) {
     	var statusDriversList = DriverStatus.colorsList;
     	for(var color in statusDriversList){
     		this._displayDriverPopupElement.find(".status").removeClass(statusDriversList[color]);
     	}
-        for(var key in info){
-        	this._displayDriverPopupElement.find("." + key).html(info[key]);
-        }
-        this._displayDriverPopupElement.find(".edit-driver").attr("data-driver-id", info.id);
-        this._displayDriverPopupElement.find(".status").addClass(statusDriversList[info.status]);
+        this._displayDriverPopupElement.find(".id").html(driver.getId());
+        this._displayDriverPopupElement.find(".name").html(driver.getName());
+        this._displayDriverPopupElement.find(".surname").html(driver.getSurname());
+        this._displayDriverPopupElement.find(".phone").html(driver.getPhone());
+        this._displayDriverPopupElement.find(".status").html(driver.getStatus());
+        this._displayDriverPopupElement.find(".edit-driver").attr("data-driver-id", driver.getId());
+        this._displayDriverPopupElement.find(".status").addClass(statusDriversList[driver.getStatus()]);
         this._displayDriverPopupElement.modal("show");
     }
 

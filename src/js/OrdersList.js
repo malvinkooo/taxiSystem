@@ -12,11 +12,11 @@ class OrdersList {
     }
 
     getAllOrders() {
-        var result = [];
+        var list = [];
         for(var id in this._orders) {
-            result.push(this._orders[id]);
+            list.push(this._orders[id]);
         }
-        return result;
+        return list;
     }
 
     editOrder(orderParams) {

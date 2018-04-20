@@ -20,7 +20,6 @@ class EditOrderPopup {
     }
 
     showEditOrderForm(order) {
-        console.log(order);
         this._lastOrder = order;
         this._statusListSelectElement.dropdown('set selected', order.getStatus());
         this._editOrderPopupElement.find(".clientName").val(order.getClientName());
