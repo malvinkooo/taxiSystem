@@ -2,628 +2,647 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Taxi System</title>
-	<link rel="stylesheet" type="text/css" href="libs/semantic/semantic.min.css">
-	<link rel="stylesheet" href="css/main.css">
+    <meta charset="UTF-8">
+    <title>Taxi System</title>
+    <link rel="stylesheet" type="text/css" href="libs/semantic/semantic.min.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-	<div class="ui container">
-		<!-- header -->
-		<h2 class="ui center aligned icon header">
-			<i class="circular car icon"></i>
-			Taxi System
-		</h2>
-		<!-- header -->
-		<!-- main tabs menu -->
-		<div id="mainMenu" class="ui four item menu main-tabs">
-			<a class="item active" data-tab="orders">Заказы</a>
-			<a class="item" data-tab="cars">Машины</a>
-			<a class="item" data-tab="drivers">Водители</a>
-			<a class="item" data-tab="stat">Статистика</a>
-		</div>
-		<!-- main tabs menu -->
-		<!-- main tabs -->
-		<div class="ui segment tab active" data-tab="orders">
-			<!-- seconadary/orders menu -->
-			<div class="ui secondary menu">
-				<a class="item active" data-tab="allOrders">
-					Все заказы
-				</a>
-				<a class="item" data-tab="addOrder">
-					Добавить новый заказ
-				</a>
-				<!-- search -->
-				<div class="right menu">
-					<div class="item">
-						<div class="ui icon input">
-							<input type="text" placeholder="Search...">
-							<i class="search link icon"></i>
-						</div>
-					</div>
-				</div>
-				<!-- search -->
-			</div>
-			<!-- seconadary/orders menu -->
-			<!-- secondary/orders tabs -->
-			<div class="ui tab active" data-tab="allOrders">
-				<table class="ui selectable celled table red">
-					<thead>
-				    	<tr>
-				    		<th>Имя клиента</th>
-				    		<th>Моб.номер</th>
-				    		<th>Откуда</th>
-				    		<th>Куда</th>
-				    		<th>Расстояние</th>
-				    		<th>Тариф</th>
-				    		<th>Статус</th>
-				    		<th>Дата открытия заявки</th>
-							<th>Дата завершения заказа</th>
-							<th>Водитель</th>
-				 		</tr>
-					</thead>
-				  	<tbody>
-				  	</tbody>
-  					<!-- pagination -->
-				  	<tfoot>
-				    	<tr>
-				    		<th colspan="10">
-				      			<div class="ui right floated pagination menu">
-				        			<a class="icon item">
-				          				<i class="left chevron icon"></i>
-				        			</a>
-				        			<a class="item">1</a>
-				        			<a class="item">2</a>
-				        			<a class="item">3</a>
-				        			<a class="item">4</a>
-				        			<a class="icon item">
-				          			<i class="right chevron icon"></i>
-				        			</a>
-				      		</div>
-				    		</th>
-				  		</tr>
-					</tfoot>
-					<!-- pagination -->
-				</table>
-				<!-- total orders -->
-				<!-- <div class="ui compact segments">
-  					<div class="ui red segment">
-    						<p>Всего в системе зарегестрированов заказов:</p>
-  						</div>
-  					<div class="ui segment">
-    					<p>3</p>
-  					</div>
-				</div> -->
- 				<!-- total orders -->
- 				<!-- display order popup -->
-				<div class="ui modal displayOrderModal">
-					<a class="ui ribbon label status"></a>
-	  				<i class="close icon"></i>
-	  				<div class="header order-number">
-	    				Заказ #<span class="id">000000</span>
-	  				</div>
-	    			<div class="ui grid">
-						<div class="eight wide column">
-							<div class="ui horizontal segments">
-	  							<div class="ui segment">
-	    							<p><i class="hand point left outline icon"></i>Откуда:</p>
-	    							<p class="carFeedPoint">
-										<!-- Пос. Котовского -->
-	    							</p>
-	  							</div>
-	  							<div class="ui segment">
-	    							<p><i class="hand point right outline icon"></i>Куда:</p>
-	    							<p class="destination">
-										<!-- Сухой Лиман -->
-	    							</p>
-	  							</div>
-							</div>
-							<div class="ui horizontal segments">
-	  							<div class="ui segment">
-	    							<p><i class="sync icon"></i>Расстояние:</p>
-	    							<p>
-										<span class="distance">15</span>км
-	    							</p>
-	  							</div>
-	  							<div class="ui segment">
-	    							<p><i class="chart line icon"></i>Тариф:</p>
-	    							<p class="rate">
-										<!-- 1 -->
-	    							</p>
-	  							</div>
-							</div>
-							<div class="ui horizontal segments">
-	  							<div class="ui segment">
-	    							<p><i class="clock outline icon"></i>Открыт:</p>
-	    							<p class="dateOfCreation">
-										<!-- 12.02.2016 -->
-	    							</p>
-	  							</div>
-	  							<div class="ui segment">
-	    							<p><i class="clock icon"></i>Завершен:</p>
-	    							<p class="dateOfCompletion">
-										<!-- 12.02.2017 -->
-	    							</p>
-	  							</div>
-							</div>
-						</div>
-						<div class="eight wide column">
-							<div class="ui cards" style="margin-top: .1rem">
-	  							<div class="card" style="width: 100%">
-	    							<div class="content">
-	      								<img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
-	      								<div class="header driver">
-	        								<!-- Водитель -->
-	      								</div>
-	      								<div class="meta driver-status">
-	        								New Member
-	     								</div>
-	      								<div class="description">
-	      									<p>
-	      										<i class="phone icon"></i>
-	      										<span class="driverPhone">
-	      											<!-- 0965544545 -->
-	      										</span>
-	      									</p>
-	        								<p class="driver-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus saepe blanditiis corrupti ipsum dolorem numquam ea dignissimos nostrum aliquid! Ducimus odio, quos qui! Reiciendis perferendis dolorum quasi facere aut esse.</p>
-	      								</div>
-	    							</div>
-	    							<!-- <div class="extra content"></div> -->
-	  							</div>
-	  							<div class="card" style="width: 100%;margin-bottom: 30px">
-	    							<div class="content">
-	      								<img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
-	      								<div class="header clientName">
-	        								<!-- Клиент -->
-	      								</div>
-	      								<div class="meta client-status">
-	        								New Member
-	     								</div>
-	      								<div class="description">
-	      									<p>
-	      										<i class="phone icon"></i>
-	      										<span class="clientPhone">
-	      											<!-- 0965544545 -->
-	      										</span>
-	      									</p>
-	        								<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus saepe blanditiis corrupti ipsum dolorem numquam ea dignissimos nostrum aliquid! Ducimus odio, quos qui! Reiciendis perferendis dolorum quasi facere aut esse.</p> -->
-	      								</div>
-	    							</div>
-	    							<!-- <div class="extra content"></div> -->
-	  							</div>
-							</div>
-						</div>
-					</div>
-					<div class="actions">
-					    <div class="ui blue button left labeled icon edit-order">
-					    	<i class="edit icon"></i>
-					    	Редактировать
-					    </div>
-					    <div class="ui button black cancel actions">
-					    	Закрыть
-					    </div>
-					</div>
-				</div>
-				<!-- display order popup -->
-				<!-- display order popup -->
-				<div class="ui modal editOrderModal">
-	  				<i class="close icon"></i>
-	  				<div class="header order-number">
-	    				Редактировать заказ #<span class="id"></span>
-	  				</div>
-	  				<form class="ui form" id="editOrderForm">
-	  					<div class="ui fields">
-	  						<div class="field status-wrap">
-	  							<select class="ui fluid dropdown status-list" name="status"></select>
-	  						</div>
-	  					</div>
-						<div class="fields two">
-							<div class="field">
-						   		<label>Имя</label>
-						   		<input type="text" name="clientName" placeholder="Имя" class="clientName">
-						  	</div>
-							<div class="field">
-						   		<label>Контактный номер</label>
-						   		<input type="text" name="clientPhone" placeholder="Контактный номер" class="clientPhone">
-						 	</div>
-						</div>
-						<div class="fields two">
-							<div class="field">
-						   		<label>Откуда</label>
-						   		<input type="text" name="carFeedPoint" placeholder="Адрес подачи машины" class="carFeedPoint">
-						  	</div>
-						  	<div class="field">
-						   		<label>Куда</label>
-						   		<input type="text" name="destination" placeholder="Адрес назначения" class="destination">
-							</div>
-						</div>
-						<div class="fields two">
-							<div class="field">
-								<div class="ui form">
-	  								<div class="field">
-	    								<label>Водитель:</label>
-	    								<select class="ui fluid dropdown" name="driver">
-										    <option value="Пупкин">Пупкин</option>
-										    <option value="Пупкин">Пупкин</option>
-										</select>
-	  								</div>
-								</div>
-							</div>
-							<div class="field">
-						   		<label>Тариф</label>
-						   		<input class="rate" type="number" name="rate" min="1" step="0.1" value="1">
-							</div>
-						</div>
-					</form>
-					<div class="actions">
-					    <div class="ui button submit green">
-					    	Сохранить
-					    </div>
-					    <div class="ui cancel actions button">
-					    	Закрыть
-					    </div>
-					</div>
-				</div>
-				<!-- display order popup -->
-			</div>
-			<div class="ui tab" data-tab="addOrder">
-				<!-- add order form -->
-				<form class="ui form" id="addOrderForm">
-					<div class="fields two">
-						<div class="field">
-					   		<label>Имя</label>
-					   		<input type="text" name="clientName" placeholder="Имя">
-					  	</div>
-						<div class="field">
-					   		<label>Контактный номер</label>
-					   		<input type="text" name="clientPhone" placeholder="Контактный номер">
-					 	</div>
-					</div>
-					<div class="fields three">
-						<div class="field">
-					   		<label>Откуда</label>
-					   		<input type="text" name="carFeedPoint" placeholder="Адрес подачи машины">
-					  	</div>
-					  	<div class="field">
-					   		<label>Куда</label>
-					   		<input type="text" name="destination" placeholder="Адрес назначения">
-						</div>
-						<div class="field">
-					   		<label>Тариф</label>
-					   		<input type="number" name="rate" min="1" step="0.1" placeholder="Цель" value="1">
-						</div>
-					</div>
-					<div class="fields two">
-						<div class="field">
-							<div class="ui form">
-  								<div class="field">
-    								<label>Выбрать водителя</label>
-    								<select name="driver" class="ui search dropdown">
-      									<option value="">Выбрать водителя</option>
-      									<option value="Василиса Пупкина">Василиса Пупкина</option>
-      									<option value="Василиса Пупкина">Василиса Пупкина</option>
-      									<option value="Василиса Пупкина">Василиса Пупкина</option>
-      									<option value="Василиса Пупкина">Василиса Пупкина</option>
-      									<option value="Василиса Пупкина">Василиса Пупкина</option>
-      									<option value="Василиса Пупкина">Василиса Пупкина</option>
-    								</select>
-  								</div>
-							</div>
-						</div>
-						<div class="ui checkbox field">
-							<input type="checkbox" name="isSetDriverAutomatically" value="true">
-							<label>Назначить водителя автоматически</label>
-						</div>
-					</div>
-					<div class="field">
-						<button id="addOrderButton" class="ui red button" type="submit">Добавить</button>
-					</div>
-				</form>
-				<!-- add order form -->
-			</div>
-			<!-- secondary/orders tabs -->
-		</div>
-		<div class="ui segment tab" data-tab="cars">
-			<!-- seconadary/cars menu -->
-			<div class="ui secondary  menu">
-				<a class="item" data-tab="allCars">
-					Все машины
-				</a>
-				<a class="item" data-tab="addCar">
-					Добавить машину
-				</a>
-				<!-- search -->
-				<div class="right menu">
-					<div class="item">
-						<div class="ui icon input">
-							<input type="text" placeholder="Search...">
-							<i class="search link icon"></i>
-						</div>
-					</div>
-				</div>
-				<!-- search -->
-			</div>
-			<!-- seconadary/cars menu -->
-			<!-- secondary/cars tabs -->
-			<div class="ui tab" data-tab="allCars">
-				<table class="ui selectable celled table blue">
-					<thead>
-				    	<tr>
-				    		<th>Марка</th>
-				    		<th>Расход бензина</th>
-				    		<th>Гос. номер</th>
-				 		</tr>
-					</thead>
-				  	<tbody>
-				    	<tr>
-				      	<td>Вася Иванов</td>
-				      	<td>0.8</td>
-				      	<td>015288424</td>
-				    	</tr>
-				    	<tr>
-				      	<td>Вася Иванов</td>
-				      	<td>0.8</td>
-				      	<td>015288424</td>
-				    	</tr>
-				    	<tr>
-				      	<td>Вася Иванов</td>
-				      	<td>0.8</td>
-				      	<td>015288424</td>
-				    	</tr>
-				  	</tbody>
-  					<!-- pagination -->
-				  	<tfoot>
-				    	<tr>
-				    		<th colspan="9">
-				      			<div class="ui right floated pagination menu">
-				        			<a class="icon item">
-				          				<i class="left chevron icon"></i>
-				        			</a>
-				        			<a class="item">1</a>
-				        			<a class="item">2</a>
-				        			<a class="item">3</a>
-				        			<a class="item">4</a>
-				        			<a class="icon item">
-				          			<i class="right chevron icon"></i>
-				        			</a>
-				      		</div>
-				    		</th>
-				  		</tr>
-					</tfoot>
-					<!-- pagination -->
-				</table>
-				<!-- total orders -->
-				<div class="ui compact segments">
-  					<div class="ui blue segment">
-    						<p>Всего в системе машин:</p>
-  					</div>
-  					<div class="ui segment">
-    					<p>3</p>
-  					</div>
-				</div>
- 				 <!-- total orders -->
-			</div>
-			<div class="ui tab" data-tab="addCar">
-				<form id="addCarForm" class="ui form">
-					<div class="field">
-						<label>Марка автомобиля</label>
-						<input type="text" name="brand" placeholder="">
-					</div>
-					<div class="field">
-						<label>Гос. номер</label>
-						<input type="text" name="stateCarNumber" placeholder="Гос. номер автомобиля">
-					</div>
-					<div class="field">
-						<label>Расход топлива (л/км)</label>
-						<input type="number" min="0" step="0.1" name="gasolineConsumptionRatio" placeholder="">
-					</div>
-					<div class="ui success message">
-						<div class="header">Автомобиль добавлен</div>
-						<p>You're all signed up for the newsletter.</p>
-					</div>
-					<div class="ui submit blue button">Добавить</div>
-				</form>
-			</div>
-			<!-- secondary/cars tabs -->
-		</div>
-		<div class="ui segment tab" data-tab="drivers">
-			<!-- seconadary/cars menu -->
-			<div class="ui secondary menu">
-				<a class="active item" data-tab="allDrivers">
-					Все водители
-				</a>
-				<a class="item" data-tab="addDriver">
-					Добавить водителя
-				</a>
-				<!-- search -->
-				<div class="right menu">
-					<div class="item">
-						<div class="ui icon input">
-							<input type="text" placeholder="Search...">
-							<i class="search link icon"></i>
-						</div>
-					</div>
-				</div>
-				<!-- search -->
-			</div>
-			<!-- seconadary/cars menu -->
-			<!-- secondary/cars tabs -->
-			<div class="ui tab" data-tab="allDrivers">
-				<table class="ui selectable celled table green">
-					<thead>
-				    	<tr>
-				    		<th>Имя</th>
-				    		<th>Фамилия</th>
-				    		<th>Моб. номер</th>
-				    		<th>Статус</th>
-				    		<th>Текущее место пребывания</th>
-				 		</tr>
-					</thead>
-				  	<tbody></tbody>
-  					<!-- pagination -->
-				  	<tfoot>
-				    	<tr>
-				    		<th colspan="9">
-				      			<div class="ui right floated pagination menu">
-				        			<a class="icon item">
-				          				<i class="left chevron icon"></i>
-				        			</a>
-				        			<a class="item">1</a>
-				        			<a class="item">2</a>
-				        			<a class="item">3</a>
-				        			<a class="item">4</a>
-				        			<a class="icon item">
-				          			<i class="right chevron icon"></i>
-				        			</a>
-				      		</div>
-				    		</th>
-				  		</tr>
-					</tfoot>
-					<!-- pagination -->
-				</table>
-				<!-- total orders -->
-				<!-- <div class="ui compact segments">
-  					<div class="ui green segment">
-    						<p>Всего в системе водителей:</p>
-  						</div>
-  					<div class="ui segment">
-    					<p>3</p>
-  					</div>
-				</div> -->
- 				 <!-- total orders -->
- 				 <!-- display order popup -->
-				<div class="ui mini modal displayDriverModal">
-					<a class="ui ribbon label status"></a>
-	  				<i class="close icon"></i>
-	  				<div class="header">
-	    				Номер в системе <span class="id"></span>
-	  				</div>
-	    			<div class="content">
-						<div class="ui cards">
-					  		<div class="card" style="width: 100%">
-					    		<div class="content">
-					      			<img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar2/large/kristy.png">
-					      			<div class="header">
-					        			<span class="name"></span>
-					        			<span class="surname"></span>
-					      			</div>
-							      	<div class="phone"></div>
-							      	<div class="currentLocation">-</div>
-					    		</div>
-					  		</div>
-						</div>
-					</div>
-					<div class="actions">
-					    <div class="ui blue button left labeled icon edit-driver">
-					    	<i class="edit icon"></i>
-					    	Редактировать
-					    </div>
-					    <div class="ui button black cancel actions">
-					    	Закрыть
-					    </div>
-					</div>
-	    		</div>
-				<!-- display order popup -->
-				<!-- display order popup -->
-				<div class="ui modal editDriverModal">
-	  				<i class="close icon"></i>
-	  				<div class="header order-number">
-	    				Редактировать информацию о водителе #<span class="id"></span>
-	  				</div>
-	  				<form class="ui form" id="editOrderForm">
-	  					<div class="ui fields">
-	  						<div class="field status-wrap">
-	  							<select class="ui fluid dropdown status-list" name="status"></select>
-	  						</div>
-	  					</div>
-						<div class="fields two">
-							<div class="field">
-						   		<label>Имя</label>
-						   		<input type="text" name="name" placeholder="Имя" class="name">
-						  	</div>
-							<div class="field">
-						   		<label>Фамилия</label>
-						   		<input type="text" name="surname" placeholder="Фамилия" class="surname">
-						 	</div>
-						</div>
-						<div class="fields two">
-							<div class="field">
-						   		<label>Телефон</label>
-						   		<input type="text" name="phone" placeholder="Телефон" class="phone">
-						  	</div>
-						  	<div class="field">
-						   		<label>Текущее место пребывания</label>
-						   		<input type="text" name="currentLocation" placeholder="Текущее место пребывания" class="">
-							</div>
-						</div>
-					</form>
-					<div class="actions">
-					    <div class="ui button submit green">
-					    	Сохранить
-					    </div>
-					    <div class="ui cancel actions button">
-					    	Закрыть
-					    </div>
-					</div>
-				</div>
-				<!-- display order popup -->
-			</div>
-			<div class="ui tab" data-tab="addDriver">
-				<form id="addDriverForm" class="ui form">
-					<div class="field">
-						<label>Имя</label>
-						<input type="text" name="name" placeholder="Имя">
-					</div>
-					<div class="field">
-						<label>Фамилия</label>
-						<input type="text" name="surname" placeholder="Фамилия">
-					</div>
-					<div class="field">
-						<label>Моб. номер</label>
-						<input type="text" name="phone" placeholder="7475454">
-					</div>
-					<div class="ui success message">
-						<div class="header">Автомобиль добавлен</div>
-					</div>
-					<div class="ui submit green button" id="addDriverButton">Добавить</div>
-				</form>
-			</div>
-			<!-- secondary/cars tabs -->
-		</div>
-		<div class="ui segment tab" data-tab="stat">
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus eveniet nobis aliquam quam odio quisquam cupiditate dicta recusandae ratione saepe impedit, maxime, earum omnis quia sint. Excepturi aliquid, necessitatibus dolore.
-			</p>
-		</div>
-		<!-- main tabs -->
-	</div>
-	<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-	 crossorigin="anonymous"></script> -->
-	<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-	<script src="libs/semantic/semantic.min.js"></script>
-	<script src="js/MainMenu.js"></script>
-	<script src="js/AddOrderForm.js"></script>
-	<script src="js/AddDriverForm.js"></script>
-	<script src="js/DisplayOrderPopup.js"></script>
-	<script src="js/DisplayDriverPopup.js"></script>
-	<script src="js/EditOrderPopup.js"></script>
-	<script src="js/EditDriverPopup.js"></script>
-	<script src="js/UI.js"></script>
-	<script src="js/OrdersTab.js"></script>
-	<script src="js/DriversTab.js"></script>
-	<script src="js/OrdersTable.js"></script>
-	<script src="js/DriversTable.js"></script>
-	<script src="js/Order.js"></script>
-	<script src="js/Driver.js"></script>
-	<script src="js/OrdersList.js"></script>
-	<script src="js/DriversList.js"></script>
-	<script src="js/GeoService.js"></script>
-	<script src="js/OrdersController.js"></script>
-	<script src="js/DriversController.js"></script>
-	<!-- <script src="js/CarsController.js"></script>
-	<script src="js/Car.js"></script>
-	<script src="js/CarsList.js"></script> -->
-	<script src="js/main.js"></script>
+    <div class="ui container">
+        <!-- header -->
+        <h2 class="ui center aligned icon header">
+            <i class="circular car icon"></i>
+            Taxi System
+        </h2>
+        <!-- header -->
+        <!-- main tabs menu -->
+        <div id="mainMenu" class="ui four item menu main-tabs">
+            <a class="item active" data-tab="orders">Заказы</a>
+            <a class="item" data-tab="cars">Машины</a>
+            <a class="item" data-tab="drivers">Водители</a>
+            <a class="item" data-tab="stat">Статистика</a>
+        </div>
+        <!-- main tabs menu -->
+        <!-- main tabs -->
+        <div class="ui segment tab active" data-tab="orders">
+            <!-- seconadary/orders menu -->
+            <div class="ui secondary menu">
+                <a class="item active" data-tab="allOrders">
+                    Все заказы
+                </a>
+                <a class="item" data-tab="addOrder">
+                    Добавить новый заказ
+                </a>
+                <!-- search -->
+                <div class="right menu">
+                    <div class="item">
+                        <div class="ui icon input">
+                            <input type="text" placeholder="Search...">
+                            <i class="search link icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- search -->
+            </div>
+            <!-- seconadary/orders menu -->
+            <!-- secondary/orders tabs -->
+            <div class="ui tab active" data-tab="allOrders">
+                <table class="ui selectable celled table red">
+                    <thead>
+                        <tr>
+                            <th>Имя клиента</th>
+                            <th>Моб.номер</th>
+                            <th>Откуда</th>
+                            <th>Куда</th>
+                            <th>Расстояние</th>
+                            <th>Тариф</th>
+                            <th>Статус</th>
+                            <th>Дата открытия заявки</th>
+                            <th>Дата завершения заказа</th>
+                            <th>Водитель</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <!-- pagination -->
+                    <tfoot>
+                        <tr>
+                            <th colspan="10">
+                                <div class="ui right floated pagination menu">
+                                    <a class="icon item">
+                                        <i class="left chevron icon"></i>
+                                    </a>
+                                    <a class="item">1</a>
+                                    <a class="item">2</a>
+                                    <a class="item">3</a>
+                                    <a class="item">4</a>
+                                    <a class="icon item">
+                                    <i class="right chevron icon"></i>
+                                    </a>
+                            </div>
+                            </th>
+                        </tr>
+                    </tfoot>
+                    <!-- pagination -->
+                </table>
+                <!-- total orders -->
+                <!-- <div class="ui compact segments">
+                    <div class="ui red segment">
+                            <p>Всего в системе зарегестрированов заказов:</p>
+                        </div>
+                    <div class="ui segment">
+                        <p>3</p>
+                    </div>
+                </div> -->
+                <!-- total orders -->
+                <!-- display order popup -->
+                <div class="ui modal displayOrderModal">
+                    <a class="ui ribbon label status"></a>
+                    <i class="close icon"></i>
+                    <div class="header order-number">
+                        Заказ #<span class="id">000000</span>
+                    </div>
+                    <div class="ui grid">
+                        <div class="eight wide column">
+                            <div class="ui horizontal segments">
+                                <div class="ui segment">
+                                    <p><i class="hand point left outline icon"></i>Откуда:</p>
+                                    <p class="carFeedPoint">
+                                        <!-- Пос. Котовского -->
+                                    </p>
+                                </div>
+                                <div class="ui segment">
+                                    <p><i class="hand point right outline icon"></i>Куда:</p>
+                                    <p class="destination">
+                                        <!-- Сухой Лиман -->
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="ui horizontal segments">
+                                <div class="ui segment">
+                                    <p><i class="sync icon"></i>Расстояние:</p>
+                                    <p>
+                                        <span class="distance">15</span>км
+                                    </p>
+                                </div>
+                                <div class="ui segment">
+                                    <p><i class="chart line icon"></i>Тариф:</p>
+                                    <p class="rate">
+                                        <!-- 1 -->
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="ui horizontal segments">
+                                <div class="ui segment">
+                                    <p><i class="clock outline icon"></i>Открыт:</p>
+                                    <p class="dateOfCreation">
+                                        <!-- 12.02.2016 -->
+                                    </p>
+                                </div>
+                                <div class="ui segment">
+                                    <p><i class="clock icon"></i>Завершен:</p>
+                                    <p class="dateOfCompletion">
+                                        <!-- 12.02.2017 -->
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="eight wide column">
+                            <div class="ui cards" style="margin-top: .1rem">
+                                <div class="card" style="width: 100%">
+                                    <div class="content">
+                                        <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
+                                        <div class="header driver">
+                                            <!-- Водитель -->
+                                        </div>
+                                        <div class="meta driver-status">
+                                            New Member
+                                        </div>
+                                        <div class="description">
+                                            <p>
+                                                <i class="phone icon"></i>
+                                                <span class="driverPhone">
+                                                    <!-- 0965544545 -->
+                                                </span>
+                                            </p>
+                                            <p class="driver-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus saepe blanditiis corrupti ipsum dolorem numquam ea dignissimos nostrum aliquid! Ducimus odio, quos qui! Reiciendis perferendis dolorum quasi facere aut esse.</p>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="extra content"></div> -->
+                                </div>
+                                <div class="card" style="width: 100%;margin-bottom: 30px">
+                                    <div class="content">
+                                        <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
+                                        <div class="header clientName">
+                                            <!-- Клиент -->
+                                        </div>
+                                        <div class="meta client-status">
+                                            New Member
+                                        </div>
+                                        <div class="description">
+                                            <p>
+                                                <i class="phone icon"></i>
+                                                <span class="clientPhone">
+                                                    <!-- 0965544545 -->
+                                                </span>
+                                            </p>
+                                            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus saepe blanditiis corrupti ipsum dolorem numquam ea dignissimos nostrum aliquid! Ducimus odio, quos qui! Reiciendis perferendis dolorum quasi facere aut esse.</p> -->
+                                        </div>
+                                    </div>
+                                    <!-- <div class="extra content"></div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <div class="ui blue button left labeled icon edit-order">
+                            <i class="edit icon"></i>
+                            Редактировать
+                        </div>
+                        <div class="ui button black cancel actions">
+                            Закрыть
+                        </div>
+                    </div>
+                </div>
+                <!-- display order popup -->
+                <!-- display order popup -->
+                <div class="ui modal editOrderModal">
+                    <i class="close icon"></i>
+                    <div class="header order-number">
+                        Редактировать заказ #<span class="id"></span>
+                    </div>
+                    <form class="ui form" id="editOrderForm">
+                        <div class="ui fields">
+                            <div class="field status-wrap">
+                                <select class="ui fluid dropdown status-list" name="status"></select>
+                            </div>
+                        </div>
+                        <div class="fields two">
+                            <div class="field">
+                                <label>Имя</label>
+                                <input type="text" name="clientName" placeholder="Имя" class="clientName">
+                            </div>
+                            <div class="field">
+                                <label>Контактный номер</label>
+                                <input type="text" name="clientPhone" placeholder="Контактный номер" class="clientPhone">
+                            </div>
+                        </div>
+                        <div class="fields two">
+                            <div class="field">
+                                <label>Откуда</label>
+                                <input type="text" name="carFeedPoint" placeholder="Адрес подачи машины" class="carFeedPoint">
+                            </div>
+                            <div class="field">
+                                <label>Куда</label>
+                                <input type="text" name="destination" placeholder="Адрес назначения" class="destination">
+                            </div>
+                        </div>
+                        <div class="fields two">
+                            <div class="field">
+                                <div class="ui form">
+                                    <div class="field">
+                                        <label>Водитель:</label>
+                                        <select class="ui fluid dropdown" name="driver">
+                                            <option value="Пупкин">Пупкин</option>
+                                            <option value="Пупкин">Пупкин</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>Тариф</label>
+                                <input class="rate" type="number" name="rate" min="1" step="0.1" value="1">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="actions">
+                        <div class="ui button submit green">
+                            Сохранить
+                        </div>
+                        <div class="ui cancel actions button">
+                            Закрыть
+                        </div>
+                    </div>
+                </div>
+                <!-- display order popup -->
+            </div>
+            <div class="ui tab" data-tab="addOrder">
+                <!-- add order form -->
+                <form class="ui form" id="addOrderForm">
+                    <div class="fields two">
+                        <div class="field">
+                            <label>Имя</label>
+                            <input type="text" name="clientName" placeholder="Имя">
+                        </div>
+                        <div class="field">
+                            <label>Контактный номер</label>
+                            <input type="text" name="clientPhone" placeholder="Контактный номер">
+                        </div>
+                    </div>
+                    <div class="fields three">
+                        <div class="field">
+                            <label>Откуда</label>
+                            <input type="text" name="carFeedPoint" placeholder="Адрес подачи машины">
+                        </div>
+                        <div class="field">
+                            <label>Куда</label>
+                            <input type="text" name="destination" placeholder="Адрес назначения">
+                        </div>
+                        <div class="field">
+                            <label>Тариф</label>
+                            <input type="number" name="rate" min="1" step="0.1" placeholder="Цель" value="1">
+                        </div>
+                    </div>
+                    <div class="fields two">
+                        <div class="field">
+                            <div class="ui form">
+                                <div class="field">
+                                    <label>Выбрать водителя</label>
+                                    <select name="driver" class="ui search dropdown">
+                                        <option value="">Выбрать водителя</option>
+                                        <option value="Василиса Пупкина">Василиса Пупкина</option>
+                                        <option value="Василиса Пупкина">Василиса Пупкина</option>
+                                        <option value="Василиса Пупкина">Василиса Пупкина</option>
+                                        <option value="Василиса Пупкина">Василиса Пупкина</option>
+                                        <option value="Василиса Пупкина">Василиса Пупкина</option>
+                                        <option value="Василиса Пупкина">Василиса Пупкина</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui checkbox field">
+                            <input type="checkbox" name="isSetDriverAutomatically" value="true">
+                            <label>Назначить водителя автоматически</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <button id="addOrderButton" class="ui red button" type="submit">Добавить</button>
+                    </div>
+                </form>
+                <!-- add order form -->
+            </div>
+            <!-- secondary/orders tabs -->
+        </div>
+        <div class="ui segment tab" data-tab="cars">
+            <!-- seconadary/cars menu -->
+            <div class="ui secondary  menu">
+                <a class="item" data-tab="allCars">
+                    Все машины
+                </a>
+                <a class="item" data-tab="addCar">
+                    Добавить машину
+                </a>
+                <!-- search -->
+                <div class="right menu">
+                    <div class="item">
+                        <div class="ui icon input">
+                            <input type="text" placeholder="Search...">
+                            <i class="search link icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- search -->
+            </div>
+            <!-- seconadary/cars menu -->
+            <!-- secondary/cars tabs -->
+            <div class="ui tab" data-tab="allCars">
+                <table class="ui selectable celled table blue">
+                    <thead>
+                        <tr>
+                            <th>Марка</th>
+                            <th>Расход бензина</th>
+                            <th>Гос. номер</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td>Вася Иванов</td>
+                        <td>0.8</td>
+                        <td>015288424</td>
+                        </tr>
+                        <tr>
+                        <td>Вася Иванов</td>
+                        <td>0.8</td>
+                        <td>015288424</td>
+                        </tr>
+                        <tr>
+                        <td>Вася Иванов</td>
+                        <td>0.8</td>
+                        <td>015288424</td>
+                        </tr>
+                    </tbody>
+                    <!-- pagination -->
+                    <tfoot>
+                        <tr>
+                            <th colspan="9">
+                                <div class="ui right floated pagination menu">
+                                    <a class="icon item">
+                                        <i class="left chevron icon"></i>
+                                    </a>
+                                    <a class="item">1</a>
+                                    <a class="item">2</a>
+                                    <a class="item">3</a>
+                                    <a class="item">4</a>
+                                    <a class="icon item">
+                                    <i class="right chevron icon"></i>
+                                    </a>
+                            </div>
+                            </th>
+                        </tr>
+                    </tfoot>
+                    <!-- pagination -->
+                </table>
+                <!-- total orders -->
+                <div class="ui compact segments">
+                    <div class="ui blue segment">
+                            <p>Всего в системе машин:</p>
+                    </div>
+                    <div class="ui segment">
+                        <p>3</p>
+                    </div>
+                </div>
+                 <!-- total orders -->
+            </div>
+            <div class="ui tab" data-tab="addCar">
+                <form id="addCarForm" class="ui form">
+                    <div class="field">
+                        <label>Марка автомобиля</label>
+                        <input type="text" name="brand" placeholder="">
+                    </div>
+                    <div class="field">
+                        <label>Гос. номер</label>
+                        <input type="text" name="stateCarNumber" placeholder="Гос. номер автомобиля">
+                    </div>
+                    <div class="field">
+                        <label>Расход топлива (л/км)</label>
+                        <input type="number" min="0" step="0.1" name="gasolineConsumptionRatio" placeholder="">
+                    </div>
+                    <div class="ui success message">
+                        <div class="header">Автомобиль добавлен</div>
+                        <p>You're all signed up for the newsletter.</p>
+                    </div>
+                    <div class="ui submit blue button">Добавить</div>
+                </form>
+            </div>
+            <!-- secondary/cars tabs -->
+        </div>
+        <div class="ui segment tab" data-tab="drivers">
+            <!-- seconadary/cars menu -->
+            <div class="ui secondary menu">
+                <a class="active item" data-tab="allDrivers">
+                    Все водители
+                </a>
+                <a class="item" data-tab="addDriver">
+                    Добавить водителя
+                </a>
+                <!-- search -->
+                <div class="right menu">
+                    <div class="item">
+                        <div class="ui icon input">
+                            <input type="text" placeholder="Search...">
+                            <i class="search link icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- search -->
+            </div>
+            <!-- seconadary/cars menu -->
+            <!-- secondary/cars tabs -->
+            <div class="ui tab" data-tab="allDrivers">
+                <table class="ui selectable celled table green">
+                    <thead>
+                        <tr>
+                            <th>Имя</th>
+                            <th>Фамилия</th>
+                            <th>Моб. номер</th>
+                            <th>Статус</th>
+                            <th>Текущее место пребывания</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <!-- pagination -->
+                    <tfoot>
+                        <tr>
+                            <th colspan="9">
+                                <div class="ui right floated pagination menu">
+                                    <a class="icon item">
+                                        <i class="left chevron icon"></i>
+                                    </a>
+                                    <a class="item">1</a>
+                                    <a class="item">2</a>
+                                    <a class="item">3</a>
+                                    <a class="item">4</a>
+                                    <a class="icon item">
+                                    <i class="right chevron icon"></i>
+                                    </a>
+                            </div>
+                            </th>
+                        </tr>
+                    </tfoot>
+                    <!-- pagination -->
+                </table>
+                <!-- total drivers -->
+                <!-- <div class="ui compact segments">
+                    <div class="ui green segment">
+                            <p>Всего в системе водителей:</p>
+                        </div>
+                    <div class="ui segment">
+                        <p>3</p>
+                    </div>
+                </div> -->
+                 <!-- total drivers -->
+                 <!-- display driver popup -->
+                <div class="ui tiny modal displayDriverModal">
+                    <a class="ui ribbon label status"></a>
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Номер в системе <span class="id"></span>
+                    </div>
+                    <div class="content">
+                        <div class="ui cards">
+                            <div class="card" style="width: 100%">
+                                <div class="content">
+                                    <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar2/large/kristy.png">
+                                    <div class="header">
+                                        <span class="name"></span>
+                                        <span class="surname"></span>
+                                    </div>
+                                    <div class="phone"></div>
+                                    <div class="currentLocation">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="ui icon button red delete-driver">
+                            <i class="trash alternate outline icon"></i>
+                        </button>
+                        <div class="ui blue button left labeled icon edit-driver">
+                            <i class="edit icon"></i>
+                            Редактировать
+                        </div>
+                        <div class="ui button black cancel actions">
+                            Закрыть
+                        </div>
+                    </div>
+                </div>
+                <!-- display driver popup -->
+                <!-- display driver popup -->
+                <div class="ui modal editDriverModal">
+                    <i class="close icon"></i>
+                    <div class="header order-number">
+                        Редактировать информацию о водителе #<span class="id"></span>
+                    </div>
+                    <form class="ui form" id="editOrderForm">
+                        <div class="ui fields">
+                            <div class="field status-wrap">
+                                <select class="ui fluid dropdown status-list" name="status"></select>
+                            </div>
+                        </div>
+                        <div class="fields two">
+                            <div class="field">
+                                <label>Имя</label>
+                                <input type="text" name="name" placeholder="Имя" class="name">
+                            </div>
+                            <div class="field">
+                                <label>Фамилия</label>
+                                <input type="text" name="surname" placeholder="Фамилия" class="surname">
+                            </div>
+                        </div>
+                        <div class="fields two">
+                            <div class="field">
+                                <label>Телефон</label>
+                                <input type="text" name="phone" placeholder="Телефон" class="phone">
+                            </div>
+                            <div class="field">
+                                <label>Текущее место пребывания</label>
+                                <input type="text" name="currentLocation" placeholder="Текущее место пребывания" class="">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="actions">
+                        <div class="ui button submit green">
+                            Сохранить
+                        </div>
+                        <div class="ui cancel actions button">
+                            Закрыть
+                        </div>
+                    </div>
+                </div>
+                <!-- display driver popup -->
+            </div>
+            <div class="ui tab" data-tab="addDriver">
+                <form id="addDriverForm" class="ui form">
+                    <div class="field">
+                        <label>Имя</label>
+                        <input type="text" name="name" placeholder="Имя">
+                    </div>
+                    <div class="field">
+                        <label>Фамилия</label>
+                        <input type="text" name="surname" placeholder="Фамилия">
+                    </div>
+                    <div class="field">
+                        <label>Моб. номер</label>
+                        <input type="text" name="phone" placeholder="7475454">
+                    </div>
+                    <div class="ui success message">
+                        <div class="header">Автомобиль добавлен</div>
+                    </div>
+                    <div class="ui submit green button" id="addDriverButton">Добавить</div>
+                </form>
+            </div>
+            <!-- secondary/cars tabs -->
+        </div>
+        <div class="ui segment tab" data-tab="stat">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus eveniet nobis aliquam quam odio quisquam cupiditate dicta recusandae ratione saepe impedit, maxime, earum omnis quia sint. Excepturi aliquid, necessitatibus dolore.
+            </p>
+        </div>
+        <!-- main tabs -->
+    </div>
+<!-- delete driver popup -->
+<div class="ui mini modal questionMessageBox">
+    <i class="close icon"></i>
+    <div class="header text"></div>
+        <div class="actions">
+            <div class="ui button actions approve green">
+                Удалить
+            </div>
+            <div class="ui cancel button">
+                Закрыть
+            </div>
+        </div>
+    </div>
+</div>
+<!-- delete driver popup -->
+    <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+     crossorigin="anonymous"></script> -->
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="libs/semantic/semantic.min.js"></script>
+    <script src="js/QuestionMessageBox.js"></script>
+    <script src="js/MainMenu.js"></script>
+    <script src="js/AddOrderForm.js"></script>
+    <script src="js/AddDriverForm.js"></script>
+    <script src="js/DisplayOrderPopup.js"></script>
+    <script src="js/DisplayDriverPopup.js"></script>
+    <script src="js/EditOrderPopup.js"></script>
+    <script src="js/EditDriverPopup.js"></script>
+    <script src="js/UI.js"></script>
+    <script src="js/OrdersTab.js"></script>
+    <script src="js/DriversTab.js"></script>
+    <script src="js/OrdersTable.js"></script>
+    <script src="js/DriversTable.js"></script>
+    <script src="js/Order.js"></script>
+    <script src="js/Driver.js"></script>
+    <script src="js/OrdersList.js"></script>
+    <script src="js/DriversList.js"></script>
+    <script src="js/GeoService.js"></script>
+    <script src="js/OrdersController.js"></script>
+    <script src="js/DriversController.js"></script>
+    <!-- <script src="js/CarsController.js"></script>
+    <script src="js/Car.js"></script>
+    <script src="js/CarsList.js"></script> -->
+    <script src="js/main.js"></script>
 </body>
 </html>

@@ -58,7 +58,6 @@ class DriversController {
 
     selectDeleteDriver(id) {
         this._driversList.deleteDriver(id);
-        this._ui.showSuccessNotification();
         var list = this._driversList.getAllDrivers();
         this._ui.showDriversList(list);
     }
