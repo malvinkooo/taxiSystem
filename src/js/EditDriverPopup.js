@@ -21,11 +21,13 @@ class EditDriverPopup {
 
     showEditDriverForm(driver) {
         this._lastDriverId = driver.getId();
-        this._editDriverPopupElement.find(".name").val(driver.getName());
-        this._editDriverPopupElement.find(".surname").val(driver.getSurname());
-        this._editDriverPopupElement.find(".phone").val(driver.getPhone());
-        this._editDriverPopupElement.find(".currentLocation").val(driver.getCurrentLocation());
-        this._editDriverPopupElement.find(".id").html(driver.getId());
+        var elements = this._editDriverPopupElement.find("[data-getAttr]");
+        for(var i = 0; i < elements.length; i++) {
+            var getAttr = $(elements[i]).attr("data-getAttr");
+            this._editDriverPopupElement
+                .find("[data-getAttr="+getAttr+"]")
+                .val(driver[getAttr]());
+        }
         this._statusListSelectElement.dropdown('set selected', driver.getStatus());
         this._editDriverPopupElement.modal("show");
     }

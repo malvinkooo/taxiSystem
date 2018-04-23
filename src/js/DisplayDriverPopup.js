@@ -14,17 +14,19 @@ class DisplayDriverPopup {
         this._driversController = driversController;
     }
 
-    showDriver(driver) {    
+    showDriver(driver) {
         this._lastDriverId = driver.getId();
         var statusDriversList = DriverStatus.colorsList;
         for(var color in statusDriversList){
             this._displayDriverPopupElement.find(".status").removeClass(statusDriversList[color]);
         }
-        this._displayDriverPopupElement.find(".id").html(driver.getId());
-        this._displayDriverPopupElement.find(".name").html(driver.getName());
-        this._displayDriverPopupElement.find(".surname").html(driver.getSurname());
-        this._displayDriverPopupElement.find(".phone").html(driver.getPhone());
-        this._displayDriverPopupElement.find(".status").html(driver.getStatus());
+        var elements = this._displayDriverPopupElement.find("[data-getAttr]");
+        for(var i = 0; i < elements.length; i++) {
+            var getAttr = $(elements[i]).attr("data-getAttr");
+            this._displayDriverPopupElement
+                .find("[data-getAttr="+getAttr+"]")
+                .html(driver[getAttr]());
+        }
         this._displayDriverPopupElement.find(".edit-driver").attr("data-driver-id", driver.getId());
         this._displayDriverPopupElement.find(".status").addClass(statusDriversList[driver.getStatus()]);
         this._displayDriverPopupElement.modal("show");
@@ -41,8 +43,8 @@ class DisplayDriverPopup {
     _onDeleteDriverButtonClick() {
         var questionBox = new QuestionMessageBox("Вы действительно хотите удалить водителя?");
         questionBox.show((function(){
-            this._driversController.selectDeleteDriver(this._lastDriverId);            
-        }).bind(this), (function(){            
+            this._driversController.selectDeleteDriver(this._lastDriverId);
+        }).bind(this), (function(){
             this._driversController.selectDriver(this._lastDriverId);
         }).bind(this));
     }

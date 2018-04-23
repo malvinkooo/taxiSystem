@@ -21,16 +21,13 @@ class DisplayOrderPopup {
                 .find(".order-status")
                 .removeClass(statusColorsList[j]);
         }
-        this._displayOrderPopupElement.find(".status").html(order.getStatus());
-        this._displayOrderPopupElement.find(".id").html(order.getId());
-        this._displayOrderPopupElement.find(".carFeedPoint").html(order.getCarFeedPoint());
-        this._displayOrderPopupElement.find(".clientName").html(order.getClientName());
-        this._displayOrderPopupElement.find(".clientPhone").html(order.getClientPhone());
-        this._displayOrderPopupElement.find(".dateOfCreation").html(order.getDateOfCreation());
-        this._displayOrderPopupElement.find(".dateOfCompletion").html(order.getDateOfCompletion());
-        this._displayOrderPopupElement.find(".destination").html(order.getDestination());
-        this._displayOrderPopupElement.find(".distance").html(order.getDistance());
-        this._displayOrderPopupElement.find(".rate").html(order.getRate());
+        var elements = this._displayOrderPopupElement.find("[data-getAttr]");
+        for(var i = 0; i < elements.length; i++) {
+            var getAttr = $(elements[i]).attr("data-getAttr");
+            this._displayOrderPopupElement
+                .find("[data-getAttr="+getAttr+"]")
+                .html(order[getAttr]());
+        }
         this._displayOrderPopupElement.modal("show");
         this._displayOrderPopupElement
             .find(".status")

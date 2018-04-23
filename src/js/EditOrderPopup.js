@@ -21,13 +21,14 @@ class EditOrderPopup {
 
     showEditOrderForm(order) {
         this._lastOrder = order;
+        var elements = this._editOrderPopupElement.find("[data-getattr]");
+        for(var i = 0; i < elements.length; i++) {
+            var getAttr = $(elements[i]).attr("data-getAttr");
+            this._editOrderPopupElement
+                .find("[data-getAttr="+getAttr+"]")
+                .val(order[getAttr]());
+        }
         this._statusListSelectElement.dropdown('set selected', order.getStatus());
-        this._editOrderPopupElement.find(".clientName").val(order.getClientName());
-        this._editOrderPopupElement.find(".clientPhone").val(order.getClientPhone());
-        this._editOrderPopupElement.find(".carFeedPoint").val(order.getCarFeedPoint());
-        this._editOrderPopupElement.find(".destination").val(order.getDestination());
-        this._editOrderPopupElement.find(".rate").val(order.getRate());
-        this._editOrderPopupElement.find(".id").html(order.getId());
         this._editOrderPopupElement.find(".driver").html(order.driver);
         this._editOrderPopupElement.modal("show");
     }
