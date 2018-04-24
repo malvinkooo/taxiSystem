@@ -14,6 +14,10 @@ class OrdersTable {
         this._editOrderPopup.setOrdersController(ordersController);
     }
 
+    setDriversController(driversController) {
+        this._editOrderPopup.setDriversController(driversController);
+    }
+
     showOrdersList(list) {
         this._tbody.html('');
         var statusColorsList = OrderStatus.colorsList;

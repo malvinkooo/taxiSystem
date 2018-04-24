@@ -15,6 +15,12 @@ driversList.addDriver({
     phone: '06547851',
     description: "Комментарий о водителе"
 });
+driversList.addDriver({
+    name:'Прасковий',
+    surname: 'Никитин',
+    phone: '06547851',
+    description: "Комментарий о водителе"
+});
 
 ordersList.addOrder({
     clientName: 'Hlieb',
@@ -32,6 +38,8 @@ ordersList.addOrder({
     destination: 'Сухой Лиман',
     rate: 1.5
 }, geoService);
+driversList.getDriver(0).setStatus(DriverStatus.BUSY);
+driversList.getDriver(1).setStatus(DriverStatus.BUSY);
 
 var ordersController = new OrdersController(ui, ordersList, driversList, geoService);
 var driversController = new DriversController(ui, driversList);

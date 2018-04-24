@@ -2,7 +2,7 @@ class AddOrderForm {
     constructor(addOrderFormElement) {
         this._addOrderFormElement = addOrderFormElement;
         this._addOrderFormElement.tab({
-            onLoad: this._onAddOrderTabLoad.bind(this)
+            onVisible: this._onAddOrderTabVisible.bind(this)
         });
         this._selectDropDown = this._addOrderFormElement.find('select.drivers-list');
         this._addOrderFormElement.find('.ui.checkbox').checkbox({
@@ -43,9 +43,9 @@ class AddOrderForm {
         this._selectDropDown.closest(".selection").removeClass("disabled");
     }
 
-    _onAddOrderTabLoad() {
+    _onAddOrderTabVisible() {
         this._selectDropDown.html("");
-        var driversList = this._driversController.getDriversList();
+        var driversList = this._driversController.getFreeDriversList();
         for(var i = 0; i < driversList.length; i++) {
             this._selectDropDown.append("<option value='"
                 +driversList[i].getId()+"'>"

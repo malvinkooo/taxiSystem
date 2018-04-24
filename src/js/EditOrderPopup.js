@@ -19,6 +19,10 @@ class EditOrderPopup {
         this._ordersController = ordersController;
     }
 
+    setDriversController(driversController) {
+        this._driversController = driversController;
+    }
+
     showEditOrderForm(order) {
         this._lastOrder = order;
         var elements = this._editOrderPopupElement.find("[data-getattr]");
@@ -27,7 +31,9 @@ class EditOrderPopup {
             $(elements[i]).val(order[getAttr]());
         }
         this._statusListSelectElement.dropdown('set selected', order.getStatus());
-        this._editOrderPopupElement.find(".driver").html(order.driver);
+
+        var driversList = this._driversController.getFreeDriversList();
+        console.log(driversList);
         this._editOrderPopupElement.modal("show");
     }
 

@@ -18,6 +18,7 @@ class OrdersTab {
     }
 
     setDriversController(driversController) {
+        this._ordersTable.setDriversController(driversController);
         this._addOrderForm.setDriversController(driversController);
     }
 

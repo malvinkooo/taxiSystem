@@ -42,6 +42,17 @@ class DriversList {
         return Object.keys(this._drivers).length;
     }
 
+    getFreeDrivers() {
+        var list = [];
+        for(var id in this._drivers) {
+            var driver = this._drivers[id];
+            if(driver.getStatus() === DriverStatus.FREE) {
+                list.push(driver);
+            }
+        }
+        return list;
+    }
+
     getFreeDriversCount() {
         var freeDriversCount = 0;
         for(var id in this._drivers) {
