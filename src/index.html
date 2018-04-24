@@ -98,23 +98,23 @@
                 <!-- total orders -->
                 <!-- display order popup -->
                 <div class="ui modal displayOrderModal">
-                    <a class="ui ribbon label status"></a>
+                    <a class="ui ribbon label status" data-getAttr="getStatus"></a>
                     <i class="close icon"></i>
                     <div class="header order-number">
-                        Заказ #<span class="id">000000</span>
+                        Заказ #<span class="id" data-getAttr="getId">000000</span>
                     </div>
                     <div class="ui grid">
                         <div class="eight wide column">
                             <div class="ui horizontal segments">
                                 <div class="ui segment">
                                     <p><i class="hand point left outline icon"></i>Откуда:</p>
-                                    <p class="carFeedPoint">
+                                    <p class="carFeedPoint" data-getAttr="getCarFeedPoint">
                                         <!-- Пос. Котовского -->
                                     </p>
                                 </div>
                                 <div class="ui segment">
                                     <p><i class="hand point right outline icon"></i>Куда:</p>
-                                    <p class="destination">
+                                    <p class="destination" data-getAttr="getDestination">
                                         <!-- Сухой Лиман -->
                                     </p>
                                 </div>
@@ -123,12 +123,12 @@
                                 <div class="ui segment">
                                     <p><i class="sync icon"></i>Расстояние:</p>
                                     <p>
-                                        <span class="distance">15</span>км
+                                        <span class="distance" data-getAttr="getDistance">15</span>км
                                     </p>
                                 </div>
                                 <div class="ui segment">
                                     <p><i class="chart line icon"></i>Тариф:</p>
-                                    <p class="rate">
+                                    <p class="rate" data-getAttr="getRate">
                                         <!-- 1 -->
                                     </p>
                                 </div>
@@ -136,13 +136,13 @@
                             <div class="ui horizontal segments">
                                 <div class="ui segment">
                                     <p><i class="clock outline icon"></i>Открыт:</p>
-                                    <p class="dateOfCreation">
+                                    <p class="dateOfCreation" data-getAttr="getDateOfCreation">
                                         <!-- 12.02.2016 -->
                                     </p>
                                 </div>
                                 <div class="ui segment">
                                     <p><i class="clock icon"></i>Завершен:</p>
-                                    <p class="dateOfCompletion">
+                                    <p class="dateOfCompletion" data-getAttr="getDateOfCompletion">
                                         <!-- 12.02.2017 -->
                                     </p>
                                 </div>
@@ -174,7 +174,7 @@
                                 <div class="card" style="width: 100%;margin-bottom: 30px">
                                     <div class="content">
                                         <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
-                                        <div class="header clientName">
+                                        <div class="header clientName" data-getAttr="getClientName">
                                             <!-- Клиент -->
                                         </div>
                                         <div class="meta client-status">
@@ -183,7 +183,7 @@
                                         <div class="description">
                                             <p>
                                                 <i class="phone icon"></i>
-                                                <span class="clientPhone">
+                                                <span class="clientPhone" data-getAttr="getClientPhone">
                                                     <!-- 0965544545 -->
                                                 </span>
                                             </p>
@@ -210,7 +210,7 @@
                 <div class="ui modal editOrderModal">
                     <i class="close icon"></i>
                     <div class="header order-number">
-                        Редактировать заказ #<span class="id"></span>
+                        Редактировать заказ #<span class="id" data-getAttr="getId"></span>
                     </div>
                     <form class="ui form" id="editOrderForm">
                         <div class="ui fields">
@@ -221,21 +221,21 @@
                         <div class="fields two">
                             <div class="field">
                                 <label>Имя</label>
-                                <input type="text" name="clientName" placeholder="Имя" class="clientName">
+                                <input type="text" name="clientName" placeholder="Имя" data-getAttr="getClientName">
                             </div>
                             <div class="field">
                                 <label>Контактный номер</label>
-                                <input type="text" name="clientPhone" placeholder="Контактный номер" class="clientPhone">
+                                <input type="text" name="clientPhone" placeholder="Контактный номер" data-getAttr="getClientPhone">
                             </div>
                         </div>
                         <div class="fields two">
                             <div class="field">
                                 <label>Откуда</label>
-                                <input type="text" name="carFeedPoint" placeholder="Адрес подачи машины" class="carFeedPoint">
+                                <input type="text" name="carFeedPoint" placeholder="Адрес подачи машины" data-getAttr="getCarFeedPoint">
                             </div>
                             <div class="field">
                                 <label>Куда</label>
-                                <input type="text" name="destination" placeholder="Адрес назначения" class="destination">
+                                <input type="text" name="destination" placeholder="Адрес назначения" data-getAttr="getDestination">
                             </div>
                         </div>
                         <div class="fields two">
@@ -252,7 +252,7 @@
                             </div>
                             <div class="field">
                                 <label>Тариф</label>
-                                <input class="rate" type="number" name="rate" min="1" step="0.1" value="1">
+                                <input data-getAttr="getRate" type="number" name="rate" min="1" step="0.1" value="1">
                             </div>
                         </div>
                     </form>
@@ -494,10 +494,10 @@
                  <!-- total drivers -->
                  <!-- display driver popup -->
                 <div class="ui tiny modal displayDriverModal">
-                    <a class="ui ribbon label status"></a>
+                    <a class="ui ribbon label status" data-getAttr="getStatus"></a>
                     <i class="close icon"></i>
                     <div class="header">
-                        Номер в системе <span class="id"></span>
+                        Номер в системе <span class="id" data-getAttr="getId"></span>
                     </div>
                     <div class="content">
                         <div class="ui cards">
@@ -505,11 +505,11 @@
                                 <div class="content">
                                     <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar2/large/kristy.png">
                                     <div class="header">
-                                        <span class="name"></span>
-                                        <span class="surname"></span>
+                                        <span class="name" data-getAttr="getName"></span>
+                                        <span class="surname" data-getAttr="getSurname"></span>
                                     </div>
-                                    <div class="phone"></div>
-                                    <div class="currentLocation">-</div>
+                                    <div class="phone" data-getAttr="getPhone"></div>
+                                    <div class="currentLocation" data-getAttr="getCurrentLocation">-</div>
                                 </div>
                             </div>
                         </div>
@@ -543,21 +543,21 @@
                         <div class="fields two">
                             <div class="field">
                                 <label>Имя</label>
-                                <input type="text" name="name" placeholder="Имя" class="name">
+                                <input type="text" name="name" placeholder="Имя" class="name" data-getAttr="getName">
                             </div>
                             <div class="field">
                                 <label>Фамилия</label>
-                                <input type="text" name="surname" placeholder="Фамилия" class="surname">
+                                <input type="text" name="surname" placeholder="Фамилия" class="surname" data-getAttr="getSurname">
                             </div>
                         </div>
                         <div class="fields two">
                             <div class="field">
                                 <label>Телефон</label>
-                                <input type="text" name="phone" placeholder="Телефон" class="phone">
+                                <input type="text" name="phone" placeholder="Телефон" class="phone" data-getAttr="getPhone">
                             </div>
                             <div class="field">
                                 <label>Текущее место пребывания</label>
-                                <input type="text" name="currentLocation" placeholder="Текущее место пребывания" class="">
+                                <input type="text" name="currentLocation" placeholder="Текущее место пребывания" data-getAttr="getCurrentLocation">
                             </div>
                         </div>
                     </form>

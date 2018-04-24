@@ -19,14 +19,15 @@ class EditOrderPopup {
         this._ordersController = ordersController;
     }
 
-    showEditOrderForm(info) {
-        this._lastOrder = info;
-        this._statusListSelectElement.dropdown('set selected',[info['status']]);
-        for(var key in info) {
-            this._editOrderPopupElement.find("." + key).val(info[key]);
+    showEditOrderForm(order) {
+        this._lastOrder = order;
+        var elements = this._editOrderPopupElement.find("[data-getattr]");
+        for(var i = 0; i < elements.length; i++) {
+            var getAttr = $(elements[i]).attr("data-getAttr");
+            $(elements[i]).val(order[getAttr]());
         }
-        this._editOrderPopupElement.find(".id").html(info['id']);
-        this._editOrderPopupElement.find(".driver").html(info['driver']);
+        this._statusListSelectElement.dropdown('set selected', order.getStatus());
+        this._editOrderPopupElement.find(".driver").html(order.driver);
         this._editOrderPopupElement.modal("show");
     }
 
@@ -36,8 +37,8 @@ class EditOrderPopup {
         for (var i = 0; i < elements.length; i++) {
             orderParams[$(elements[i]).attr('name')] = $(elements[i]).val();
         }
-        orderParams['id'] = this._lastOrder.id;
-        if(orderParams['status'] === OrderStatus.COMPLETED && orderParams['status'] !== this._lastOrder['status']){
+        orderParams['id'] = this._lastOrder.getId();
+        if(orderParams['status'] === OrderStatus.COMPLETED && orderParams['status'] !== this._lastOrder.getStatus()){
             orderParams['dateOfCompletion'] = new Date();
         } else if(orderParams['status'] !== OrderStatus.COMPLETED) {
             orderParams['dateOfCompletion'] = '-';

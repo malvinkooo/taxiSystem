@@ -15,7 +15,6 @@ class OrdersController {
             orderParams.driver = this._drivers.getRandomFreeDriver();
         }
         this._orders.addOrder(orderParams, geoService);
-        this._ui.showSuccessNotification();
         var list = this._orders.getAllOrders();
         this._ui.showOrdersList(list);
     }
@@ -26,19 +25,17 @@ class OrdersController {
     }
 
     selectOrder(id) {
-        var info = this._orders.getOrder(id);
-        this._ui.showOrderInfo(info);
+        var order = this._orders.getOrder(id);
+        this._ui.showOrder(order);
     }
 
     selectEditOrder(id) {
-        var info = this._orders.getOrder(id);
-        this._ui.showOrderEditForm(info);
+        var order = this._orders.getOrder(id);
+        this._ui.showEditOrderForm(order);
     }
 
     editOrder(orderParams) {
-        this._orders.editOrder(orderParams);
-        // this.ui.showSuccessNotification();
-        var info = this._orders.getOrder(orderParams.id);
-        this._ui.showOrderInfo(info);
+        var order = this._orders.editOrder(orderParams);
+        this._ui.showOrder(order);
     }
 }

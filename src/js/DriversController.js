@@ -10,8 +10,8 @@ class DriversController {
     }
 
     selectDriver(id) {
-        var info = this._driversList.getDriver(id);
-        this._ui.showDriverInfo(info);
+        var driver = this._driversList.getDriver(id);
+        this._ui.showDriver(driver);
     }
 
     selectMenuItemAddDriver() {
@@ -47,13 +47,13 @@ class DriversController {
     }
 
     selectEditDriver(id) {
-        var info = this._driversList.getDriver(id);
-        this._ui.showEditDriverForm(info);
+        var order = this._driversList.getDriver(id);
+        this._ui.showEditDriverForm(order);
     }
 
     editDriver(driverParams) {
-        var info = this._driversList.editDriver(driverParams);
-        this._ui.showDriverInfo(info);
+        var driver = this._driversList.editDriver(driverParams);
+        this._ui.showDriver(driver);
     }
 
     selectDeleteDriver(id) {

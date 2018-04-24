@@ -40,6 +40,10 @@ class Driver {
         this._status = DriverStatus.FREE;
     }
 
+    getId() {
+        return this._id;
+    }
+
     getName() {
         return this._name;
     }
@@ -48,27 +52,32 @@ class Driver {
         this._name = name;
     }
 
+    getSurname() {
+        return this._surname;
+    }
+
     setSurname(surname) {
         this._surname = surname;
     }
 
+    getFullName() {
+        return this._surname + " " + this._name;
+    }
+
+    getPhone() {
+        return this._phone;
+    }
+
     setPhone(phone) {
-        this.phone = phone;
+        this._phone = phone;
+    }
+
+    getCurrentLocation() {
+        return this._currentLocation;
     }
 
     setCurrentLocation(currentLocation) {
         this._currentLocation = currentLocation;
-    }
-
-    getInfo() {
-        return {
-            id: this._id,
-            name: this._name,
-            surname: this._surname,
-            phone: this._phone,
-            currentLocation: this._currentLocation,
-            status: this._status
-        };
     }
 
     getStatus() {

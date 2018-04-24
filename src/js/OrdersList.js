@@ -12,12 +12,11 @@ class OrdersList {
     }
 
     getAllOrders() {
-        var result = [];
+        var list = [];
         for(var id in this._orders) {
-            var order = this._orders[id];
-            result.push( order.getInfo() );
+            list.push(this._orders[id]);
         }
-        return result;
+        return list;
     }
 
     editOrder(orderParams) {
@@ -29,10 +28,11 @@ class OrdersList {
         order.setDestination(orderParams.destination);
         order.setRate(orderParams.rate);
         order.setStatus(orderParams.status);
+        return order;
     }
 
     getOrder(id) {
-        return this._orders[id].getInfo();
+        return this._orders[id];
     }
 
     getOrdersCount() {

@@ -17,11 +17,11 @@ class DriversTab {
         this._driversTable.showDriversList(list);
     }
 
-    showDriverInfo(info) {
-        this._driversTable.showDriverInfo(info);
+    showDriver(driver) {
+        this._driversTable.showDriver(driver);
     }
 
-    showEditDriverForm(info) {
-        this._driversTable.showEditDriverForm(info);
+    showEditDriverForm(driver) {
+        this._driversTable.showEditDriverForm(driver);
     }
 }

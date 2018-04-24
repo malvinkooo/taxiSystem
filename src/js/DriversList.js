@@ -6,12 +6,11 @@ class DriversList {
     }
 
     getAllDrivers() {
-        var result = [];
+        var list = [];
         for (var id in this._drivers) {
-            var driver = this._drivers[id];
-            result.push( driver.getInfo() );
+            list.push(this._drivers[id]);
         }
-        return result;
+        return list;
     }
 
     addDriver(driverParams) {
@@ -21,8 +20,7 @@ class DriversList {
     }
 
     getDriver(id) {
-        var driver = this._drivers[id];
-        return driver.getInfo();
+        return this._drivers[id];
     }
 
     editDriver(driverParams) {
@@ -32,7 +30,7 @@ class DriversList {
         driver.setPhone(driverParams.phone);
         driver.setStatus(driverParams.status);
         driver.setCurrentLocation(driverParams.currentLocation);
-        return driver.getInfo();
+        return driver;
     }
 
     deleteDriver(id) {

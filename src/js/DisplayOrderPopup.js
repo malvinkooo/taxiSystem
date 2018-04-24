@@ -13,21 +13,23 @@ class DisplayOrderPopup {
         this._ordersController = ordersController;
     }
 
-    showOrderInfo(info) {
-        this._lastOrderId = info.id;
+    showOrder(order) {
+        this._lastOrderId = order.getId();
         var statusColorsList = OrderStatus.colorsList;
         for (var j in statusColorsList) {
             this._displayOrderPopupElement
                 .find(".order-status")
                 .removeClass(statusColorsList[j]);
         }
-        for (var key in info) {
-        	this._displayOrderPopupElement.find("."+key+"").html(info[key]);
+        var elements = this._displayOrderPopupElement.find("[data-getAttr]");
+        for(var i = 0; i < elements.length; i++) {
+            var getAttr = $(elements[i]).attr("data-getAttr");
+            $(elements[i]).html(order[getAttr]());
         }
         this._displayOrderPopupElement.modal("show");
         this._displayOrderPopupElement
             .find(".status")
-            .addClass(statusColorsList[info.status]);
+            .addClass(statusColorsList[order.getStatus()]);
     }
 
     _onEditOrderButtonClick(e){

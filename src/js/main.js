@@ -3,28 +3,33 @@ var geoService = new GeoService();
 var ordersList = new OrdersList();
 var driversList = new DriversList();
 
+driversList.addDriver({
+    name:'Петр',
+    surname: 'Иванов',
+    phone: '1245757'
+});
+driversList.addDriver({
+    name:'Василий',
+    surname: 'Жуков',
+    phone: '06547851'
+});
+
 ordersList.addOrder({
     clientName: 'Hlieb',
-    driver: 'Вася Пупкин',
+    driver: driversList.getDriver(0),
     clientPhone: '904820983423',
     carFeedPoint: 'Сухой Лиман',
     destination: 'Поселок Котовского',
     rate: 1
 }, geoService);
-
 ordersList.addOrder({
     clientName: 'Лена',
-    driver: 'Вася Пупкин',
+    driver: driversList.getDriver(1),
     clientPhone: '872498742',
     carFeedPoint: 'Поселок Котовского',
     destination: 'Сухой Лиман',
     rate: 1.5
 }, geoService);
-
-driversList.addDriver({
-    name:'Петр',
-    surname: 'Иванов',
-    phone: '1245757'});
 
 var ordersController = new OrdersController(ui, ordersList, driversList, geoService);
 var driversController = new DriversController(ui, driversList);

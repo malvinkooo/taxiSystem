@@ -18,22 +18,24 @@ class DriversTable {
        this._tbody.html("");
        var statusColorsList = DriverStatus.colorsList;
        for (var i = 0; i < list.length; i++) {
-            var row = list[i];
-            $('<tr data-driver-id='+row.id+'><td>'+row.name+
-            '</td><td>'+row.surname+
-            '</td><td>'+row.phone+
-            '</td><td><button class="ui button driver-status '+statusColorsList[row.status]+'">'+row.status+
-            '</button></td><td>'+row.currentLocation+
+            var driver = list[i];
+            $('<tr data-driver-id='+driver.getId()+'><td>'+driver.getName()+
+            '</td><td>'+driver.getSurname()+
+            '</td><td>'+driver.getPhone()+
+            '</td><td><button class="ui button driver-status '
+                +statusColorsList[driver.getStatus()]+'">'
+                +driver.getStatus()+
+            '</button></td><td>'+driver.getCurrentLocation()+
             '</td></tr>').appendTo(this._tbody)
        }
     }
 
-    showDriverInfo(info) {
-        this._displayDriverPopup.showDriverInfo(info);
+    showDriver(driver) {
+        this._displayDriverPopup.showDriver(driver);
     }
 
-    showEditDriverForm(info) {
-        this._editDriverPopup.showEditDriverForm(info);
+    showEditDriverForm(driver) {
+        this._editDriverPopup.showEditDriverForm(driver);
     }
 
     _onDriverRowClick(e) {

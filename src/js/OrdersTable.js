@@ -18,27 +18,27 @@ class OrdersTable {
         this._tbody.html('');
         var statusColorsList = OrderStatus.colorsList;
         for(var i=0; i < list.length; i++) {
-            var row = list[i];
-            $('<tr data-order-id='+ row.id +'><td>'+ row.clientName +
-                '</td><td>' + row.clientPhone +
-                '</td><td>' + row.carFeedPoint +
-                '</td><td>' + row.destination +
-                '</td><td>' + row.distance +
-                '</td><td>' + row.rate +
-                '</td><td><button class="ui button order-status '+statusColorsList[row.status]+'">' + row.status +
-                '</button></td><td>' + row.dateOfCreation +
-                '</td><td>' + row.dateOfCompletion +
-                '</td><td>' + row.driver +
+            var order = list[i];
+            $('<tr data-order-id='+ order.getId() +'><td>'+ order.getClientName() +
+                '</td><td>' + order.getClientPhone() +
+                '</td><td>' + order.getCarFeedPoint() +
+                '</td><td>' + order.getDestination() +
+                '</td><td>' + order.getDistance() +
+                '</td><td>' + order.getRate() +
+                '</td><td><button class="ui button order-status '+statusColorsList[order.getStatus()]+'">' + order.getStatus() +
+                '</button></td><td>' + order.getDateOfCreation() +
+                '</td><td>' + order.getDateOfCompletion() +
+                '</td><td>' + order.getDriver().getFullName() +
                 '</td></tr>').appendTo(this._tbody);
         }
     }
 
-    showOrderInfo(info) {
-        this._displayOrderPoup.showOrderInfo(info);
+    showOrder(order) {
+        this._displayOrderPoup.showOrder(order);
     }
 
-    showEditOrderform(info) {
-        this._editOrderPopup.showEditOrderForm(info);
+    showEditOrderform(order) {
+        this._editOrderPopup.showEditOrderForm(order);
     }
 
     _onOrderRowClick(e) {

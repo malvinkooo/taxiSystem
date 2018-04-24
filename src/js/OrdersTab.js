@@ -17,11 +17,11 @@ class OrdersTab {
         this._ordersTable.setOrdersController(ordersController);
     }
 
-    showOrderInfo(info) {
-        this._ordersTable.showOrderInfo(info);
+    showOrder(order) {
+        this._ordersTable.showOrder(order);
     }
 
-    showEditOrderForm(info) {
-        this._ordersTable.showEditOrderform(info);
+    showEditOrderForm(order) {
+        this._ordersTable.showEditOrderform(order);
     }
 }
