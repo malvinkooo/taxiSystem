@@ -17,6 +17,10 @@ class OrdersTab {
         this._ordersTable.setOrdersController(ordersController);
     }
 
+    setDriversController(driversController) {
+        this._addOrderForm.setDriversController(driversController);
+    }
+
     showOrder(order) {
         this._ordersTable.showOrder(order);
     }

@@ -4,6 +4,10 @@ class DriversController {
         this._driversList = driversList;
     }
 
+    getDriversList() {
+        return this._driversList.getAllDrivers();;
+    }
+
     selectMenuItemAllDrivers() {
         var list = this._driversList.getAllDrivers();
         this._ui.showDriversList(list);

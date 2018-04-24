@@ -11,6 +11,7 @@ class UI {
 
     setDriversController(driversController) {
         this._mainMenu.setDriversController(driversController);
+        this._ordersTab.setDriversController(driversController);
         this._driversTab.setDriversController(driversController);
     }
 
