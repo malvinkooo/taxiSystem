@@ -60,6 +60,10 @@ class Driver {
         this._surname = surname;
     }
 
+    getFullName() {
+        return this._surname + " " + this._name;
+    }
+
     getPhone() {
         return this._phone;
     }

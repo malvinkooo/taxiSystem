@@ -24,9 +24,7 @@ class DisplayOrderPopup {
         var elements = this._displayOrderPopupElement.find("[data-getAttr]");
         for(var i = 0; i < elements.length; i++) {
             var getAttr = $(elements[i]).attr("data-getAttr");
-            this._displayOrderPopupElement
-                .find("[data-getAttr="+getAttr+"]")
-                .html(order[getAttr]());
+            $(elements[i]).html(order[getAttr]());
         }
         this._displayOrderPopupElement.modal("show");
         this._displayOrderPopupElement

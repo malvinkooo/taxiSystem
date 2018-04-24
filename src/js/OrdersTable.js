@@ -28,7 +28,7 @@ class OrdersTable {
                 '</td><td><button class="ui button order-status '+statusColorsList[order.getStatus()]+'">' + order.getStatus() +
                 '</button></td><td>' + order.getDateOfCreation() +
                 '</td><td>' + order.getDateOfCompletion() +
-                '</td><td>' + order.getDriver() +
+                '</td><td>' + order.getDriver().getFullName() +
                 '</td></tr>').appendTo(this._tbody);
         }
     }

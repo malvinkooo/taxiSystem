@@ -23,11 +23,8 @@ class DisplayDriverPopup {
         var elements = this._displayDriverPopupElement.find("[data-getAttr]");
         for(var i = 0; i < elements.length; i++) {
             var getAttr = $(elements[i]).attr("data-getAttr");
-            this._displayDriverPopupElement
-                .find("[data-getAttr="+getAttr+"]")
-                .html(driver[getAttr]());
+            $(elements[i]).html(driver[getAttr]());
         }
-        this._displayDriverPopupElement.find(".edit-driver").attr("data-driver-id", driver.getId());
         this._displayDriverPopupElement.find(".status").addClass(statusDriversList[driver.getStatus()]);
         this._displayDriverPopupElement.modal("show");
     }

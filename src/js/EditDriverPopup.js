@@ -24,9 +24,7 @@ class EditDriverPopup {
         var elements = this._editDriverPopupElement.find("[data-getAttr]");
         for(var i = 0; i < elements.length; i++) {
             var getAttr = $(elements[i]).attr("data-getAttr");
-            this._editDriverPopupElement
-                .find("[data-getAttr="+getAttr+"]")
-                .val(driver[getAttr]());
+            $(elements[i]).val(driver[getAttr]());
         }
         this._statusListSelectElement.dropdown('set selected', driver.getStatus());
         this._editDriverPopupElement.modal("show");
