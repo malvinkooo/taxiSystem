@@ -36,7 +36,8 @@ class Driver {
         this._name = driverParams.name;
         this._surname = driverParams.surname;
         this._phone = driverParams.phone;
-        this._currentLocation = undefined;
+        this._description = driverParams.description;
+        this._currentLocation = "-";
         this._status = DriverStatus.FREE;
     }
 
@@ -86,5 +87,13 @@ class Driver {
 
     setStatus(status) {
         this._status = status;
+    }
+
+    getDescription() {
+        return this._description;
+    }
+
+    setDescription(description) {
+        this._description = description;
     }
 }

@@ -30,6 +30,7 @@ class DriversList {
         driver.setPhone(driverParams.phone);
         driver.setStatus(driverParams.status);
         driver.setCurrentLocation(driverParams.currentLocation);
+        driver.setDescription(driverParams.description);
         return driver;
     }
 

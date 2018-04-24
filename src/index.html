@@ -153,20 +153,17 @@
                                 <div class="card" style="width: 100%">
                                     <div class="content">
                                         <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
-                                        <div class="header driver">
-                                            <!-- Водитель -->
-                                        </div>
-                                        <div class="meta driver-status">
-                                            New Member
+                                        <div class="header" data-driver-getAttr="getFullName"></div>
+                                        <div class="meta">
+                                            <i class="taxi icon"></i>
+                                            <span data-driver-getAttr="getCurrentLocation"></span>
                                         </div>
                                         <div class="description">
                                             <p>
                                                 <i class="phone icon"></i>
-                                                <span class="driverPhone">
-                                                    <!-- 0965544545 -->
-                                                </span>
+                                                <span data-driver-getAttr="getPhone"></span>
                                             </p>
-                                            <p class="driver-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus saepe blanditiis corrupti ipsum dolorem numquam ea dignissimos nostrum aliquid! Ducimus odio, quos qui! Reiciendis perferendis dolorum quasi facere aut esse.</p>
+                                            <p data-driver-getAttr="getDescription"></p>
                                         </div>
                                     </div>
                                     <!-- <div class="extra content"></div> -->
@@ -176,9 +173,6 @@
                                         <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
                                         <div class="header clientName" data-getAttr="getClientName">
                                             <!-- Клиент -->
-                                        </div>
-                                        <div class="meta client-status">
-                                            New Member
                                         </div>
                                         <div class="description">
                                             <p>
@@ -501,16 +495,24 @@
                     </div>
                     <div class="content">
                         <div class="ui cards">
-                            <div class="card" style="width: 100%">
+                            <div class="card">
                                 <div class="content">
                                     <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar2/large/kristy.png">
                                     <div class="header">
-                                        <span class="name" data-getAttr="getName"></span>
-                                        <span class="surname" data-getAttr="getSurname"></span>
+                                        <span data-getAttr="getFullName"></span>
                                     </div>
-                                    <div class="phone" data-getAttr="getPhone"></div>
-                                    <div class="currentLocation" data-getAttr="getCurrentLocation">-</div>
+                                    <div class="phone">
+                                        <i class="phone icon"></i>
+                                        <span data-getAttr="getPhone"></span>
+                                    </div>
+                                    <div class="description" data-getAttr="getDescription">-</div>
                                 </div>
+                                <div class="extra content">
+                                    <a>
+                                      <i class="taxi icon"></i>
+                                      <span data-getAttr="getCurrentLocation">-</span>
+                                    </a>
+                              </div>
                             </div>
                         </div>
                     </div>
@@ -531,8 +533,8 @@
                 <!-- display driver popup -->
                 <div class="ui modal editDriverModal">
                     <i class="close icon"></i>
-                    <div class="header order-number">
-                        Редактировать информацию о водителе #<span class="id"></span>
+                    <div class="header">
+                        Редактировать информацию о водителе #<span data-getAttr="getId"></span>
                     </div>
                     <form class="ui form" id="editOrderForm">
                         <div class="ui fields">
@@ -560,6 +562,10 @@
                                 <input type="text" name="currentLocation" placeholder="Текущее место пребывания" data-getAttr="getCurrentLocation">
                             </div>
                         </div>
+                        <div class="field">
+                            <label>Комментарий</label>
+                            <textarea name="description" rows="4"></textarea>
+                        </div>
                     </form>
                     <div class="actions">
                         <div class="ui button submit green">
@@ -585,6 +591,10 @@
                     <div class="field">
                         <label>Моб. номер</label>
                         <input type="text" name="phone" placeholder="7475454">
+                    </div>
+                    <div class="field">
+                        <label>Комментарий</label>
+                        <textarea name="description" rows="4"></textarea>
                     </div>
                     <div class="ui success message">
                         <div class="header">Автомобиль добавлен</div>

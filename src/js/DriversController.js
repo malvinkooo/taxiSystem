@@ -40,7 +40,6 @@ class DriversController {
  */
 
     addDriver(driverParams){
-        console.log(driverParams);
         this._driversList.addDriver(driverParams);
         var list = this._driversList.getAllDrivers();
         this._ui.showDriversList(list);

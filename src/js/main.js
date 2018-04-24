@@ -6,12 +6,14 @@ var driversList = new DriversList();
 driversList.addDriver({
     name:'Петр',
     surname: 'Иванов',
-    phone: '1245757'
+    phone: '1245757',
+    description: "Комментарий о водителе"
 });
 driversList.addDriver({
     name:'Василий',
     surname: 'Жуков',
-    phone: '06547851'
+    phone: '06547851',
+    description: "Комментарий о водителе"
 });
 
 ordersList.addOrder({
