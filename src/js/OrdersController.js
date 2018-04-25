@@ -38,6 +38,7 @@ class OrdersController {
     }
 
     editOrder(orderParams) {
+        orderParams.driver = this._drivers.getDriver(orderParams.driver);
         var order = this._orders.editOrder(orderParams);
         this._ui.showOrder(order);
     }

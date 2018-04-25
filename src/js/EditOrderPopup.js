@@ -3,15 +3,16 @@ class EditOrderPopup {
         this._ordersController = null;
         this._lastOrder = null;
         this._editOrderPopupElement = editOrderPopupElement;
-        this._statusListSelectElement = this._editOrderPopupElement.find("select.status-list");
+        this._statusListSelect = this._editOrderPopupElement.find("select.status-list");
         var statusList = OrderStatus.statusList;
         for (var i = 0; i < statusList.length; i++) {
-            this._statusListSelectElement.append("<option value="
+            this._statusListSelect.append("<option value="
                 +statusList[i]+">"
                 +statusList[i]+
             "</option>");
         }
-        this._statusListSelectElement.dropdown({showOnFocus: false});
+        this._driversListSelect = this._editOrderPopupElement.find("select.drivers-list");
+        this._statusListSelect.dropdown({showOnFocus: false});
         this._editOrderPopupElement.find(".submit").click(this._onEditFormSubmit.bind(this));
     }
 
@@ -30,10 +31,17 @@ class EditOrderPopup {
             var getAttr = $(elements[i]).attr("data-getAttr");
             $(elements[i]).val(order[getAttr]());
         }
-        this._statusListSelectElement.dropdown('set selected', order.getStatus());
+        this._statusListSelect.dropdown('set selected', order.getStatus());
 
-        var driversList = this._driversController.getFreeDriversList();
-        console.log(driversList);
+        this._driversListSelect.html("");
+        var driversList = this._driversController.getDriversList();
+        for(var j = 0; j < driversList.length; j++) {
+            this._driversListSelect.append("<option value='"
+                +driversList[j].getId()+"'>"
+                +driversList[j].getFullName()+
+            "</option>");
+        }
+        this._driversListSelect.dropdown('set selected', order.getDriver().getId());
         this._editOrderPopupElement.modal("show");
     }
 

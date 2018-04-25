@@ -28,6 +28,7 @@ class OrdersList {
         order.setDestination(orderParams.destination);
         order.setRate(orderParams.rate);
         order.setStatus(orderParams.status);
+        order.setDriver(orderParams.driver);
         return order;
     }
 

@@ -6,6 +6,7 @@ class UI {
     }
 
     setOrdersController(ordersController) {
+        this._mainMenu.setOrdersController(ordersController);
         this._ordersTab.setOrdersController(ordersController);
     }
 

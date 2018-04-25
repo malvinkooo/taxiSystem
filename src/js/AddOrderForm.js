@@ -1,9 +1,6 @@
 class AddOrderForm {
     constructor(addOrderFormElement) {
         this._addOrderFormElement = addOrderFormElement;
-        this._addOrderFormElement.tab({
-            onVisible: this._onAddOrderTabVisible.bind(this)
-        });
         this._selectDropDown = this._addOrderFormElement.find('select.drivers-list');
         this._addOrderFormElement.find('.ui.checkbox').checkbox({
             onChecked: this._onSetDriverAutomaticallyChecked.bind(this),
@@ -33,6 +30,18 @@ class AddOrderForm {
         return false;
     }
 
+    show() {
+        this._selectDropDown.html("");
+        var driversList = this._driversController.getDriversList();
+        for(var i = 0; i < driversList.length; i++) {
+            this._selectDropDown.append("<option value='"
+                +driversList[i].getId()+"'>"
+                +driversList[i].getFullName()
+            +"</option>");
+        }
+        this._selectDropDown.dropdown();
+    }
+
     _onSetDriverAutomaticallyChecked() {
         this._isSetDriverAutomaticallyChecked = true;
         this._selectDropDown.closest(".selection").addClass("disabled");
@@ -41,17 +50,5 @@ class AddOrderForm {
     _onSetDriverAutomaticallyUnchecked() {
         this._isSetDriverAutomaticallyChecked = false;
         this._selectDropDown.closest(".selection").removeClass("disabled");
-    }
-
-    _onAddOrderTabVisible() {
-        this._selectDropDown.html("");
-        var driversList = this._driversController.getFreeDriversList();
-        for(var i = 0; i < driversList.length; i++) {
-            this._selectDropDown.append("<option value='"
-                +driversList[i].getId()+"'>"
-                +driversList[i].getFullName()
-            +"</optiom>");
-        }
-        this._selectDropDown.dropdown();
     }
 }
