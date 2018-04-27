@@ -1,9 +1,10 @@
 class Car {
 
-    constructor(stateCarNumber, gasolineConsumptionRatio, brand) {
-        this._stateCarNumber = stateCarNumber;
-        this._gasolineConsumptionRatio = gasolineConsumptionRatio;
-        this._brand = brand;
+    constructor(id, carParams) {
+        this._id = id;
+        this._stateCarNumber = carParams.stateCarNumber;
+        this._gasolineConsumptionRatio = carParams.gasolineConsumptionRatio;
+        this._brand = carParams.brand;
     }
 
     getInfo() {

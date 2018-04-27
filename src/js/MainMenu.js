@@ -1,12 +1,22 @@
 class MainMenu {
     constructor(menuElement) {
         this._menuElement = menuElement;
-        this._menuElement.find('.item').tab();
-        this._menuElement.find(".item[data-tab='drivers']").tab({
-        	'onLoad': this._onDriversTabLoad.bind(this)
-        });
-        this._menuElement.find(".item[data-tab='orders']").tab({
-            'onLoad': this._onOrdersTabLoad.bind(this)
+        this._menuElement.find('.item').tab({
+            'onLoad': (function(tab) {
+                switch(tab) {
+                    case 'orders':
+                        this._onOrdersTabLoad();
+                    break;
+
+                    case 'cars':
+                        this._onCarsTabLoad();
+                    break;
+
+                    case 'drivers':
+                        this._onDriversTabLoad();
+                    break;
+                }
+            }).bind(this)
         });
         this._driversController = null;
     }
@@ -15,15 +25,23 @@ class MainMenu {
     	this._driversController = driversController;
     }
 
+    setCarsController() {
+        this._carsController = carsController;
+    }
+
     setOrdersController(ordersController) {
         this._ordersController = ordersController;
     }
 
-    _onDriversTabLoad(){
-    	this._driversController.selectMenuItemAllDrivers();
-    }
-
     _onOrdersTabLoad() {
         this._ordersController.selectMenuItemAllOrders();
+    }
+
+    _onCarsTabLoad() {
+        this._carsController.selectMenuItemAllCars();
+    }
+
+    _onDriversTabLoad(){
+    	this._driversController.selectMenuItemAllDrivers();
     }
 }

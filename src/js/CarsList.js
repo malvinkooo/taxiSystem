@@ -9,13 +9,13 @@ class CarsList {
         var result = [];
         for(var id in this._cars) {
             var car = this._cars[id];
-            result.push( car.getInfo() );
+            result.push(car);
         }
         return result;
     }
 
-    addCar(stateCarNumber, gasolineConsumptionRatio, brand) {
-        var car = new Car(this._lastInsertId, stateCarNumber, gasolineConsumptionRatio, brand);
+    addCar(carParams) {
+        var car = new Car(this._lastInsertId, carParams);
         this._cars[this._lastInsertId] = car;
         this._lastInsertId++;
     }
