@@ -6,12 +6,20 @@ var driversList = new DriversList();
 driversList.addDriver({
     name:'Петр',
     surname: 'Иванов',
-    phone: '1245757'
+    phone: '1245757',
+    description: "Комментарий о водителе"
 });
 driversList.addDriver({
     name:'Василий',
     surname: 'Жуков',
-    phone: '06547851'
+    phone: '06547851',
+    description: "Комментарий о водителе"
+});
+driversList.addDriver({
+    name:'Прасковий',
+    surname: 'Никитин',
+    phone: '06547851',
+    description: "Комментарий о водителе"
 });
 
 ordersList.addOrder({
@@ -30,6 +38,8 @@ ordersList.addOrder({
     destination: 'Сухой Лиман',
     rate: 1.5
 }, geoService);
+driversList.getDriver(0).setStatus(DriverStatus.BUSY);
+driversList.getDriver(1).setStatus(DriverStatus.BUSY);
 
 var ordersController = new OrdersController(ui, ordersList, driversList, geoService);
 var driversController = new DriversController(ui, driversList);

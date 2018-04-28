@@ -11,9 +11,12 @@ class OrdersController {
     }
 
     addOrder(orderParams) {
-        if(orderParams.isSetDriverAutomatically === 'true') {
+        if(orderParams.isSetDriverAutomatically === true) {
             orderParams.driver = this._drivers.getRandomFreeDriver();
+        } else {
+            orderParams.driver = this._drivers.getDriver(orderParams.driver);
         }
+        orderParams.driver.setStatus(DriverStatus.BUSY);
         this._orders.addOrder(orderParams, geoService);
         var list = this._orders.getAllOrders();
         this._ui.showOrdersList(list);
@@ -35,6 +38,7 @@ class OrdersController {
     }
 
     editOrder(orderParams) {
+        orderParams.driver = this._drivers.getDriver(orderParams.driver);
         var order = this._orders.editOrder(orderParams);
         this._ui.showOrder(order);
     }

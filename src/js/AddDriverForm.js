@@ -11,7 +11,7 @@ class AddDriverForm{
 
     _onAddDriverButtonClick() {
         var driverParams = {};
-        var elements = this._addDriverFormElement.find('input');
+        var elements = this._addDriverFormElement.find('input, textarea');
         for(var i = 0; i < elements.length; i++) {
             driverParams[$(elements[i]).attr('name')] = $(elements[i]).val();
         }

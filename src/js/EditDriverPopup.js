@@ -26,6 +26,7 @@ class EditDriverPopup {
             var getAttr = $(elements[i]).attr("data-getAttr");
             $(elements[i]).val(driver[getAttr]());
         }
+        this._editDriverPopupElement.find("[data-GetAttr='getId']").html(driver.getId());
         this._statusListSelectElement.dropdown('set selected', driver.getStatus());
         this._editDriverPopupElement.modal("show");
     }
@@ -33,7 +34,7 @@ class EditDriverPopup {
     _onEditFormSubmit() {
         var driverParams = {};
         driverParams['id'] = this._lastDriverId;
-        var elements = this._editDriverPopupElement.find("input, select");
+        var elements = this._editDriverPopupElement.find("input, select, textarea");
         for (var i = 0; i < elements.length; i++) {
             driverParams[$(elements[i]).attr('name')] = $(elements[i]).val();
         }

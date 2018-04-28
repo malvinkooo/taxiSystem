@@ -6,11 +6,13 @@ class UI {
     }
 
     setOrdersController(ordersController) {
+        this._mainMenu.setOrdersController(ordersController);
         this._ordersTab.setOrdersController(ordersController);
     }
 
     setDriversController(driversController) {
         this._mainMenu.setDriversController(driversController);
+        this._ordersTab.setDriversController(driversController);
         this._driversTab.setDriversController(driversController);
     }
 

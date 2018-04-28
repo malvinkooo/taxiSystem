@@ -30,6 +30,7 @@ class DriversList {
         driver.setPhone(driverParams.phone);
         driver.setStatus(driverParams.status);
         driver.setCurrentLocation(driverParams.currentLocation);
+        driver.setDescription(driverParams.description);
         return driver;
     }
 
@@ -39,6 +40,17 @@ class DriversList {
 
     getDriverscount() {
         return Object.keys(this._drivers).length;
+    }
+
+    getFreeDrivers() {
+        var list = [];
+        for(var id in this._drivers) {
+            var driver = this._drivers[id];
+            if(driver.getStatus() === DriverStatus.FREE) {
+                list.push(driver);
+            }
+        }
+        return list;
     }
 
     getFreeDriversCount() {
