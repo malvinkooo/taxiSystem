@@ -7,20 +7,28 @@ class Car {
         this._brand = carParams.brand;
     }
 
-    getInfo() {
-    	return {
-    		stateCarNumber: this._stateCarNumber,
-    		gasolineConsumptionRatio: this._gasolineConsumptionRatio,
-    		brand: this._brand
-    	};
+    getId() {
+        return this._id;
+    }
+
+    getStateCarNumber() {
+        return this._stateCarNumber;
     }
 
     setStateCarNumber(stateCarNumber) {
     	this._stateCarNumber = stateCarNumber;
     }
 
+    getGasolineConsumptionRation() {
+        return this._gasolineConsumptionRatio;
+    }
+
     setGasolineConsumptionRatio(gasolineConsumptionRatio) {
     	this._gasolineConsumptionRatio = gasolineConsumptionRatio;
+    }
+
+    getBrand() {
+        return this._brand;
     }
 
     setBrand(brand) {

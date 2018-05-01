@@ -9,6 +9,6 @@ class CarsTab {
     showCarsList(list) {
         $.tab('change tab', 'allCars');
         this._carsTabElement.find('[data-tab="allCars"]').trigger('click');
-        this._carsTable.showCarsTable(list);
+        this._carsTable.showCarsList(list);
     }
 }
