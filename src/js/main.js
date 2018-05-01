@@ -44,7 +44,8 @@ driversList.getDriver(1).setStatus(DriverStatus.BUSY);
 carsList.addCar({
     stateCarNumber: "4545445",
     brand: "Nissan",
-    gasolineConsumptionRatio: 1.77
+    gasolineConsumptionRatio: 1.77,
+    description: "Краткий комментарий о машине"
 });
 
 var ordersController = new OrdersController(ui, ordersList, driversList, geoService);

@@ -21,7 +21,7 @@ class CarsList {
     }
 
     getCar(id) {
-        return this._list[id].getInfo();
+        return this._cars[id];
     }
 
     editCar(id, stateCarNumber, gasolineConsumptionRatio, brand) {

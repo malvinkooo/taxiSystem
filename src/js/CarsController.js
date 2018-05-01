@@ -19,8 +19,8 @@ class CarsController {
     }
 
     selectCar(id) {
-        var info = this._cars.getCar(id);
-        this._ui.showCarInfo(info);
+        var car = this._cars.getCar(id);
+        this._ui.showCar(car);
     }
 
     selectMenuItemEditCar(id) {

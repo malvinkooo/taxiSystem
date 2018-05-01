@@ -370,6 +370,96 @@
                     </div>
                 </div> -->
                  <!-- total orders -->
+                 <!-- display car popup -->
+                <div class="ui tiny modal displayCarModal">
+                    <!-- <a class="ui ribbon label status" data-getAttr="getStatus"></a> -->
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Номер в системе <span class="id" data-getAttr="getId"></span>
+                    </div>
+                    <div class="content">
+                        <div class="ui cards">
+                            <div class="card">
+                                <div class="content">
+                                    <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar2/large/kristy.png">
+                                    <div class="header">
+                                        <span data-getAttr="getBrand"></span>
+                                    </div>
+                                    <div>
+                                        <span data-getAttr="getStateCarNumber"></span>
+                                    </div>
+                                    <div class="description" data-getAttr="getDescription">-</div>
+                                </div>
+                                <div class="extra content">
+                                    <a>
+                                      <i class="tachometer alternate icon"></i>
+                                      <span data-getAttr="getGasolineConsumptionRatio">-</span>
+                                    </a>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="ui icon button red delete-car">
+                            <i class="trash alternate outline icon"></i>
+                        </button>
+                        <div class="ui blue button left labeled icon edit-car">
+                            <i class="edit icon"></i>
+                            Редактировать
+                        </div>
+                        <div class="ui button black cancel actions">
+                            Закрыть
+                        </div>
+                    </div>
+                </div>
+                <!-- display car popup -->
+                <!-- edit car popup -->
+                <div class="ui modal editCarModal">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Редактировать информацию о водителе #<span data-getAttr="getId"></span>
+                    </div>
+                    <form class="ui form" id="editOrderForm">
+                        <div class="ui fields">
+                            <div class="field status-wrap">
+                                <select class="ui fluid dropdown status-list" name="status"></select>
+                            </div>
+                        </div>
+                        <div class="fields two">
+                            <div class="field">
+                                <label>Имя</label>
+                                <input type="text" name="name" placeholder="Имя" class="name" data-getAttr="getName">
+                            </div>
+                            <div class="field">
+                                <label>Фамилия</label>
+                                <input type="text" name="surname" placeholder="Фамилия" class="surname" data-getAttr="getSurname">
+                            </div>
+                        </div>
+                        <div class="fields two">
+                            <div class="field">
+                                <label>Телефон</label>
+                                <input type="text" name="phone" placeholder="Телефон" class="phone" data-getAttr="getPhone">
+                            </div>
+                            <div class="field">
+                                <label>Текущее место пребывания</label>
+                                <input type="text" name="currentLocation" placeholder="Текущее место пребывания" data-getAttr="getCurrentLocation">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Комментарий</label>
+                            <textarea name="description" rows="4"></textarea>
+                        </div>
+                    </form>
+                    <div class="actions">
+                        <div class="ui button submit green">
+                            Сохранить
+                        </div>
+                        <div class="ui cancel actions button">
+                            Закрыть
+                        </div>
+                    </div>
+                </div>
+                <!-- edit car popup -->
             </div>
             <div class="ui tab" data-tab="addCar">
                 <form id="addCarForm" class="ui form">
@@ -459,7 +549,7 @@
                     </div>
                 </div> -->
                  <!-- total drivers -->
-                 <!-- display driver popup -->
+                <!-- display driver popup -->
                 <div class="ui tiny modal displayDriverModal">
                     <a class="ui ribbon label status" data-getAttr="getStatus"></a>
                     <i class="close icon"></i>
@@ -503,7 +593,7 @@
                     </div>
                 </div>
                 <!-- display driver popup -->
-                <!-- display driver popup -->
+                <!-- edit driver popup -->
                 <div class="ui modal editDriverModal">
                     <i class="close icon"></i>
                     <div class="header">
@@ -549,7 +639,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- display driver popup -->
+                <!-- edit driver popup -->
             </div>
             <div class="ui tab" data-tab="addDriver">
                 <form id="addDriverForm" class="ui form">
@@ -609,6 +699,7 @@
     <script src="js/AddDriverForm.js"></script>
     <script src="js/DisplayOrderPopup.js"></script>
     <script src="js/DisplayDriverPopup.js"></script>
+    <script src="js/DisplayCarPopup.js"></script>
     <script src="js/EditOrderPopup.js"></script>
     <script src="js/EditDriverPopup.js"></script>
     <script src="js/UI.js"></script>
