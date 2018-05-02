@@ -4,13 +4,10 @@ class CarsController {
         this._cars = cars;
     }
 
-    addCar(stateCarNumber, gasolineConsumptionRatio, brand) {
-        this._cars.addCar(stateCarNumber, gasolineConsumptionRatio, brand);
-        this._ui.showSuccessNotification();
-        setTimeout(function(){
-            var list = this._cars.getAllCars();
-            this._ui.showAllCars(list);
-        }.bind(this), 1000);
+    addCar(carParams) {
+        this._cars.addCar(carParams);
+        var list = this._cars.getAllCars();
+        this._ui.showCarsList(list);
     }
 
     selectMenuItemAllCars() {
