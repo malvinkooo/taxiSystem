@@ -1,25 +1,34 @@
 class Car {
 
-    constructor(stateCarNumber, gasolineConsumptionRatio, brand) {
-        this._stateCarNumber = stateCarNumber;
-        this._gasolineConsumptionRatio = gasolineConsumptionRatio;
-        this._brand = brand;
+    constructor(id, carParams) {
+        this._id = id;
+        this._stateCarNumber = carParams.stateCarNumber;
+        this._gasolineConsumptionRatio = carParams.gasolineConsumptionRatio;
+        this._brand = carParams.brand;
     }
 
-    getInfo() {
-    	return {
-    		stateCarNumber: this._stateCarNumber,
-    		gasolineConsumptionRatio: this._gasolineConsumptionRatio,
-    		brand: this._brand
-    	};
+    getId() {
+        return this._id;
+    }
+
+    getStateCarNumber() {
+        return this._stateCarNumber;
     }
 
     setStateCarNumber(stateCarNumber) {
     	this._stateCarNumber = stateCarNumber;
     }
 
+    getGasolineConsumptionRation() {
+        return this._gasolineConsumptionRatio;
+    }
+
     setGasolineConsumptionRatio(gasolineConsumptionRatio) {
     	this._gasolineConsumptionRatio = gasolineConsumptionRatio;
+    }
+
+    getBrand() {
+        return this._brand;
     }
 
     setBrand(brand) {

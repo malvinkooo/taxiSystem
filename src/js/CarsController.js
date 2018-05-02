@@ -15,7 +15,7 @@ class CarsController {
 
     selectMenuItemAllCars() {
         var list = this._cars.getAllCars();
-        this._ui.showAllCars(list);
+        this._ui.showCarsList(list);
     }
 
     selectCar(id) {
