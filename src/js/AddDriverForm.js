@@ -2,14 +2,14 @@ class AddDriverForm{
     constructor(addDriverFormElement){
         this._addDriverFormElement = addDriverFormElement;
         this._driversController = null;
-        this._addDriverFormElement.find("#addDriverButton").click(this._onAddDriverButtonClick.bind(this));
+        this._addDriverFormElement.find(".submit").click(this._onAddDriverFormSubmit.bind(this));
     }
 
     setDriversController(driversController) {
         this._driversController = driversController;
     }
 
-    _onAddDriverButtonClick() {
+    _onAddDriverFormSubmit() {
         var driverParams = {};
         var elements = this._addDriverFormElement.find('input, textarea');
         for(var i = 0; i < elements.length; i++) {

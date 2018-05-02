@@ -60,7 +60,6 @@ class UI {
     }
 
     showCarsList(list) {
-        console.log(list);
         this._carsTab.showCarsList(list);
     }
 
