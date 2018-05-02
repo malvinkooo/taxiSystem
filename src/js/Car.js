@@ -5,6 +5,7 @@ class Car {
         this._stateCarNumber = carParams.stateCarNumber;
         this._gasolineConsumptionRatio = carParams.gasolineConsumptionRatio;
         this._brand = carParams.brand;
+        this._description = carParams.description;
     }
 
     getId() {
@@ -19,7 +20,7 @@ class Car {
     	this._stateCarNumber = stateCarNumber;
     }
 
-    getGasolineConsumptionRation() {
+    getGasolineConsumptionRatio() {
         return this._gasolineConsumptionRatio;
     }
 
@@ -33,5 +34,13 @@ class Car {
 
     setBrand(brand) {
     	this._brand = brand;
+    }
+
+    getDescription() {
+        return this._description;
+    }
+
+    setDescription(description) {
+        this._description = description;
     }
 }

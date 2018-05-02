@@ -13,6 +13,7 @@ class UI {
 
     setCarsController(carsController) {
         this._mainMenu.setCarsController(carsController);
+        this._carsTab.setCarsController(carsController);
     }
 
     setDriversController(driversController) {
@@ -62,8 +63,8 @@ class UI {
         this._carsTab.showCarsList(list);
     }
 
-    showCarInfo(info) {
-        //...
+    showCar(car) {
+        this._carsTab.showCar(car);
     }
 
     showStatsPage(driversCount, freeDriversCount, carsCount, ordersCount, ordersInProgressCount) {

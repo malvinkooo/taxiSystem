@@ -41,6 +41,7 @@
 .displayDriverModal .description {
 	margin: 15px 0;
 }
-.displayDriverModal .ui.cards > .card {
+.displayDriverModal .ui.cards > .card,
+.displayCarModal .ui.cards > .card {
 	width: 100%;
 }
