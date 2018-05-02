@@ -4,17 +4,20 @@ class CarsTable {
       this._tbody = this._carsTableElement.find("table tbody");
       this._tbody.on("click", "tr", this._onCarRowClick.bind(this));
       this._displayCarPopup = new DisplayCarPopup(this._carsTableElement.find(".displayCarModal"));
+      this._editCarPopup = new EditCarPopup(this._carsTableElement.find(".editCarModal"));
    }
 
    setCarsController(carsController) {
       this._carsController = carsController;
+      this._displayCarPopup.setCarsController(carsController);
+      this._editCarPopup.setCarsController(carsController);
    }
 
    showCarsList(list) {
-      this._tbody.html();
+      this._tbody.html("");
       for(var i = 0; i < list.length; i++) {
          var car = list[i];
-         this._tbody.html("<tr data-car-id='"+car.getId()+"'><td>"
+         this._tbody.append("<tr data-car-id='"+car.getId()+"'><td>"
             +car.getBrand()+"</td><td>"
             +car.getGasolineConsumptionRatio()+"</td><td>"
             +car.getStateCarNumber()
@@ -24,6 +27,10 @@ class CarsTable {
 
    showCar(car) {
       this._displayCarPopup.showCar(car);
+   }
+
+   showEditCarForm(car) {
+      this._editCarPopup.showEditCarForm(car);
    }
 
    _onCarRowClick(e) {

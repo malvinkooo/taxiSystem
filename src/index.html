@@ -300,7 +300,7 @@
                         </div>
                     </div>
                     <div class="field">
-                        <button id="addOrderButton" class="ui red button" type="submit">Добавить</button>
+                        <button class="ui red button submit" type="submit">Добавить</button>
                     </div>
                 </form>
                 <!-- add order form -->
@@ -417,37 +417,28 @@
                 <div class="ui modal editCarModal">
                     <i class="close icon"></i>
                     <div class="header">
-                        Редактировать информацию о водителе #<span data-getAttr="getId"></span>
+                        Редактировать информацию о машине #<span data-getAttr="getId"></span>
                     </div>
                     <form class="ui form" id="editOrderForm">
-                        <div class="ui fields">
-                            <div class="field status-wrap">
-                                <select class="ui fluid dropdown status-list" name="status"></select>
-                            </div>
+                        <div class="field">
+                            <label>Марка</label>
+                            <input type="text" name="brand" placeholder="Марка" class="name" data-getAttr="getBrand">
                         </div>
                         <div class="fields two">
                             <div class="field">
-                                <label>Имя</label>
-                                <input type="text" name="name" placeholder="Имя" class="name" data-getAttr="getName">
+                                <div class="field">
+                                    <label>Гос.номер</label>
+                                    <input type="text" name="stateCarNumber" placeholder="Гос.номер" class="surname" data-getAttr="getStateCarNumber">
+                                </div>
                             </div>
                             <div class="field">
-                                <label>Фамилия</label>
-                                <input type="text" name="surname" placeholder="Фамилия" class="surname" data-getAttr="getSurname">
-                            </div>
-                        </div>
-                        <div class="fields two">
-                            <div class="field">
-                                <label>Телефон</label>
-                                <input type="text" name="phone" placeholder="Телефон" class="phone" data-getAttr="getPhone">
-                            </div>
-                            <div class="field">
-                                <label>Текущее место пребывания</label>
-                                <input type="text" name="currentLocation" placeholder="Текущее место пребывания" data-getAttr="getCurrentLocation">
+                                <label>Коэффициент расхода бензина</label>
+                                <input type="number" min="0" step="0.1" name="gasolineConsumptionRatio" placeholder="Коэффициент расхода бензина" data-getAttr="getGasolineConsumptionRatio">
                             </div>
                         </div>
                         <div class="field">
                             <label>Комментарий</label>
-                            <textarea name="description" rows="4"></textarea>
+                            <textarea name="description" rows="4" data-getAttr="getDescription"></textarea>
                         </div>
                     </form>
                     <div class="actions">
@@ -465,7 +456,7 @@
                 <form id="addCarForm" class="ui form">
                     <div class="field">
                         <label>Марка автомобиля</label>
-                        <input type="text" name="brand" placeholder="">
+                        <input type="text" name="brand" placeholder="Марка автомобиля">
                     </div>
                     <div class="field">
                         <label>Гос. номер</label>
@@ -473,7 +464,11 @@
                     </div>
                     <div class="field">
                         <label>Расход топлива (л/км)</label>
-                        <input type="number" min="0" step="0.1" name="gasolineConsumptionRatio" placeholder="">
+                        <input type="number" min="0" step="0.1" name="gasolineConsumptionRatio" placeholder="Коэффициент расхода бензина">
+                    </div>
+                    <div class="field">
+                        <label>Комментарий</label>
+                        <textarea name="description" rows="4"></textarea>
                     </div>
                     <div class="ui success message">
                         <div class="header">Автомобиль добавлен</div>
@@ -599,7 +594,7 @@
                     <div class="header">
                         Редактировать информацию о водителе #<span data-getAttr="getId"></span>
                     </div>
-                    <form class="ui form" id="editOrderForm">
+                    <form class="ui form">
                         <div class="ui fields">
                             <div class="field status-wrap">
                                 <select class="ui fluid dropdown status-list" name="status"></select>
@@ -627,7 +622,7 @@
                         </div>
                         <div class="field">
                             <label>Комментарий</label>
-                            <textarea name="description" rows="4"></textarea>
+                            <textarea name="description" rows="4" data-getAttr="getDescription"></textarea>
                         </div>
                     </form>
                     <div class="actions">
@@ -662,7 +657,7 @@
                     <div class="ui success message">
                         <div class="header">Автомобиль добавлен</div>
                     </div>
-                    <div class="ui submit green button" id="addDriverButton">Добавить</div>
+                    <div class="ui submit green button">Добавить</div>
                 </form>
             </div>
             <!-- secondary/cars tabs -->
@@ -696,12 +691,14 @@
     <script src="js/QuestionMessageBox.js"></script>
     <script src="js/MainMenu.js"></script>
     <script src="js/AddOrderForm.js"></script>
+    <script src="js/AddCarForm.js"></script>
     <script src="js/AddDriverForm.js"></script>
     <script src="js/DisplayOrderPopup.js"></script>
     <script src="js/DisplayDriverPopup.js"></script>
     <script src="js/DisplayCarPopup.js"></script>
     <script src="js/EditOrderPopup.js"></script>
     <script src="js/EditDriverPopup.js"></script>
+    <script src="js/EditCarPopup.js"></script>
     <script src="js/UI.js"></script>
     <script src="js/OrdersTab.js"></script>
     <script src="js/CarsTab.js"></script>

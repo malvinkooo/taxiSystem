@@ -4,13 +4,10 @@ class CarsController {
         this._cars = cars;
     }
 
-    addCar(stateCarNumber, gasolineConsumptionRatio, brand) {
-        this._cars.addCar(stateCarNumber, gasolineConsumptionRatio, brand);
-        this._ui.showSuccessNotification();
-        setTimeout(function(){
-            var list = this._cars.getAllCars();
-            this._ui.showAllCars(list);
-        }.bind(this), 1000);
+    addCar(carParams) {
+        this._cars.addCar(carParams);
+        var list = this._cars.getAllCars();
+        this._ui.showCarsList(list);
     }
 
     selectMenuItemAllCars() {
@@ -23,22 +20,19 @@ class CarsController {
         this._ui.showCar(car);
     }
 
-    selectMenuItemEditCar(id) {
-        var info = this._car.getCar(id);
-        this._ui.showEditCarform(info);
+    selectEditCar(id) {
+        var car = this._cars.getCar(id);
+        this._ui.showEditCarForm(car);
     }
 
-    editCar(id, stateCarNumber, gasolineConsumptionRatio, brand) {
-        this._cars.editCar(id, stateCarNumber, gasolineConsumptionRatio, brand);
-        this._ui.showSuccessNotification();
-        var info = this._cars.getCar(id);
-        this._ui.showCarInfo(info);
+    editCar(carParams) {
+        var car = this._cars.editCar(carParams);
+        this._ui.showCar(car);
     }
 
-    deleteCar(id) {
+    selectDeleteCar(id) {
         this._cars.deleteCar(id);
-        this._ui.showSuccessNotification();
         var list = this._cars.getAllCars();
-        this._ui.showAllCars(list);
+        this._ui.showCarsList(list);
     }
 }

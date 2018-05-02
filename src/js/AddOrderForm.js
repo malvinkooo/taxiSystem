@@ -7,7 +7,7 @@ class AddOrderForm {
             onUnchecked: this._onSetDriverAutomaticallyUnchecked.bind(this)
         });
         this._isSetDriverAutomaticallyChecked = false;
-        this._addOrderFormElement.find('#addOrderButton').click(this._onAddOrderButtonClick.bind(this));
+        this._addOrderFormElement.find('.submit').click(this._onAddOrderFormSubmit.bind(this));
     }
 
     setOrdersController(ordersController) {
@@ -18,7 +18,7 @@ class AddOrderForm {
         this._driversController = driversController;
     }
 
-    _onAddOrderButtonClick() {
+    _onAddOrderFormSubmit() {
         var orderParams = {};
         var elements = this._addOrderFormElement.find('input, select');
         for(var i=0; i < elements.length; i++) {
