@@ -6,6 +6,7 @@ class DisplayCarPopup {
         this._displayCarPopupElement.modal({
             onHide: this._onDisplayCarPopupClose.bind(this)
         });
+        this._displayCarPopupElement.find(".delete-car").click(this._onDeleteCarButtonClick.bind(this));
     }
 
     setCarsController(carsController) {
@@ -29,5 +30,14 @@ class DisplayCarPopup {
 
     _onDisplayCarPopupClose() {
         this._carsController.selectMenuItemAllCars();
+    }
+
+    _onDeleteCarButtonClick() {
+        var questionBox = new QuestionMessageBox("Вы действительно хотите удалить машину?");
+        questionBox.show((function(){
+            this._carsController.selectDeleteCar(this._lastCarId);
+        }).bind(this), (function(){
+            this._carsController.selectCar(this._lastCarId);
+        }).bind(this));
     }
 }

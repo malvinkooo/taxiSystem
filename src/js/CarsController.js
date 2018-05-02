@@ -33,10 +33,9 @@ class CarsController {
         this._ui.showCar(car);
     }
 
-    deleteCar(id) {
+    selectDeleteCar(id) {
         this._cars.deleteCar(id);
-        this._ui.showSuccessNotification();
         var list = this._cars.getAllCars();
-        this._ui.showAllCars(list);
+        this._ui.showCarsList(list);
     }
 }
