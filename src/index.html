@@ -417,7 +417,7 @@
                 <div class="ui modal editCarModal">
                     <i class="close icon"></i>
                     <div class="header">
-                        Редактировать информацию о водителе #<span data-getAttr="getId"></span>
+                        Редактировать информацию о машине #<span data-getAttr="getId"></span>
                     </div>
                     <form class="ui form" id="editOrderForm">
                         <div class="field">
@@ -433,7 +433,7 @@
                             </div>
                             <div class="field">
                                 <label>Коэффициент расхода бензина</label>
-                                <input type="text" name="gasolineConsumptionRatio" placeholder="Коэффициент расхода бензина" data-getAttr="getGasolineConsumptionRatio">
+                                <input type="number" min="0" step="0.1" name="gasolineConsumptionRatio" placeholder="Коэффициент расхода бензина" data-getAttr="getGasolineConsumptionRatio">
                             </div>
                         </div>
                         <div class="field">
@@ -464,7 +464,7 @@
                     </div>
                     <div class="field">
                         <label>Расход топлива (л/км)</label>
-                        <input type="number" min="0" step="0.1" name="gasolineConsumptionRatio" placeholder="Коэффициент расхоба бензина">
+                        <input type="number" min="0" step="0.1" name="gasolineConsumptionRatio" placeholder="Коэффициент расхода бензина">
                     </div>
                     <div class="field">
                         <label>Комментарий</label>
@@ -594,7 +594,7 @@
                     <div class="header">
                         Редактировать информацию о водителе #<span data-getAttr="getId"></span>
                     </div>
-                    <form class="ui form" id="editOrderForm">
+                    <form class="ui form">
                         <div class="ui fields">
                             <div class="field status-wrap">
                                 <select class="ui fluid dropdown status-list" name="status"></select>
