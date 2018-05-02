@@ -67,6 +67,10 @@ class UI {
         this._carsTab.showCar(car);
     }
 
+    showEditCarForm(car) {
+        this._carsTab.showEditCarForm(car);
+    }
+
     showStatsPage(driversCount, freeDriversCount, carsCount, ordersCount, ordersInProgressCount) {
         //...
     }

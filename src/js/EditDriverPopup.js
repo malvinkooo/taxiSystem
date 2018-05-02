@@ -33,7 +33,7 @@ class EditDriverPopup {
 
     _onEditFormSubmit() {
         var driverParams = {};
-        driverParams['id'] = this._lastDriverId;
+        driverParams["id"] = this._lastDriverId;
         var elements = this._editDriverPopupElement.find("input, select, textarea");
         for (var i = 0; i < elements.length; i++) {
             driverParams[$(elements[i]).attr('name')] = $(elements[i]).val();

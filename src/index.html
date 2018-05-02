@@ -420,34 +420,25 @@
                         Редактировать информацию о водителе #<span data-getAttr="getId"></span>
                     </div>
                     <form class="ui form" id="editOrderForm">
-                        <div class="ui fields">
-                            <div class="field status-wrap">
-                                <select class="ui fluid dropdown status-list" name="status"></select>
-                            </div>
+                        <div class="field">
+                            <label>Марка</label>
+                            <input type="text" name="brand" placeholder="Марка" class="name" data-getAttr="getBrand">
                         </div>
                         <div class="fields two">
                             <div class="field">
-                                <label>Имя</label>
-                                <input type="text" name="name" placeholder="Имя" class="name" data-getAttr="getName">
+                                <div class="field">
+                                    <label>Гос.номер</label>
+                                    <input type="text" name="stateCarNumber" placeholder="Гос.номер" class="surname" data-getAttr="getStateCarNumber">
+                                </div>
                             </div>
                             <div class="field">
-                                <label>Фамилия</label>
-                                <input type="text" name="surname" placeholder="Фамилия" class="surname" data-getAttr="getSurname">
-                            </div>
-                        </div>
-                        <div class="fields two">
-                            <div class="field">
-                                <label>Телефон</label>
-                                <input type="text" name="phone" placeholder="Телефон" class="phone" data-getAttr="getPhone">
-                            </div>
-                            <div class="field">
-                                <label>Текущее место пребывания</label>
-                                <input type="text" name="currentLocation" placeholder="Текущее место пребывания" data-getAttr="getCurrentLocation">
+                                <label>Коэффициент расхода бензина</label>
+                                <input type="text" name="gasolineConsumptionRatio" placeholder="Коэффициент расхода бензина" data-getAttr="getGasolineConsumptionRatio">
                             </div>
                         </div>
                         <div class="field">
                             <label>Комментарий</label>
-                            <textarea name="description" rows="4"></textarea>
+                            <textarea name="description" rows="4" data-getAttr="getDescription"></textarea>
                         </div>
                     </form>
                     <div class="actions">
@@ -627,7 +618,7 @@
                         </div>
                         <div class="field">
                             <label>Комментарий</label>
-                            <textarea name="description" rows="4"></textarea>
+                            <textarea name="description" rows="4" data-getAttr="getDescription"></textarea>
                         </div>
                     </form>
                     <div class="actions">
@@ -702,6 +693,7 @@
     <script src="js/DisplayCarPopup.js"></script>
     <script src="js/EditOrderPopup.js"></script>
     <script src="js/EditDriverPopup.js"></script>
+    <script src="js/EditCarPopup.js"></script>
     <script src="js/UI.js"></script>
     <script src="js/OrdersTab.js"></script>
     <script src="js/CarsTab.js"></script>

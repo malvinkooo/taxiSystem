@@ -19,4 +19,8 @@ class CarsTab {
     showCar(car) {
         this._carsTable.showCar(car);
     }
+
+    showEditCarForm(car) {
+        this._carsTable.showEditCarForm(car);
+    }
 }
