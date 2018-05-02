@@ -14,7 +14,7 @@ class CarsTable {
    }
 
    showCarsList(list) {
-      this._tbody.html();
+      this._tbody.html("");
       for(var i = 0; i < list.length; i++) {
          var car = list[i];
          this._tbody.html("<tr data-car-id='"+car.getId()+"'><td>"
