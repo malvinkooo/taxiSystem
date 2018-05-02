@@ -23,16 +23,14 @@ class CarsController {
         this._ui.showCar(car);
     }
 
-    selectMenuItemEditCar(id) {
-        var info = this._car.getCar(id);
-        this._ui.showEditCarform(info);
+    selectEditCar(id) {
+        var car = this._cars.getCar(id);
+        this._ui.showEditCarForm(car);
     }
 
-    editCar(id, stateCarNumber, gasolineConsumptionRatio, brand) {
-        this._cars.editCar(id, stateCarNumber, gasolineConsumptionRatio, brand);
-        this._ui.showSuccessNotification();
-        var info = this._cars.getCar(id);
-        this._ui.showCarInfo(info);
+    editCar(carParams) {
+        var car = this._cars.editCar(carParams);
+        this._ui.showCar(car);
     }
 
     deleteCar(id) {
