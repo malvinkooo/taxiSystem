@@ -24,11 +24,13 @@ class CarsList {
         return this._cars[id];
     }
 
-    editCar(id, stateCarNumber, gasolineConsumptionRatio, brand) {
-        var car = this._list[id];
-        car.setStateCarNumber(stateCarNumber);
-        car.setGasolineConsumptionRatio(gasolineConsumptionRatio);
-        car.setBrand(brand);
+    editCar(carParams) {
+        var car = this._cars[carParams.id];
+        car.setStateCarNumber(carParams.stateCarNumber);
+        car.setBrand(carParams.brand);
+        car.setGasolineConsumptionRatio(carParams.gasolineConsumptionRatio);
+        car.setDescription(carParams.description);
+        return car;
     }
 
     deleteCar(id) {
