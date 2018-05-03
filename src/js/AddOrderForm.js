@@ -34,9 +34,10 @@ class AddOrderForm {
         this._selectDropDown.html("");
         var driversList = this._driversController.getDriversList();
         for(var i = 0; i < driversList.length; i++) {
+            var driver = driversList[i];
             this._selectDropDown.append("<option value='"
-                +driversList[i].getId()+"'>"
-                +driversList[i].getFullName()
+                +driver.getId()+"'>"
+                +driver.getFullName()
             +"</option>");
         }
         this._selectDropDown.dropdown();

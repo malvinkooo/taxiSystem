@@ -638,17 +638,29 @@
             </div>
             <div class="ui tab" data-tab="addDriver">
                 <form id="addDriverForm" class="ui form">
-                    <div class="field">
-                        <label>Имя</label>
-                        <input type="text" name="name" placeholder="Имя">
+                    <div class="fields two">
+                        <div class="field">
+                            <label>Имя</label>
+                            <input type="text" name="name" placeholder="Имя">
+                        </div>
+                        <div class="field">
+                            <label>Фамилия</label>
+                            <input type="text" name="surname" placeholder="Фамилия">
+                        </div>
                     </div>
-                    <div class="field">
-                        <label>Фамилия</label>
-                        <input type="text" name="surname" placeholder="Фамилия">
-                    </div>
-                    <div class="field">
-                        <label>Моб. номер</label>
-                        <input type="text" name="phone" placeholder="7475454">
+                    <div class="fields two">
+                        <div class="field">
+                            <label>Моб. номер</label>
+                            <input type="text" name="phone" placeholder="7475454">
+                        </div>
+                        <div class="field">
+                            <div class="ui form">
+                                <div class="field">
+                                    <label>Назначить машину</label>
+                                    <select name="car" class="ui search dropdown cars-list"></select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="field">
                         <label>Комментарий</label>

@@ -15,6 +15,7 @@ class DriversTable {
     }
 
     showDriversList(list){
+        console.log(list);
        this._tbody.html("");
        var statusColorsList = DriverStatus.colorsList;
        for (var i = 0; i < list.length; i++) {

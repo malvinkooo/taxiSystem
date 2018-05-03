@@ -1,6 +1,7 @@
 class DriversController {
-    constructor(ui, driversList) {
+    constructor(ui, carsList, driversList) {
         this._ui = ui;
+        this._carsList = carsList;
         this._driversList = driversList;
     }
 
@@ -44,6 +45,7 @@ class DriversController {
  */
 
     addDriver(driverParams){
+        driverParams.car = this._carsList.getCar(driverParams.car);
         this._driversList.addDriver(driverParams);
         var list = this._driversList.getAllDrivers();
         this._ui.showDriversList(list);

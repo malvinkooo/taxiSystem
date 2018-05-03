@@ -4,23 +4,32 @@ var ordersList = new OrdersList();
 var carsList = new CarsList();
 var driversList = new DriversList();
 
+carsList.addCar({
+    stateCarNumber: "4545445",
+    brand: "Nissan",
+    gasolineConsumptionRatio: 1.77,
+    description: "Краткий комментарий о машине"
+});
 driversList.addDriver({
     name:'Петр',
     surname: 'Иванов',
     phone: '1245757',
-    description: "Комментарий о водителе"
+    description: "Комментарий о водителе",
+    car: carsList.getCar(0)
 });
 driversList.addDriver({
     name:'Василий',
     surname: 'Жуков',
     phone: '06547851',
-    description: "Комментарий о водителе"
+    description: "Комментарий о водителе",
+    car: carsList.getCar(0)
 });
 driversList.addDriver({
     name:'Прасковий',
     surname: 'Никитин',
     phone: '06547851',
-    description: "Комментарий о водителе"
+    description: "Комментарий о водителе",
+    car: carsList.getCar(0)
 });
 
 ordersList.addOrder({
@@ -41,16 +50,10 @@ ordersList.addOrder({
 }, geoService);
 driversList.getDriver(0).setStatus(DriverStatus.BUSY);
 driversList.getDriver(1).setStatus(DriverStatus.BUSY);
-carsList.addCar({
-    stateCarNumber: "4545445",
-    brand: "Nissan",
-    gasolineConsumptionRatio: 1.77,
-    description: "Краткий комментарий о машине"
-});
 
 var ordersController = new OrdersController(ui, ordersList, driversList, geoService);
 var carsController = new CarsController(ui, carsList);
-var driversController = new DriversController(ui, driversList);
+var driversController = new DriversController(ui, carsList, driversList);
 ui.setOrdersController(ordersController);
 ui.setDriversController(driversController);
 ui.setCarsController(carsController);

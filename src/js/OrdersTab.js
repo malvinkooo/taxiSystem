@@ -32,7 +32,9 @@ class OrdersTab {
         this._ordersTable.showEditOrderform(order);
     }
 
-    _onAddOrderTabLoaded(){
-        this._addOrderForm.show();
+    _onAddOrderTabLoaded(tab){
+        if(tab === 'addOrder') {
+            this._addOrderForm.show();
+        }
     }
 }
