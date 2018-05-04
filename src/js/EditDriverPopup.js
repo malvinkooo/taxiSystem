@@ -1,9 +1,11 @@
 class EditDriverPopup {
     constructor(editDriverPopupElement){
         this._editDriverPopupElement = editDriverPopupElement;
+        this._carsController = null;
         this._driversController = null;
         this._lastDriverId = null;
         this._statusListSelectElement = this._editDriverPopupElement.find("select.status-list");
+        this._carsListSelectElement = this._editDriverPopupElement.find("select.cars-list");
         var statusList = DriverStatus.statusList;
         for (var i = 0; i < statusList.length; i++) {
             this._statusListSelectElement.append("<option value='"
@@ -13,6 +15,10 @@ class EditDriverPopup {
         }
         this._statusListSelectElement.dropdown({showOnFocus: false});
         this._editDriverPopupElement.find(".submit").click(this._onEditFormSubmit.bind(this));
+    }
+
+    setCarsController(carsController) {
+        this._carsController = carsController;
     }
 
     setDriversController(driversController) {
@@ -28,6 +34,17 @@ class EditDriverPopup {
         }
         this._editDriverPopupElement.find("[data-GetAttr='getId']").html(driver.getId());
         this._statusListSelectElement.dropdown('set selected', driver.getStatus());
+
+        this._carsListSelectElement.html("");
+        var carsList = this._carsController.getCarsList();
+        for(var i = 0; i < carsList.length; i++) {
+            var car = carsList[i];
+            this._carsListSelectElement.append("<option value='"
+            +car.getId()+"'>"
+            +car.getBrand()+ " " + car.getStateCarNumber()
+            +"</option>");
+        }
+        this._carsListSelectElement.dropdown("set selected", driver.getCar().getId());
         this._editDriverPopupElement.modal("show");
     }
 

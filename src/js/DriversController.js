@@ -57,6 +57,7 @@ class DriversController {
     }
 
     editDriver(driverParams) {
+        driverParams.car = this._carsList.getCar(driverParams.car);
         var driver = this._driversList.editDriver(driverParams);
         this._ui.showDriver(driver);
     }

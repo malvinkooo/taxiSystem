@@ -163,6 +163,10 @@
                                                 <i class="phone icon"></i>
                                                 <span data-driver-getAttr="getPhone"></span>
                                             </p>
+                                            <p>
+                                                <i class="taxi icon"></i>
+                                                <span data-car-getAttr="getCar"></span>
+                                            </p>
                                             <p data-driver-getAttr="getDescription"></p>
                                         </div>
                                     </div>
@@ -559,21 +563,28 @@
                                     <div class="header">
                                         <span data-getAttr="getFullName"></span>
                                     </div>
-                                    <div class="phone">
-                                        <i class="phone icon"></i>
-                                        <span data-getAttr="getPhone"></span>
+                                    <div class="ui horizontal segments">
+                                       <div class="ui segment">
+                                            <i class="phone icon"></i>
+                                            <span data-getAttr="getPhone"></span>
+                                        </div>
+                                        <div class="ui segment">
+                                            <i class="taxi icon"></i>
+                                            <span data-car-getAttr="getCar"></span>
+                                        </div>
                                     </div>
                                     <div class="description" data-getAttr="getDescription">-</div>
                                 </div>
                                 <div class="extra content">
                                     <a>
-                                      <i class="taxi icon"></i>
-                                      <span data-getAttr="getCurrentLocation">-</span>
+                                        <i class="map marker icon"></i>
+                                        <span data-getAttr="getCurrentLocation">-</span>
                                     </a>
                               </div>
                             </div>
                         </div>
                     </div>
+                    <!-- map marker -->
                     <div class="actions">
                         <button class="ui icon button red delete-driver">
                             <i class="trash alternate outline icon"></i>
@@ -619,6 +630,9 @@
                                 <label>Текущее место пребывания</label>
                                 <input type="text" name="currentLocation" placeholder="Текущее место пребывания" data-getAttr="getCurrentLocation">
                             </div>
+                        </div>
+                        <div class="field">
+                            <select class="ui fluid dropdown cars-list" name="car"></select>
                         </div>
                         <div class="field">
                             <label>Комментарий</label>

@@ -14,7 +14,8 @@
 .ui.horizontal.segments>.segment {
 	min-width: 50%;
 }
-#editOrderForm {
+#editOrderForm,
+.editDriverModal  form {
 	padding: 20px;
 }
 #editOrderForm .status.ui.button {
@@ -41,7 +42,9 @@
 .displayDriverModal .description {
 	margin: 15px 0;
 }
-.displayDriverModal .ui.cards > .card,
-.displayCarModal .ui.cards > .card {
+.displayDriverModal .ui.cards > .card {
+	width: 100%;
+}
+.displayDriverModal .ui.horizontal.segments {
 	width: 100%;
 }

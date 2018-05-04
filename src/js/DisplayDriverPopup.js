@@ -2,7 +2,7 @@ class DisplayDriverPopup {
     constructor(displayDriverPopupElement) {
         this._displayDriverPopupElement = displayDriverPopupElement;
         this._driversController = null;
-        this._lastDriverId = null;
+        this._lastDriver = null;
         this._displayDriverPopupElement.find(".edit-driver").click(this._onEditDriverButtonClick.bind(this));
         this._displayDriverPopupElement.modal({
             onHide: this._onDisplayDriverPopupClose.bind(this)
@@ -15,7 +15,7 @@ class DisplayDriverPopup {
     }
 
     showDriver(driver) {
-        this._lastDriverId = driver.getId();
+        this._lastDriver = driver;
         var statusDriversList = DriverStatus.colorsList;
         for(var color in statusDriversList){
             this._displayDriverPopupElement.find(".status").removeClass(statusDriversList[color]);
@@ -26,11 +26,13 @@ class DisplayDriverPopup {
             $(elements[i]).html(driver[getAttr]());
         }
         this._displayDriverPopupElement.find(".status").addClass(statusDriversList[driver.getStatus()]);
+        this._displayDriverPopupElement.find("[data-car-getAttr]").html(driver.getCar().getBrand() + " "
+                +driver.getCar().getStateCarNumber());
         this._displayDriverPopupElement.modal("show");
     }
 
     _onEditDriverButtonClick() {
-        this._driversController.selectEditDriver(this._lastDriverId);
+        this._driversController.selectEditDriver(this._lastDriver.getId());
     }
 
     _onDisplayDriverPopupClose() {
@@ -40,9 +42,9 @@ class DisplayDriverPopup {
     _onDeleteDriverButtonClick() {
         var questionBox = new QuestionMessageBox("Вы действительно хотите удалить водителя?");
         questionBox.show((function(){
-            this._driversController.selectDeleteDriver(this._lastDriverId);
+            this._driversController.selectDeleteDriver(this._lastDriver.getId());
         }).bind(this), (function(){
-            this._driversController.selectDriver(this._lastDriverId);
+            this._driversController.selectDriver(this._lastDriver.getId());
         }).bind(this));
     }
 }

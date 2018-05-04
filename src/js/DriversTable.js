@@ -8,6 +8,10 @@ class DriversTable {
         this._tbody.on("click", "tr", this._onDriverRowClick.bind(this));
     }
 
+    setCarsController(carsController) {
+        this._editDriverPopup.setCarsController(carsController);
+    }
+
     setDriversController(driversController){
         this._driversController = driversController;
         this._displayDriverPopup.setDriversController(driversController);
@@ -15,7 +19,6 @@ class DriversTable {
     }
 
     showDriversList(list){
-        console.log(list);
        this._tbody.html("");
        var statusColorsList = DriverStatus.colorsList;
        for (var i = 0; i < list.length; i++) {

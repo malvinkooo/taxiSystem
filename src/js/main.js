@@ -10,6 +10,18 @@ carsList.addCar({
     gasolineConsumptionRatio: 1.77,
     description: "Краткий комментарий о машине"
 });
+carsList.addCar({
+    stateCarNumber: "4545445",
+    brand: "Opel",
+    gasolineConsumptionRatio: 1.77,
+    description: "Краткий комментарий о машине"
+});
+carsList.addCar({
+    stateCarNumber: "4545445",
+    brand: "Opel",
+    gasolineConsumptionRatio: 1.77,
+    description: "Краткий комментарий о машине"
+});
 driversList.addDriver({
     name:'Петр',
     surname: 'Иванов',

@@ -14,6 +14,7 @@ class DriversTab {
     }
 
     setCarsController(carsController) {
+        this._driversTable.setCarsController(carsController);
         this._addDriverForm.setCarsController(carsController);
     }
 
