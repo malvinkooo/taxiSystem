@@ -21,9 +21,7 @@ class AddDriverForm{
         for(var i = 0; i < carsList.length; i++){
             var car = carsList[i];
             this._selectDropDown.append("<option value='"
-                +car.getId()+"'>"
-                +car.getBrand()+" "+car.getStateCarNumber()
-            +"</option>");
+                +car.getId()+"'>"+car+"</option>");
         }
         this._selectDropDown.dropdown();
     }

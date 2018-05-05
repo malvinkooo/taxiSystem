@@ -31,8 +31,7 @@ class DisplayOrderPopup {
             var driverGetAttr = $(driverElements[k]).attr("data-driver-getAttr");
             $(driverElements[k]).html(order.getDriver()[driverGetAttr]());
         }
-        var car = order.getDriver().getCar();
-        this._displayOrderPopupElement.find("[data-car-getAttr]").html(car.getBrand() +" "+car.getStateCarNumber());
+        this._displayOrderPopupElement.find("[data-car-getAttr]").html(order.getDriver().getCar().toString());
         this._displayOrderPopupElement
             .find(".status")
             .addClass(statusColorsList[order.getStatus()]);

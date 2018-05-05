@@ -8,6 +8,10 @@ class Car {
         this._description = carParams.description;
     }
 
+    toString() {
+        return this._brand + " " + this._stateCarNumber;
+    }
+
     getId() {
         return this._id;
     }

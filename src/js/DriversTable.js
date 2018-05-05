@@ -30,6 +30,7 @@ class DriversTable {
                 +statusColorsList[driver.getStatus()]+'">'
                 +driver.getStatus()+
             '</button></td><td>'+driver.getCurrentLocation()+
+            '</td><td>'+driver.getCar()+
             '</td></tr>').appendTo(this._tbody)
        }
     }

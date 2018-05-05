@@ -26,8 +26,7 @@ class DisplayDriverPopup {
             $(elements[i]).html(driver[getAttr]());
         }
         this._displayDriverPopupElement.find(".status").addClass(statusDriversList[driver.getStatus()]);
-        this._displayDriverPopupElement.find("[data-car-getAttr]").html(driver.getCar().getBrand() + " "
-                +driver.getCar().getStateCarNumber());
+        this._displayDriverPopupElement.find("[data-car-getAttr]").html(driver.getCar().toString());
         this._displayDriverPopupElement.modal("show");
     }
 
