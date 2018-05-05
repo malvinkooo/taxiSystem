@@ -14,6 +14,7 @@ class UI {
     setCarsController(carsController) {
         this._mainMenu.setCarsController(carsController);
         this._carsTab.setCarsController(carsController);
+        this._driversTab.setCarsController(carsController);
     }
 
     setDriversController(driversController) {

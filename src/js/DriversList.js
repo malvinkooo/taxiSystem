@@ -31,6 +31,7 @@ class DriversList {
         driver.setStatus(driverParams.status);
         driver.setCurrentLocation(driverParams.currentLocation);
         driver.setDescription(driverParams.description);
+        driver.setCar(driverParams.car);
         return driver;
     }
 

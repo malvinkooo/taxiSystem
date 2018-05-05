@@ -10,6 +10,10 @@ class CarsController {
         this._ui.showCarsList(list);
     }
 
+    getCarsList() {
+        return this._cars.getAllCars();
+    }
+
     selectMenuItemAllCars() {
         var list = this._cars.getAllCars();
         this._ui.showCarsList(list);

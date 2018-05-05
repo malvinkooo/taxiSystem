@@ -8,6 +8,10 @@ class DriversTable {
         this._tbody.on("click", "tr", this._onDriverRowClick.bind(this));
     }
 
+    setCarsController(carsController) {
+        this._editDriverPopup.setCarsController(carsController);
+    }
+
     setDriversController(driversController){
         this._driversController = driversController;
         this._displayDriverPopup.setDriversController(driversController);
@@ -26,6 +30,7 @@ class DriversTable {
                 +statusColorsList[driver.getStatus()]+'">'
                 +driver.getStatus()+
             '</button></td><td>'+driver.getCurrentLocation()+
+            '</td><td>'+driver.getCar()+
             '</td></tr>').appendTo(this._tbody)
        }
     }

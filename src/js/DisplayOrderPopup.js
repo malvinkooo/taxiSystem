@@ -31,10 +31,11 @@ class DisplayOrderPopup {
             var driverGetAttr = $(driverElements[k]).attr("data-driver-getAttr");
             $(driverElements[k]).html(order.getDriver()[driverGetAttr]());
         }
-        this._displayOrderPopupElement.modal("show");
+        this._displayOrderPopupElement.find("[data-car-getAttr]").html(order.getDriver().getCar().toString());
         this._displayOrderPopupElement
             .find(".status")
             .addClass(statusColorsList[order.getStatus()]);
+        this._displayOrderPopupElement.modal("show");
     }
 
     _onEditOrderButtonClick(e){
