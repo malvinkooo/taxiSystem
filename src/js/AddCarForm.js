@@ -2,6 +2,15 @@ class AddCarForm {
     constructor(addCarFormElement) {
         this._addCarFormElement = addCarFormElement;
         this._addCarFormElement.find(".submit").click(this._onAddCarFormSubmit.bind(this));
+        this._addCarFormConstraints = {
+            stateCarNumber: {
+                presence: {message: "^is required when using AMEX"},
+                length: {
+                    minimum: 3,
+                    message: "^Lengthghghghhhg"
+                }
+            }
+        };
     }
 
     setCarsController(carsController) {
@@ -15,7 +24,10 @@ class AddCarForm {
             var element = $(elements[i]);
             carsParams[element.attr("name")] = element.val();
         }
-        this._carsController.addCar(carsParams);
-        this._addCarFormElement.find("form")[0].reset();
+        var form = this._addCarFormElement.find("form")[0];
+        var errors = validate(form, this._addCarFormConstraints);
+        console.log(errors);
+        // this._carsController.addCar(carsParams);
+        // this._addCarFormElement.find("form")[0].reset();
     }
 }
