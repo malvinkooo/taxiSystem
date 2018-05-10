@@ -4,6 +4,7 @@ class EditDriverPopup {
         this._carsController = null;
         this._driversController = null;
         this._lastDriverId = null;
+        this._currentLocation = new SearchBox(this._editDriverPopupElement.find(".search.currentLocation"));
         this._statusListSelectElement = this._editDriverPopupElement.find("select.status-list");
         this._carsListSelectElement = this._editDriverPopupElement.find("select.cars-list");
         var statusList = DriverStatus.statusList;

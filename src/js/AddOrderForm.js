@@ -6,37 +6,8 @@ class AddOrderForm {
             onChecked: this._onSetDriverAutomaticallyChecked.bind(this),
             onUnchecked: this._onSetDriverAutomaticallyUnchecked.bind(this)
         });
-        this._carFeedPointSearch = this._addOrderFormElement.find(".search.carFeedPoint");
-        this._carFeedPointSearch.search({
-            apiSettings: {
-              onResponse: function(openstreetmapResponse){
-                var response = {
-                    results: []
-                };
-                $.each(openstreetmapResponse, function(index, item){
-                    if(item.address.road && item.address.house_number){
-                        response.results.push({
-                            title: item.address.road + ", " + item.address.house_number,
-                            desciption: item.display_name
-                        });
-                    }
-                });
-                return response;
-              },
-              url: 'https://nominatim.openstreetmap.org/search?&addressdetails=1&format=json&q={query}'
-              // url: 'https://api.github.com/search/repositories?q={query}'
-            },
-            fields: {
-              results: 'results',
-              title: 'title',
-              description: "description",
-              url: false
-            },
-            minCharacters : 3,
-            onResults: function(results) {
-                console.log(results);
-            }
-        });
+        this._carFeedPointSearchBox = new SearchBox(this._addOrderFormElement.find(".search.carFeedPoint"));
+        this._destinationSearchBox = new SearchBox(this._addOrderFormElement.find(".search.destination"));
         this._isSetDriverAutomaticallyChecked = false;
         this._addOrderFormElement.find('.submit').click(this._onAddOrderFormSubmit.bind(this));
     }
