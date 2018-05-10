@@ -4,10 +4,13 @@ class AddCarForm {
         this._addCarFormElement.find(".submit").click(this._onAddCarFormSubmit.bind(this));
         this._addCarFormConstraints = {
             stateCarNumber: {
-                presence: {message: "^is required when using AMEX"},
+                presence: {
+                    message: "^Пожалуйста, заполните поле 'Гос. номер'"
+                },
                 length: {
-                    minimum: 3,
-                    message: "^Lengthghghghhhg"
+                    minimum: 5,
+                    maximun: 15,
+                    message: "^Номер автомобиля должен состоять максимум из 15 символов и минимум из 5"
                 }
             }
         };
