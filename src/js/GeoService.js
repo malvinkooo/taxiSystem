@@ -5,15 +5,15 @@ class GeoService {
     }
 
     static getAddressHint(query, callback) {
-    	$.ajax({
-    		url: "https://nominatim.openstreetmap.org/search",
-    		data: {
-    			addressdetails: 1,
-    			format: "json",
-    			q: "одесса " + query
-    		},
-    		success: function(openstreetmapResponse){
-    			var response = {
+        $.ajax({
+            url: "https://nominatim.openstreetmap.org/search",
+            data: {
+                addressdetails: 1,
+                format: "json",
+                q: "одесса " + query
+            },
+            success: function(openstreetmapResponse){
+                var response = {
                     results: []
                 };
                 $.each(openstreetmapResponse, function(index, item){
@@ -24,8 +24,8 @@ class GeoService {
                         });
                     }
                 });
-    			callback(response);
-    		}
-    	});
+                callback(response);
+            }
+        });
     }
 }

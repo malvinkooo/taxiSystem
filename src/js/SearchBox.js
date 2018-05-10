@@ -9,7 +9,7 @@ class SearchBox {
             fields: {
               results: 'results',
               title: 'title',
-              description: "description",
+              description: 'description',
               url: false
             },
             minCharacters : 3
