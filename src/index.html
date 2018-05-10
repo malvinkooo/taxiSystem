@@ -227,13 +227,15 @@
                             </div>
                         </div>
                         <div class="fields two">
-                            <div class="field">
+                            <div class="field ui search carFeedPoint">
                                 <label>Откуда</label>
-                                <input type="text" name="carFeedPoint" placeholder="Адрес подачи машины" data-getAttr="getCarFeedPoint">
+                                <input class="prompt" type="text" placeholder="Адрес подачи машины" name="carFeedPoint" data-getAttr="getCarFeedPoint">
+                                <div class="results"></div>
                             </div>
-                            <div class="field">
+                            <div class="field ui search destination">
                                 <label>Куда</label>
-                                <input type="text" name="destination" placeholder="Адрес назначения" data-getAttr="getDestination">
+                                <input class="prompt" type="text" placeholder="Адрес назначения" name="destination" data-getAttr="getDestination">
+                                <div class="results"></div>
                             </div>
                         </div>
                         <div class="fields two">
@@ -276,13 +278,15 @@
                         </div>
                     </div>
                     <div class="fields three">
-                        <div class="field">
-                            <label>Откуда</label>
-                            <input type="text" name="carFeedPoint" placeholder="Адрес подачи машины">
+                        <div class="field ui search carFeedPoint">
+                                <label>Откуда</label>
+                                <input class="prompt" type="text" placeholder="Адрес подачи машины" name="carFeedPoint">
+                                <div class="results"></div>
                         </div>
-                        <div class="field">
-                            <label>Куда</label>
-                            <input type="text" name="destination" placeholder="Адрес назначения">
+                        <div class="field ui search destination">
+                                <label>Куда</label>
+                                <input class="prompt" type="text" placeholder="Адрес назначения" name="destination">
+                                <div class="results"></div>
                         </div>
                         <div class="field">
                             <label>Тариф</label>
@@ -627,9 +631,10 @@
                                 <label>Телефон</label>
                                 <input type="text" name="phone" placeholder="Телефон" class="phone" data-getAttr="getPhone">
                             </div>
-                            <div class="field">
+                            <div class="field ui search currentLocation">
                                 <label>Текущее место пребывания</label>
-                                <input type="text" name="currentLocation" placeholder="Текущее место пребывания" data-getAttr="getCurrentLocation">
+                                <input class="prompt" type="text" placeholder="Текущее место пребывания" name="currentLocation" data-getAttr="getCurrentLocation">
+                                <div class="results"></div>
                             </div>
                         </div>
                         <div class="field">
@@ -743,6 +748,7 @@
     <script src="js/OrdersController.js"></script>
     <script src="js/CarsController.js"></script>
     <script src="js/DriversController.js"></script>
+    <script src="js/SearchBox.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

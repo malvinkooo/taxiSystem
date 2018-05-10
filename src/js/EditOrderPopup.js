@@ -3,6 +3,8 @@ class EditOrderPopup {
         this._ordersController = null;
         this._lastOrder = null;
         this._editOrderPopupElement = editOrderPopupElement;
+        this._carFeedPointSearchBox = new SearchBox(this._editOrderPopupElement.find(".search.carFeedPoint"));
+        this._destinationSearchBox = new SearchBox(this._editOrderPopupElement.find(".search.destination"));
         this._statusListSelect = this._editOrderPopupElement.find("select.status-list");
         var statusList = OrderStatus.statusList;
         for (var i = 0; i < statusList.length; i++) {
@@ -31,6 +33,7 @@ class EditOrderPopup {
             var getAttr = $(elements[i]).attr("data-getAttr");
             $(elements[i]).val(order[getAttr]());
         }
+        this._editOrderPopupElement.find("[data-getattr='getId']").html(order.getId());
         this._statusListSelect.dropdown('set selected', order.getStatus());
 
         this._driversListSelect.html("");

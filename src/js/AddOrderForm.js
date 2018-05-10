@@ -6,6 +6,8 @@ class AddOrderForm {
             onChecked: this._onSetDriverAutomaticallyChecked.bind(this),
             onUnchecked: this._onSetDriverAutomaticallyUnchecked.bind(this)
         });
+        this._carFeedPointSearchBox = new SearchBox(this._addOrderFormElement.find(".search.carFeedPoint"));
+        this._destinationSearchBox = new SearchBox(this._addOrderFormElement.find(".search.destination"));
         this._isSetDriverAutomaticallyChecked = false;
         this._addOrderFormElement.find('.submit').click(this._onAddOrderFormSubmit.bind(this));
     }
