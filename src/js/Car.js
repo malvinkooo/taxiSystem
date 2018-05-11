@@ -3,7 +3,7 @@ class Car {
     constructor(id, carParams) {
         this._id = id;
         this._stateCarNumber = carParams.stateCarNumber;
-        this._gasolineConsumptionRatio = Number.parseInt(carParams.gasolineConsumptionRatio);
+        this._gasolineConsumptionRatio = Number.parseFloat(carParams.gasolineConsumptionRatio);
         this._brand = carParams.brand;
         this._description = carParams.description;
     }
@@ -29,7 +29,7 @@ class Car {
     }
 
     setGasolineConsumptionRatio(gasolineConsumptionRatio) {
-    	this._gasolineConsumptionRatio = Number.parseInt(gasolineConsumptionRatio);
+    	this._gasolineConsumptionRatio = Number.parseFloat(gasolineConsumptionRatio);
     }
 
     getBrand() {
