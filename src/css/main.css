@@ -48,3 +48,14 @@
 .displayDriverModal .ui.horizontal.segments {
 	width: 100%;
 }
+.field.has-error input,
+.field.has-error textarea {
+	border: 1px solid rgb(240, 10, 10) !important;
+}
+.field.has-error .help-error {
+	color: rgb(240, 10, 10);
+	padding-left: 10px;
+}
+.ui.cards>.card {
+	width: 100%;
+}
