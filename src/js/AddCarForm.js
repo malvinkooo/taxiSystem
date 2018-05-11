@@ -5,12 +5,40 @@ class AddCarForm {
         this._addCarFormConstraints = {
             stateCarNumber: {
                 presence: {
-                    message: "^Пожалуйста, заполните поле 'Гос. номер'"
+                    message: "^Пожалуйста, заполните поле."
                 },
                 length: {
                     minimum: 5,
-                    maximun: 15,
-                    message: "^Номер автомобиля должен состоять максимум из 15 символов и минимум из 5"
+                    maximum: 15,
+                    message: "^Номер автомобиля должен состоять максимум из 15 символов и минимум из 5."
+                }
+            },
+            brand: {
+                presence: {
+                    message: "^Пожалуйста, заполните поле."
+                },
+                length: {
+                    minimum: 3,
+                    maximum: 50,
+                    message: "^Марка автомобиля должен состоять максимум из 50 символов и минимум из 4."
+                }
+            },
+            gasolineConsumptionRatio: {
+                presence: {
+                    message: "^Пожалуйста, заполните поле."
+                },
+                numericality: {
+                    onlyInteger: {
+                        message: "^Допустимы только числа."
+                    },
+                    greaterThanOrEqualTo: 0,
+                    message: "^Отрицательное значение недопустимо."
+                }
+            },
+            description: {
+                length: {
+                    maximum: 255,
+                    message: "^Количество символов не должно быть больше 255."
                 }
             }
         };
@@ -23,14 +51,27 @@ class AddCarForm {
     _onAddCarFormSubmit() {
         var carsParams = {};
         var elements = this._addCarFormElement.find("input, textarea");
-        for(var i = 0; i < elements.length; i++) {
-            var element = $(elements[i]);
-            carsParams[element.attr("name")] = element.val();
-        }
+
         var form = this._addCarFormElement.find("form")[0];
         var errors = validate(form, this._addCarFormConstraints);
-        console.log(errors);
-        // this._carsController.addCar(carsParams);
-        // this._addCarFormElement.find("form")[0].reset();
+
+        for(var k = 0; k < elements.length; k++){
+            var field = $(elements[k]).closest(".field");
+            field.removeClass("has-error");
+            field.find(".help-error").remove();
+            if(errors){
+                var errorsInput = errors[$(elements[k]).attr("name")];
+                if(errorsInput){
+                    field.addClass("has-error").append("<p class='help-error'>"+errorsInput+"</p>");
+                }
+            } else {
+                carsParams[$(elements[k]).attr("name")] = $(elements[k]).val();
+            }
+        }
+        if(!errors) {
+             console.log(carsParams);
+            this._carsController.addCar(carsParams);
+            this._addCarFormElement.find("form")[0].reset();
+        }
     }
 }
