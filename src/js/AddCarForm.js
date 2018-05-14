@@ -53,9 +53,7 @@ class AddCarForm {
             carsParams[element.attr("name")] = element.val();
         }
 
-        var form = this._addCarFormElement.find("form")[0];
         var errors = validate(carsParams, this._addCarFormConstraints);
-
         for(var k = 0; k < elements.length; k++){
             var field = $(elements[k]).closest(".field");
             field.removeClass("has-error");
