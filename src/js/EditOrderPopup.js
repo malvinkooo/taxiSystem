@@ -16,6 +16,63 @@ class EditOrderPopup {
         this._driversListSelect = this._editOrderPopupElement.find("select.drivers-list");
         this._statusListSelect.dropdown({showOnFocus: false});
         this._editOrderPopupElement.find(".submit").click(this._onEditFormSubmit.bind(this));
+        this._editOrderFormConstraints = {
+            clientName: {
+                presence: {
+                    allowEmpty: false,
+                    message: "^Пожалуйста, заполните это поле."
+                },
+                format: {
+                    pattern: /[А-Яа-я-ёЁ]*/,
+                    message: "^Имя может состоять только из букв."
+                },
+                length: {
+                    minimum: 2,
+                    maximum: 30,
+                    message: "^Имя должно состоять максимум из 30 символов и минимум из 2."
+                }
+            },
+            clientPhone: {
+                presence: {
+                    allowEmpty: false,
+                    message: "^Это поле обязательно для заполнения."
+                },
+                format: {
+                    pattern: /^\+?(\d+(\#\d+)?){1,30}/,
+                    message: "^Номер телефона не может превышать 30 символов и должен состоять только из цифр."
+                }
+            },
+            carFeedPoint: {
+                presence: {
+                    allowEmpty: false,
+                    message: "^Пожалуйста, заполните это поле."
+                },
+                length: {
+                    maximum: 50,
+                    message: "^Адрес может состоять максимум из 50 символов"
+                }
+            },
+            destination: {
+                presence: {
+                    allowEmpty: false,
+                    message: "^Пожалуйста, заполните это поле."
+                },
+                length: {
+                    maximum: 50,
+                    message: "^Адрес может состоять максимум из 50 символов"
+                }
+            },
+            rate: {
+                presence: {
+                    allowEmpty: false,
+                    message: "^Пожалуйста, заполните поле."
+                },
+                numericality: {
+                    greaterThanOrEqualTo: 0,
+                    message: "^Допустимы только положительные числа."
+                }
+            }
+        };
     }
 
     setOrdersController(ordersController) {
@@ -60,6 +117,21 @@ class EditOrderPopup {
         } else if(orderParams['status'] !== OrderStatus.COMPLETED) {
             orderParams['dateOfCompletion'] = '-';
         }
-        this._ordersController.editOrder(orderParams);
+        var errors = validate(orderParams, this._editOrderFormConstraints);
+        for( var k = 0; k < elements.length; k++) {
+            var field = $(elements[k]).closest(".field");
+            field.removeClass("has-error");
+            field.find(".help-error").remove();
+            if(errors) {
+                var errorsInput = errors[$(elements[k]).attr("name")];
+                if(errorsInput) {
+                    field.addClass("has-error").append("<p class='help-error'>"+errorsInput+"</p>");
+                }
+            }
+        }
+        if(!errors) {
+            this._ordersController.editOrder(orderParams);
+            this._editOrderPopupElement.find("form")[0].reset();
+        }
     }
 }
