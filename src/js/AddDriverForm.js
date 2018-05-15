@@ -72,7 +72,6 @@ class AddDriverForm{
         var errors = validate(driverParams, this._addDriverFormConstraints);
         for(var k = 0; k < elements.length; k++) {
             var field = $(elements[k]).closest(".field");
-            console.log(field);
             field.removeClass("has-error");
             field.find(".help-error").remove();
             if(errors) {
