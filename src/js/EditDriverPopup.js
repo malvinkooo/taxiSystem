@@ -16,6 +16,7 @@ class EditDriverPopup {
         }
         this._statusListSelectElement.dropdown({showOnFocus: false});
         this._editDriverPopupElement.find(".submit").click(this._onEditFormSubmit.bind(this));
+        this._editDriverPopupConstraints = Validation.getEditDriverConstraints();
     }
 
     setCarsController(carsController) {
@@ -56,6 +57,21 @@ class EditDriverPopup {
         for (var i = 0; i < elements.length; i++) {
             driverParams[$(elements[i]).attr('name')] = $(elements[i]).val();
         }
-        this._driversController.editDriver(driverParams);
+        var errors = validate(driverParams, this._editDriverPopupConstraints);
+        for(var k = 0; k < elements.length; k++) {
+            var field = $(elements[k]).closest(".field");
+            field.removeClass("has-error");
+            field.find(".help-error").remove();
+            if(errors) {
+                var errorsInput = errors[$(elements[k]).attr("name")];
+                if(errorsInput) {
+                    field.addClass("has-error").append("<p class='help-error'>"+errorsInput+"</p>");
+                }
+            }
+        }
+        if(!errors) {
+            this._driversController.editDriver(driverParams);
+            this._editDriverPopupElement.find("form")[0].reset();
+        }
     }
 }

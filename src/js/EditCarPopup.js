@@ -3,6 +3,7 @@ class EditCarPopup {
         this._editCarPopupElement = editCarPopupElement;
         this._lastCarId = null;
         this._editCarPopupElement.find(".submit").click(this._onEditFormSubmit.bind(this));
+        this._editCarFormConstraints = Validation.getCarConstraints();
     }
 
     setCarsController(carsController) {
@@ -30,6 +31,21 @@ class EditCarPopup {
             var element = $(elements[i]);
             carParams[element.attr("name")] = element.val();
         }
-        this._carsController.editCar(carParams);
+        var errors = validate(carParams, this._editCarFormConstraints);
+        for(var k = 0; k < elements.length; k++) {
+            var field = $(elements[k]).closest(".field");
+            field.removeClass("has-error");
+            field.find(".help-error").remove();
+            if(errors) {
+                var errorsInput = errors[$(elements[k]).attr("name")];
+                if(errorsInput) {
+                    field.addClass("has-error").append("<p class='help-error'>"+errorsInput+"</p>");
+                }
+            }
+        }
+        if(!errors) {
+            this._carsController.editCar(carParams);
+            this._editCarPopupElement.find("form")[0].reset();
+        }
     }
 }

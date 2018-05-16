@@ -10,6 +10,7 @@ class AddOrderForm {
         this._destinationSearchBox = new SearchBox(this._addOrderFormElement.find(".search.destination"));
         this._isSetDriverAutomaticallyChecked = false;
         this._addOrderFormElement.find('.submit').click(this._onAddOrderFormSubmit.bind(this));
+        this._addOrderFormConstraints = Validation.getOrderConstraints();
     }
 
     setOrdersController(ordersController) {
@@ -27,9 +28,22 @@ class AddOrderForm {
             orderParams[$(elements[i]).attr('name')] = $(elements[i]).val();
         }
         orderParams.isSetDriverAutomatically = this._isSetDriverAutomaticallyChecked;
-        this._ordersController.addOrder(orderParams);
-        this._addOrderFormElement.find('form')[0].reset();
-        return false;
+        var errors = validate(orderParams, this._addOrderFormConstraints);
+        for(var k = 0; k < elements.length; k++) {
+            var field = $(elements[k]).closest(".field");
+            field.removeClass("has-error");
+            field.find(".help-error").remove();
+            if(errors) {
+                var errorsInput = errors[$(elements[k]).attr("name")];
+                if(errorsInput) {
+                    field.addClass("has-error").append("<p class='help-error'>"+errorsInput+"</p>");
+                }
+            }
+        }
+        if(!errors) {
+            this._ordersController.addOrder(orderParams);
+            this._addOrderFormElement.find('form')[0].reset();
+        }
     }
 
     show() {
