@@ -3,43 +3,7 @@ class EditCarPopup {
         this._editCarPopupElement = editCarPopupElement;
         this._lastCarId = null;
         this._editCarPopupElement.find(".submit").click(this._onEditFormSubmit.bind(this));
-        this._editCarFormConstraints = {
-            stateCarNumber: {
-                presence: {
-                    message: "^Пожалуйста, заполните поле."
-                },
-                length: {
-                    minimum: 5,
-                    maximun: 15,
-                    message: "^Номер автомобиля должен состоять максимум из 15 символов и минимум из 5."
-                }
-            },
-            brand: {
-                presence: {
-                    message: "^Пожалуйста, заполните поле."
-                },
-                length: {
-                    minimum: 3,
-                    maximum: 50,
-                    message: "^Марка автомобиля должна состоять максимум из 50 символов и минимум из 4."
-                }
-            },
-            gasolineConsumptionRatio: {
-                presence: {
-                    message: "^Пожалуйста, заполните поле."
-                },
-                numericality: {
-                    greaterThanOrEqualTo: 0,
-                    message: "^Допустимы только положительные числа."
-                }
-            },
-            description: {
-                length: {
-                    maximum: 255,
-                    message: "^Количество символов не должно быть больше 255."
-                }
-            }
-        };
+        this._editCarFormConstraints = Validation.getCarConstraints();
     }
 
     setCarsController(carsController) {

@@ -5,42 +5,7 @@ class AddDriverForm{
         this._carsController = null;
         this._selectDropDown = this._addDriverFormElement.find("select.cars-list");
         this._addDriverFormElement.find(".submit").click(this._onAddDriverFormSubmit.bind(this));
-        this._addDriverFormConstraints = {
-            name: {
-                format: {
-                    pattern: /[А-Яа-я-ёЁ]+/,
-                    message: "^Пожалуйста, заполните это поле. Имя может состоять только из букв."
-                },
-                length: {
-                    minimum: 2,
-                    maximum: 30,
-                    message: "^Имя должно состоять максимум из 30 символов и минимум из 2."
-                }
-            },
-            surname: {
-                format: {
-                    pattern: /[А-Яа-я-ёЁ]+/,
-                    message: "^Пожалуйста, заполните это поле. Фамилия может состоять только из букв."
-                },
-                length: {
-                    minimum: 2,
-                    maximum: 30,
-                    message: "^Фамилия должна состоять максимум из 30 символов и минимум из 2."
-                }
-            },
-            phone: {
-                format: {
-                    pattern: /^\+?(\d+(\#\d+)?){1,30}/,
-                    message: "^Это поле обязательно для заполнения. Номер телефона не может превышать 30 символов и должен состоять только из цифр."
-                }
-            },
-            description: {
-                length: {
-                    maximum: 255,
-                    message: "^Количество символов не должно быть больше 255."
-                }
-            }
-        };
+        this._addDriverFormConstraints = Validation.getAddDriverConstraints();
     }
 
     setDriversController(driversController) {
