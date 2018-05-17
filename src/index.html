@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Taxi System</title>
     <link rel="stylesheet" type="text/css" href="libs/semantic/semantic.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
     <link rel="stylesheet" href="css/main.css">
 </head>
 
@@ -720,10 +721,20 @@
     </div>
 </div>
 <!-- delete driver popup -->
+<!-- map -->
+<div class="ui modal small map">
+    <i class="close icon"></i>
+    <div class="header">Header</div>
+    <div class="content">
+        <div id="map"></div>
+    </div>
+</div>
+<!-- map -->
     <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
      crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.12.0/validate.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
     <script src="libs/semantic/semantic.min.js"></script>
     <script src="js/QuestionMessageBox.js"></script>
     <script src="js/MainMenu.js"></script>
@@ -755,6 +766,7 @@
     <script src="js/DriversController.js"></script>
     <script src="js/SearchBox.js"></script>
     <script src="js/Validation.js"></script>
+    <script src="js/MapPopup.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

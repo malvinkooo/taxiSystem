@@ -11,6 +11,8 @@ class AddOrderForm {
         this._isSetDriverAutomaticallyChecked = false;
         this._addOrderFormElement.find('.submit').click(this._onAddOrderFormSubmit.bind(this));
         this._addOrderFormConstraints = Validation.getOrderConstraints();
+        this._addOrderFormElement.find(".map.marker").click(this._onShowMapClick.bind(this));
+        this._map = new MapPopup($(".map"));
     }
 
     setOrdersController(ordersController) {
@@ -67,5 +69,9 @@ class AddOrderForm {
     _onSetDriverAutomaticallyUnchecked() {
         this._isSetDriverAutomaticallyChecked = false;
         this._selectDropDown.closest(".selection").removeClass("disabled");
+    }
+
+    _onShowMapClick() {
+        this._map.show();
     }
 }
