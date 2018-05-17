@@ -12,7 +12,7 @@ class AddOrderForm {
         this._addOrderFormElement.find('.submit').click(this._onAddOrderFormSubmit.bind(this));
         this._addOrderFormConstraints = Validation.getOrderConstraints();
         this._addOrderFormElement.find(".map.marker").click(this._onShowMapClick.bind(this));
-        this._map = new MapPopup($(".map"));
+        this._map = new MapPopup($(".map.modal"));
     }
 
     setOrdersController(ordersController) {

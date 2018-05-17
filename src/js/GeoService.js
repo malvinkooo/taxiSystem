@@ -28,4 +28,23 @@ class GeoService {
             }
         });
     }
+
+    static getAddress(latlng, callback) {
+        console.log(latlng);
+        $.ajax({
+            url: "https://api.openrouteservice.org/geocode/reverse",
+            data: {
+                'api_key': "58d904a497c67e00015b45fc4c4016bdef0646d88f5c9612c3ac2bff",
+                'point.lat': latlng.lat,
+                'point.lon': latlng.lng,
+                'layers': "address",
+                'size': 1
+            },
+            success: function(data) {
+                if(!data.features[0].properties.street)
+                var address = data.features[0].properties.street + ", " + data.features[0].properties.housenumber;
+                callback(address);
+            }
+        });
+    }
 }
