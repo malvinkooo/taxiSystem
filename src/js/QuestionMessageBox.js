@@ -12,7 +12,7 @@ class QuestionMessageBox {
         this._questionMessageBoxElement.modal({
             onApprove: acceptCallback,
             onDeny: rejectCallback
-        });       
+        });
         this._questionMessageBoxElement.modal("show");
     }
 }

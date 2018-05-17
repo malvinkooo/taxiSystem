@@ -72,6 +72,10 @@ class AddOrderForm {
     }
 
     _onShowMapClick() {
-        this._map.show();
+        this._map.show(function(){
+            console.log("Popup Opened");
+        }, function(){
+            console.log("Popup closed");
+        });
     }
 }

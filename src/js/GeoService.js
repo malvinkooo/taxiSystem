@@ -30,7 +30,6 @@ class GeoService {
     }
 
     static getAddress(latlng, callback) {
-        console.log(latlng);
         $.ajax({
             url: "https://api.openrouteservice.org/geocode/reverse",
             data: {
@@ -41,8 +40,12 @@ class GeoService {
                 'size': 1
             },
             success: function(data) {
-                if(!data.features[0].properties.street)
-                var address = data.features[0].properties.street + ", " + data.features[0].properties.housenumber;
+                var address;
+                if(!data.features[0].properties.street) {
+                    address = data.features[0].properties.street + ", " + data.features[0].properties.housenumber;
+                } else {
+                    address = data.features[0].properties.name;
+                }
                 callback(address);
             }
         });

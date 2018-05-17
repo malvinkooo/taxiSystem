@@ -14,7 +14,9 @@ class MapPopup {
         this._currentMarker;
     }
 
-    show() {
+    show(acceptCallback, rejectCallback) {
+        this._mapPopupelement.modal('attach events', ".positive.button", acceptCallback);
+        this._mapPopupelement.modal('attach events', ".deny.button", rejectCallback);
         this._mapPopupelement.modal("show");
     }
 
