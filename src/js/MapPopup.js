@@ -1,6 +1,9 @@
 class MapPopup {
     constructor(mapPopupElement) {
         this._mapPopupelement = mapPopupElement;
+        this._mapPopupelement.find(".header").click((function(){
+            console.log(this._currentAddress);
+        }).bind(this));
         this._currentMarker;
         this._currentAddress;
         this._map = L.map('map').setView([46.4880795, 30.7410718], 18);
@@ -12,9 +15,12 @@ class MapPopup {
                 this._map.invalidateSize();
             }).bind(this),
             onHidden: (function(){
-                // this._currentAddress = null;
-                // this._currentMarker.remove();
-                // this._currentMarker = null;
+                if(this._currentMarker) {
+                    this._currentAddress = null;
+                    this._currentMarker.remove();
+                    this._currentMarker = null;
+                    this._mapPopupelement.find(".address").html("Пожалуйста, выберите адрес.");
+                }
             }).bind(this)
         });
         this._map.on("click", this._onMapClick.bind(this));
@@ -22,7 +28,9 @@ class MapPopup {
 
     show(acceptCallback) {
         this._mapPopupelement
-            .modal("setting", "onApprove", acceptCallback.bind(null, this._currentAddress))
+            .modal("setting", "onApprove", (function(){
+                acceptCallback(this._currentAddress);
+            }).bind(this))
             .modal("show");
     }
 
@@ -33,7 +41,6 @@ class MapPopup {
             this._currentMarker.setLatLng(e.latlng);
         }
         GeoService.getAddress(e.latlng, (function(address){
-            console.log(address);
             this._currentAddress = address;
             this._mapPopupelement.find(".address").html(address);
         }).bind(this));
