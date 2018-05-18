@@ -11,8 +11,21 @@ class AddOrderForm {
         this._isSetDriverAutomaticallyChecked = false;
         this._addOrderFormElement.find('.submit').click(this._onAddOrderFormSubmit.bind(this));
         this._addOrderFormConstraints = Validation.getOrderConstraints();
-        this._addOrderFormElement.find(".map.marker").click(this._onShowMapClick.bind(this));
         this._map = new MapPopup($(".map.modal"));
+        this._addOrderFormElement
+            .find(".carFeedPoint .map.marker")
+            .click(this._onShowMapClick.bind(
+                this,
+                this._addOrderFormElement.find("input[name='carFeedPoint']")
+            )
+        );
+        this._addOrderFormElement
+            .find(".destination .map.marker")
+            .click(this._onShowMapClick.bind(
+                this,
+                this._addOrderFormElement.find("input[name='destination']")
+            )
+        );
     }
 
     setOrdersController(ordersController) {
@@ -71,11 +84,9 @@ class AddOrderForm {
         this._selectDropDown.closest(".selection").removeClass("disabled");
     }
 
-    _onShowMapClick() {
-        this._map.show(function(){
-            console.log("Popup Opened");
-        }, function(){
-            console.log("Popup closed");
+    _onShowMapClick(input) {
+        this._map.show(function(address){
+            input.val(address);
         });
     }
 }

@@ -41,7 +41,7 @@ class GeoService {
             },
             success: function(data) {
                 var address;
-                if(!data.features[0].properties.street) {
+                if(data.features[0].properties.street) {
                     address = data.features[0].properties.street + ", " + data.features[0].properties.housenumber;
                 } else {
                     address = data.features[0].properties.name;
