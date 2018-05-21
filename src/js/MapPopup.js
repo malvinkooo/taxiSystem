@@ -4,8 +4,8 @@ class MapPopup {
         this._mapPopupelement.find(".header").click((function(){
             console.log(this._currentAddress);
         }).bind(this));
-        this._currentMarker;
-        this._currentAddress;
+        this._currentMarker = null;
+        this._currentAddress = null;
         this._map = L.map('map').setView([46.4880795, 30.7410718], 18);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',

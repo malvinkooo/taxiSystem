@@ -1,5 +1,5 @@
 var ui = new UI();
-var geoService = new GeoService()
+var geoService = new GeoService();
 var ordersList = new OrdersList();
 var carsList = new CarsList();
 var driversList = new DriversList();
