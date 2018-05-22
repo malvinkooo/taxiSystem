@@ -271,11 +271,11 @@
                     <div class="fields two">
                         <div class="field">
                             <label>Имя</label>
-                            <input type="text" name="clientName" placeholder="Имя">
+                            <input type="text" name="clientName" placeholder="Имя" class="param">
                         </div>
                         <div class="field">
                             <label>Контактный номер</label>
-                            <input type="text" name="clientPhone" placeholder="Контактный номер">
+                            <input type="text" name="clientPhone" placeholder="Контактный номер" class="param">
                         </div>
                     </div>
                     <div class="fields three">
@@ -283,7 +283,9 @@
                                 <label>Откуда</label>
                                 <div class="ui icon input">
                                     <i class="map marker alternate icon link" title="Выбрать на карте"></i>
-                                    <input class="prompt" type="text" placeholder="Адрес подачи машины" name="carFeedPoint">
+                                    <input class="prompt param" type="text" placeholder="Адрес подачи машины" name="carFeedPoint">
+                                    <input type="hidden" name="carFeedPointLat" class="lat">
+                                    <input type="hidden" name="carFeedPointLng" class="lng">
                                 </div>
                                 <div class="results"></div>
                         </div>
@@ -291,13 +293,15 @@
                                 <label>Куда</label>
                                 <div class="ui icon input">
                                     <i class="map marker alternate icon link" title="Выбрать на карте"></i>
-                                    <input class="prompt" type="text" placeholder="Адрес назначения" name="destination">
+                                    <input class="prompt param" type="text" placeholder="Адрес назначения" name="destination">
+                                    <input type="hidden" name="destinationLat" class="lat">
+                                    <input type="hidden" name="destinationLng" class="lng">
                                 </div>
                                 <div class="results"></div>
                         </div>
                         <div class="field">
                             <label>Тариф</label>
-                            <input type="number" name="rate" min="1" step="0.1" placeholder="Цель" value="1">
+                            <input type="number" name="rate" min="1" step="0.1" placeholder="Цель" value="1" class="param">
                         </div>
                     </div>
                     <div class="fields two">

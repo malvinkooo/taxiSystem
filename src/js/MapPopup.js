@@ -5,7 +5,7 @@ class MapPopup {
             console.log(this._currentAddress);
         }).bind(this));
         this._currentMarker = null;
-        this._currentAddress = null;
+        this._currentAddress = {};
         this._map = L.map('map').setView([46.4880795, 30.7410718], 18);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -16,7 +16,7 @@ class MapPopup {
             }).bind(this),
             onHidden: (function(){
                 if(this._currentMarker) {
-                    this._currentAddress = null;
+                    this._currentAddress = {};
                     this._currentMarker.remove();
                     this._currentMarker = null;
                     this._mapPopupelement.find(".address").html("Пожалуйста, выберите адрес.");
@@ -28,9 +28,7 @@ class MapPopup {
 
     show(acceptCallback) {
         this._mapPopupelement
-            .modal("setting", "onApprove", (function(){
-                acceptCallback(this._currentAddress);
-            }).bind(this))
+            .modal("setting", "onApprove", acceptCallback.bind(this, this._currentAddress))
             .modal("show");
     }
 
@@ -40,8 +38,10 @@ class MapPopup {
         } else {
             this._currentMarker.setLatLng(e.latlng);
         }
+        this._currentAddress.lat = e.latlng.lat;
+        this._currentAddress.lng = e.latlng.lng;
         GeoService.getAddress(e.latlng, (function(address){
-            this._currentAddress = address;
+            this._currentAddress.address = address;
             this._mapPopupelement.find(".address").html(address);
         }).bind(this));
     }

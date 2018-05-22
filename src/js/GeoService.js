@@ -50,4 +50,19 @@ class GeoService {
             }
         });
     }
+
+    static getDistance(carFeedPointLatlng, destinationtLatlng, callback) {
+        $.ajax({
+            url: "https://api.openrouteservice.org/directions",
+            data: {
+                'api_key': "58d904a497c67e00015b45fc4c4016bdef0646d88f5c9612c3ac2bff",
+                'coordinates': carFeedPointLatlng+'|'+destinationtLatlng,
+                'profile': 'driving-car',
+                'units': 'm'
+            },
+            success: function(data) {
+                callback(data.routes[0].summary.distance);
+            }
+        });
+    }
 }

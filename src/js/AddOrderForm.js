@@ -16,14 +16,18 @@ class AddOrderForm {
             .find(".carFeedPoint .map.marker")
             .click(this._onShowMapClick.bind(
                 this,
-                this._addOrderFormElement.find("input[name='carFeedPoint']")
+                this._addOrderFormElement.find("input[name='carFeedPoint']"),
+                this._addOrderFormElement.find(".carFeedPoint input.lat"),
+                this._addOrderFormElement.find(".carFeedPoint input.lng")
             )
         );
         this._addOrderFormElement
             .find(".destination .map.marker")
             .click(this._onShowMapClick.bind(
                 this,
-                this._addOrderFormElement.find("input[name='destination']")
+                this._addOrderFormElement.find("input[name='destination']"),
+                this._addOrderFormElement.find(".destination input.lat"),
+                this._addOrderFormElement.find(".destination input.lng")
             )
         );
     }
@@ -38,7 +42,7 @@ class AddOrderForm {
 
     _onAddOrderFormSubmit() {
         var orderParams = {};
-        var elements = this._addOrderFormElement.find('input, select');
+        var elements = this._addOrderFormElement.find('input.param, select[name]');
         for(var i=0; i < elements.length; i++) {
             orderParams[$(elements[i]).attr('name')] = $(elements[i]).val();
         }
@@ -56,6 +60,12 @@ class AddOrderForm {
             }
         }
         if(!errors) {
+            orderParams.carFeedPointLatLng = [];
+            orderParams.carFeedPointLatLng.push(this._addOrderFormElement.find(".carFeedPoint input.lat").val());
+            orderParams.carFeedPointLatLng.push(this._addOrderFormElement.find(".carFeedPoint input.lng").val());
+            orderParams.destinationLatLng = [];
+            orderParams.destinationLatLng.push(this._addOrderFormElement.find(".destination input.lat").val());
+            orderParams.destinationLatLng.push(this._addOrderFormElement.find(".destination input.lng").val());
             this._ordersController.addOrder(orderParams);
             this._addOrderFormElement.find('form')[0].reset();
         }
@@ -84,9 +94,11 @@ class AddOrderForm {
         this._selectDropDown.closest(".selection").removeClass("disabled");
     }
 
-    _onShowMapClick(input) {
+    _onShowMapClick(inputAddress, inputLat, inputLng) {
         this._map.show(function(address){
-            input.val(address);
+            inputAddress.val(address.address);
+            inputLat.val(address.lat);
+            inputLng.val(address.lng);
         });
     }
 }

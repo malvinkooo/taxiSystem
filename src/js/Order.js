@@ -44,7 +44,7 @@ class Order {
         this._dateOfCompletion = "-";
         this._carFeedPoint = orderParams.carFeedPoint;
         this._destination = orderParams.destination;
-        this._distance = geoService.getDistance(this._carFeedPoint, this._destination);
+        this._distance = orderParams.distance;
         this._rate = orderParams.rate;
         this._id = id;
         this._status = OrderStatus.NEW_ORDER;
