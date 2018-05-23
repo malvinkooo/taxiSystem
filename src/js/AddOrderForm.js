@@ -60,12 +60,6 @@ class AddOrderForm {
             }
         }
         if(!errors) {
-            orderParams.carFeedPointLatLng = [];
-            orderParams.carFeedPointLatLng.push(this._addOrderFormElement.find(".carFeedPoint input.lat").val());
-            orderParams.carFeedPointLatLng.push(this._addOrderFormElement.find(".carFeedPoint input.lng").val());
-            orderParams.destinationLatLng = [];
-            orderParams.destinationLatLng.push(this._addOrderFormElement.find(".destination input.lat").val());
-            orderParams.destinationLatLng.push(this._addOrderFormElement.find(".destination input.lng").val());
             this._ordersController.addOrder(orderParams);
             this._addOrderFormElement.find('form')[0].reset();
         }

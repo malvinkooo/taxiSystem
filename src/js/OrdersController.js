@@ -17,7 +17,7 @@ class OrdersController {
             orderParams.driver = this._drivers.getDriver(orderParams.driver);
         }
         orderParams.driver.setStatus(DriverStatus.BUSY);
-        GeoService.getDistance(orderParams.carFeedPointLatLng, orderParams.destinationLatLng, (function(distance){
+        GeoService.getDistance([orderParams.carFeedPointLng, orderParams.carFeedPointLat], [orderParams.destinationLng, orderParams.destinationLat], (function(distance){
             orderParams.distance = distance;
             this._orders.addOrder(orderParams, geoService);
             var list = this._orders.getAllOrders();
