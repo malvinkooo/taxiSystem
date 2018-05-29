@@ -3,6 +3,7 @@ var geoService = new GeoService();
 var ordersList = new OrdersList();
 var carsList = new CarsList();
 var driversList = new DriversList();
+var decorator = new JQueryValDecorator();
 
 carsList.addCar({
     stateCarNumber: "4545445",

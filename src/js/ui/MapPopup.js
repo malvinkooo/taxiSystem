@@ -1,15 +1,14 @@
 class MapPopup {
-    constructor(mapPopupElement) {
-        this._mapPopupelement = mapPopupElement;
-        this._mapPopupelement.find(".header").click((function(){
-            console.log(this._currentAddress);
-        }).bind(this));
+    constructor() {
         this._currentMarker = null;
         this._currentAddress = {};
-        this._map = L.map('map').setView([46.4880795, 30.7410718], 18);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-        }).addTo(this._map);
+    }
+
+    _initPopup() {
+        $(".mapContainer").remove();
+        $($("#mapPopup").html()).appendTo('body');
+        var tmp = $("#mapPopup").html();
+        this._mapPopupelement = $(".mapContainer");
         this._mapPopupelement.modal({
             onVisible: (function(){
                 this._map.invalidateSize();
@@ -23,10 +22,20 @@ class MapPopup {
                 }
             }).bind(this)
         });
+        this._mapPopupelement.modal("show");
+    }
+
+    _initMap() {
+        this._map = L.map('map').setView([46.4880795, 30.7410718], 18);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(this._map);
         this._map.on("click", this._onMapClick.bind(this));
     }
 
     show(acceptCallback) {
+        this._initPopup();
+        this._initMap();
         this._mapPopupelement
             .modal("setting", "onApprove", acceptCallback.bind(this, this._currentAddress))
             .modal("show");

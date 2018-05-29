@@ -31,21 +31,21 @@ class Validation {
                 presence: {
                     allowEmpty: false,
                     message: "^Пожалуйста, заполните это поле."
-                },
+                }/*,
                 length: {
                     maximum: 50,
                     message: "^Адрес может состоять максимум из 50 символов"
-                }
+                }*/
             },
             destination: {
                 presence: {
                     allowEmpty: false,
                     message: "^Пожалуйста, заполните это поле."
-                },
+                }/*,
                 length: {
                     maximum: 50,
                     message: "^Адрес может состоять максимум из 50 символов"
-                }
+                }*/
             },
             rate: {
                 presence: {

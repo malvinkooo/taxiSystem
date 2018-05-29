@@ -44,7 +44,7 @@ class AddOrderForm {
         var orderParams = {};
         var elements = this._addOrderFormElement.find('input.param, select[name]');
         for(var i=0; i < elements.length; i++) {
-            orderParams[$(elements[i]).attr('name')] = $(elements[i]).val();
+            orderParams[$(elements[i]).attr('name')] = $(elements[i]).value();
         }
         orderParams.isSetDriverAutomatically = this._isSetDriverAutomaticallyChecked;
         var errors = validate(orderParams, this._addOrderFormConstraints);
@@ -60,8 +60,9 @@ class AddOrderForm {
             }
         }
         if(!errors) {
-            this._ordersController.addOrder(orderParams);
-            this._addOrderFormElement.find('form')[0].reset();
+            console.log(orderParams);
+            // this._ordersController.addOrder(orderParams);
+            // this._addOrderFormElement.find('form')[0].reset();
         }
     }
 
@@ -89,7 +90,8 @@ class AddOrderForm {
     }
 
     _onShowMapClick(inputAddress, inputLat, inputLng) {
-        this._map.show(function(address){
+        var mapPopup = new MapPopup();
+        mapPopup.show(function(address){
             inputAddress.val(address.address);
             inputLat.val(address.lat);
             inputLng.val(address.lng);
