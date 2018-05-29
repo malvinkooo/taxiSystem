@@ -1,7 +1,7 @@
 class MapPopup {
     constructor() {
         this._currentMarker = null;
-        this._currentAddress = {};
+        this._currentAddress = null;
     }
 
     _initPopup() {
@@ -33,11 +33,21 @@ class MapPopup {
         this._map.on("click", this._onMapClick.bind(this));
     }
 
-    show(acceptCallback) {
+    show(acceptCallback, address) {
         this._initPopup();
         this._initMap();
+        if(address && address.isValid()) {
+            this._currentAddress = address;
+            this._currentMarker = L.marker(address.getLatLng()).addTo(this._map);
+            this._map.setView(address.getLatLng(), 18);
+            this._mapPopupelement.find(".address").html(address.getText());
+        }
         this._mapPopupelement
-            .modal("setting", "onApprove", acceptCallback.bind(this, this._currentAddress))
+            .modal("setting", "onApprove", () => {
+                if(this._currentAddress) {
+                    acceptCallback(this._currentAddress);
+                }
+            })
             .modal("show");
     }
 
@@ -47,11 +57,9 @@ class MapPopup {
         } else {
             this._currentMarker.setLatLng(e.latlng);
         }
-        this._currentAddress.lat = e.latlng.lat;
-        this._currentAddress.lng = e.latlng.lng;
-        GeoService.getAddress(e.latlng, (function(address){
-            this._currentAddress.address = address;
-            this._mapPopupelement.find(".address").html(address);
+        GeoService.getAddress(e.latlng, (function(addressText){
+            this._currentAddress = new Address(addressText, e.latlng.lat, e.latlng.lng);
+            this._mapPopupelement.find(".address").html(addressText);
         }).bind(this));
     }
 }

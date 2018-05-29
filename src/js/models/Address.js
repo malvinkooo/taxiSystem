@@ -29,6 +29,10 @@ class Address {
     toString() {
         return this._text;
     }
+
+    isValid() {
+        return Boolean(this._text && (typeof this._lat == "number") && (typeof this._lng == "number"));
+    }
 }
 
 (function(global) {

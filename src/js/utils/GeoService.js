@@ -20,7 +20,9 @@ class GeoService {
                     if(item.address.road && item.address.house_number){
                         response.results.push({
                             title: item.address.road + ", " + item.address.house_number,
-                            description: item.display_name
+                            description: item.display_name,
+                            lng: item.lon,
+                            lat: item.lat
                         });
                     }
                 });
