@@ -17,12 +17,12 @@ class OrdersController {
             orderParams.driver = this._drivers.getDriver(orderParams.driver);
         }
         orderParams.driver.setStatus(DriverStatus.BUSY);
-        GeoService.getDistance([orderParams.carFeedPointLng, orderParams.carFeedPointLat], [orderParams.destinationLng, orderParams.destinationLat], (function(distance){
+        GeoService.getDistance(orderParams.carFeedPoint, orderParams.destination).then((distance) => {
             orderParams.distance = distance;
             this._orders.addOrder(orderParams, geoService);
             var list = this._orders.getAllOrders();
             this._ui.showOrdersList(list);
-        }).bind(this));
+        });
     }
 
     selectMenuItemAllOrders() {

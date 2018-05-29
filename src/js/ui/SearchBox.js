@@ -3,7 +3,11 @@ class SearchBox {
         this._searchSettings = {
             apiSettings: {
               responseAsync: function(settings, callback){
-                GeoService.getAddressHint(settings.urlData.query, callback);
+                GeoService.getAddressHint(settings.urlData.query)
+                    .then(callback)
+                    .catch((err) => {
+                      console.log(err);
+                    });
               },
             },
             fields: {

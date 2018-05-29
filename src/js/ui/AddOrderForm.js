@@ -71,9 +71,8 @@ class AddOrderForm {
             }
         }
         if(!errors) {
-            console.log(orderParams);
-            // this._ordersController.addOrder(orderParams);
-            // this._addOrderFormElement.find('form')[0].reset();
+            this._ordersController.addOrder(orderParams);
+            this._addOrderFormElement.find('form')[0].reset();
         }
     }
 
