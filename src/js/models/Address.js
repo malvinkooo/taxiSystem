@@ -31,7 +31,7 @@ class Address {
     }
 
     isValid() {
-        return Boolean(this._text && (typeof this._lat == "number") && (typeof this._lng == "number"));
+        return Boolean(this._text && (typeof this._lat == "number" && !isNaN(this._lat)) && (typeof this._lng == "number" && !isNaN(this._lng)));
     }
 }
 

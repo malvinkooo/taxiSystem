@@ -17,6 +17,12 @@ class SearchBox {
               url: false
             },
             minCharacters : 3,
+            text: {
+              noResults: {
+                header: 'Упс...',
+                message: 'Не найдено ни одного адреса.'
+              }
+            },
             onSelect: (result) => {
               var address =  new Address(result.title, result.lat, result.lng);
               if(this._handler) {

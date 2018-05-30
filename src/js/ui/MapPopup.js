@@ -15,7 +15,7 @@ class MapPopup {
             }).bind(this),
             onHidden: (function(){
                 if(this._currentMarker) {
-                    this._currentAddress = {};
+                    this._currentAddress = null;
                     this._currentMarker.remove();
                     this._currentMarker = null;
                     this._mapPopupelement.find(".address").html("Пожалуйста, выберите адрес.");

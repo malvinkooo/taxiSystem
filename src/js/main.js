@@ -5,6 +5,12 @@ var carsList = new CarsList();
 var driversList = new DriversList();
 var decorator = new JQueryValDecorator();
 
+validate.validators.address = function(value, options) {
+    if(!value.isValid()) {
+        return options.message;
+    }
+}
+
 carsList.addCar({
     stateCarNumber: "4545445",
     brand: "Nissan",
