@@ -7,7 +7,18 @@ class AddOrderForm {
             onUnchecked: this._onSetDriverAutomaticallyUnchecked.bind(this)
         });
         this._carFeedPointSearchBox = new SearchBox(this._addOrderFormElement.find(".search.carFeedPoint"));
+        this._carFeedPointSearchBox.onSelect((address) => {
+            this._addOrderFormElement.find("input[name='carFeedPoint']").val(address.getText());
+            this._addOrderFormElement.find(".carFeedPoint input.lat").val(address.getLat());
+            this._addOrderFormElement.find(".carFeedPoint input.lng").val(address.getLng());
+        });
+
         this._destinationSearchBox = new SearchBox(this._addOrderFormElement.find(".search.destination"));
+        this._destinationSearchBox.onSelect((address) => {
+            this._addOrderFormElement.find("input[name='destination']").val(address.getText());
+            this._addOrderFormElement.find(".destination input.lat").val(address.getLat());
+            this._addOrderFormElement.find(".destination input.lng").val(address.getLng());
+        });
         this._isSetDriverAutomaticallyChecked = false;
         this._addOrderFormElement.find('.submit').click(this._onAddOrderFormSubmit.bind(this));
         this._addOrderFormConstraints = Validation.getOrderConstraints();
@@ -16,14 +27,18 @@ class AddOrderForm {
             .find(".carFeedPoint .map.marker")
             .click(this._onShowMapClick.bind(
                 this,
-                this._addOrderFormElement.find("input[name='carFeedPoint']")
+                this._addOrderFormElement.find("input[name='carFeedPoint']"),
+                this._addOrderFormElement.find(".carFeedPoint input.lat"),
+                this._addOrderFormElement.find(".carFeedPoint input.lng")
             )
         );
         this._addOrderFormElement
             .find(".destination .map.marker")
             .click(this._onShowMapClick.bind(
                 this,
-                this._addOrderFormElement.find("input[name='destination']")
+                this._addOrderFormElement.find("input[name='destination']"),
+                this._addOrderFormElement.find(".destination input.lat"),
+                this._addOrderFormElement.find(".destination input.lng")
             )
         );
     }
@@ -38,9 +53,9 @@ class AddOrderForm {
 
     _onAddOrderFormSubmit() {
         var orderParams = {};
-        var elements = this._addOrderFormElement.find('input, select');
+        var elements = this._addOrderFormElement.find('input.param, select[name]');
         for(var i=0; i < elements.length; i++) {
-            orderParams[$(elements[i]).attr('name')] = $(elements[i]).val();
+            orderParams[$(elements[i]).attr('name')] = $(elements[i]).value();
         }
         orderParams.isSetDriverAutomatically = this._isSetDriverAutomaticallyChecked;
         var errors = validate(orderParams, this._addOrderFormConstraints);
@@ -84,9 +99,12 @@ class AddOrderForm {
         this._selectDropDown.closest(".selection").removeClass("disabled");
     }
 
-    _onShowMapClick(input) {
-        this._map.show(function(address){
-            input.val(address);
-        });
+    _onShowMapClick(inputAddress, inputLat, inputLng) {
+        var mapPopup = new MapPopup();
+        mapPopup.show(function(address){
+            inputAddress.val(address.getText());
+            inputLat.val(address.getLat());
+            inputLng.val(address.getLng());
+        }, inputAddress.value());
     }
 }

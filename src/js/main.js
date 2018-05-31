@@ -3,6 +3,13 @@ var geoService = new GeoService();
 var ordersList = new OrdersList();
 var carsList = new CarsList();
 var driversList = new DriversList();
+var decorator = new JQueryValDecorator();
+
+validate.validators.address = function(value, options) {
+    if(!value.isValid()) {
+        return options.message;
+    }
+}
 
 carsList.addCar({
     stateCarNumber: "4545445",
@@ -48,17 +55,19 @@ ordersList.addOrder({
     clientName: 'Hlieb',
     driver: driversList.getDriver(0),
     clientPhone: '904820983423',
-    carFeedPoint: 'Сухой Лиман',
-    destination: 'Поселок Котовского',
-    rate: 1
+    carFeedPoint: 'Приморський бульвар, 8',
+    destination: 'Катерининська площа, 4',
+    rate: 1,
+    distance: 39.7
 }, geoService);
 ordersList.addOrder({
     clientName: 'Лена',
     driver: driversList.getDriver(1),
     clientPhone: '872498742',
-    carFeedPoint: 'Поселок Котовского',
-    destination: 'Сухой Лиман',
-    rate: 1.5
+    carFeedPoint: 'Приморський бульвар, 8',
+    destination: 'Катерининська площа, 4',
+    rate: 1,
+    distance: 39.7
 }, geoService);
 driversList.getDriver(0).setStatus(DriverStatus.BUSY);
 driversList.getDriver(1).setStatus(DriverStatus.BUSY);
