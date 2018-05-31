@@ -32,9 +32,8 @@ class Validation {
                     allowEmpty: false,
                     message: "^Пожалуйста, заполните это поле."
                 },
-                length: {
-                    maximum: 50,
-                    message: "^Адрес может состоять максимум из 50 символов"
+                address: {
+                    message: "^Извините, мы не можем найти указанный адрес. Попробуйте снова."
                 }
             },
             destination: {
@@ -42,9 +41,8 @@ class Validation {
                     allowEmpty: false,
                     message: "^Пожалуйста, заполните это поле."
                 },
-                length: {
-                    maximum: 50,
-                    message: "^Адрес может состоять максимум из 50 символов"
+                address: {
+                    message: "^Извините, мы не можем найти указанный адрес. Попробуйте снова."
                 }
             },
             rate: {

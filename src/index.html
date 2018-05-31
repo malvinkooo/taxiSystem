@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Taxi System</title>
     <link rel="stylesheet" type="text/css" href="libs/semantic/semantic.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
     <link rel="stylesheet" href="css/main.css">
 </head>
 
@@ -270,27 +271,37 @@
                     <div class="fields two">
                         <div class="field">
                             <label>Имя</label>
-                            <input type="text" name="clientName" placeholder="Имя">
+                            <input type="text" name="clientName" placeholder="Имя" class="param">
                         </div>
                         <div class="field">
                             <label>Контактный номер</label>
-                            <input type="text" name="clientPhone" placeholder="Контактный номер">
+                            <input type="text" name="clientPhone" placeholder="Контактный номер" class="param">
                         </div>
                     </div>
                     <div class="fields three">
                         <div class="field ui search carFeedPoint">
-                                <label>Откуда</label>
-                                <input class="prompt" type="text" placeholder="Адрес подачи машины" name="carFeedPoint">
-                                <div class="results"></div>
+                            <label>Откуда</label>
+                            <div class="ui icon input">
+                                <i class="map marker alternate icon link" title="Выбрать на карте"></i>
+                                <input class="prompt param" type="text" placeholder="Адрес подачи машины" name="carFeedPoint" data-group="carFeedPoint" data-class="Address">
+                                <input type="hidden" name="carFeedPointLat" class="lat" data-group="carFeedPoint">
+                                <input type="hidden" name="carFeedPointLng" class="lng" data-group="carFeedPoint">
+                            </div>
+                            <div class="results"></div>
                         </div>
                         <div class="field ui search destination">
-                                <label>Куда</label>
-                                <input class="prompt" type="text" placeholder="Адрес назначения" name="destination">
-                                <div class="results"></div>
+                            <label>Куда</label>
+                            <div class="ui icon input">
+                                <i class="map marker alternate icon link" title="Выбрать на карте"></i>
+                                <input class="prompt param" type="text" placeholder="Адрес назначения" name="destination" data-group="destination" data-class="Address">
+                                <input type="hidden" name="destinationLat" class="lat" data-group="destination">
+                                <input type="hidden" name="destinationLng" class="lng" data-group="destination">
+                            </div>
+                            <div class="results"></div>
                         </div>
                         <div class="field">
                             <label>Тариф</label>
-                            <input type="number" name="rate" min="1" step="0.1" placeholder="Цель" value="1">
+                            <input type="number" name="rate" min="1" step="0.1" placeholder="Цель" value="1" class="param">
                         </div>
                     </div>
                     <div class="fields two">
@@ -714,41 +725,71 @@
     </div>
 </div>
 <!-- delete driver popup -->
+<!-- map -->
+<script id="mapPopup" type="text/template">
+<div class="ui modal small map mapContainer">
+    <i class="close icon"></i>
+    <div class="header">Выберите адрес:</div>
+    <div class="content">
+        <div id="map"></div>
+        <div>
+            <p class="address">
+                Пожалуйста, выберите адрес.
+            </p>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            Отмена
+        </div>
+        <div class="ui positive button">
+            Выбрать
+        </div>
+    </div>
+</div>
+</script>
+<!-- map -->
     <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
      crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.12.0/validate.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.5.1/bluebird.core.min.js"></script>
     <script src="libs/semantic/semantic.min.js"></script>
-    <script src="js/QuestionMessageBox.js"></script>
-    <script src="js/MainMenu.js"></script>
-    <script src="js/AddOrderForm.js"></script>
-    <script src="js/AddCarForm.js"></script>
-    <script src="js/AddDriverForm.js"></script>
-    <script src="js/DisplayOrderPopup.js"></script>
-    <script src="js/DisplayDriverPopup.js"></script>
-    <script src="js/DisplayCarPopup.js"></script>
-    <script src="js/EditOrderPopup.js"></script>
-    <script src="js/EditDriverPopup.js"></script>
-    <script src="js/EditCarPopup.js"></script>
-    <script src="js/UI.js"></script>
-    <script src="js/OrdersTab.js"></script>
-    <script src="js/CarsTab.js"></script>
-    <script src="js/DriversTab.js"></script>
-    <script src="js/OrdersTable.js"></script>
-    <script src="js/CarsTable.js"></script>
-    <script src="js/DriversTable.js"></script>
-    <script src="js/Order.js"></script>
-    <script src="js/Car.js"></script>
-    <script src="js/Driver.js"></script>
-    <script src="js/OrdersList.js"></script>
-    <script src="js/CarsList.js"></script>
-    <script src="js/DriversList.js"></script>
-    <script src="js/GeoService.js"></script>
-    <script src="js/OrdersController.js"></script>
-    <script src="js/CarsController.js"></script>
-    <script src="js/DriversController.js"></script>
-    <script src="js/SearchBox.js"></script>
-    <script src="js/Validation.js"></script>
+    <script src="libs/semantic/components/search.js"></script>
+    <script src="js/ui/QuestionMessageBox.js"></script>
+    <script src="js/ui/MainMenu.js"></script>
+    <script src="js/ui/AddOrderForm.js"></script>
+    <script src="js/ui/AddCarForm.js"></script>
+    <script src="js/ui/AddDriverForm.js"></script>
+    <script src="js/ui/DisplayOrderPopup.js"></script>
+    <script src="js/ui/DisplayDriverPopup.js"></script>
+    <script src="js/ui/DisplayCarPopup.js"></script>
+    <script src="js/ui/EditOrderPopup.js"></script>
+    <script src="js/ui/EditDriverPopup.js"></script>
+    <script src="js/ui/EditCarPopup.js"></script>
+    <script src="js/ui/UI.js"></script>
+    <script src="js/ui/OrdersTab.js"></script>
+    <script src="js/ui/CarsTab.js"></script>
+    <script src="js/ui/DriversTab.js"></script>
+    <script src="js/ui/OrdersTable.js"></script>
+    <script src="js/ui/CarsTable.js"></script>
+    <script src="js/ui/DriversTable.js"></script>
+    <script src="js/models/Order.js"></script>
+    <script src="js/models/Car.js"></script>
+    <script src="js/models/Driver.js"></script>
+    <script src="js/models/OrdersList.js"></script>
+    <script src="js/models/CarsList.js"></script>
+    <script src="js/models/DriversList.js"></script>
+    <script src="js/models/Address.js"></script>
+    <script src="js/utils/GeoService.js"></script>
+    <script src="js/controllers/OrdersController.js"></script>
+    <script src="js/controllers/CarsController.js"></script>
+    <script src="js/controllers/DriversController.js"></script>
+    <script src="js/ui/SearchBox.js"></script>
+    <script src="js/utils/Validation.js"></script>
+    <script src="js/ui/MapPopup.js"></script>
+    <script src="js/utils/JQueryValDecorator.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
