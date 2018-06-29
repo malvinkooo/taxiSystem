@@ -26,6 +26,7 @@ class OrdersList {
         order.setDateOfComplention(orderParams.dateOfCompletion);
         order.setCarFeedPoint(orderParams.carFeedPoint);
         order.setDestination(orderParams.destination);
+        order.setDistance(orderParams.distance)
         order.setRate(orderParams.rate);
         order.setStatus(orderParams.status);
         order.setDriver(orderParams.driver);

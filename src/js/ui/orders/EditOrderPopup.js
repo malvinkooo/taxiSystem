@@ -4,7 +4,13 @@ class EditOrderPopup {
         this._lastOrder = null;
         this._editOrderPopupElement = editOrderPopupElement;
         this._carFeedPointSearchBox = new SearchBox(this._editOrderPopupElement.find(".search.carFeedPoint"));
+        this._carFeedPointSearchBox.onSelect((address) => {
+            this._editOrderPopupElement.find("input[name='carFeedPoint']").value(address);            
+        });        
         this._destinationSearchBox = new SearchBox(this._editOrderPopupElement.find(".search.destination"));
+        this._destinationSearchBox.onSelect((address) => {
+            this._editOrderPopupElement.find("input[name='destination']").value(address);            
+        });
         this._statusListSelect = this._editOrderPopupElement.find("select.status-list");
         var statusList = OrderStatus.statusList;
         for (var i = 0; i < statusList.length; i++) {
@@ -51,7 +57,7 @@ class EditOrderPopup {
         var elements = this._editOrderPopupElement.find("[data-getattr]");
         for(var i = 0; i < elements.length; i++) {
             var getAttr = $(elements[i]).attr("data-getAttr");
-            $(elements[i]).val(order[getAttr]());
+            $(elements[i]).value(order[getAttr]());
         }
         this._editOrderPopupElement.find("[data-getattr='getId']").html(order.getId());
         this._statusListSelect.dropdown('set selected', order.getStatus());

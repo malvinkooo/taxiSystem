@@ -22,6 +22,8 @@ class OrdersController {
             this._orders.addOrder(orderParams, geoService);
             var list = this._orders.getAllOrders();
             this._ui.showOrdersList(list);
+        }).catch((error) => {
+            console.error('Error occured while getting a distance, see details: ', error);
         });
     }
 
@@ -42,7 +44,13 @@ class OrdersController {
 
     editOrder(orderParams) {
         orderParams.driver = this._drivers.getDriver(orderParams.driver);
-        var order = this._orders.editOrder(orderParams);
-        this._ui.showOrder(order);
+        GeoService.getDistance(orderParams.carFeedPoint, orderParams.destination).then((distance) => {
+            orderParams.distance = distance;
+            var order = this._orders.editOrder(orderParams);
+            this._ui.showOrder(order);
+        }).catch((error) => {
+            console.error('Error occured while getting a distance, see details: ', error);
+        });
+        
     }
 }

@@ -54,9 +54,9 @@ class GeoService {
             url: "https://api.openrouteservice.org/directions",
             data: {
                 'api_key': "58d904a497c67e00015b45fc4c4016bdef0646d88f5c9612c3ac2bff",
-                'coordinates': addressA.getLatLng()+'|'+addressB.getLatLng(),
+                'coordinates': addressA.getLngLat()+'|'+addressB.getLngLat(),
                 'profile': 'driving-car',
-                'units': 'm'
+                'units': 'km'
             }
         })).then((data) => {
             if(data && data.routes && data.routes.length > 0) {
