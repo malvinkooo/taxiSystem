@@ -24,7 +24,7 @@ class DisplayOrderPopup {
         var elements = this._displayOrderPopupElement.find("[data-getAttr]");
         for(var i = 0; i < elements.length; i++) {
             var getAttr = $(elements[i]).attr("data-getAttr");
-            $(elements[i]).html(order[getAttr]());
+            $(elements[i]).html(order[getAttr]()+'');
         }
         var driverElements = this._displayOrderPopupElement.find("[data-driver-getAttr]");
         for(var k = 0; k < driverElements.length; k++) {

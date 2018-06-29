@@ -32,7 +32,7 @@ class EditOrderPopup {
         var elements = this._editOrderPopupElement.find("[data-getattr]");
         for(var i = 0; i < elements.length; i++) {
             var getAttr = $(elements[i]).attr("data-getAttr");
-            $(elements[i]).val(order[getAttr]());
+            $(elements[i]).value(order[getAttr]());
         }
         this._editOrderPopupElement.find("[data-getattr='getId']").html(order.getId());
         this._statusListSelect.dropdown('set selected', order.getStatus());
@@ -53,7 +53,7 @@ class EditOrderPopup {
         var orderParams = {};
         var elements = this._editOrderPopupElement.find('input, select');
         for (var i = 0; i < elements.length; i++) {
-            orderParams[$(elements[i]).attr('name')] = $(elements[i]).val();
+            orderParams[$(elements[i]).attr('name')] = $(elements[i]).value();
         }
         orderParams['id'] = this._lastOrder.getId();
         if(orderParams['status'] === OrderStatus.COMPLETED && orderParams['status'] !== this._lastOrder.getStatus()){
