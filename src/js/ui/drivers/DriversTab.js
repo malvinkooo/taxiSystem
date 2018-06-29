@@ -1,10 +1,10 @@
 class DriversTab {
-    constructor(driversTabElement) {
+    constructor(driversTabElement, driversList) {
         this._driversTabElement = driversTabElement;
         this._driversTabElement.find(".secondary.menu .item").tab({
             onVisible: this._onAddDriverTabLoaded.bind(this)
         });
-        this._driversTable = new DriversTable(this._driversTabElement.find('.tab[data-tab="allDrivers"]'));
+        this._driversTable = new DriversTable(this._driversTabElement.find('.tab[data-tab="allDrivers"]'), driversList);
         this._addDriverForm = new AddDriverForm(this._driversTabElement.find('.tab[data-tab="addDriver"]'));
     }
 
@@ -21,7 +21,7 @@ class DriversTab {
     showDriversList(list) {
         $.tab('change tab', 'allDrivers');
         this._driversTabElement.find('.item[data-tab="allDrivers"]').trigger('click');
-        this._driversTable.showDriversList(list);
+        // this._driversTable.showDriversList(list);
     }
 
     showDriver(driver) {

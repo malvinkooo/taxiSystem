@@ -3,6 +3,7 @@ class DriversList {
     constructor() {
         this._drivers = {};
         this._lastInsertId = 0;
+        this._emitter = new EventEmitter();
     }
 
     getAllDrivers() {
@@ -17,6 +18,7 @@ class DriversList {
         var driver = new Driver(this._lastInsertId, driverParams);
         this._drivers[this._lastInsertId] = driver;
         this._lastInsertId++;
+        this._emitter.emit("driverAdded", driver);
     }
 
     getDriver(id) {
@@ -32,6 +34,7 @@ class DriversList {
         driver.setCurrentLocation(driverParams.currentLocation);
         driver.setDescription(driverParams.description);
         driver.setCar(driverParams.car);
+        this._emitter.emit("driverChanged", driver);
         return driver;
     }
 
@@ -76,6 +79,14 @@ class DriversList {
         }
         var rand = Math.floor(Math.random() * result.length);
         return result[rand];
+    }
+
+    onDriverAdded(fn) {
+        return this._emitter.subscribe("driverAdded", fn);
+    }
+
+    onDriverChanged(fn) {
+        return this._emitter.subscribe("driverChanged", fn);
     }
 
 }

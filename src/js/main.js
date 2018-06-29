@@ -1,8 +1,8 @@
-var ui = new UI();
 var geoService = new GeoService();
 var ordersList = new OrdersList();
 var carsList = new CarsList();
 var driversList = new DriversList();
+var ui = new UI(driversList);
 var decorator = new JQueryValDecorator();
 
 validate.validators.address = function(value, options) {

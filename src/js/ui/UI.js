@@ -1,9 +1,9 @@
 class UI {
-   constructor() {
+   constructor(driversList) {
        this._mainMenu = new MainMenu($('#mainMenu'));
        this._ordersTab = new OrdersTab($('.tab[data-tab=orders]'));
        this._carsTab = new CarsTab($('.tab[data-tab=cars]'));
-       this._driversTab = new DriversTab($('.tab[data-tab=drivers]'));
+       this._driversTab = new DriversTab($('.tab[data-tab=drivers]'), driversList);
     }
 
     setOrdersController(ordersController) {

@@ -1,6 +1,7 @@
 class Address {
 
     constructor(text, lat, lng) {
+        console.log("Address");
         this._text = text;
         this._lat = Number.parseFloat(lat);
         this._lng = Number.parseFloat(lng);
