@@ -17,6 +17,25 @@ class EditOrderPopup {
         this._statusListSelect.dropdown({showOnFocus: false});
         this._editOrderPopupElement.find(".submit").click(this._onEditFormSubmit.bind(this));
         this._editOrderFormConstraints = Validation.getOrderConstraints();
+
+        this._editOrderPopupElement
+            .find(".carFeedPoint .map.marker")
+            .click(this._onShowMapClick.bind(
+                this,
+                this._editOrderPopupElement.find("input[name='carFeedPoint']"),
+                this._editOrderPopupElement.find(".carFeedPoint input.lat"),
+                this._editOrderPopupElement.find(".carFeedPoint input.lng")
+            )
+        );
+        this._editOrderPopupElement
+            .find(".destination .map.marker")
+            .click(this._onShowMapClick.bind(
+                this,
+                this._editOrderPopupElement.find("input[name='destination']"),
+                this._editOrderPopupElement.find(".destination input.lat"),
+                this._editOrderPopupElement.find(".destination input.lng")
+            )
+        );
     }
 
     setOrdersController(ordersController) {
@@ -53,7 +72,7 @@ class EditOrderPopup {
         var orderParams = {};
         var elements = this._editOrderPopupElement.find('input, select');
         for (var i = 0; i < elements.length; i++) {
-            orderParams[$(elements[i]).attr('name')] = $(elements[i]).val();
+            orderParams[$(elements[i]).attr('name')] = $(elements[i]).value();
         }
         orderParams['id'] = this._lastOrder.getId();
         if(orderParams['status'] === OrderStatus.COMPLETED && orderParams['status'] !== this._lastOrder.getStatus()){
@@ -77,5 +96,14 @@ class EditOrderPopup {
             this._ordersController.editOrder(orderParams);
             this._editOrderPopupElement.find("form")[0].reset();
         }
+    }
+
+    _onShowMapClick(inputAddress, inputLat, inputLng) {
+        var mapPopup = new MapPopup();
+        mapPopup.show(function(address){
+            inputAddress.val(address.getText());
+            inputLat.val(address.getLat());
+            inputLng.val(address.getLng());
+        }, inputAddress.value());
     }
 }

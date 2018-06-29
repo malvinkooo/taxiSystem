@@ -55,8 +55,6 @@ ordersList.addOrder({
     clientName: 'Hlieb',
     driver: driversList.getDriver(0),
     clientPhone: '904820983423',
-    carFeedPoint: 'Приморський бульвар, 8',
-    destination: 'Катерининська площа, 4',
     rate: 1,
     distance: 39.7
 }, geoService);
@@ -64,8 +62,6 @@ ordersList.addOrder({
     clientName: 'Лена',
     driver: driversList.getDriver(1),
     clientPhone: '872498742',
-    carFeedPoint: 'Приморський бульвар, 8',
-    destination: 'Катерининська площа, 4',
     rate: 1,
     distance: 39.7
 }, geoService);

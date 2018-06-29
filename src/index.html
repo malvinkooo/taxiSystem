@@ -230,12 +230,19 @@
                         <div class="fields two">
                             <div class="field ui search carFeedPoint">
                                 <label>Откуда</label>
-                                <input class="prompt" type="text" placeholder="Адрес подачи машины" name="carFeedPoint" data-getAttr="getCarFeedPoint">
+                                <div class="ui icon input">
+                                    <i class="map marker alternate icon link" title="Выбрать на карте"></i>
+                                    <input class="prompt" type="text" placeholder="Адрес подачи машины" name="carFeedPoint" data-group="carFeedPoint" data-class="Address">
+                                    <input type="hidden" name="carFeedPointLat" class="lat" data-group="carFeedPoint">
+                                    <input type="hidden" name="carFeedPointLng" class="lng" data-group="carFeedPoint">
+                                </div>
                                 <div class="results"></div>
                             </div>
                             <div class="field ui search destination">
                                 <label>Куда</label>
-                                <input class="prompt" type="text" placeholder="Адрес назначения" name="destination" data-getAttr="getDestination">
+                                <input class="prompt" type="text" placeholder="Адрес назначения" name="destination" data-group="destination" data-class="Address">
+                                <input type="hidden" name="carFeedPointLat" class="lat" data-group="carFeedPoint">
+                                <input type="hidden" name="carFeedPointLng" class="lng" data-group="carFeedPoint">
                                 <div class="results"></div>
                             </div>
                         </div>

@@ -5,7 +5,7 @@ class JQueryValDecorator {
                 if(this.is('[data-class]')) {
                     var className = this.attr('data-class');
                     var groupName = this.attr('data-group');
-                    var group = $('[data-group="' + groupName + '"]');
+                    var group = this.closest("form").find('[data-group="' + groupName + '"]');
                     var args = [];
                     group.each(function() {
                         var value = $(this).val();
