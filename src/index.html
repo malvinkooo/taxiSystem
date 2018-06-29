@@ -293,9 +293,9 @@
                             <label>Откуда</label>
                             <div class="ui icon input">
                                 <i class="map marker alternate icon link" title="Выбрать на карте"></i>
-                                <input class="prompt param" type="text" placeholder="Адрес подачи машины" name="carFeedPoint" data-group="carFeedPoint" data-class="Address">
-                                <input type="hidden" name="carFeedPointLat" class="lat" data-group="carFeedPoint">
-                                <input type="hidden" name="carFeedPointLng" class="lng" data-group="carFeedPoint">
+                                <input class="prompt param" type="text" placeholder="Адрес подачи машины" name="carFeedPoint" data-group="carFeedPoint" data-class="Address" data-getattr="getCarFeedPoint" data-attr="getText">
+                                <input type="hidden" name="carFeedPointLat" class="lat" data-group="carFeedPoint" data-attr="getLat">
+                                <input type="hidden" name="carFeedPointLng" class="lng" data-group="carFeedPoint" data-attr="getLng">
                             </div>
                             <div class="results"></div>
                         </div>
@@ -303,9 +303,9 @@
                             <label>Куда</label>
                             <div class="ui icon input">
                                 <i class="map marker alternate icon link" title="Выбрать на карте"></i>
-                                <input class="prompt param" type="text" placeholder="Адрес назначения" name="destination" data-group="destination" data-class="Address">
-                                <input type="hidden" name="destinationLat" class="lat" data-group="destination">
-                                <input type="hidden" name="destinationLng" class="lng" data-group="destination">
+                                <input class="prompt param" type="text" placeholder="Адрес назначения" name="destination" data-group="destination" data-class="Address" data-getattr="getDestination" data-attr="getText">
+                                <input type="hidden" name="destinationLat" class="lat" data-group="destination" data-attr="getLat">
+                                <input type="hidden" name="destinationLng" class="lng" data-group="destination" data-attr="getLng">
                             </div>
                             <div class="results"></div>
                         </div>
