@@ -105,11 +105,14 @@ class EditOrderPopup {
     }
 
     _onShowMapClick(inputAddress, inputLat, inputLng) {
-        var mapPopup = new MapPopup();
-        mapPopup.show(function(address){
-            inputAddress.val(address.getText());
-            inputLat.val(address.getLat());
-            inputLng.val(address.getLng());
-        }, inputAddress.value());
+        var mapPopup = new MapPopup({
+            onAccept: (selectedAddress) => {
+                inputAddress.value(selectedAddress);
+            },
+            onClosed: () => {
+                this._editOrderPopupElement.modal("show");
+            }
+        });
+        mapPopup.show(inputAddress.value());
     }
 }

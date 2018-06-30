@@ -18,7 +18,6 @@ class AddOrderForm {
         this._isSetDriverAutomaticallyChecked = false;
         this._addOrderFormElement.find('.submit').click(this._onAddOrderFormSubmit.bind(this));
         this._addOrderFormConstraints = Validation.getOrderConstraints();
-        this._map = new MapPopup($(".map.modal"));
         this._addOrderFormElement
             .find(".carFeedPoint .map.marker")
             .click(this._onShowMapClick.bind(
@@ -96,11 +95,11 @@ class AddOrderForm {
     }
 
     _onShowMapClick(inputAddress, inputLat, inputLng) {
-        var mapPopup = new MapPopup();
-        mapPopup.show(function(address){
-            inputAddress.val(address.getText());
-            inputLat.val(address.getLat());
-            inputLng.val(address.getLng());
-        }, inputAddress.value());
+        var mapPopup = new MapPopup({
+            onAccept: (selectedAddress) => {
+                inputAddress.value(selectedAddress);
+            }
+        });
+        mapPopup.show(inputAddress.value());
     }
 }

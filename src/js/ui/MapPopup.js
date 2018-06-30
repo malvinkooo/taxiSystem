@@ -1,7 +1,12 @@
 class MapPopup {
-    constructor() {
+    constructor(options) {
         this._currentMarker = null;
         this._currentAddress = null;
+        if (options) {            
+            this._onAccept = options.onAccept || null;
+            this._onReject = options.onReject || null;
+            this._onClosed = options.onClosed || null;
+        }
     }
 
     _initPopup() {
@@ -20,6 +25,9 @@ class MapPopup {
                     this._currentMarker = null;
                     this._mapPopupelement.find(".address").html("Пожалуйста, выберите адрес.");
                 }
+                if (this._onClosed) {
+                    this._onClosed();
+                }                
             }).bind(this)
         });
         this._mapPopupelement.modal("show");
@@ -33,7 +41,7 @@ class MapPopup {
         this._map.on("click", this._onMapClick.bind(this));
     }
 
-    show(acceptCallback, address) {
+    show(address) {
         this._initPopup();
         this._initMap();
         if(address && address.isValid()) {
@@ -45,7 +53,14 @@ class MapPopup {
         this._mapPopupelement
             .modal("setting", "onApprove", () => {
                 if(this._currentAddress) {
-                    acceptCallback(this._currentAddress);
+                    if (this._onAccept) {
+                        this._onAccept(this._currentAddress);
+                    }                    
+                }
+            })
+            .modal("setting", "onReject", () => {
+                if (this._onReject) {
+                    this._onReject();
                 }
             })
             .modal("show");
