@@ -4,7 +4,13 @@ class EditOrderPopup {
         this._lastOrder = null;
         this._editOrderPopupElement = editOrderPopupElement;
         this._carFeedPointSearchBox = new SearchBox(this._editOrderPopupElement.find(".search.carFeedPoint"));
+        this._carFeedPointSearchBox.onSelect((address) => {
+            this._editOrderPopupElement.find("input[name='carFeedPoint']").value(address);            
+        });        
         this._destinationSearchBox = new SearchBox(this._editOrderPopupElement.find(".search.destination"));
+        this._destinationSearchBox.onSelect((address) => {
+            this._editOrderPopupElement.find("input[name='destination']").value(address);            
+        });
         this._statusListSelect = this._editOrderPopupElement.find("select.status-list");
         var statusList = OrderStatus.statusList;
         for (var i = 0; i < statusList.length; i++) {
@@ -17,6 +23,25 @@ class EditOrderPopup {
         this._statusListSelect.dropdown({showOnFocus: false});
         this._editOrderPopupElement.find(".submit").click(this._onEditFormSubmit.bind(this));
         this._editOrderFormConstraints = Validation.getOrderConstraints();
+
+        this._editOrderPopupElement
+            .find(".carFeedPoint .map.marker")
+            .click(this._onShowMapClick.bind(
+                this,
+                this._editOrderPopupElement.find("input[name='carFeedPoint']"),
+                this._editOrderPopupElement.find(".carFeedPoint input.lat"),
+                this._editOrderPopupElement.find(".carFeedPoint input.lng")
+            )
+        );
+        this._editOrderPopupElement
+            .find(".destination .map.marker")
+            .click(this._onShowMapClick.bind(
+                this,
+                this._editOrderPopupElement.find("input[name='destination']"),
+                this._editOrderPopupElement.find(".destination input.lat"),
+                this._editOrderPopupElement.find(".destination input.lng")
+            )
+        );
     }
 
     setOrdersController(ordersController) {
@@ -32,7 +57,7 @@ class EditOrderPopup {
         var elements = this._editOrderPopupElement.find("[data-getattr]");
         for(var i = 0; i < elements.length; i++) {
             var getAttr = $(elements[i]).attr("data-getAttr");
-            $(elements[i]).val(order[getAttr]());
+            $(elements[i]).value(order[getAttr]());
         }
         this._editOrderPopupElement.find("[data-getattr='getId']").html(order.getId());
         this._statusListSelect.dropdown('set selected', order.getStatus());
@@ -53,7 +78,7 @@ class EditOrderPopup {
         var orderParams = {};
         var elements = this._editOrderPopupElement.find('input, select');
         for (var i = 0; i < elements.length; i++) {
-            orderParams[$(elements[i]).attr('name')] = $(elements[i]).val();
+            orderParams[$(elements[i]).attr('name')] = $(elements[i]).value();
         }
         orderParams['id'] = this._lastOrder.getId();
         if(orderParams['status'] === OrderStatus.COMPLETED && orderParams['status'] !== this._lastOrder.getStatus()){
@@ -77,5 +102,14 @@ class EditOrderPopup {
             this._ordersController.editOrder(orderParams);
             this._editOrderPopupElement.find("form")[0].reset();
         }
+    }
+
+    _onShowMapClick(inputAddress, inputLat, inputLng) {
+        var mapPopup = new MapPopup();
+        mapPopup.show(function(address){
+            inputAddress.val(address.getText());
+            inputLat.val(address.getLat());
+            inputLng.val(address.getLng());
+        }, inputAddress.value());
     }
 }

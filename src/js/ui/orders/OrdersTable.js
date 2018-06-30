@@ -1,10 +1,15 @@
 class OrdersTable {
-    constructor(ordersTableElement) {
+    constructor(ordersTableElement, ordersList) {
         this._ordersTableElement = ordersTableElement;
+        this._ordersList = ordersList;
         this._ordersController = null;
         this._displayOrderPoup = new DisplayOrderPopup(this._ordersTableElement.find(".displayOrderModal"));
         this._editOrderPopup = new EditOrderPopup(this._ordersTableElement.find(".editOrderModal"));
         this._tbody = this._ordersTableElement.find('table tbody');
+
+        this._ordersList.onOrderAdded(this._orderAdded.bind(this));
+        this._ordersList.onOrderChanged(this._orderChanged.bind(this));
+
         this._tbody.on("click", "tr", this._onOrderRowClick.bind(this));
     }
 
@@ -18,7 +23,8 @@ class OrdersTable {
         this._editOrderPopup.setDriversController(driversController);
     }
 
-    showOrdersList(list) {
+    _showOrdersList() {
+        var list = this._ordersList.getAllOrders();
         this._tbody.html('');
         var statusColorsList = OrderStatus.colorsList;
         for(var i=0; i < list.length; i++) {
@@ -48,5 +54,15 @@ class OrdersTable {
     _onOrderRowClick(e) {
         var orderId = e.currentTarget.dataset.orderId;
         this._ordersController.selectOrder(orderId);
+    }
+
+    _orderAdded() {
+        console.log("Order has been added");
+        this._showOrdersList();
+    }
+
+    _orderChanged() {
+        console.log("Order has been changed");
+        this._showOrdersList();
     }
 }

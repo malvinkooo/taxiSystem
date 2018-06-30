@@ -1,8 +1,8 @@
-var ui = new UI();
 var geoService = new GeoService();
 var ordersList = new OrdersList();
 var carsList = new CarsList();
 var driversList = new DriversList();
+var ui = new UI(driversList, carsList, ordersList);
 var decorator = new JQueryValDecorator();
 
 validate.validators.address = function(value, options) {
@@ -55,8 +55,8 @@ ordersList.addOrder({
     clientName: 'Hlieb',
     driver: driversList.getDriver(0),
     clientPhone: '904820983423',
-    carFeedPoint: 'Приморський бульвар, 8',
-    destination: 'Катерининська площа, 4',
+    destination: new Address("Приморський бульвар, 7", "46.48833171370467", "30.740929841940673"),
+    carFeedPoint: new Address("Приморський бульвар, 9", "46.48733817624743", "30.741841793005737"),
     rate: 1,
     distance: 39.7
 }, geoService);
@@ -64,8 +64,8 @@ ordersList.addOrder({
     clientName: 'Лена',
     driver: driversList.getDriver(1),
     clientPhone: '872498742',
-    carFeedPoint: 'Приморський бульвар, 8',
-    destination: 'Катерининська площа, 4',
+    destination: new Address("Приморський бульвар, 7", "46.48833171370467", "30.740929841940673"),
+    carFeedPoint: new Address("Приморський бульвар, 9", "46.48733817624743", "30.741841793005737"),
     rate: 1,
     distance: 39.7
 }, geoService);

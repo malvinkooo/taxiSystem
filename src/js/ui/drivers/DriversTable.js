@@ -1,10 +1,15 @@
 class DriversTable {
-    constructor(driversTableElement) {
+    constructor(driversTableElement, driversList) {
         this._driversTableElement = driversTableElement;
         this._driversController = null;
+        this._driversList = driversList;
         this._tbody = this._driversTableElement.find('table tbody');
         this._displayDriverPopup = new DisplayDriverPopup(this._driversTableElement.find(".displayDriverModal"));
         this._editDriverPopup = new EditDriverPopup(this._driversTableElement.find(".editDriverModal"));
+
+        this._driversList.onDriverAdded(this._driverAdded.bind(this));
+        this._driversList.onDriverChanged(this._driverChanged.bind(this));
+
         this._tbody.on("click", "tr", this._onDriverRowClick.bind(this));
     }
 
@@ -18,7 +23,8 @@ class DriversTable {
         this._editDriverPopup.setDriversController(driversController);
     }
 
-    showDriversList(list){
+    _showDriversList(){
+        var list = driversList.getAllDrivers();
        this._tbody.html("");
        var statusColorsList = DriverStatus.colorsList;
        for (var i = 0; i < list.length; i++) {
@@ -46,5 +52,13 @@ class DriversTable {
     _onDriverRowClick(e) {
         var driverId = e.currentTarget.dataset.driverId;
         this._driversController.selectDriver(driverId);
+    }
+
+    _driverAdded() {
+        this._showDriversList();
+    }
+
+    _driverChanged() {
+        this._showDriversList();
     }
 }

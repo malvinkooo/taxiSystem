@@ -3,12 +3,14 @@ class OrdersList {
     constructor() {
         this._orders = {};
         this._lastInsertId = 0;
+        this._emitter = new EventEmitter();
     }
 
     addOrder(orderParams, geoService) {
         var order = new Order(this._lastInsertId, orderParams, geoService);
         this._orders[this._lastInsertId] = order;
         this._lastInsertId++;
+        this._emitter.emit("orderAdded", order);
     }
 
     getAllOrders() {
@@ -26,9 +28,11 @@ class OrdersList {
         order.setDateOfComplention(orderParams.dateOfCompletion);
         order.setCarFeedPoint(orderParams.carFeedPoint);
         order.setDestination(orderParams.destination);
+        order.setDistance(orderParams.distance)
         order.setRate(orderParams.rate);
         order.setStatus(orderParams.status);
         order.setDriver(orderParams.driver);
+        this._emitter.emit("orderChanged", order);
         return order;
     }
 
@@ -61,4 +65,12 @@ class OrdersList {
         }
         return result;
     }
+
+    onOrderAdded(fn) {
+        this._emitter.subscribe("orderAdded", fn);
+    }
+
+    onOrderChanged(fn) {
+        this._emitter.subscribe("orderChanged", fn);
+    } 
 }

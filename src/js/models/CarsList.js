@@ -3,6 +3,7 @@ class CarsList {
     constructor() {
         this._cars = {};
         this._lastInsertId = 0;
+        this._emitter = new EventEmitter();
     }
 
     getAllCars() {
@@ -18,6 +19,7 @@ class CarsList {
         var car = new Car(this._lastInsertId, carParams);
         this._cars[this._lastInsertId] = car;
         this._lastInsertId++;
+        this._emitter.emit("carAdded", car);
     }
 
     getCar(id) {
@@ -30,6 +32,7 @@ class CarsList {
         car.setBrand(carParams.brand);
         car.setGasolineConsumptionRatio(carParams.gasolineConsumptionRatio);
         car.setDescription(carParams.description);
+        this._emitter.emit("carChanged", car);
         return car;
     }
 
@@ -39,5 +42,13 @@ class CarsList {
 
     getCarsCount() {
         return Object.keys(this._cars).length;
+    }
+
+    onCarAdded(fn) {
+        this._emitter.subscribe("carAdded", fn);
+    }
+
+    onCarChanged(fn) {
+        this._emitter.subscribe("carChanged", fn);
     }
 }

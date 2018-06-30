@@ -8,16 +8,12 @@ class AddOrderForm {
         });
         this._carFeedPointSearchBox = new SearchBox(this._addOrderFormElement.find(".search.carFeedPoint"));
         this._carFeedPointSearchBox.onSelect((address) => {
-            this._addOrderFormElement.find("input[name='carFeedPoint']").val(address.getText());
-            this._addOrderFormElement.find(".carFeedPoint input.lat").val(address.getLat());
-            this._addOrderFormElement.find(".carFeedPoint input.lng").val(address.getLng());
+            this._addOrderFormElement.find("input[name='carFeedPoint']").value(address);            
         });
 
         this._destinationSearchBox = new SearchBox(this._addOrderFormElement.find(".search.destination"));
         this._destinationSearchBox.onSelect((address) => {
-            this._addOrderFormElement.find("input[name='destination']").val(address.getText());
-            this._addOrderFormElement.find(".destination input.lat").val(address.getLat());
-            this._addOrderFormElement.find(".destination input.lng").val(address.getLng());
+            this._addOrderFormElement.find("input[name='destination']").value(address);            
         });
         this._isSetDriverAutomaticallyChecked = false;
         this._addOrderFormElement.find('.submit').click(this._onAddOrderFormSubmit.bind(this));
