@@ -18,10 +18,9 @@ class DriversTab {
         this._addDriverForm.setCarsController(carsController);
     }
 
-    showDriversList(list) {
+    showDriversList() {
         $.tab('change tab', 'allDrivers');
         this._driversTabElement.find('.item[data-tab="allDrivers"]').trigger('click');
-        // this._driversTable.showDriversList(list);
     }
 
     showDriver(driver) {

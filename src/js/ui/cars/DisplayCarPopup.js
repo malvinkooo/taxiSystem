@@ -3,9 +3,6 @@ class DisplayCarPopup {
         this._displayCarPopupElement = displayCarPopupElement;
         this._lastCarId = null;
         this._displayCarPopupElement.find(".edit-car").click(this._onEditCarButtonClick.bind(this));
-        // this._displayCarPopupElement.modal({
-        //     onHide: this._onDisplayCarPopupClose.bind(this)
-        // });
         this._displayCarPopupElement.find(".delete-car").click(this._onDeleteCarButtonClick.bind(this));
     }
 
@@ -27,10 +24,6 @@ class DisplayCarPopup {
     _onEditCarButtonClick() {
         this._carsController.selectEditCar(this._lastCarId);
     }
-
-    // _onDisplayCarPopupClose() {
-    //     this._carsController.selectMenuItemAllCars();
-    // }
 
     _onDeleteCarButtonClick() {
         var questionBox = new QuestionMessageBox("Вы действительно хотите удалить машину?");

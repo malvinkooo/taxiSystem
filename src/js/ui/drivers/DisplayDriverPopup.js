@@ -4,9 +4,6 @@ class DisplayDriverPopup {
         this._driversController = null;
         this._lastDriver = null;
         this._displayDriverPopupElement.find(".edit-driver").click(this._onEditDriverButtonClick.bind(this));
-        // this._displayDriverPopupElement.modal({
-        //     onHide: this._onDisplayDriverPopupClose.bind(this)
-        // });
         this._displayDriverPopupElement.find(".delete-driver").click(this._onDeleteDriverButtonClick.bind(this));
     }
 
@@ -33,10 +30,6 @@ class DisplayDriverPopup {
     _onEditDriverButtonClick() {
         this._driversController.selectEditDriver(this._lastDriver.getId());
     }
-
-    // _onDisplayDriverPopupClose() {
-    //     this._driversController.selectMenuItemAllDrivers();
-    // }
 
     _onDeleteDriverButtonClick() {
         var questionBox = new QuestionMessageBox("Вы действительно хотите удалить водителя?");

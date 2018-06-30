@@ -28,8 +28,7 @@ class OrdersController {
     }
 
     selectMenuItemAllOrders() {
-        var list = this._orders.getAllOrders();
-        this._ui.showOrdersList(list);
+        this._ui.showOrdersList();
     }
 
     selectOrder(id) {

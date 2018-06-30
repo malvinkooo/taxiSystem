@@ -55,12 +55,10 @@ class DriversTable {
     }
 
     _driverAdded() {
-        console.log("Driver has been added");
         this._showDriversList();
     }
 
     _driverChanged() {
-        console.log("Driver has been changed");
         this._showDriversList();
     }
 }

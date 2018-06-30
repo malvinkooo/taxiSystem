@@ -10,8 +10,7 @@ class DriversController {
     }
 
     selectMenuItemAllDrivers() {
-        var list = this._driversList.getAllDrivers();
-        this._ui.showDriversList(list);
+        this._ui.showDriversList();
     }
 
     selectDriver(id) {

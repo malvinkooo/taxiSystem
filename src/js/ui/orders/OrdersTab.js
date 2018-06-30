@@ -1,17 +1,16 @@
 class OrdersTab {
-    constructor(ordersTabElement) {
+    constructor(ordersTabElement, ordersList) {
         this._ordersTabElement = ordersTabElement;
         this._ordersTabElement.find('.secondary.menu .item').tab({
             onVisible: this._onAddOrderTabLoaded.bind(this)
         });
         this._addOrderForm = new AddOrderForm(this._ordersTabElement.find('.tab[data-tab="addOrder"]'));
-        this._ordersTable = new OrdersTable(this._ordersTabElement.find('.tab[data-tab="allOrders"]'));
+        this._ordersTable = new OrdersTable(this._ordersTabElement.find('.tab[data-tab="allOrders"]'), ordersList);
     }
 
-    showOrdersList(list) {
+    showOrdersList() {
         $.tab('change tab', 'allOrders');
         this._ordersTabElement.find('[data-tab="allOrders"]').trigger('click');
-        this._ordersTable.showOrdersList(list);
     }
 
     setOrdersController(ordersController) {
