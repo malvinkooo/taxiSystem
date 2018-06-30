@@ -38,7 +38,7 @@ class DisplayOrderPopup {
         this._displayOrderPopupElement.modal("show");
     }
 
-    _onEditOrderButtonClick(e){
+    _onEditOrderButtonClick(e) {        
     	this._ordersController.selectEditOrder(this._lastOrderId);
     }
 
