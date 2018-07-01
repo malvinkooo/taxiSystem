@@ -1,10 +1,13 @@
 class DisplayOrderPopup {
-    constructor(displayOrderPopupElement) {
-        this._displayOrderPopupElement = displayOrderPopupElement;
+    constructor() {
+        $($("#displayOrderPopup").html()).appendTo("body");
+        this._displayOrderPopupElement = $(".displayOrderModal");
         this._ordersController = null;
         this._displayOrderPopupElement.find(".edit-order").click(this._onEditOrderButtonClick.bind(this));
         this._displayOrderPopupElement.modal({
-            onHide: this._onDisplayOrderPopupClose.bind(this)
+            onHidden: function() {
+                $(".displayOrderModal").remove();
+            }
         });
         this._lastOrderId = null;
     }
@@ -38,11 +41,7 @@ class DisplayOrderPopup {
         this._displayOrderPopupElement.modal("show");
     }
 
-    _onEditOrderButtonClick(e) {        
-    	this._ordersController.selectEditOrder(this._lastOrderId);
-    }
-
-    _onDisplayOrderPopupClose() {
-        this._ordersController.selectMenuItemAllOrders();
+    _onEditOrderButtonClick(e) {
+        this._ordersController.selectEditOrder(this._lastOrderId);
     }
 }

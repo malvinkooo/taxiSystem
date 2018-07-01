@@ -98,114 +98,9 @@
                 </div> -->
                 <!-- total orders -->
                 <!-- display order popup -->
-                <div class="ui modal displayOrderModal">
-                    <a class="ui ribbon label status" data-getAttr="getStatus"></a>
-                    <i class="close icon"></i>
-                    <div class="header order-number">
-                        Заказ #<span class="id" data-getAttr="getId">000000</span>
-                    </div>
-                    <div class="ui grid">
-                        <div class="eight wide column">
-                            <div class="ui horizontal segments">
-                                <div class="ui segment">
-                                    <p><i class="hand point left outline icon"></i>Откуда:</p>
-                                    <p class="carFeedPoint" data-getAttr="getCarFeedPoint">
-                                        <!-- Пос. Котовского -->
-                                    </p>
-                                </div>
-                                <div class="ui segment">
-                                    <p><i class="hand point right outline icon"></i>Куда:</p>
-                                    <p class="destination" data-getAttr="getDestination">
-                                        <!-- Сухой Лиман -->
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="ui horizontal segments">
-                                <div class="ui segment">
-                                    <p><i class="sync icon"></i>Расстояние:</p>
-                                    <p>
-                                        <span class="distance" data-getAttr="getDistance">15</span>км
-                                    </p>
-                                </div>
-                                <div class="ui segment">
-                                    <p><i class="chart line icon"></i>Тариф:</p>
-                                    <p class="rate" data-getAttr="getRate">
-                                        <!-- 1 -->
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="ui horizontal segments">
-                                <div class="ui segment">
-                                    <p><i class="clock outline icon"></i>Открыт:</p>
-                                    <p class="dateOfCreation" data-getAttr="getDateOfCreation">
-                                        <!-- 12.02.2016 -->
-                                    </p>
-                                </div>
-                                <div class="ui segment">
-                                    <p><i class="clock icon"></i>Завершен:</p>
-                                    <p class="dateOfCompletion" data-getAttr="getDateOfCompletion">
-                                        <!-- 12.02.2017 -->
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="eight wide column">
-                            <div class="ui cards" style="margin-top: .1rem">
-                                <div class="card" style="width: 100%">
-                                    <div class="content">
-                                        <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
-                                        <div class="header" data-driver-getAttr="getFullName"></div>
-                                        <div class="meta">
-                                            <i class="taxi icon"></i>
-                                            <span data-driver-getAttr="getCurrentLocation"></span>
-                                        </div>
-                                        <div class="description">
-                                            <p>
-                                                <i class="phone icon"></i>
-                                                <span data-driver-getAttr="getPhone"></span>
-                                            </p>
-                                            <p>
-                                                <i class="taxi icon"></i>
-                                                <span data-car-getAttr="getCar"></span>
-                                            </p>
-                                            <p data-driver-getAttr="getDescription"></p>
-                                        </div>
-                                    </div>
-                                    <!-- <div class="extra content"></div> -->
-                                </div>
-                                <div class="card" style="width: 100%;margin-bottom: 30px">
-                                    <div class="content">
-                                        <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
-                                        <div class="header clientName" data-getAttr="getClientName">
-                                            <!-- Клиент -->
-                                        </div>
-                                        <div class="description">
-                                            <p>
-                                                <i class="phone icon"></i>
-                                                <span class="clientPhone" data-getAttr="getClientPhone">
-                                                    <!-- 0965544545 -->
-                                                </span>
-                                            </p>
-                                            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus saepe blanditiis corrupti ipsum dolorem numquam ea dignissimos nostrum aliquid! Ducimus odio, quos qui! Reiciendis perferendis dolorum quasi facere aut esse.</p> -->
-                                        </div>
-                                    </div>
-                                    <!-- <div class="extra content"></div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="actions">
-                        <div class="ui blue button left labeled icon edit-order">
-                            <i class="edit icon"></i>
-                            Редактировать
-                        </div>
-                        <div class="ui button black cancel actions">
-                            Закрыть
-                        </div>
-                    </div>
-                </div>
+
                 <!-- display order popup -->
-                <!-- display order popup -->
+                <!-- edit order popup -->
                 <div class="ui modal editOrderModal">
                     <i class="close icon"></i>
                     <div class="header order-number">
@@ -273,7 +168,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- display order popup -->
+                <!-- edit order popup -->
             </div>
             <div class="ui tab" data-tab="addOrder">
                 <!-- add order form -->
@@ -759,6 +654,101 @@
 </div>
 </script>
 <!-- map -->
+<!-- display order popup -->
+<script id="displayOrderPopup" type="text/template">
+<div class="ui modal displayOrderModal">
+    <a class="ui ribbon label status" data-getAttr="getStatus"></a>
+    <i class="close icon"></i>
+    <div class="header order-number">
+        Заказ #<span class="id" data-getAttr="getId">000000</span>
+    </div>
+    <div class="ui grid">
+        <div class="eight wide column">
+            <div class="ui horizontal segments">
+                <div class="ui segment">
+                    <p><i class="hand point left outline icon"></i>Откуда:</p>
+                    <p class="carFeedPoint" data-getAttr="getCarFeedPoint"></p>
+                </div>
+                <div class="ui segment">
+                    <p><i class="hand point right outline icon"></i>Куда:</p>
+                    <p class="destination" data-getAttr="getDestination"></p>
+                </div>
+            </div>
+            <div class="ui horizontal segments">
+                <div class="ui segment">
+                    <p><i class="sync icon"></i>Расстояние:</p>
+                    <p>
+                        <span class="distance" data-getAttr="getDistance">15</span>км
+                    </p>
+                </div>
+                <div class="ui segment">
+                    <p><i class="chart line icon"></i>Тариф:</p>
+                    <p class="rate" data-getAttr="getRate"></p>
+                </div>
+            </div>
+            <div class="ui horizontal segments">
+                <div class="ui segment">
+                    <p><i class="clock outline icon"></i>Открыт:</p>
+                    <p class="dateOfCreation" data-getAttr="getDateOfCreation"></p>
+                </div>
+                <div class="ui segment">
+                    <p><i class="clock icon"></i>Завершен:</p>
+                    <p class="dateOfCompletion" data-getAttr="getDateOfCompletion"></p>
+                </div>
+            </div>
+        </div>
+        <div class="eight wide column">
+            <div class="ui cards" style="margin-top: .1rem">
+                <div class="card" style="width: 100%">
+                    <div class="content">
+                        <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
+                        <div class="header" data-driver-getAttr="getFullName"></div>
+                            <div class="meta">
+                                <i class="taxi icon"></i>
+                                <span data-driver-getAttr="getCurrentLocation"></span>
+                            </div>
+                            <div class="description">
+                                <p>
+                                    <i class="phone icon"></i>
+                                    <span data-driver-getAttr="getPhone"></span>
+                                </p>
+                                <p>
+                                    <i class="taxi icon"></i>
+                                    <span data-car-getAttr="getCar"></span>
+                                 </p>
+                                <p data-driver-getAttr="getDescription"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 100%;margin-bottom: 30px">
+                        <div class="content">
+                            <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
+                            <div class="header clientName" data-getAttr="getClientName">
+                            <!-- Клиент -->
+                        </div>
+                        <div class="description">
+                            <p>
+                                <i class="phone icon"></i>
+                                <span class="clientPhone" data-getAttr="getClientPhone"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui blue button left labeled icon edit-order">
+            <i class="edit icon"></i>
+            Редактировать
+        </div>
+        <div class="ui button black cancel actions">
+            Закрыть
+        </div>
+    </div>
+</div>
+</script>
+<!-- display order popup -->
     <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
      crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>

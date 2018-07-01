@@ -45,14 +45,10 @@ class CarsTable {
    }
 
    _carAdded() {
-      console.log("Car has been added");
       this._showCarsList();
-      //
    }
 
    _carChanged() {
-      console.log("Car has been changed");
       this._showCarsList();
-      //
    }
 }

@@ -3,7 +3,6 @@ class OrdersTable {
         this._ordersTableElement = ordersTableElement;
         this._ordersList = ordersList;
         this._ordersController = null;
-        this._displayOrderPoup = new DisplayOrderPopup(this._ordersTableElement.find(".displayOrderModal"));
         this._editOrderPopup = new EditOrderPopup(this._ordersTableElement.find(".editOrderModal"));
         this._tbody = this._ordersTableElement.find('table tbody');
 
@@ -15,7 +14,6 @@ class OrdersTable {
 
     setOrdersController(ordersController) {
         this._ordersController = ordersController;
-        this._displayOrderPoup.setOrdersController(ordersController);
         this._editOrderPopup.setOrdersController(ordersController);
     }
 
@@ -44,7 +42,9 @@ class OrdersTable {
     }
 
     showOrder(order) {
-        this._displayOrderPoup.showOrder(order);
+        var popup = new DisplayOrderPopup();
+        popup.setOrdersController(ordersController);
+        popup.showOrder(order);
     }
 
     showEditOrderform(order) {
@@ -57,12 +57,10 @@ class OrdersTable {
     }
 
     _orderAdded() {
-        console.log("Order has been added");
         this._showOrdersList();
     }
 
     _orderChanged() {
-        console.log("Order has been changed");
         this._showOrdersList();
     }
 }
