@@ -1,15 +1,33 @@
 class EditOrderPopup {
-    constructor(editOrderPopupElement) {
+    constructor(options) {
+        if (options) {
+            this._onAccept = options.onAccept || null;
+            this._onReject = options.onReject || null;
+            this._onClosed = options.onClosed || null;
+        }
+        $($("#editOrderPopup").html()).appendTo("body");
         this._ordersController = null;
         this._lastOrder = null;
-        this._editOrderPopupElement = editOrderPopupElement;
+        this._editOrderPopupElement = $(".editOrderModal");
+        this._editOrderPopupElement.modal({
+            onHidden: () => {
+                if(this._onClosed) {
+                    this._onClosed();
+                }
+            },
+            onAccept: () => {
+                if(this._onAccept) {
+                    this._onAccept();
+                }
+            }
+        });
         this._carFeedPointSearchBox = new SearchBox(this._editOrderPopupElement.find(".search.carFeedPoint"));
         this._carFeedPointSearchBox.onSelect((address) => {
-            this._editOrderPopupElement.find("input[name='carFeedPoint']").value(address);            
-        });        
+            this._editOrderPopupElement.find("input[name='carFeedPoint']").value(address);
+        });
         this._destinationSearchBox = new SearchBox(this._editOrderPopupElement.find(".search.destination"));
         this._destinationSearchBox.onSelect((address) => {
-            this._editOrderPopupElement.find("input[name='destination']").value(address);            
+            this._editOrderPopupElement.find("input[name='destination']").value(address);
         });
         this._statusListSelect = this._editOrderPopupElement.find("select.status-list");
         var statusList = OrderStatus.statusList;
@@ -52,7 +70,7 @@ class EditOrderPopup {
         this._driversController = driversController;
     }
 
-    showEditOrderForm(order) {
+    show(order) {
         this._lastOrder = order;
         var elements = this._editOrderPopupElement.find("[data-getattr]");
         for(var i = 0; i < elements.length; i++) {

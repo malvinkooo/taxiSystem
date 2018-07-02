@@ -48,6 +48,7 @@ class Order {
         this._rate = orderParams.rate;
         this._id = id;
         this._status = OrderStatus.NEW_ORDER;
+        this._emitter = new EventEmitter();
     }
 
     getDriver() {
@@ -76,6 +77,7 @@ class Order {
 
     setStatus(status) {
         this._status = status;
+        this._emitter.emit("change");
     }
 
     getClientName() {
@@ -128,5 +130,9 @@ class Order {
 
     getDateOfCreation() {
         return this._dateOfCreation;
+    }
+
+    onChange(fn) {
+        return this._emitter.subscribe("changed", fn);
     }
 }

@@ -3,22 +3,19 @@ class OrdersTable {
         this._ordersTableElement = ordersTableElement;
         this._ordersList = ordersList;
         this._ordersController = null;
-        this._editOrderPopup = new EditOrderPopup(this._ordersTableElement.find(".editOrderModal"));
+        this._driversController = null;
         this._tbody = this._ordersTableElement.find('table tbody');
-
         this._ordersList.onOrderAdded(this._orderAdded.bind(this));
         this._ordersList.onOrderChanged(this._orderChanged.bind(this));
-
         this._tbody.on("click", "tr", this._onOrderRowClick.bind(this));
     }
 
     setOrdersController(ordersController) {
         this._ordersController = ordersController;
-        this._editOrderPopup.setOrdersController(ordersController);
     }
 
     setDriversController(driversController) {
-        this._editOrderPopup.setDriversController(driversController);
+        this._driversController = driversController;
     }
 
     _showOrdersList() {
@@ -43,12 +40,9 @@ class OrdersTable {
 
     showOrder(order) {
         var popup = new DisplayOrderPopup();
-        popup.setOrdersController(ordersController);
+        popup.setOrdersController(this._ordersController);
+        popup.setDriversController(this._driversController);
         popup.showOrder(order);
-    }
-
-    showEditOrderform(order) {
-        this._editOrderPopup.showEditOrderForm(order);
     }
 
     _onOrderRowClick(e) {
