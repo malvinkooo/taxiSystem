@@ -46,10 +46,10 @@ class OrdersController {
         GeoService.getDistance(orderParams.carFeedPoint, orderParams.destination).then((distance) => {
             orderParams.distance = distance;
             var order = this._orders.editOrder(orderParams);
-            this._ui.showOrder(order);
+            // this._ui.showOrder(order);
         }).catch((error) => {
             console.error('Error occured while getting a distance, see details: ', error);
         });
-        
+
     }
 }

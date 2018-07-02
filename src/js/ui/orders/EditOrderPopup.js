@@ -7,17 +7,17 @@ class EditOrderPopup {
         }
         $($("#editOrderPopup").html()).appendTo("body");
         this._ordersController = null;
+        this._driversController = null;
         this._lastOrder = null;
+        this._cleanHTML = true;
         this._editOrderPopupElement = $(".editOrderModal");
         this._editOrderPopupElement.modal({
             onHidden: () => {
                 if(this._onClosed) {
                     this._onClosed();
                 }
-            },
-            onAccept: () => {
-                if(this._onAccept) {
-                    this._onAccept();
+                if(this._cleanHTML) {
+                    $(".editOrderModal").remove();
                 }
             }
         });
@@ -128,9 +128,11 @@ class EditOrderPopup {
                 inputAddress.value(selectedAddress);
             },
             onClosed: () => {
+                this._cleanHTML = true;
                 this._editOrderPopupElement.modal("show");
             }
         });
+        this._cleanHTML = false;
         mapPopup.show(inputAddress.value());
     }
 }

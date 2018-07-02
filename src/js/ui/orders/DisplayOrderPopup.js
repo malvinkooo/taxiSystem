@@ -60,10 +60,8 @@ class DisplayOrderPopup {
 
     _onEditOrderButtonClick() {
         var popup = new EditOrderPopup({
-            onAccept: () => {
-                this._repaint();
-            },
             onClosed: () => {
+                this._repaint();
                 this._displayOrderPopupElement.modal("show");
                 this._cleanHTML = true;
             }
