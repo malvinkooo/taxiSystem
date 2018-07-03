@@ -6,6 +6,7 @@ class DisplayOrderPopup {
         this._driversController = null;
         this._cleanHTML = true;
         this._order = null;
+        this._lastOrderId = null;
         this._onOrderChangeUnsubscribe = null;
         this._displayOrderPopupElement.find(".edit-order").click(this._onEditOrderButtonClick.bind(this));
         this._displayOrderPopupElement.modal({
@@ -16,7 +17,6 @@ class DisplayOrderPopup {
                 }
             }).bind(this)
         });
-        this._lastOrderId = null;
     }
 
     setOrdersController(ordersController) {

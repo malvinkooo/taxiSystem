@@ -3,19 +3,13 @@ class CarsTable {
       this._carsTableElement = carsTableElement;
       this._carsList = carsList;
       this._tbody = this._carsTableElement.find("table tbody");
-
       this._carsList.onCarAdded(this._carAdded.bind(this));
       this._carsList.onCarChanged(this._carChanged.bind(this));
-
       this._tbody.on("click", "tr", this._onCarRowClick.bind(this));
-      this._displayCarPopup = new DisplayCarPopup(this._carsTableElement.find(".displayCarModal"));
-      this._editCarPopup = new EditCarPopup(this._carsTableElement.find(".editCarModal"));
    }
 
    setCarsController(carsController) {
       this._carsController = carsController;
-      this._displayCarPopup.setCarsController(carsController);
-      this._editCarPopup.setCarsController(carsController);
    }
 
    _showCarsList() {
@@ -32,7 +26,9 @@ class CarsTable {
    }
 
    showCar(car) {
-      this._displayCarPopup.showCar(car);
+      var popup = new DisplayCarPopup();
+      popup.setCarsController(carsController);
+      popup.showCar(car);
    }
 
    showEditCarForm(car) {

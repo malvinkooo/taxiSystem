@@ -33,19 +33,10 @@ class UI {
 
     showEditDriverForm(driver) {
         this._driversTab.showEditDriverForm(driver);
-
     }
 
     showSuccessNotification() {
         $('.ui.tab.active form.ui.form').addClass('success');
-    }
-
-    showDriverEdirForm (info) {
-
-    }
-
-    showAddOrderForm() {
-        //...
     }
 
     showOrdersList(list) {
@@ -56,9 +47,6 @@ class UI {
     	this._ordersTab.showOrder(order);
     }
 
-    showEditOrderForm(order) {
-        this._ordersTab.showEditOrderForm(order);
-    }
 
     showCarsList(list) {
         this._carsTab.showCarsList(list);
@@ -66,10 +54,6 @@ class UI {
 
     showCar(car) {
         this._carsTab.showCar(car);
-    }
-
-    showEditCarForm(car) {
-        this._carsTab.showEditCarForm(car);
     }
 
     showStatsPage(driversCount, freeDriversCount, carsCount, ordersCount, ordersInProgressCount) {

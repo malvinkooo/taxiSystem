@@ -23,14 +23,8 @@ class CarsController {
         this._ui.showCar(car);
     }
 
-    selectEditCar(id) {
-        var car = this._cars.getCar(id);
-        this._ui.showEditCarForm(car);
-    }
-
     editCar(carParams) {
         var car = this._cars.editCar(carParams);
-        this._ui.showCar(car);
     }
 
     selectDeleteCar(id) {
