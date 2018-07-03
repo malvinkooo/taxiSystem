@@ -57,6 +57,7 @@ class Order {
 
     setDriver(driver) {
         this._driver = driver;
+        this._emitter.emit("orderChanged");
     }
 
     getId() {
@@ -69,6 +70,7 @@ class Order {
 
     setDistance(distance) {
         this._distance = distance;
+        this._emitter.emit("orderChanged");
     }
 
     getStatus() {
@@ -77,7 +79,7 @@ class Order {
 
     setStatus(status) {
         this._status = status;
-        this._emitter.emit("change");
+        this._emitter.emit("orderChanged");
     }
 
     getClientName() {
@@ -86,6 +88,7 @@ class Order {
 
     setClientName(clientName) {
         this._clientName = clientName;
+        this._emitter.emit("orderChanged");
     }
 
     getClientPhone() {
@@ -94,6 +97,7 @@ class Order {
 
     setClientPhone(clientPhone) {
         this._clientPhone = clientPhone;
+        this._emitter.emit("orderChanged");
     }
 
     getDateOfCompletion() {
@@ -102,6 +106,7 @@ class Order {
 
     setDateOfComplention(dateOfCompletion) {
         this._dateOfCompletion = dateOfCompletion;
+        this._emitter.emit("orderChanged");
     }
 
     getCarFeedPoint() {
@@ -110,6 +115,7 @@ class Order {
 
     setCarFeedPoint(carFeedPoint) {
         this._carFeedPoint = carFeedPoint;
+        this._emitter.emit("orderChanged");
     }
 
     getDestination() {
@@ -118,6 +124,7 @@ class Order {
 
     setDestination(destination) {
         this._destination = destination;
+        this._emitter.emit("orderChanged");
     }
 
     getRate() {
@@ -126,6 +133,7 @@ class Order {
 
     setRate(rate) {
         this._rate = rate;
+        this._emitter.emit("orderChanged");
     }
 
     getDateOfCreation() {
@@ -133,6 +141,6 @@ class Order {
     }
 
     onChange(fn) {
-        return this._emitter.subscribe("changed", fn);
+        return this._emitter.subscribe("orderChanged", fn);
     }
 }

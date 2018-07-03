@@ -13,10 +13,8 @@ class EditOrderPopup {
         this._editOrderPopupElement = $(".editOrderModal");
         this._editOrderPopupElement.modal({
             onHidden: () => {
-                if(this._onClosed) {
-                    this._onClosed();
-                }
                 if(this._cleanHTML) {
+                    this._onClosed();
                     $(".editOrderModal").remove();
                 }
             }
@@ -123,6 +121,7 @@ class EditOrderPopup {
     }
 
     _onShowMapClick(inputAddress, inputLat, inputLng) {
+        this._cleanHTML = false;
         var mapPopup = new MapPopup({
             onAccept: (selectedAddress) => {
                 inputAddress.value(selectedAddress);
@@ -132,7 +131,6 @@ class EditOrderPopup {
                 this._editOrderPopupElement.modal("show");
             }
         });
-        this._cleanHTML = false;
         mapPopup.show(inputAddress.value());
     }
 }
