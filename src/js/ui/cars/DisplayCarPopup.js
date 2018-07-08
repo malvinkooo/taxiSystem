@@ -53,11 +53,14 @@ class DisplayCarPopup {
     }
 
     _onDeleteCarButtonClick() {
+        this._cleanHTML = false;
         var questionBox = new QuestionMessageBox("Вы действительно хотите удалить машину?");
         questionBox.show((function(){
-            this._carsController.selectDeleteCar(this._lastCarId);
+            this._cleanHTML = true;
+            this._carsController.selectDeleteCar(this._car.getId());
         }).bind(this), (function(){
-            this._carsController.selectCar(this._lastCarId);
+            this._displayCarPopupElement.modal("show");
+            this._cleanHTML = true;
         }).bind(this));
     }
 }

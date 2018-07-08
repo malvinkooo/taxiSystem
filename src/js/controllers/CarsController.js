@@ -24,7 +24,6 @@ class CarsController {
 
     selectDeleteCar(id) {
         this._cars.deleteCar(id);
-        var list = this._cars.getAllCars();
-        this._ui.showCarsList(list);
+        // this._ui.showCarsList();
     }
 }
