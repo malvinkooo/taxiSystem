@@ -13,11 +13,6 @@ class DriversController {
         this._ui.showDriversList();
     }
 
-    selectDriver(id) {
-        var driver = this._driversList.getDriver(id);
-        this._ui.showDriver(driver);
-    }
-
     selectMenuItemAddDriver() {
         this._ui.showAddDriverForm();
     }

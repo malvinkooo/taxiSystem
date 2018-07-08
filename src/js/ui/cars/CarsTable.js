@@ -31,13 +31,10 @@ class CarsTable {
       popup.showCar(car);
    }
 
-   showEditCarForm(car) {
-      this._editCarPopup.showEditCarForm(car);
-   }
-
    _onCarRowClick(e) {
       var carId = e.currentTarget.dataset.carId;
-      this._carsController.selectCar(carId);
+      var car = this._carsList.getCar(carId);
+      this.showCar(car);
    }
 
    _carAdded() {

@@ -43,7 +43,6 @@ class DisplayCarPopup {
     _onEditCarButtonClick() {
         var popup = new EditCarPopup({
             onClosed: () => {
-                this._repaint();
                 this._displayCarPopupElement.modal("show");
                 this._cleanHTML = true;
             }

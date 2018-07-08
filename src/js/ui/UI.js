@@ -23,12 +23,8 @@ class UI {
         this._driversTab.setDriversController(driversController);
     }
 
-    showDriversList(list) {
-        this._driversTab.showDriversList(list);
-    }
-
-    showDriver(driver) {
-        this._driversTab.showDriver(driver);
+    showDriversList() {
+        this._driversTab.showDriversList();
     }
 
     showEditDriverForm(driver) {
@@ -47,13 +43,8 @@ class UI {
     	this._ordersTab.showOrder(order);
     }
 
-
-    showCarsList(list) {
-        this._carsTab.showCarsList(list);
-    }
-
-    showCar(car) {
-        this._carsTab.showCar(car);
+    showCarsList() {
+        this._carsTab.showCarsList();
     }
 
     showStatsPage(driversCount, freeDriversCount, carsCount, ordersCount, ordersInProgressCount) {

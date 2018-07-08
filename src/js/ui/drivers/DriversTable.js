@@ -51,7 +51,8 @@ class DriversTable {
 
     _onDriverRowClick(e) {
         var driverId = e.currentTarget.dataset.driverId;
-        this._driversController.selectDriver(driverId);
+        var driver = this._driversList.getDriver(driverId);
+        this.showDriver(driver);
     }
 
     _driverAdded() {
