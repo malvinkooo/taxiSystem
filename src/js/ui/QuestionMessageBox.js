@@ -1,18 +1,34 @@
 class QuestionMessageBox {
-    constructor(messageText) {
+    constructor(options) {
+        if (options) {
+            this._onAccept = options.onAccept || null;
+            this._onReject = options.onReject || null;
+            this._messageText = options.messageText;
+        }
+        $($("#questionMessageBox").html()).appendTo("body");
         this._questionMessageBoxElement = $(".questionMessageBox");
-        this._questionMessageBoxElement.find(".text").html(messageText);
+        this._questionMessageBoxElement.find(".text").html(this._messageText);
     }
 
     hide() {
         this._questionMessageBoxElement.modal("hide");
     }
 
-    show(acceptCallback, rejectCallback) {
+    show() {
         this._questionMessageBoxElement.modal({
-            onApprove: acceptCallback,
-            onDeny: rejectCallback
-        });
-        this._questionMessageBoxElement.modal("show");
+             onApprove: () => {
+                if(this._onAccept) {
+                    this._onAccept();
+                }
+            },
+            onDeny: () => {
+                if(this._onReject) {
+                    this._onReject();
+                }
+            },
+            onHidden: function() {
+                $(".questionMessageBox").remove();
+            }
+        }).modal("show");
     }
 }

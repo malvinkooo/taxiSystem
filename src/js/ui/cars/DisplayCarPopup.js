@@ -56,14 +56,18 @@ class DisplayCarPopup {
 
     _onDeleteCarButtonClick() {
         this._cleanHTML = false;
-        var questionBox = new QuestionMessageBox("Вы действительно хотите удалить машину?");
-        questionBox.show((function(){
-            this._cleanHTML = true;
-            this._destroy();
-            this._carsController.selectDeleteCar(this._car);
-        }).bind(this), (function(){
-            this._displayCarPopupElement.modal("show");
-            this._cleanHTML = true;
-        }).bind(this));
+        var questionBox = new QuestionMessageBox({
+            onAccept: (function(){
+                this._cleanHTML = true;
+                this._destroy();
+                this._carsController.selectDeleteCar(this._car);
+            }).bind(this),
+            onReject: (function(){
+                this._displayCarPopupElement.modal("show");
+                this._cleanHTML = true;
+            }).bind(this),
+            messageText: "Вы действительно хотите удалить машину?"
+        });
+        questionBox.show();
     }
 }
