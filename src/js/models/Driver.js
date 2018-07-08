@@ -37,7 +37,10 @@ class Driver {
         this._surname = driverParams.surname;
         this._phone = driverParams.phone;
         this._description = driverParams.description;
-        this._car = driverParams.car;
+        if(driverParams.car) {
+            this._car = driverParams.car;
+            this._car.set();
+        }
         this._currentLocation = "-";
         this._status = DriverStatus.FREE;
     }

@@ -60,7 +60,7 @@ class DisplayCarPopup {
         questionBox.show((function(){
             this._cleanHTML = true;
             this._destroy();
-            this._carsController.selectDeleteCar(this._car.getId());
+            this._carsController.selectDeleteCar(this._car);
         }).bind(this), (function(){
             this._displayCarPopupElement.modal("show");
             this._cleanHTML = true;

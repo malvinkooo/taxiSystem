@@ -22,8 +22,13 @@ class CarsController {
         var car = this._cars.editCar(carParams);
     }
 
-    selectDeleteCar(id) {
-        this._cars.deleteCar(id);
-        // this._ui.showCarsList();
+    selectDeleteCar(car) {
+        if(!car.isSet()) {
+            this._cars.deleteCar(car.getId());
+            return true;
+        } else {
+            console.log("При удалении машины что-то пошло не так.");
+        }
+        
     }
 }
