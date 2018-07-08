@@ -35,12 +35,8 @@ class UI {
         $('.ui.tab.active form.ui.form').addClass('success');
     }
 
-    showOrdersList(list) {
-        this._ordersTab.showOrdersList(list);
-    }
-
-    showOrder(order) {
-    	this._ordersTab.showOrder(order);
+    showOrdersList() {
+        this._ordersTab.showOrdersList();
     }
 
     showCarsList() {

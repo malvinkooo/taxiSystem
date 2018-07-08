@@ -16,8 +16,4 @@ class CarsTab {
         $.tab('change tab', 'allCars');
         this._carsTabElement.find('[data-tab="allCars"]').trigger('click');
     }
-
-    showEditCarForm(car) {
-        this._carsTable.showEditCarForm(car);
-    }
 }

@@ -47,7 +47,8 @@ class OrdersTable {
 
     _onOrderRowClick(e) {
         var orderId = e.currentTarget.dataset.orderId;
-        this._ordersController.selectOrder(orderId);
+        var order = this._ordersList.getOrder(orderId);
+        this.showOrder(order);
     }
 
     _orderAdded() {
