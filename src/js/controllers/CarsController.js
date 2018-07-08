@@ -28,6 +28,7 @@ class CarsController {
             return true;
         } else {
             console.log("При удалении машины что-то пошло не так.");
+            return false;
         }
         
     }
