@@ -10,12 +10,7 @@ class DisplayCarPopup {
         this._displayCarPopupElement.find(".edit-car").click(this._onEditCarButtonClick.bind(this));
         this._displayCarPopupElement.find(".delete-car").click(this._onDeleteCarButtonClick.bind(this));
         this._displayCarPopupElement.modal({
-            onHidden: (function(){
-                if(this._cleanHTML) {
-                    this._onCarChangeUnsubscribe();
-                    $(".displayCarModal").remove();
-                }
-            }).bind(this)
+            onHidden: this._destroy.bind(this)
         });
     }
 
@@ -40,6 +35,13 @@ class DisplayCarPopup {
         this._displayCarPopupElement.modal("show");
     }
 
+    _destroy() {
+        if(this._cleanHTML) {
+            this._onCarChangeUnsubscribe();
+            $(".displayCarModal").remove();
+        }
+    }
+
     _onEditCarButtonClick() {
         var popup = new EditCarPopup({
             onClosed: () => {
@@ -57,6 +59,7 @@ class DisplayCarPopup {
         var questionBox = new QuestionMessageBox("Вы действительно хотите удалить машину?");
         questionBox.show((function(){
             this._cleanHTML = true;
+            this._destroy();
             this._carsController.selectDeleteCar(this._car.getId());
         }).bind(this), (function(){
             this._displayCarPopupElement.modal("show");

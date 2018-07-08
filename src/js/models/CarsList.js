@@ -38,6 +38,7 @@ class CarsList {
 
     deleteCar(id) {
         delete this._cars[id];
+        this._emitter.emit("carRemoved");
     }
 
     getCarsCount() {
@@ -50,5 +51,9 @@ class CarsList {
 
     onCarChanged(fn) {
         this._emitter.subscribe("carChanged", fn);
+    }
+
+    onCarRemoved(fn) {
+        this._emitter.subscribe("carRemoved", fn);
     }
 }

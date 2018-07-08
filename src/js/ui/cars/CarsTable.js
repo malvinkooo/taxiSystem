@@ -5,6 +5,7 @@ class CarsTable {
       this._tbody = this._carsTableElement.find("table tbody");
       this._carsList.onCarAdded(this._carAdded.bind(this));
       this._carsList.onCarChanged(this._carChanged.bind(this));
+      this._carsList.onCarRemoved(this._carRemoved.bind(this));
       this._tbody.on("click", "tr", this._onCarRowClick.bind(this));
    }
 
@@ -42,6 +43,10 @@ class CarsTable {
    }
 
    _carChanged() {
+      this._showCarsList();
+   }
+
+   _carRemoved() {
       this._showCarsList();
    }
 }
