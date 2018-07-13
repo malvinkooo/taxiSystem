@@ -39,7 +39,7 @@ class Driver {
         this._description = driverParams.description;
         if(driverParams.car) {
             this._car = driverParams.car;
-            this._car.set();
+            this._car.assign();
         }
         this._currentLocation = "-";
         this._status = DriverStatus.FREE;
