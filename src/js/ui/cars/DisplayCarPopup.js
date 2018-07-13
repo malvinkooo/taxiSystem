@@ -4,7 +4,6 @@ class DisplayCarPopup {
         this._displayCarPopupElement = $(".displayCarModal");
         this._car = null;
         this._carsController = null;
-        this._lastCarId = null;
         this._cleanHTML = true;
         this._onCarChangeUnsubscribe = null;
         this._displayCarPopupElement.find(".edit-car").click(this._onEditCarButtonClick.bind(this));
@@ -19,7 +18,6 @@ class DisplayCarPopup {
     }
 
     _repaint() {
-        this._lastCarId = this._car.getId();
         var elements = this._displayCarPopupElement.find("[data-getAttr]");
         for(var i = 0; i < elements.length; i++) {
             var element = $(elements[i]);

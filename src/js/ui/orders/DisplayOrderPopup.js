@@ -6,7 +6,6 @@ class DisplayOrderPopup {
         this._driversController = null;
         this._cleanHTML = true;
         this._order = null;
-        this._lastOrderId = null;
         this._onOrderChangeUnsubscribe = null;
         this._displayOrderPopupElement.find(".edit-order").click(this._onEditOrderButtonClick.bind(this));
         this._displayOrderPopupElement.modal({
@@ -28,7 +27,6 @@ class DisplayOrderPopup {
     }
 
     _repaint() {
-        this._lastOrderId = this._order.getId();
         var statusColorsList = OrderStatus.colorsList;
         for (var j in statusColorsList) {
             this._displayOrderPopupElement

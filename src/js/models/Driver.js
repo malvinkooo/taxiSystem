@@ -43,6 +43,7 @@ class Driver {
         }
         this._currentLocation = "-";
         this._status = DriverStatus.FREE;
+        this._emitter = new EventEmitter();
     }
 
     getId() {
@@ -55,6 +56,7 @@ class Driver {
 
     setName(name) {
         this._name = name;
+        this._emitter.emit("driverChanged");
     }
 
     getSurname() {
@@ -63,6 +65,7 @@ class Driver {
 
     setSurname(surname) {
         this._surname = surname;
+        this._emitter.emit("driverChanged");
     }
 
     getFullName() {
@@ -75,6 +78,7 @@ class Driver {
 
     setPhone(phone) {
         this._phone = phone;
+        this._emitter.emit("driverChanged");
     }
 
     getCurrentLocation() {
@@ -83,6 +87,7 @@ class Driver {
 
     setCurrentLocation(currentLocation) {
         this._currentLocation = currentLocation;
+        this._emitter.emit("driverChanged");
     }
 
     getStatus() {
@@ -91,6 +96,7 @@ class Driver {
 
     setStatus(status) {
         this._status = status;
+        this._emitter.emit("driverChanged");
     }
 
     getDescription() {
@@ -99,6 +105,7 @@ class Driver {
 
     setDescription(description) {
         this._description = description;
+        this._emitter.emit("driverChanged");
     }
 
     getCar() {
@@ -107,5 +114,10 @@ class Driver {
 
     setCar(car) {
         this._car = car;
+        this._emitter.emit("driverChanged");
+    }
+
+    onChange(fn) {
+        return this._emitter.subscribe("driverChanged", fn);
     }
 }

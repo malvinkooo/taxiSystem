@@ -23,10 +23,6 @@ class DriversTab {
         this._driversTabElement.find('.item[data-tab="allDrivers"]').trigger('click');
     }
 
-    showEditDriverForm(driver) {
-        this._driversTable.showEditDriverForm(driver);
-    }
-
     _onAddDriverTabLoaded(tab) {
         if(tab === 'addDriver') {
             this._addDriverForm.show();

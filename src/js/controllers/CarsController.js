@@ -23,12 +23,14 @@ class CarsController {
     }
 
     selectDeleteCar(car) {
+        var result;
         if(!car.isAssigned()) {
             this._cars.deleteCar(car.getId());
-            return true;
+            result = true;
         } else {
             console.log("При удалении машины что-то пошло не так.");
-            return false;
+            result = false;
         }
+        return result;
     }
 }

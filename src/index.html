@@ -316,106 +316,6 @@
                     </div>
                 </div> -->
                 <!-- total drivers -->
-                <!-- display driver popup -->
-                <div class="ui tiny modal displayDriverModal">
-                    <a class="ui ribbon label status" data-getAttr="getStatus"></a>
-                    <i class="close icon"></i>
-                    <div class="header">
-                        Номер в системе <span class="id" data-getAttr="getId"></span>
-                    </div>
-                    <div class="content">
-                        <div class="ui cards">
-                            <div class="card">
-                                <div class="content">
-                                    <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar2/large/kristy.png">
-                                    <div class="header">
-                                        <span data-getAttr="getFullName"></span>
-                                    </div>
-                                    <div class="ui horizontal segments">
-                                       <div class="ui segment">
-                                        <i class="phone icon"></i>
-                                        <span data-getAttr="getPhone"></span>
-                                    </div>
-                                    <div class="ui segment">
-                                        <i class="taxi icon"></i>
-                                        <span data-car-getAttr="getCar"></span>
-                                    </div>
-                                </div>
-                                <div class="description" data-getAttr="getDescription">-</div>
-                            </div>
-                            <div class="extra content">
-                                <i class="map marker icon"></i>
-                                <span data-getAttr="getCurrentLocation">-</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- map marker -->
-                <div class="actions">
-                    <button class="ui icon button red delete-driver">
-                        <i class="trash alternate outline icon"></i>
-                    </button>
-                    <div class="ui blue button left labeled icon edit-driver">
-                        <i class="edit icon"></i>
-                        Редактировать
-                    </div>
-                    <div class="ui button black cancel actions">
-                        Закрыть
-                    </div>
-                </div>
-            </div>
-            <!-- display driver popup -->
-            <!-- edit driver popup -->
-            <div class="ui modal editDriverModal">
-                <i class="close icon"></i>
-                <div class="header">
-                    Редактировать информацию о водителе #<span data-getAttr="getId"></span>
-                </div>
-                <form class="ui form">
-                    <div class="ui fields">
-                        <div class="field status-wrap">
-                            <select class="ui fluid dropdown status-list" name="status"></select>
-                        </div>
-                    </div>
-                    <div class="fields two">
-                        <div class="field">
-                            <label>Имя</label>
-                            <input type="text" name="name" placeholder="Имя" class="name" data-getAttr="getName">
-                        </div>
-                        <div class="field">
-                            <label>Фамилия</label>
-                            <input type="text" name="surname" placeholder="Фамилия" class="surname" data-getAttr="getSurname">
-                        </div>
-                    </div>
-                    <div class="fields two">
-                        <div class="field">
-                            <label>Телефон</label>
-                            <input type="text" name="phone" placeholder="Телефон" class="phone" data-getAttr="getPhone">
-                        </div>
-                        <div class="field ui search currentLocation">
-                            <label>Текущее место пребывания</label>
-                            <input class="prompt" type="text" placeholder="Текущее место пребывания" name="currentLocation" data-getAttr="getCurrentLocation">
-                            <div class="results"></div>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <select class="ui fluid dropdown cars-list" name="car"></select>
-                    </div>
-                    <div class="field">
-                        <label>Комментарий</label>
-                        <textarea name="description" rows="4" data-getAttr="getDescription"></textarea>
-                    </div>
-                </form>
-                <div class="actions">
-                    <div class="ui button submit green">
-                        Сохранить
-                    </div>
-                    <div class="ui cancel actions button">
-                        Закрыть
-                    </div>
-                </div>
-            </div>
-            <!-- edit driver popup -->
         </div>
         <div class="ui tab" data-tab="addDriver">
             <form id="addDriverForm" class="ui form">
@@ -737,6 +637,110 @@
     </div>
 </script>
 <!-- edit car popup -->
+<!-- display driver popup -->
+<script id="displayDriverPopup" type="text/template">
+    <div class="ui tiny modal displayDriverModal">
+        <a class="ui ribbon label status" data-getAttr="getStatus"></a>
+        <i class="close icon"></i>
+        <div class="header">
+            Номер в системе <span class="id" data-getAttr="getId"></span>
+        </div>
+        <div class="content">
+            <div class="ui cards">
+                <div class="card">
+                    <div class="content">
+                        <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar2/large/kristy.png">
+                        <div class="header">
+                            <span data-getAttr="getFullName"></span>
+                        </div>
+                        <div class="ui horizontal segments">
+                            <div class="ui segment">
+                                <i class="phone icon"></i>
+                                <span data-getAttr="getPhone"></span>
+                            </div>
+                            <div class="ui segment">
+                                <i class="taxi icon"></i>
+                                <span data-car-getAttr="getCar"></span>
+                            </div>
+                        </div>
+                        <div class="description" data-getAttr="getDescription">-</div>
+                    </div>
+                    <div class="extra content">
+                        <i class="map marker icon"></i>
+                        <span data-getAttr="getCurrentLocation">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- map marker -->
+        <div class="actions">
+            <button class="ui icon button red delete-driver">
+                <i class="trash alternate outline icon"></i>
+            </button>
+            <div class="ui blue button left labeled icon edit-driver">
+                <i class="edit icon"></i>
+                Редактировать
+            </div>
+            <div class="ui button black cancel actions">
+                Закрыть
+            </div>
+        </div>
+    </div>
+</script>
+<!-- display driver popup -->
+<!-- edit driver popup -->
+<script id="editDriverPopup" type="text/template">
+    <div class="ui modal editDriverModal">
+        <i class="close icon"></i>
+        <div class="header">
+            Редактировать информацию о водителе #<span data-getAttr="getId"></span>
+        </div>
+        <form class="ui form">
+            <div class="ui fields">
+                <div class="field status-wrap">
+                    <select class="ui fluid dropdown status-list" name="status"></select>
+                </div>
+            </div>
+            <div class="fields two">
+                <div class="field">
+                    <label>Имя</label>
+                    <input type="text" name="name" placeholder="Имя" class="name" data-getAttr="getName">
+                </div>
+                <div class="field">
+                    <label>Фамилия</label>
+                    <input type="text" name="surname" placeholder="Фамилия" class="surname" data-getAttr="getSurname">
+                </div>
+            </div>
+            <div class="fields two">
+                <div class="field">
+                    <label>Телефон</label>
+                    <input type="text" name="phone" placeholder="Телефон" class="phone" data-getAttr="getPhone">
+                </div>
+                <div class="field ui search currentLocation">
+                    <label>Текущее место пребывания</label>
+                    <input class="prompt" type="text" placeholder="Текущее место пребывания" name="currentLocation" data-getAttr="getCurrentLocation">
+                    <div class="results"></div>
+                </div>
+            </div>
+            <div class="field">
+                <select class="ui fluid dropdown cars-list" name="car"></select>
+            </div>
+            <div class="field">
+                <label>Комментарий</label>
+                <textarea name="description" rows="4" data-getAttr="getDescription"></textarea>
+            </div>
+        </form>
+        <div class="actions">
+            <div class="ui button submit green action approve">
+                Сохранить
+            </div>
+            <div class="ui cancel actions button">
+                Закрыть
+            </div>
+        </div>
+    </div>
+</script>
+<!-- edit driver popup -->
 <!-- question messagebox -->
 <script id="questionMessageBox" type="text/template">
     <div class="ui mini modal questionMessageBox">
