@@ -16,14 +16,19 @@ GET /api/drivers/
         'name': 'Василий',
         'surname': 'Пупкин',
         'phone': '0999999999',
-        'currentLocation': 'ул. Марсельская, 12',
-        'car': 'Nissan x34',
+        'car': {
+          'id': 1,
+          'stateCarNumber': 'BY454545',
+          'gasolineConsumtionRatio': 0.77,
+          'brand': 'Nissan x45',
+          'description': 'Комментарий о машине'
+        },
         'description': 'Комментарий о водителе'
       },
       ...
     ]
 
-500 Internal Server Error
+500 Internal Server Error - при внутренней ошибке сервера
 
 ## Получить информацию об одном водителе
 
@@ -43,15 +48,21 @@ DRIVER_ID - идентификатор водителя
       'surname': 'Пупкин',
       'phone': '0999999999',
       'currentLocation': 'ул. Марсельская, 12',
-      'car': 'Nissan x34',
+      'car': {
+        'id': 1,
+        'stateCarNumber': 'BY454545',
+        'gasolineConsumtionRatio': 0.77,
+        'brand': 'Nissan x45',
+        'description': 'Комментарий о машине'
+      },
       'description': 'Комментарий о водителе'
     }
 
-400 Bad Request
+400 Bad Request - при ошибке валидации
 
-404 Not Found
+404 Not Found - если объект не найден
 
-500 Internal Server Error
+500 Internal Server Error - при внутренней ошибке сервера
 
 ## Добавить водителя
 
@@ -80,9 +91,9 @@ POST /api/drivers/
       'description': 'Комментарий о водителе'
     }
 
-400 Bad Request
+400 Bad Request - при ошибке валидации
 
-500 Internal Server Error
+500 Internal Server Error - при внутренней ошибке сервера
 
 ## Редактировать информацию о водителе
 
@@ -115,11 +126,11 @@ DRIVER_ID - идентификатор водителя.
       'description': 'Комментарий о водителе'
     }
 
-400 Bad Request
+400 Bad Request - при ошибке валидации
 
-404 Not Found
+404 Not Found - если объект не найден
 
-500 Internal Server Error
+500 Internal Server Error - при внутренней ошибке сервера
 
 ## Удалить водителя
 
@@ -133,11 +144,11 @@ DRIVER_ID - идентификатор водителя
 
 200 ОК
 
-400 Bad Request
+400 Bad Request - при ошибке валидации
 
-404 Not Found
+404 Not Found - если объект не найден
 
-500 Internal Server Error
+500 Internal Server Error - при внутренней ошибке сервера
 
 # Работа с машинами
 
@@ -162,7 +173,7 @@ GET /api/cars/
       ...
     ]
 
-500 Internal Server Error
+500 Internal Server Error - привнутренней ошибке сервера
 
 ## Получить информацию об одной машине
 
@@ -182,11 +193,11 @@ CAR_ID - идентификатор машины
       'description': 'Комментарий о машине'
     }
 
-400 Bad Request
+400 Bad Request - при ошибке валидации
 
-404 Not Found
+404 Not Found - если объект не найден
 
-500 Internal Server Error
+500 Internal Server Error - при внутренней ошибке сервера
 
 ## Добавить машину
 
@@ -213,9 +224,9 @@ POST /api/cars/
       'description': 'Комментарий о машине'
     }
 
-400 Bad Request
+400 Bad Request - при ошибке валидации
 
-500 Internal Server Error
+500 Internal Server Error - при внутренней ошибке сервера
 
 ## Редактировать информацию о машине
 
@@ -245,11 +256,11 @@ CAR_ID - идентификатор машины
       'description': 'Комментарий о машине'
     }
 
-400 Bad Request
+400 Bad Request - при ошибке валидации
 
-404 Not Found
+404 Not Found - если объект не найден
 
-500 Internal Server Error
+500 Internal Server Error - при внутренней ошибке сервера
 
 ## Удалить машину
 
@@ -263,11 +274,11 @@ CAR_ID - идентификатор машины
 
 200 ОК
 
-400 Bad Request
+400 Bad Request - при ошибкевалидации
 
-404 Not Found
+404 Not Found - если объект не найден
 
-500 Internal Server Error
+500 Internal Server Error - при внутренней ошибке сервера
 
 # Работа с заказами
 
@@ -316,7 +327,7 @@ GET /api/orders/
       ...
     ]
 
-500 Internal Server Error
+500 Internal Server Error - при внутренней ошибке сервера
 
 ## Получить информацию о заказе
 
@@ -362,11 +373,11 @@ ORDER_ID - идентификатор заказа
       'status': 'Отменен'
     }
 
-400 Bad Request
+400 Bad Request - при ошибке валидации
 
-404 Not Found
+404 Not Found - если объект не найден
 
-500 Internal Server Error
+500 Internal Server Error - при внутренней ошибке сервера
 
 ## Редактировать заказ
 
@@ -441,11 +452,11 @@ POST /api/orders/
       'status': 'Отменен'
     }
 
-400 Bad Request
+400 Bad Request - при ошибке валидации
 
-404 Not Found
+404 Not Found - если объект не найден
 
-500 Internal Server Error
+500 Internal Server Error - при внутренней ошибке сервера
 
 ## Редактировать заказ
 
@@ -523,8 +534,8 @@ ORDER_ID - идентификатор заказа
       'status': 'Отменен'
     }
 
-400 Bad Request
+400 Bad Request - при ошибке валдиации
 
-404 Not Found
+404 Not Found - если объект не найден
 
-500 Internal Server Error
+500 Internal Server Error - при внутренней ошибке сервера
