@@ -56,7 +56,7 @@ class DriversController {
             this._driversList.deleteDriver(driver.getId());
             result = true;
         } else {
-            console.log("При удалении машины что-то пошло не так.");
+            console.log("При удалении водителя что-то пошло не так.");
             result = false;
         }
         return result;

@@ -6,7 +6,7 @@ class Car {
         this._gasolineConsumptionRatio = Number.parseFloat(carParams.gasolineConsumptionRatio);
         this._brand = carParams.brand;
         this._description = carParams.description;
-        this._isAssign = false;
+        this._isAssigned = false;
         this._emitter = new EventEmitter();
     }
 
@@ -15,11 +15,11 @@ class Car {
     }
 
     assign() {
-        this._isAssign = true;
+        this._isAssigned = true;
     }
 
     isAssigned() {
-        return this._isAssign;
+        return this._isAssigned;
     }
 
     getId() {
