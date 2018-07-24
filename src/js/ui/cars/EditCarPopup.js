@@ -1,16 +1,32 @@
 class EditCarPopup {
-    constructor(editCarPopupElement) {
-        this._editCarPopupElement = editCarPopupElement;
+    constructor(options) {
+        if (options) {
+            this._onAccept = options.onAccept || null;
+            this._onReject = options.onReject || null;
+            this._onClosed = options.onClosed || null;
+        }
+        $($("#editCarPopup").html()).appendTo('body');
+        this._editCarPopupElement = $(".editCarModal");
+        this._carsController = null;
         this._lastCarId = null;
+        this._cleanHTML = true;
         this._editCarPopupElement.find(".submit").click(this._onEditFormSubmit.bind(this));
         this._editCarFormConstraints = Validation.getCarConstraints();
+        this._editCarPopupElement.modal({
+            onHidden: () => {
+                if(this._cleanHTML) {
+                    this._onClosed();
+                    $(".editCarModal").remove();
+                }
+            }
+        });
     }
 
     setCarsController(carsController) {
         this._carsController = carsController;
     }
 
-    showEditCarForm(car) {
+    show(car) {
         this._lastCarId = car.getId();
         var elements = this._editCarPopupElement.find("[data-getAttr]");
         for(var i = 0; i < elements.length; i++) {
@@ -20,7 +36,6 @@ class EditCarPopup {
         }
         this._editCarPopupElement.find("[data-getAttr='getId']").html(car.getId());
         this._editCarPopupElement.modal("show");
-
     }
 
     _onEditFormSubmit() {

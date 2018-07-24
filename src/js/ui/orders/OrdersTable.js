@@ -3,24 +3,19 @@ class OrdersTable {
         this._ordersTableElement = ordersTableElement;
         this._ordersList = ordersList;
         this._ordersController = null;
-        this._displayOrderPoup = new DisplayOrderPopup(this._ordersTableElement.find(".displayOrderModal"));
-        this._editOrderPopup = new EditOrderPopup(this._ordersTableElement.find(".editOrderModal"));
+        this._driversController = null;
         this._tbody = this._ordersTableElement.find('table tbody');
-
         this._ordersList.onOrderAdded(this._orderAdded.bind(this));
         this._ordersList.onOrderChanged(this._orderChanged.bind(this));
-
         this._tbody.on("click", "tr", this._onOrderRowClick.bind(this));
     }
 
     setOrdersController(ordersController) {
         this._ordersController = ordersController;
-        this._displayOrderPoup.setOrdersController(ordersController);
-        this._editOrderPopup.setOrdersController(ordersController);
     }
 
     setDriversController(driversController) {
-        this._editOrderPopup.setDriversController(driversController);
+        this._driversController = driversController;
     }
 
     _showOrdersList() {
@@ -44,25 +39,23 @@ class OrdersTable {
     }
 
     showOrder(order) {
-        this._displayOrderPoup.showOrder(order);
-    }
-
-    showEditOrderform(order) {
-        this._editOrderPopup.showEditOrderForm(order);
+        var popup = new DisplayOrderPopup();
+        popup.setOrdersController(this._ordersController);
+        popup.setDriversController(this._driversController);
+        popup.showOrder(order);
     }
 
     _onOrderRowClick(e) {
         var orderId = e.currentTarget.dataset.orderId;
-        this._ordersController.selectOrder(orderId);
+        var order = this._ordersList.getOrder(orderId);
+        this.showOrder(order);
     }
 
     _orderAdded() {
-        console.log("Order has been added");
         this._showOrdersList();
     }
 
     _orderChanged() {
-        console.log("Order has been changed");
         this._showOrdersList();
     }
 }

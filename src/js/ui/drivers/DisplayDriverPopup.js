@@ -1,18 +1,27 @@
 class DisplayDriverPopup {
-    constructor(displayDriverPopupElement) {
-        this._displayDriverPopupElement = displayDriverPopupElement;
+    constructor() {
+        $($("#displayDriverPopup").html()).appendTo("body");
+        this._displayDriverPopupElement = $(".displayDriverModal");
         this._driversController = null;
-        this._lastDriver = null;
+        this._carsController = null;
+        this._driver = null;
+        this._cleanHTML = true;
         this._displayDriverPopupElement.find(".edit-driver").click(this._onEditDriverButtonClick.bind(this));
         this._displayDriverPopupElement.find(".delete-driver").click(this._onDeleteDriverButtonClick.bind(this));
+        this._displayDriverPopupElement.modal({
+            onHidden: this._destroy.bind(this)
+        });
     }
 
     setDriversController(driversController) {
         this._driversController = driversController;
     }
 
-    showDriver(driver) {
-        this._lastDriver = driver;
+    setCarsController(carsController) {
+        this._carsController = carsController;
+    }
+
+    _repaint() {
         var statusDriversList = DriverStatus.colorsList;
         for(var color in statusDriversList){
             this._displayDriverPopupElement.find(".status").removeClass(statusDriversList[color]);
@@ -20,23 +29,64 @@ class DisplayDriverPopup {
         var elements = this._displayDriverPopupElement.find("[data-getAttr]");
         for(var i = 0; i < elements.length; i++) {
             var getAttr = $(elements[i]).attr("data-getAttr");
-            $(elements[i]).html(driver[getAttr]());
+            $(elements[i]).html(this._driver[getAttr]());
         }
-        this._displayDriverPopupElement.find(".status").addClass(statusDriversList[driver.getStatus()]);
-        this._displayDriverPopupElement.find("[data-car-getAttr]").html(driver.getCar().toString());
+        this._displayDriverPopupElement.find(".status").addClass(statusDriversList[this._driver.getStatus()]);
+        this._displayDriverPopupElement.find("[data-car-getAttr]").html(this._driver.getCar().toString());
+    }
+
+    _destroy() {
+        if(this._cleanHTML) {
+            this._onDriverChangeUnsubscribe();
+            $(".displayDriverModal").remove();
+        }
+    }
+
+    showDriver(driver) {
+        this._driver = driver;
+        this._repaint();
+        this._onDriverChangeUnsubscribe = this._driver.onChange(this._repaint.bind(this));
         this._displayDriverPopupElement.modal("show");
     }
 
     _onEditDriverButtonClick() {
-        this._driversController.selectEditDriver(this._lastDriver.getId());
+        var popup = new EditDriverPopup({
+            onClosed: () => {
+                this._displayDriverPopupElement.modal("show");
+                this._cleanHTML = true;
+            }
+        });
+        this._cleanHTML = false;
+        popup.setDriversController(this._driversController);
+        popup.setCarsController(this._carsController);
+        popup.show(this._driver);
     }
 
     _onDeleteDriverButtonClick() {
-        var questionBox = new QuestionMessageBox("Вы действительно хотите удалить водителя?");
-        questionBox.show((function(){
-            this._driversController.selectDeleteDriver(this._lastDriver.getId());
-        }).bind(this), (function(){
-            this._driversController.selectDriver(this._lastDriver.getId());
-        }).bind(this));
+        this._cleanHTML = false;
+        var questionBox = new QuestionMessageBox({
+            onAccept: (function(){
+                var result = this._driversController.selectDeleteDriver(this._driver);
+                if(!result) {
+                    var infoMessage = new InfoMessageBox({
+                        onHidden: () => {
+                            this._displayDriverPopupElement.modal("show");
+                            this._cleanHTML = true;
+                        },
+                        messageText: "Не удалось удалить водителя из системы. Возможно он сейчас на заказе."
+                    });
+                    infoMessage.show();
+                } else {
+                    this._cleanHTML = true;
+                    this._destroy();
+                }
+            }).bind(this),
+            onReject: (function(){
+                this._displayDriverPopupElement.modal("show");
+                this._cleanHTML = true;
+            }).bind(this),
+            messageText: "Вы действительно хотите удалить водителя из системы?"
+        });
+        questionBox.show();
     }
 }

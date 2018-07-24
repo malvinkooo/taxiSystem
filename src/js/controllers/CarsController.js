@@ -18,24 +18,19 @@ class CarsController {
         this._ui.showCarsList();
     }
 
-    selectCar(id) {
-        var car = this._cars.getCar(id);
-        this._ui.showCar(car);
-    }
-
-    selectEditCar(id) {
-        var car = this._cars.getCar(id);
-        this._ui.showEditCarForm(car);
-    }
-
     editCar(carParams) {
         var car = this._cars.editCar(carParams);
-        this._ui.showCar(car);
     }
 
-    selectDeleteCar(id) {
-        this._cars.deleteCar(id);
-        var list = this._cars.getAllCars();
-        this._ui.showCarsList(list);
+    selectDeleteCar(car) {
+        var result;
+        if(!car.isAssigned()) {
+            this._cars.deleteCar(car.getId());
+            result = true;
+        } else {
+            console.log("При удалении машины что-то пошло не так.");
+            result = false;
+        }
+        return result;
     }
 }

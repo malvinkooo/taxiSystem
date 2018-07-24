@@ -2,7 +2,7 @@ class MapPopup {
     constructor(options) {
         this._currentMarker = null;
         this._currentAddress = null;
-        if (options) {            
+        if (options) {
             this._onAccept = options.onAccept || null;
             this._onReject = options.onReject || null;
             this._onClosed = options.onClosed || null;
@@ -27,7 +27,7 @@ class MapPopup {
                 }
                 if (this._onClosed) {
                     this._onClosed();
-                }                
+                }
             }).bind(this)
         });
         this._mapPopupelement.modal("show");
@@ -55,7 +55,7 @@ class MapPopup {
                 if(this._currentAddress) {
                     if (this._onAccept) {
                         this._onAccept(this._currentAddress);
-                    }                    
+                    }
                 }
             })
             .modal("setting", "onReject", () => {

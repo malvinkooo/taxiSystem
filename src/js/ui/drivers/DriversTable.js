@@ -2,25 +2,20 @@ class DriversTable {
     constructor(driversTableElement, driversList) {
         this._driversTableElement = driversTableElement;
         this._driversController = null;
+        this._carsController = null;
         this._driversList = driversList;
         this._tbody = this._driversTableElement.find('table tbody');
-        this._displayDriverPopup = new DisplayDriverPopup(this._driversTableElement.find(".displayDriverModal"));
-        this._editDriverPopup = new EditDriverPopup(this._driversTableElement.find(".editDriverModal"));
-
         this._driversList.onDriverAdded(this._driverAdded.bind(this));
         this._driversList.onDriverChanged(this._driverChanged.bind(this));
-
         this._tbody.on("click", "tr", this._onDriverRowClick.bind(this));
     }
 
     setCarsController(carsController) {
-        this._editDriverPopup.setCarsController(carsController);
+        this._carsController = carsController;
     }
 
     setDriversController(driversController){
         this._driversController = driversController;
-        this._displayDriverPopup.setDriversController(driversController);
-        this._editDriverPopup.setDriversController(driversController);
     }
 
     _showDriversList(){
@@ -42,16 +37,16 @@ class DriversTable {
     }
 
     showDriver(driver) {
-        this._displayDriverPopup.showDriver(driver);
-    }
-
-    showEditDriverForm(driver) {
-        this._editDriverPopup.showEditDriverForm(driver);
+        var popup = new DisplayDriverPopup();
+        popup.setDriversController(this._driversController);
+        popup.setCarsController(this._carsController);
+        popup.showDriver(driver);
     }
 
     _onDriverRowClick(e) {
         var driverId = e.currentTarget.dataset.driverId;
-        this._driversController.selectDriver(driverId);
+        var driver = this._driversList.getDriver(driverId);
+        this.showDriver(driver);
     }
 
     _driverAdded() {

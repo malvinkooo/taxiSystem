@@ -1,15 +1,31 @@
 class EditOrderPopup {
-    constructor(editOrderPopupElement) {
+    constructor(options) {
+        if (options) {
+            this._onAccept = options.onAccept || null;
+            this._onReject = options.onReject || null;
+            this._onClosed = options.onClosed || null;
+        }
+        $($("#editOrderPopup").html()).appendTo("body");
         this._ordersController = null;
+        this._driversController = null;
         this._lastOrder = null;
-        this._editOrderPopupElement = editOrderPopupElement;
+        this._cleanHTML = true;
+        this._editOrderPopupElement = $(".editOrderModal");
+        this._editOrderPopupElement.modal({
+            onHidden: () => {
+                if(this._cleanHTML) {
+                    this._onClosed();
+                    $(".editOrderModal").remove();
+                }
+            }
+        });
         this._carFeedPointSearchBox = new SearchBox(this._editOrderPopupElement.find(".search.carFeedPoint"));
         this._carFeedPointSearchBox.onSelect((address) => {
-            this._editOrderPopupElement.find("input[name='carFeedPoint']").value(address);            
-        });        
+            this._editOrderPopupElement.find("input[name='carFeedPoint']").value(address);
+        });
         this._destinationSearchBox = new SearchBox(this._editOrderPopupElement.find(".search.destination"));
         this._destinationSearchBox.onSelect((address) => {
-            this._editOrderPopupElement.find("input[name='destination']").value(address);            
+            this._editOrderPopupElement.find("input[name='destination']").value(address);
         });
         this._statusListSelect = this._editOrderPopupElement.find("select.status-list");
         var statusList = OrderStatus.statusList;
@@ -52,7 +68,7 @@ class EditOrderPopup {
         this._driversController = driversController;
     }
 
-    showEditOrderForm(order) {
+    show(order) {
         this._lastOrder = order;
         var elements = this._editOrderPopupElement.find("[data-getattr]");
         for(var i = 0; i < elements.length; i++) {
@@ -105,11 +121,13 @@ class EditOrderPopup {
     }
 
     _onShowMapClick(inputAddress, inputLat, inputLng) {
+        this._cleanHTML = false;
         var mapPopup = new MapPopup({
             onAccept: (selectedAddress) => {
                 inputAddress.value(selectedAddress);
             },
             onClosed: () => {
+                this._cleanHTML = true;
                 this._editOrderPopupElement.modal("show");
             }
         });

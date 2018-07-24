@@ -6,10 +6,20 @@ class Car {
         this._gasolineConsumptionRatio = Number.parseFloat(carParams.gasolineConsumptionRatio);
         this._brand = carParams.brand;
         this._description = carParams.description;
+        this._isAssigned = false;
+        this._emitter = new EventEmitter();
     }
 
     toString() {
         return this._brand + " " + this._stateCarNumber;
+    }
+
+    assign() {
+        this._isAssigned = true;
+    }
+
+    isAssigned() {
+        return this._isAssigned;
     }
 
     getId() {
@@ -22,6 +32,7 @@ class Car {
 
     setStateCarNumber(stateCarNumber) {
     	this._stateCarNumber = stateCarNumber;
+        this._emitter.emit("carChanged");
     }
 
     getGasolineConsumptionRatio() {
@@ -30,6 +41,7 @@ class Car {
 
     setGasolineConsumptionRatio(gasolineConsumptionRatio) {
     	this._gasolineConsumptionRatio = Number.parseFloat(gasolineConsumptionRatio);
+        this._emitter.emit("carChanged");
     }
 
     getBrand() {
@@ -38,6 +50,7 @@ class Car {
 
     setBrand(brand) {
     	this._brand = brand;
+        this._emitter.emit("carChanged");
     }
 
     getDescription() {
@@ -46,5 +59,10 @@ class Car {
 
     setDescription(description) {
         this._description = description;
+        this._emitter.emit("carChanged");
+    }
+
+    onChange(fn) {
+        return this._emitter.subscribe("carChanged", fn);
     }
 }

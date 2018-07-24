@@ -3,19 +3,14 @@ class CarsTable {
       this._carsTableElement = carsTableElement;
       this._carsList = carsList;
       this._tbody = this._carsTableElement.find("table tbody");
-
       this._carsList.onCarAdded(this._carAdded.bind(this));
       this._carsList.onCarChanged(this._carChanged.bind(this));
-
+      this._carsList.onCarRemoved(this._carRemoved.bind(this));
       this._tbody.on("click", "tr", this._onCarRowClick.bind(this));
-      this._displayCarPopup = new DisplayCarPopup(this._carsTableElement.find(".displayCarModal"));
-      this._editCarPopup = new EditCarPopup(this._carsTableElement.find(".editCarModal"));
    }
 
    setCarsController(carsController) {
       this._carsController = carsController;
-      this._displayCarPopup.setCarsController(carsController);
-      this._editCarPopup.setCarsController(carsController);
    }
 
    _showCarsList() {
@@ -32,27 +27,26 @@ class CarsTable {
    }
 
    showCar(car) {
-      this._displayCarPopup.showCar(car);
-   }
-
-   showEditCarForm(car) {
-      this._editCarPopup.showEditCarForm(car);
+      var popup = new DisplayCarPopup();
+      popup.setCarsController(carsController);
+      popup.showCar(car);
    }
 
    _onCarRowClick(e) {
       var carId = e.currentTarget.dataset.carId;
-      this._carsController.selectCar(carId);
+      var car = this._carsList.getCar(carId);
+      this.showCar(car);
    }
 
    _carAdded() {
-      console.log("Car has been added");
       this._showCarsList();
-      //
    }
 
    _carChanged() {
-      console.log("Car has been changed");
       this._showCarsList();
-      //
+   }
+
+   _carRemoved() {
+      this._showCarsList();
    }
 }

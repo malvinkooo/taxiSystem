@@ -13,11 +13,6 @@ class DriversController {
         this._ui.showDriversList();
     }
 
-    selectDriver(id) {
-        var driver = this._driversList.getDriver(id);
-        this._ui.showDriver(driver);
-    }
-
     selectMenuItemAddDriver() {
         this._ui.showAddDriverForm();
     }
@@ -50,20 +45,20 @@ class DriversController {
         this._ui.showDriversList(list);
     }
 
-    selectEditDriver(id) {
-        var order = this._driversList.getDriver(id);
-        this._ui.showEditDriverForm(order);
-    }
-
     editDriver(driverParams) {
         driverParams.car = this._carsList.getCar(driverParams.car);
         var driver = this._driversList.editDriver(driverParams);
-        this._ui.showDriver(driver);
     }
 
-    selectDeleteDriver(id) {
-        this._driversList.deleteDriver(id);
-        var list = this._driversList.getAllDrivers();
-        this._ui.showDriversList(list);
+    selectDeleteDriver(driver) {
+        var result;
+        if(driver.getStatus === DriverStatus.FREE) {
+            this._driversList.deleteDriver(driver.getId());
+            result = true;
+        } else {
+            console.log("При удалении водителя что-то пошло не так.");
+            result = false;
+        }
+        return result;
     }
 }

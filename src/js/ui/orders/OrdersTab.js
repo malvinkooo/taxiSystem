@@ -23,14 +23,6 @@ class OrdersTab {
         this._addOrderForm.setDriversController(driversController);
     }
 
-    showOrder(order) {
-        this._ordersTable.showOrder(order);
-    }
-
-    showEditOrderForm(order) {
-        this._ordersTable.showEditOrderform(order);
-    }
-
     _onAddOrderTabLoaded(tab){
         if(tab === 'addOrder') {
             this._addOrderForm.show();

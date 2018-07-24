@@ -1,9 +1,17 @@
 class EditDriverPopup {
-    constructor(editDriverPopupElement){
-        this._editDriverPopupElement = editDriverPopupElement;
+    constructor(options){
+        if (options) {
+            this._onAccept = options.onAccept || null;
+            this._onReject = options.onReject || null;
+            this._onClosed = options.onClosed || null;
+        }
+
+        $($("#editDriverPopup").html()).appendTo("body");
+        this._editDriverPopupElement = $(".editDriverModal");
         this._carsController = null;
         this._driversController = null;
         this._lastDriverId = null;
+        this._cleanHtml = true;
         this._currentLocation = new SearchBox(this._editDriverPopupElement.find(".search.currentLocation"));
         this._statusListSelectElement = this._editDriverPopupElement.find("select.status-list");
         this._carsListSelectElement = this._editDriverPopupElement.find("select.cars-list");
@@ -17,6 +25,14 @@ class EditDriverPopup {
         this._statusListSelectElement.dropdown({showOnFocus: false});
         this._editDriverPopupElement.find(".submit").click(this._onEditFormSubmit.bind(this));
         this._editDriverPopupConstraints = Validation.getEditDriverConstraints();
+        this._editDriverPopupElement.modal({
+            onHidden: () => {
+                if(this._cleanHtml) {
+                    this._onClosed();
+                    $(".editDriverModal").remove();
+                }
+            }
+        });
     }
 
     setCarsController(carsController) {
@@ -27,7 +43,7 @@ class EditDriverPopup {
         this._driversController = driversController;
     }
 
-    showEditDriverForm(driver) {
+    show(driver) {
         this._lastDriverId = driver.getId();
         var elements = this._editDriverPopupElement.find("[data-getAttr]");
         for(var i = 0; i < elements.length; i++) {

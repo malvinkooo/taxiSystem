@@ -12,16 +12,8 @@ class CarsTab {
         this._addCarForm.setCarsController(carsController);
     }
 
-    showCarsList(list) {
+    showCarsList() {
         $.tab('change tab', 'allCars');
         this._carsTabElement.find('[data-tab="allCars"]').trigger('click');
-    }
-
-    showCar(car) {
-        this._carsTable.showCar(car);
-    }
-
-    showEditCarForm(car) {
-        this._carsTable.showEditCarForm(car);
     }
 }

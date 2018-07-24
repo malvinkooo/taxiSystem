@@ -31,25 +31,14 @@ class OrdersController {
         this._ui.showOrdersList();
     }
 
-    selectOrder(id) {
-        var order = this._orders.getOrder(id);
-        this._ui.showOrder(order);
-    }
-
-    selectEditOrder(id) {
-        var order = this._orders.getOrder(id);
-        this._ui.showEditOrderForm(order);
-    }
-
     editOrder(orderParams) {
         orderParams.driver = this._drivers.getDriver(orderParams.driver);
         GeoService.getDistance(orderParams.carFeedPoint, orderParams.destination).then((distance) => {
             orderParams.distance = distance;
             var order = this._orders.editOrder(orderParams);
-            this._ui.showOrder(order);
         }).catch((error) => {
             console.error('Error occured while getting a distance, see details: ', error);
         });
-        
+
     }
 }
