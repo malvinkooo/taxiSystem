@@ -1,0 +1,530 @@
+# Работа с водителями
+
+## Получение списка всех водителей
+
+GET /api/drivers/
+
+Параметры: -
+
+Возвращаемое значение:
+
+200 ОК
+
+    [
+      {
+        'id': 1,
+        'name': 'Василий',
+        'surname': 'Пупкин',
+        'phone': '0999999999',
+        'currentLocation': 'ул. Марсельская, 12',
+        'car': 'Nissan x34',
+        'description': 'Комментарий о водителе'
+      },
+      ...
+    ]
+
+500 Internal Server Error
+
+## Получить информацию об одном водителе
+
+GET /api/drivers/{DRIVER_ID}
+
+Параметры:
+
+DRIVER_ID - идентификатор водителя
+
+Возвращаемое значение:
+
+200 ОК
+
+    {
+      'id': 1,
+      'name': 'Василий',
+      'surname': 'Пупкин',
+      'phone': '0999999999',
+      'currentLocation': 'ул. Марсельская, 12',
+      'car': 'Nissan x34',
+      'description': 'Комментарий о водителе'
+    }
+
+400 Bad Request
+
+404 Not Found
+
+500 Internal Server Error
+
+## Добавить водителя
+
+POST /api/drivers/
+
+Параметры:
+
+    {
+      'name': 'Никита',
+      'surname': 'Сидоров',
+      'phone': '0998888888',
+      'car': 1,
+      'description': 'Комментарий о водителе'
+    }
+
+Возвращаемое значение:
+
+200 ОК
+
+    {
+      'id': 2,
+      'name': 'Никита',
+      'surname': 'Сидоров',
+      'phone': '0998888888',
+      'car': 1,
+      'description': 'Комментарий о водителе'
+    }
+
+400 Bad Request
+
+500 Internal Server Error
+
+## Редактировать информацию о водителе
+
+PUT /api/drivers/{DRIVER_ID}
+
+Параметры:
+
+DRIVER_ID - идентификатор водителя.
+
+    {
+      'id': 2,
+      'name': 'Сергей',
+      'surname': 'Макаренко',
+      'phone': '0777777777',
+      'car': 3,
+      'description': 'Комментарий о водителе'
+    }
+
+
+Возвращаемое значение:
+
+200 ОК
+
+    {
+      'id': 2,
+      'name': 'Сергей',
+      'surname': 'Макаренко',
+      'phone': '0777777777',
+      'car': 3,
+      'description': 'Комментарий о водителе'
+    }
+
+400 Bad Request
+
+404 Not Found
+
+500 Internal Server Error
+
+## Удалить водителя
+
+DELETE /api/drivers/{DRIVER_ID}
+
+Параметры:
+
+DRIVER_ID - идентификатор водителя
+
+Возвращаемое значение:
+
+200 ОК
+
+400 Bad Request
+
+404 Not Found
+
+500 Internal Server Error
+
+# Работа с машинами
+
+## Получить список всех машин
+
+GET /api/cars/
+
+Параметры: -
+
+Возвращаемое значение:
+
+200 ОК
+
+    [
+      {
+        'id': 1,
+        'stateCarNumber': 'BY454545',
+        'gasolineConsumtionRatio': 0.77,
+        'brand': 'Nissan x45',
+        'description': 'Комментарий о машине'
+      },
+      ...
+    ]
+
+500 Internal Server Error
+
+## Получить информацию об одной машине
+
+GET /api/cars/{CAR_ID}
+
+Параметры:
+
+CAR_ID - идентификатор машины
+
+Возвращаемое значение:
+
+    {
+      'id': 1,
+      'stateCarNumber': 'BY454545',
+      'gasolineConsumtionRatio': 0.77,
+      'brand': 'Nissan x45',
+      'description': 'Комментарий о машине'
+    }
+
+400 Bad Request
+
+404 Not Found
+
+500 Internal Server Error
+
+## Добавить машину
+
+POST /api/cars/
+
+Параметры:
+
+    {
+      'stateCarNumber': 'BY454545',
+      'gasolineConsumtionRatio': 0.77,
+      'brand': 'Nissan x45',
+      'description': 'Комментарий о машине'
+    }
+
+Возвращаемое значение:
+
+200 ОК
+
+    {
+      'id': 1,
+      'stateCarNumber': 'BY454545',
+      'gasolineConsumtionRatio': 0.77,
+      'brand': 'Nissan x45',
+      'description': 'Комментарий о машине'
+    }
+
+400 Bad Request
+
+500 Internal Server Error
+
+## Редактировать информацию о машине
+
+PUT /api/cars/{CAR_ID}
+
+Параметры:
+
+CAR_ID - идентификатор машины
+
+    {
+      'id': 2,
+      'stateCarNumber': 'BY454545',
+      'gasolineConsumtionRatio': 0.77,
+      'brand': 'Nissan x45',
+      'description': 'Комментарий о машине'
+    }
+
+Возвращаемое значение:
+
+200 ОК
+
+    {
+      'id': 2,
+      'stateCarNumber': 'BY121212',
+      'gasolineConsumtionRatio': 2.77,
+      'brand': 'Nissan x45',
+      'description': 'Комментарий о машине'
+    }
+
+400 Bad Request
+
+404 Not Found
+
+500 Internal Server Error
+
+## Удалить машину
+
+DELETE /api/cars/{CAR_ID}
+
+Параметры:
+
+CAR_ID - идентификатор машины
+
+Возвращаемое значение:
+
+200 ОК
+
+400 Bad Request
+
+404 Not Found
+
+500 Internal Server Error
+
+# Работа с заказами
+
+## Получить список всех заказов
+
+GET /api/orders/
+
+Параметры: -
+
+Возвращаемое значение:
+
+200 ОК
+
+    [
+      {
+        'id': 1,
+        'driver': {
+          'id': 2,
+          'name': 'Sergey',
+          'surname': 'Makarenko',
+          'phone': '0777777777',
+          'car': 3,
+          'description': 'About driver'
+         },
+        'clientName': 'Егор',
+        'clientSurname': 'Савченко',
+        'clientPhone': '0777777777',
+        'dateOfCreation': '12.12.2018',
+        'dateOfCompletion': '12.12.2018',
+        'carFeedPont': {
+          'id': 1,
+          'lat': 12.1111111111,
+          'lng': 12.2222222222,
+          'title': 'ул. Марсельская, 45'
+        },
+        'destination': {
+          'id': 1,
+          'lat': 12.1111111111,
+          'lng': 12.2222222222,
+          'title': 'ул. Марсельская, 45'
+        },
+        'distance': '1200м',
+        'rate': 1.00,
+        'status': 'Отменен'
+      },
+      ...
+    ]
+
+500 Internal Server Error
+
+## Получить информацию о заказе
+
+GET /api/orders/{ORDER_ID}
+
+Параметры:
+
+ORDER_ID - идентификатор заказа
+
+Возвращаемое значение:
+
+200 ОК
+
+    {
+      'id': 1,
+      'driver': {
+      'id': 2,
+        'name': 'Sergey',
+        'surname': 'Makarenko',
+        'phone': '0777777777',
+        'car': 3,
+        'description': 'About driver'
+      },
+      'clientName': 'Егор',
+      'clientSurname': 'Савченко',
+      'clientPhone': '0777777777',
+      'dateOfCreation': '12.12.2018',
+      'dateOfCompletion': '12.12.2018',
+      'carFeedPont': {
+          'id': 1,
+          'lat': 12.1111111111,
+          'lng': 12.2222222222,
+          'title': 'ул. Марсельская, 45'
+        },
+      'destination': {
+        'id': 1,
+        'lat': 12.1111111111,
+        'lng': 12.2222222222,
+        'title': 'ул. Марсельская, 45'
+      },
+      'distance': '1200м',
+      'rate': 1.00,
+      'status': 'Отменен'
+    }
+
+400 Bad Request
+
+404 Not Found
+
+500 Internal Server Error
+
+## Редактировать заказ
+
+POST /api/orders/
+
+Параметры:
+
+    {
+      'driver': {
+      'id': 2,
+        'name': 'Sergey',
+        'surname': 'Makarenko',
+        'phone': '0777777777',
+        'car': 3,
+        'description': 'About driver'
+      },
+      'clientName': 'Егор',
+      'clientSurname': 'Савченко',
+      'clientPhone': '0777777777',
+      'dateOfCreation': '12.12.2018',
+      'dateOfCompletion': '12.12.2018',
+      'carFeedPont': {
+          'id': 1,
+          'lat': 12.1111111111,
+          'lng': 12.2222222222,
+          'title': 'ул. Марсельская, 45'
+        },
+      'destination': {
+        'id': 1,
+        'lat': 12.1111111111,
+        'lng': 12.2222222222,
+        'title': 'ул. Марсельская, 45'
+      },
+      'distance': '1200м',
+      'rate': 1.00,
+      'status': 'Отменен'
+    }
+
+Возвращаемое значение:
+
+200 ОК
+
+    {
+      'id': 2,
+      'driver': {
+      'id': 2,
+        'name': 'Sergey',
+        'surname': 'Makarenko',
+        'phone': '0777777777',
+        'car': 3,
+        'description': 'About driver'
+      },
+      'clientName': 'Егор',
+      'clientSurname': 'Савченко',
+      'clientPhone': '0777777777',
+      'dateOfCreation': '12.12.2018',
+      'dateOfCompletion': '12.12.2018',
+      'carFeedPont': {
+          'id': 1,
+          'lat': 12.1111111111,
+          'lng': 12.2222222222,
+          'title': 'ул. Марсельская, 45'
+        },
+      'destination': {
+        'id': 1,
+        'lat': 12.1111111111,
+        'lng': 12.2222222222,
+        'title': 'ул. Марсельская, 45'
+      },
+      'distance': '1200м',
+      'rate': 1.00,
+      'status': 'Отменен'
+    }
+
+400 Bad Request
+
+404 Not Found
+
+500 Internal Server Error
+
+## Редактировать заказ
+
+PUT /api/orders/{ORDER_ID}
+
+Параметры:
+
+ORDER_ID - идентификатор заказа
+
+    {
+      'id': 2,
+      'driver': {
+      'id': 2,
+        'name': 'Sergey',
+        'surname': 'Makarenko',
+        'phone': '0777777777',
+        'car': 3,
+        'description': 'About driver'
+      },
+      'clientName': 'Егор',
+      'clientSurname': 'Савченко',
+      'clientPhone': '0777777777',
+      'dateOfCreation': '12.12.2018',
+      'dateOfCompletion': '12.12.2018',
+      'carFeedPont': {
+          'id': 1,
+          'lat': 12.1111111111,
+          'lng': 12.2222222222,
+          'title': 'ул. Марсельская, 45'
+        },
+      'destination': {
+        'id': 1,
+        'lat': 12.1111111111,
+        'lng': 12.2222222222,
+        'title': 'ул. Марсельская, 45'
+      },
+      'distance': '1200м',
+      'rate': 1.00,
+      'status': 'Отменен'
+    }
+
+Возвращаемое значение:
+
+200 ОК
+
+    {
+      'id': 2,
+      'driver': {
+      'id': 2,
+        'name': 'Sergey',
+        'surname': 'Makarenko',
+        'phone': '0777777777',
+        'car': 3,
+        'description': 'About driver'
+      },
+      'clientName': 'Егор',
+      'clientSurname': 'Савченко',
+      'clientPhone': '0777777777',
+      'dateOfCreation': '12.12.2018',
+      'dateOfCompletion': '12.12.2018',
+      'carFeedPont': {
+          'id': 1,
+          'lat': 12.1111111111,
+          'lng': 12.2222222222,
+          'title': 'ул. Марсельская, 45'
+        },
+      'destination': {
+        'id': 1,
+        'lat': 12.1111111111,
+        'lng': 12.2222222222,
+        'title': 'ул. Марсельская, 45'
+      },
+      'distance': '1200м',
+      'rate': 1.00,
+      'status': 'Отменен'
+    }
+
+400 Bad Request
+
+404 Not Found
+
+500 Internal Server Error
