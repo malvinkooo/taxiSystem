@@ -87,7 +87,13 @@ POST /api/drivers/
       'name': 'Никита',
       'surname': 'Сидоров',
       'phone': '0998888888',
-      'car': 1,
+      'car': {
+        'id': 1,
+        'stateCarNumber': 'BY454545',
+        'gasolineConsumtionRatio': 0.77,
+        'brand': 'Nissan x45',
+        'description': 'Комментарий о машине'
+      },
       'description': 'Комментарий о водителе'
     }
 
@@ -122,7 +128,13 @@ DRIVER_ID - идентификатор водителя.
       'name': 'Сергей',
       'surname': 'Макаренко',
       'phone': '0777777777',
-      'car': 3,
+      'car': {
+        'id': 1,
+        'stateCarNumber': 'BY454545',
+        'gasolineConsumtionRatio': 0.77,
+        'brand': 'Nissan x45',
+        'description': 'Комментарий о машине'
+      },
       'description': 'Комментарий о водителе'
     }
 
@@ -300,7 +312,13 @@ GET /api/orders/
           'name': 'Sergey',
           'surname': 'Makarenko',
           'phone': '0777777777',
-          'car': 3,
+          'car': {
+            'id': 1,
+            'stateCarNumber': 'BY454545',
+            'gasolineConsumtionRatio': 0.77,
+            'brand': 'Nissan x45',
+            'description': 'Комментарий о машине'
+          },
           'description': 'About driver'
          },
         'clientName': 'Егор',
@@ -348,7 +366,13 @@ ORDER_ID - идентификатор заказа
         'name': 'Sergey',
         'surname': 'Makarenko',
         'phone': '0777777777',
-        'car': 3,
+        'car': {
+          'id': 1,
+          'stateCarNumber': 'BY454545',
+          'gasolineConsumtionRatio': 0.77,
+          'brand': 'Nissan x45',
+          'description': 'Комментарий о машине'
+        },
         'description': 'About driver'
       },
       'clientName': 'Егор',
@@ -379,21 +403,14 @@ ORDER_ID - идентификатор заказа
 
 500 Internal Server Error - при внутренней ошибке сервера
 
-## Редактировать заказ
+## Добавить заказ
 
 POST /api/orders/
 
 Параметры:
 
     {
-      'driver': {
-      'id': 2,
-        'name': 'Sergey',
-        'surname': 'Makarenko',
-        'phone': '0777777777',
-        'car': 3,
-        'description': 'About driver'
-      },
+      'driver': 2,
       'clientName': 'Егор',
       'clientSurname': 'Савченко',
       'clientPhone': '0777777777',
@@ -423,12 +440,11 @@ POST /api/orders/
     {
       'id': 2,
       'driver': {
-      'id': 2,
+        'id': 2,
         'name': 'Sergey',
         'surname': 'Makarenko',
         'phone': '0777777777',
-        'car': 3,
-        'description': 'About driver'
+        'car': 1
       },
       'clientName': 'Егор',
       'clientSurname': 'Савченко',
@@ -468,14 +484,7 @@ ORDER_ID - идентификатор заказа
 
     {
       'id': 2,
-      'driver': {
-      'id': 2,
-        'name': 'Sergey',
-        'surname': 'Makarenko',
-        'phone': '0777777777',
-        'car': 3,
-        'description': 'About driver'
-      },
+      'driver': 2,
       'clientName': 'Егор',
       'clientSurname': 'Савченко',
       'clientPhone': '0777777777',
@@ -505,11 +514,17 @@ ORDER_ID - идентификатор заказа
     {
       'id': 2,
       'driver': {
-      'id': 2,
+        'id': 2,
         'name': 'Sergey',
         'surname': 'Makarenko',
         'phone': '0777777777',
-        'car': 3,
+        'car': {
+          'id': 1,
+          'stateCarNumber': 'BY454545',
+          'gasolineConsumtionRatio': 0.77,
+          'brand': 'Nissan x45',
+          'description': 'Комментарий о машине'
+        },
         'description': 'About driver'
       },
       'clientName': 'Егор',
