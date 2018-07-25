@@ -12,7 +12,7 @@ GET /api/drivers/
 
     [
       {
-        'id': 1,
+        'driver_id': 1,
         'name': 'Василий',
         'surname': 'Пупкин',
         'phone': '0999999999',
@@ -43,7 +43,7 @@ DRIVER_ID - идентификатор водителя
 200 ОК
 
     {
-      'id': 1,
+      'driver_id': 1,
       'name': 'Василий',
       'surname': 'Пупкин',
       'phone': '0999999999',
@@ -83,7 +83,7 @@ POST /api/drivers/
 200 ОК
 
     {
-      'id': 2,
+      'driver_id': 2,
       'name': 'Никита',
       'surname': 'Сидоров',
       'phone': '0998888888',
@@ -110,7 +110,7 @@ PUT /api/drivers/{DRIVER_ID}
 DRIVER_ID - идентификатор водителя.
 
     {
-      'id': 2,
+      'driver_id': 2,
       'name': 'Сергей',
       'surname': 'Макаренко',
       'phone': '0777777777',
@@ -124,7 +124,7 @@ DRIVER_ID - идентификатор водителя.
 200 ОК
 
     {
-      'id': 2,
+      'driver_id': 2,
       'name': 'Сергей',
       'surname': 'Макаренко',
       'phone': '0777777777',
@@ -176,7 +176,7 @@ GET /api/cars/
 
     [
       {
-        'id': 1,
+        'car_id': 1,
         'stateCarNumber': 'BY454545',
         'gasolineConsumtionRatio': 0.77,
         'brand': 'Nissan x45',
@@ -198,7 +198,7 @@ CAR_ID - идентификатор машины
 Возвращаемое значение:
 
     {
-      'id': 1,
+      'car_id': 1,
       'stateCarNumber': 'BY454545',
       'gasolineConsumtionRatio': 0.77,
       'brand': 'Nissan x45',
@@ -229,7 +229,7 @@ POST /api/cars/
 200 ОК
 
     {
-      'id': 1,
+      'car_id': 1,
       'stateCarNumber': 'BY454545',
       'gasolineConsumtionRatio': 0.77,
       'brand': 'Nissan x45',
@@ -249,7 +249,7 @@ PUT /api/cars/{CAR_ID}
 CAR_ID - идентификатор машины
 
     {
-      'id': 2,
+      'car_id': 2,
       'stateCarNumber': 'BY454545',
       'gasolineConsumtionRatio': 0.77,
       'brand': 'Nissan x45',
@@ -261,7 +261,7 @@ CAR_ID - идентификатор машины
 200 ОК
 
     {
-      'id': 2,
+      'car_id': 2,
       'stateCarNumber': 'BY121212',
       'gasolineConsumtionRatio': 2.77,
       'brand': 'Nissan x45',
@@ -306,14 +306,14 @@ GET /api/orders/
 
     [
       {
-        'id': 1,
+        'order_id': 1,
         'driver': {
-          'id': 2,
+          'driver_id': 2,
           'name': 'Sergey',
           'surname': 'Makarenko',
           'phone': '0777777777',
           'car': {
-            'id': 1,
+            'car_id': 1,
             'stateCarNumber': 'BY454545',
             'gasolineConsumtionRatio': 0.77,
             'brand': 'Nissan x45',
@@ -360,14 +360,14 @@ ORDER_ID - идентификатор заказа
 200 ОК
 
     {
-      'id': 1,
+      'order_id': 1,
       'driver': {
-      'id': 2,
+        'driver_id': 2,
         'name': 'Sergey',
         'surname': 'Makarenko',
         'phone': '0777777777',
         'car': {
-          'id': 1,
+          'car_id': 1,
           'stateCarNumber': 'BY454545',
           'gasolineConsumtionRatio': 0.77,
           'brand': 'Nissan x45',
@@ -438,9 +438,9 @@ POST /api/orders/
 200 ОК
 
     {
-      'id': 2,
+      'car_id': 2,
       'driver': {
-        'id': 2,
+        'driver_id': 2,
         'name': 'Sergey',
         'surname': 'Makarenko',
         'phone': '0777777777',
@@ -483,7 +483,7 @@ PUT /api/orders/{ORDER_ID}
 ORDER_ID - идентификатор заказа
 
     {
-      'id': 2,
+      'order_id': 2,
       'driver': 2,
       'clientName': 'Егор',
       'clientSurname': 'Савченко',
@@ -512,14 +512,14 @@ ORDER_ID - идентификатор заказа
 200 ОК
 
     {
-      'id': 2,
+      'order_id': 2,
       'driver': {
-        'id': 2,
+        'driver_id': 2,
         'name': 'Sergey',
         'surname': 'Makarenko',
         'phone': '0777777777',
         'car': {
-          'id': 1,
+          'car_id': 1,
           'stateCarNumber': 'BY454545',
           'gasolineConsumtionRatio': 0.77,
           'brand': 'Nissan x45',
