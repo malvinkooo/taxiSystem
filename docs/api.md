@@ -12,7 +12,7 @@ GET /api/drivers/
 
     [
       {
-        'driver_id': 1,
+        'id': 1,
         'name': 'Василий',
         'surname': 'Пупкин',
         'phone': '0999999999',
