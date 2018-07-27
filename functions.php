@@ -29,7 +29,7 @@ function getDrivers() {
                         cars.description AS carDescription
                       FROM drivers_list AS drivers
                       LEFT OUTER JOIN cars_list AS cars
-                      ON drivers.id = cars.id");
+                      ON drivers.carId = cars.id");
   $stm->execute();
   return $stm->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -50,10 +50,28 @@ function getDriver($id) {
                         cars.description AS carDescription
                       FROM drivers_list AS drivers
                       LEFT OUTER JOIN cars_list AS cars
-                      ON drivers.id = cars.id
+                      ON drivers.carId = cars.id
                       WHERE drivers.id = ?");
   $stm->execute(array($id));
   return $stm->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function addDriver($driver) {
+  global $db;
+  $stm = $db->prepare("INSERT INTO drivers_list
+                      (name, surname, phone, carId, description)
+                      VALUES
+                      (:name, :surname, :phone, :carId, :description)");
+  $params = array(
+    ':name' => $driver['name'],
+    ':surname' => $driver['surname'],
+    ':phone' => $driver['phone'],
+    ':carId' => (int) $driver['car'],
+    ':description' => $driver['description']
+  );
+  $stm->execute($params);
+
+  return (int) $db->lastInsertId();
 }
 
 function getCars() {
@@ -68,6 +86,23 @@ function getCar($id) {
   $stm = $db->prepare("SELECT * FROM cars_list WHERE id = ?");
   $stm->execute(array($id));
   return $stm->fetchAll(PDO::FETCH_ASSOC)[0];
+}
+
+function addCar($car) {
+  global $db;
+  $stm = $db->prepare("INSERT INTO cars_list
+                      (stateCarNumber, gasolineConsumptionRatio, brand, description)
+                      VALUES
+                      (:stateCarNumber, :gasolineConsumptionRatio, :brand, :description)");
+  $params = array(
+    ':stateCarNumber' => $car['stateCarNumber'],
+    ':gasolineConsumptionRatio' => $car['gasolineConsumptionRatio'],
+    ':brand' => $car['brand'],
+    ':description' => $car['description']
+  );
+  $stm->execute($params);
+
+  return (int) $db->lastInsertId();
 }
 
 function getOrders() {
@@ -151,7 +186,7 @@ function getOrder($id) {
                         destination.lat AS destinationLat
                       FROM orders_list AS orders
                       LEFT OUTER JOIN drivers_list AS drivers
-                      ON orders.id = drivers.id
+                      ON orders.DriverId = drivers.id
                       LEFT OUTER JOIN cars_list AS cars
                       ON drivers.carId = cars.id
                       LEFT OUTER JOIN client_list clients
@@ -163,6 +198,59 @@ function getOrder($id) {
                       WHERE orders.id = ?");
   $stm->execute(array($id));
   return $stm->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function addOrder($order) {
+  global $db;
+  $addClient = $db->prepare("INSERT INTO client_list
+                      (name, surname, phone)
+                      VALUES
+                      (:name, :surname, :phone)");
+  $clientParams = array(
+    ':name' => $order['clientName'],
+    ':surname' => $order['clientSurname'],
+    ':phone' => $order['clientPhone']
+  );
+  $addClient->execute($clientParams);
+  $clientId = (int) $db->lastInsertId();
+
+  $addAddress = $db->prepare("INSERT INTO address
+                          (title, lng, lat)
+                          VALUES
+                          (:title, :lng, :lat)");
+  $destinationParams = array(
+    ':title' => $order['destination'],
+    ':lng' => $order['destinationLng'],
+    ':lat' => $order['destinationLat']
+  );
+  $addAddress->execute($destinationParams);
+  $destinationId = $db->lastInsertId();
+
+  $carFeedPointParams = array(
+    ':title' => $order['carFeedPoint'],
+    ':lng' => $order['carFeedPointLng'],
+    ':lat' => $order['carFeedPointLat']
+  );
+  $addAddress->execute($carFeedPointParams);
+  $carFeedPointId = $db->lastInsertId();
+
+  $addOrder = $db->prepare("INSERT INTO orders_list
+                        (driverId, clientId, dateOfCreation, carFeedPoint, destination, distance, rate, status)
+                        VALUES
+                        (:driverId, :clientId, :dateOfCreation, :carFeedPoint, :destination, :distance, :rate, :status)");
+  $orderParams = array(
+    ':driverId' => $order['driverId'],
+    ':clientId' => $clientId,
+    ':dateOfCreation' => $order['dateOfCreation'],
+    ':carFeedPoint' => $carFeedPointId,
+    ':destination' => $destinationId,
+    ':distance' => $order['distance'],
+    ':rate' => $order['rate'],
+    ':status' => 'Новый'
+  );
+  $addOrder->execute($orderParams);
+
+  return (int) $db->lastInsertId();
 }
 
 function prepareDrivers($drivers) {

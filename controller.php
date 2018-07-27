@@ -18,12 +18,26 @@ $app->get('/api/drivers/{id}', function(Request $req, Response $res, $args){
   return $res->withStatus(200)->withJson($driver);
 });
 
+$app->post('/api/drivers', function(Request $req, Response $res){
+  $params = $req->getParsedBody();
+  $lastId = addDriver($params);
+
+  return $res->withStatus(200)->withJson( getDriver($lastId) );
+});
+
 $app->get('/api/cars', function(Request $req, Response $res){
   return $res->withStatus(200)->withJson(getCars());
 });
 
 $app->get('/api/cars/{id}', function(Request $req, Response $res, $args){
-  return $res->withStatus(200)->withJson(getCar($args['id']));
+  return $res->withStatus(200)->withJson( getCar($args['id']) );
+});
+
+$app->post('/api/cars', function(Request $req, Response $res){
+  $params = $req->getParsedBody();
+  $lastId = addCar($params);
+
+  return $res->withStatus(200)->withJson( getCar($lastId) );
 });
 
 $app->get('/api/orders', function(Request $req, Response $res){
@@ -36,6 +50,13 @@ $app->get('/api/orders/{id}', function(Request $req, Response $res, $args){
   $order =  prepareOrders( getOrder($args['id']) )[0];
 
   return $res->withStatus(200)->withJson($order);
+});
+
+$app->post('/api/orders', function(Request $req, Response $res){
+  $params = $req->getParsedBody();
+  $lastId = addOrder($params);
+
+  return $res->withStatus(200)->withJson( getOrder($lastId) );
 });
 
 $app->run();
