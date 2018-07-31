@@ -30,7 +30,28 @@ class CarsList {
     );
     $stm->execute($params);
 
-    return (int) $db->lastInsertId();
+    return (int) $this->db->lastInsertId();
+  }
+
+  public function updatecar($id, $params) {
+    $stm = $this->db->prepare("UPDATE cars_list SET
+      stateCarNumber = :stateCarNumber,
+      gasolineConsumptionRatio = :gasolineConsumptionRatio,
+      brand = :brand,
+      description = :description
+      WHERE id = :id");
+    return $stm->execute(array(
+      ':stateCarNumber' => $params['stateCarNumber'],
+      ':gasolineConsumptionRatio' => $params['gasolineConsumptionRatio'],
+      ':brand' => $params['brand'],
+      ':description' => $params['description'],
+      ':id' => $id
+    ));
+  }
+
+  public function deleteCar($id) {
+    $stm = $this->db->prepare("DELETE FROM cars_list WHERE id = ?");
+    return $stm->execute(array($id));
   }
 }
 ?>
