@@ -6,9 +6,9 @@ require 'functions.php';
 require 'DriversList.php';
 require 'CarsList.php';
 require 'OrdersList.php';
-$driversList = new DriversList();
-$carsList = new CarsList();
-$ordersList = new OrdersList();
+$driversList = new DriversList($db);
+$carsList = new CarsList($db);
+$ordersList = new OrdersList($db);
 
 $app = new \Slim\App();
 

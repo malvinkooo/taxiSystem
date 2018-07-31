@@ -1,9 +1,12 @@
 <?php
 class OrdersList {
 
+  function __construct($db) {
+    $this->db = $db;
+  }
+
   public function getOrders() {
-    global $db;
-    $stm = $db->prepare("SELECT
+    $stm = $this->db->prepare("SELECT
       orders.id,
       orders.dateOfCreation,
       orders.dateOfCompletion,
@@ -15,7 +18,7 @@ class OrdersList {
       drivers.surname AS driverSurname,
       drivers.phone AS driverPhone,
       drivers.description AS driverDescription,
-      drivers.status,
+      drivers.status AS driverStatus,
       cars.id AS carId,
       cars.stateCarNumber,
       cars.gasolineConsumptionRatio,
@@ -49,8 +52,7 @@ class OrdersList {
   }
 
   public function getOrder($id) {
-    global $db;
-    $stm = $db->prepare("SELECT
+    $stm = $this->db->prepare("SELECT
       orders.id,
       orders.dateOfCreation,
       orders.dateOfCompletion,
@@ -62,7 +64,7 @@ class OrdersList {
       drivers.surname AS driverSurname,
       drivers.phone AS driverPhone,
       drivers.description AS driverDescription,
-      drivers.status,
+      drivers.status AS driverStatus,
       cars.id AS carId,
       cars.stateCarNumber,
       cars.gasolineConsumptionRatio,
@@ -97,8 +99,7 @@ class OrdersList {
   }
 
   public function addOrder($order) {
-    global $db;
-    $addClient = $db->prepare("INSERT INTO client_list
+    $addClient = $this->db->prepare("INSERT INTO client_list
       (name, surname, phone)
       VALUES
       (:name, :surname, :phone)");
@@ -173,7 +174,7 @@ class OrdersList {
       $order_driver['surname'] = $val['driverSurname'];
       $order_driver['phone'] = $val['driverPhone'];
       $order_driver['description'] = $val['driverDescription'];
-      $order_driver['status'] = $val['status'];
+      $order_driver['status'] = $val['driverStatus'];
       $order['driver'] = $order_driver;
 
       $driver_car['id'] = $val['carId'];

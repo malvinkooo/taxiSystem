@@ -1,9 +1,12 @@
 <?php
 class DriversList {
 
+  function __construct($db) {
+    $this->db = $db;
+  }
+
   public function getDrivers() {
-    global $db;
-    $stm = $db->prepare("SELECT
+    $stm = $this->db->prepare("SELECT
       drivers.id,
       drivers.name,
       drivers.surname,
@@ -23,8 +26,7 @@ class DriversList {
   }
 
   public function getDriver($id) {
-    global $db;
-    $stm = $db->prepare("SELECT
+    $stm = $this->db->prepare("SELECT
       drivers.id,
       drivers.name,
       drivers.surname,
@@ -45,8 +47,7 @@ class DriversList {
   }
 
   public function addDriver($driver) {
-    global $db;
-    $stm = $db->prepare("INSERT INTO drivers_list
+    $stm = $this->db->prepare("INSERT INTO drivers_list
       (name, surname, phone, carId, description)
       VALUES
       (:name, :surname, :phone, :carId, :description)");

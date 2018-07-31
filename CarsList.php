@@ -1,23 +1,24 @@
 <?php
 class CarsList {
 
+  function __construct($db) {
+    $this->db = $db;
+  }
+
   public function getCars() {
-    global $db;
-    $stm = $db->prepare("SELECT * FROM cars_list");
+    $stm = $this->db->prepare("SELECT * FROM cars_list");
     $stm->execute();
     return $stm->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public function getCar($id) {
-    global $db;
-    $stm = $db->prepare("SELECT * FROM cars_list WHERE id = ?");
+    $stm = $this->db->prepare("SELECT * FROM cars_list WHERE id = ?");
     $stm->execute(array($id));
     return $stm->fetchAll(PDO::FETCH_ASSOC)[0];
   }
 
   public function addCar($car) {
-    global $db;
-    $stm = $db->prepare("INSERT INTO cars_list
+    $stm = $this->db->prepare("INSERT INTO cars_list
       (stateCarNumber, gasolineConsumptionRatio, brand, description)
       VALUES
       (:stateCarNumber, :gasolineConsumptionRatio, :brand, :description)");
