@@ -60,7 +60,32 @@ class DriversList {
     );
     $stm->execute($params);
 
-    return (int) $db->lastInsertId();
+    return (int) $this->db->lastInsertId();
+  }
+
+  public function updateDriver($id, $params) {
+    $stm = $this->db->prepare("UPDATE drivers_list SET
+      name = :name,
+      surname = :surname,
+      phone = :phone,
+      description = :description,
+      carId = :car,
+      status = :status
+      WHERE id = :id");
+    return $stm->execute(array(
+      ':name' => $params['name'],
+      ':surname' => $params['surname'],
+      ':phone' => $params['phone'],
+      ':description' => $params['description'],
+      ':car' => $params['car'],
+      ':status' => $params['status'],
+      ':id' => (int) $id
+    ));
+  }
+
+  public function deleteDriver($id) {
+    $stm = $this->db->prepare("DELETE FROM drivers_list WHERE id = ?");
+    return $stm->execute(array($id));
   }
 
   public function prepareDrivers($drivers) {

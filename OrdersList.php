@@ -3,6 +3,8 @@ class OrdersList {
 
   function __construct($db) {
     $this->db = $db;
+    $this->clientList = new ClientList($db);
+    $this->address = new Address($db);
   }
 
   public function getOrders() {
@@ -99,37 +101,18 @@ class OrdersList {
   }
 
   public function addOrder($order) {
-    $addClient = $this->db->prepare("INSERT INTO client_list
-      (name, surname, phone)
-      VALUES
-      (:name, :surname, :phone)");
-    $clientParams = array(
-      ':name' => $order['clientName'],
-      ':surname' => $order['clientSurname'],
-      ':phone' => $order['clientPhone']
-    );
-    $addClient->execute($clientParams);
-    $clientId = (int) $this->db->lastInsertId();
+    $clientId = $this->clientList->addClient($params);
 
-    $addAddress = $this->db->prepare("INSERT INTO address
-      (title, lng, lat)
-      VALUES
-      (:title, :lng, :lat)");
-    $destinationParams = array(
-      ':title' => $order['destination'],
-      ':lng' => $order['destinationLng'],
-      ':lat' => $order['destinationLat']
+    $destinationId = $this->address->addAddress(
+      $params['destination'],
+      $params['destinationLng'],
+      $params['destinationLat']
     );
-    $addAddress->execute($destinationParams);
-    $destinationId = $this->db->lastInsertId();
-
-    $carFeedPointParams = array(
-      ':title' => $order['carFeedPoint'],
-      ':lng' => $order['carFeedPointLng'],
-      ':lat' => $order['carFeedPointLat']
+    $carFeedPointId = $this->address->addAddress(
+      $params['carFeedPoint'],
+      $params['carFeedPointLng'],
+      $params['carFeedPointLat']
     );
-    $addAddress->execute($carFeedPointParams);
-    $carFeedPointId = $this->db->lastInsertId();
 
     $addOrder = $this->db->prepare("INSERT INTO orders_list
       (driverId, clientId, dateOfCreation, carFeedPoint, destination, distance, rate, status)
@@ -151,37 +134,18 @@ class OrdersList {
   }
 
   public function updateOrder($id, $params) {
-    $addClient = $this->db->prepare("INSERT INTO client_list
-      (name, surname, phone)
-      VALUES
-      (:name, :surname, :phone)");
-    $clientParams = array(
-      ':name' => $params['clientName'],
-      ':surname' => $params['clientSurname'],
-      ':phone' => $params['clientPhone']
-    );
-    $addClient->execute($clientParams);
-    $clientId = (int) $this->db->lastInsertId();
+    $clientId = $this->clientList->addClient($params);
 
-    $addAddress = $this->db->prepare("INSERT INTO address
-      (title, lng, lat)
-      VALUES
-      (:title, :lng, :lat)");
-    $destinationParams = array(
-      ':title' => $params['destination'],
-      ':lng' => $params['destinationLng'],
-      ':lat' => $params['destinationLat']
+    $destinationId = $this->address->addAddress(
+      $params['destination'],
+      $params['destinationLng'],
+      $params['destinationLat']
     );
-    $addAddress->execute($destinationParams);
-    $destinationId = $this->db->lastInsertId();
-
-    $carFeedPointParams = array(
-      ':title' => $params['carFeedPoint'],
-      ':lng' => $params['carFeedPointLng'],
-      ':lat' => $params['carFeedPointLat']
+    $carFeedPointId = $this->address->addAddress(
+      $params['carFeedPoint'],
+      $params['carFeedPointLng'],
+      $params['carFeedPointLat']
     );
-    $addAddress->execute($carFeedPointParams);
-    $carFeedPointId = $this->db->lastInsertId();
 
     $addOrder = $this->db->prepare("UPDATE orders_list SET
       driverId = :driverId,

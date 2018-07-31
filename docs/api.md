@@ -43,7 +43,7 @@ DRIVER_ID - идентификатор водителя
 200 ОК
 
     {
-      'driver_id': 1,
+      'id': 1,
       'name': 'Василий',
       'surname': 'Пупкин',
       'phone': '0999999999',
@@ -83,7 +83,7 @@ POST /api/drivers/
 200 ОК
 
     {
-      'driver_id': 2,
+      'id': 2,
       'name': 'Никита',
       'surname': 'Сидоров',
       'phone': '0998888888',
@@ -110,7 +110,6 @@ PUT /api/drivers/{DRIVER_ID}
 DRIVER_ID - идентификатор водителя.
 
     {
-      'driver_id': 2,
       'name': 'Сергей',
       'surname': 'Макаренко',
       'phone': '0777777777',
@@ -124,7 +123,7 @@ DRIVER_ID - идентификатор водителя.
 200 ОК
 
     {
-      'driver_id': 2,
+      'id': 2,
       'name': 'Сергей',
       'surname': 'Макаренко',
       'phone': '0777777777',
@@ -176,7 +175,7 @@ GET /api/cars/
 
     [
       {
-        'car_id': 1,
+        'id': 1,
         'stateCarNumber': 'BY454545',
         'gasolineConsumtionRatio': 0.77,
         'brand': 'Nissan x45',
@@ -198,7 +197,7 @@ CAR_ID - идентификатор машины
 Возвращаемое значение:
 
     {
-      'car_id': 1,
+      'id': 1,
       'stateCarNumber': 'BY454545',
       'gasolineConsumtionRatio': 0.77,
       'brand': 'Nissan x45',
@@ -229,7 +228,7 @@ POST /api/cars/
 200 ОК
 
     {
-      'car_id': 1,
+      'id': 1,
       'stateCarNumber': 'BY454545',
       'gasolineConsumtionRatio': 0.77,
       'brand': 'Nissan x45',
@@ -249,7 +248,6 @@ PUT /api/cars/{CAR_ID}
 CAR_ID - идентификатор машины
 
     {
-      'car_id': 2,
       'stateCarNumber': 'BY454545',
       'gasolineConsumtionRatio': 0.77,
       'brand': 'Nissan x45',
@@ -261,7 +259,7 @@ CAR_ID - идентификатор машины
 200 ОК
 
     {
-      'car_id': 2,
+      'id': 2,
       'stateCarNumber': 'BY121212',
       'gasolineConsumtionRatio': 2.77,
       'brand': 'Nissan x45',
@@ -306,7 +304,7 @@ GET /api/orders/
 
     [
       {
-        'order_id': 1,
+        'id': 1,
         'driver': {
           'driver_id': 2,
           'name': 'Sergey',
@@ -360,7 +358,7 @@ ORDER_ID - идентификатор заказа
 200 ОК
 
     {
-      'order_id': 1,
+      'id': 1,
       'driver': {
         'driver_id': 2,
         'name': 'Sergey',
@@ -438,7 +436,7 @@ POST /api/orders/
 200 ОК
 
     {
-      'car_id': 2,
+      'id': 2,
       'driver': {
         'driver_id': 2,
         'name': 'Sergey',
@@ -483,7 +481,6 @@ PUT /api/orders/{ORDER_ID}
 ORDER_ID - идентификатор заказа
 
     {
-      'order_id': 2,
       'driver': 2,
       'clientName': 'Егор',
       'clientSurname': 'Савченко',
@@ -512,7 +509,7 @@ ORDER_ID - идентификатор заказа
 200 ОК
 
     {
-      'order_id': 2,
+      'id': 2,
       'driver': {
         'driver_id': 2,
         'name': 'Sergey',

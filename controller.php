@@ -5,6 +5,8 @@ require 'vendor/autoload.php';
 require 'functions.php';
 require 'DriversList.php';
 require 'CarsList.php';
+require 'ClientList.php';
+require 'Address.php';
 require 'OrdersList.php';
 $driversList = new DriversList($db);
 $carsList = new CarsList($db);
