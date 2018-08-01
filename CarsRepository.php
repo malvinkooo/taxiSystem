@@ -1,5 +1,5 @@
 <?php
-class CarsList {
+class CarsRepository {
 
   function __construct($db) {
     $this->db = $db;
@@ -33,7 +33,7 @@ class CarsList {
     return (int) $this->db->lastInsertId();
   }
 
-  public function updatecar($id, $params) {
+  public function updateCar($id, $params) {
     $stm = $this->db->prepare("UPDATE cars_list SET
       stateCarNumber = :stateCarNumber,
       gasolineConsumptionRatio = :gasolineConsumptionRatio,

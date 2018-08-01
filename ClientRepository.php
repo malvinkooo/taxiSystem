@@ -1,5 +1,5 @@
 <?php
-class ClientList {
+class ClientRepository {
 
   function __construct($db) {
     $this->db = $db;

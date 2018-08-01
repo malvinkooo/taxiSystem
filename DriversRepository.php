@@ -1,5 +1,5 @@
 <?php
-class DriversList {
+class DriversRepository {
 
   function __construct($db) {
     $this->db = $db;

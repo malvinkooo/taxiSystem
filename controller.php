@@ -3,14 +3,14 @@ use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 require 'vendor/autoload.php';
 require 'functions.php';
-require 'DriversList.php';
-require 'CarsList.php';
-require 'ClientList.php';
-require 'Address.php';
-require 'OrdersList.php';
-$driversList = new DriversList($db);
-$carsList = new CarsList($db);
-$ordersList = new OrdersList($db);
+require 'DriversRepository.php';
+require 'CarsRepository.php';
+require 'ClientRepository.php';
+require 'AddressRepository.php';
+require 'OrdersRepository.php';
+$driversList = new DriversRepository($db);
+$carsList = new CarsRepository($db);
+$ordersList = new OrdersRepository($db);
 
 $app = new \Slim\App();
 
