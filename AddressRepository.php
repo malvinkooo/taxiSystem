@@ -1,5 +1,5 @@
 <?php
-class Address {
+class AddressRepository {
 
   function __construct($db) {
     $this->db = $db;

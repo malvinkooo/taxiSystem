@@ -1,10 +1,10 @@
 <?php
-class OrdersList {
+class OrdersRepository {
 
   function __construct($db) {
     $this->db = $db;
-    $this->clientList = new ClientList($db);
-    $this->address = new Address($db);
+    $this->clients = new ClientRepository($db);
+    $this->address = new AddressRepository($db);
   }
 
   public function getOrders() {
@@ -101,17 +101,17 @@ class OrdersList {
   }
 
   public function addOrder($order) {
-    $clientId = $this->clientList->addClient($params);
+    $clientId = $this->clients->addClient($order);
 
     $destinationId = $this->address->addAddress(
-      $params['destination'],
-      $params['destinationLng'],
-      $params['destinationLat']
+      $order['destination'],
+      $order['destinationLng'],
+      $order['destinationLat']
     );
     $carFeedPointId = $this->address->addAddress(
-      $params['carFeedPoint'],
-      $params['carFeedPointLng'],
-      $params['carFeedPointLat']
+      $order['carFeedPoint'],
+      $order['carFeedPointLng'],
+      $order['carFeedPointLat']
     );
 
     $addOrder = $this->db->prepare("INSERT INTO orders_list
@@ -134,7 +134,7 @@ class OrdersList {
   }
 
   public function updateOrder($id, $params) {
-    $clientId = $this->clientList->addClient($params);
+    $clientId = $this->clients->addClient($params);
 
     $destinationId = $this->address->addAddress(
       $params['destination'],
