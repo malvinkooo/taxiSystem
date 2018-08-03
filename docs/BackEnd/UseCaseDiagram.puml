@@ -1,0 +1,37 @@
+﻿http://www.plantuml.com/plantuml/uml/XT912i8m40NGVKwHfIvwXrfJNGhU83XP56m2ax7djvBcqr06T__JnuS9xRDubi_yDlubYQqRjd3Z56MCP4nDjkliwK9a7qo1psQNVv_SqCgH9W4jHRNt08hyH-OzpTKUiUDfmMuf5IisDnZJXsV0Ceh-4C1ecdw6EIq1lktwcLU_OYGC7rK6qqyhQqZgKOKXwkTi4WMs3v7Md-yB
+
+@startuml
+actor DB
+actor FrontEnd
+
+FrontEnd -- (Add Order)
+(Add Order) -- DB
+FrontEnd -- (Edit Order)
+(Edit Order) -- DB
+FrontEnd -- (Get Order)
+(Get Order) -- DB
+FrontEnd -- (Get Orders)
+(Get Orders) -- DB
+
+FrontEnd -- (Get Driver)
+(Get Driver) -- DB
+FrontEnd -- (Get Drivers)
+(Get Drivers) -- DB
+FrontEnd -- (Add Driver)
+(Add Driver) -- DB
+FrontEnd -- (Edit Driver)
+(Edit Driver) -- DB
+FrontEnd -- (Remove Driver)
+(Remove Driver) -- DB
+
+FrontEnd -- (Get Car)
+(Get Car) -- DB
+FrontEnd -- (Get Cars)
+(Get Cars) -- DB
+FrontEnd -- (Add Car)
+(Add Car) -- DB
+FrontEnd -- (Edit Car)
+(Edit Car) -- DB
+FrontEnd -- (Remove Car)
+(Remove Car) -- DB
+@enduml
