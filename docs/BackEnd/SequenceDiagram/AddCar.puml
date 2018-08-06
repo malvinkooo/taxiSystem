@@ -1,0 +1,33 @@
+http://www.plantuml.com/plantuml/uml/TL9DJyCm3BtdLrWxRGUq-wIXmIXY2B6n8d6iJ9D3fBGfIOgqVy_R2kdIqgFjz_5iUUC3kz1MHd0PhAD7P-kGrL8qQEjIDrm7oeskaiQMdTy2wAmnoer6HzLOho5tIaQpebXXN1GpOdy62ic1FzahUhWNui-QRculZhIYmpv_foKtUbb2zXnHVtDGNQ0B1jWq35Z0qffOIapcA0xikFABI1_6Jqj83fQ8ab-jSgUxQTt1xca9NQm9hVpjfLEAHFGdm1sGdFAj2RJkkVJnb1qpqX9DmpxiQgzSs4aXrRLgwTHliB41klsrEk3yscunf4pS6fQJ5qZXqHC6ZKLY60VxdEzVank21kpOhUSDB4S-yOF-PQJexez0YR-VqjAdswXQjfNv0G00
+
+@startuml
+actor FrontEnd
+participant Slim
+participant CarsController
+participant CarsRepository
+participant "__:Car__" as Car
+database DB
+
+FrontEnd -> Slim : POST /api/cars
+activate Slim
+Slim -> CarsController : car = addCar(carParams)
+activate CarsController
+CarsController -> CarsRepository : car = queryAddCar(carParams)
+activate CarsRepository
+CarsRepository -> DB : SQL query
+activate DB
+CarsRepository -> DB : query result = SQL query WHERE id = lastInsertId
+deactivate DB
+create Car
+CarsRepository -> Car : car = create(query result)
+CarsRepository -> CarsController : car
+deactivate CarsRepository
+CarsController -> Car : response = toJSON
+activate Car
+Car --> CarsController : response
+deactivate Car
+CarsController --> Slim : response
+deactivate CarsController
+Slim --> FrontEnd : response
+deactivate Slim
+@enduml

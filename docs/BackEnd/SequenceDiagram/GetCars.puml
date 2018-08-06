@@ -1,0 +1,23 @@
+http://www.plantuml.com/plantuml/uml/TP51JyCm38Nl-HNMJkCmxTu3sXW32KqWAFVAf1QAb2N5SONsxt72UeW2j_Qzpy_FxIu9iindRz1AP7ZW6EGOHZEfxAoRC0ZqtfqhuO2S3Wfoz9wuiTveYibftCNOJ5XnCIHO3KEdzZ2i05C1pOY27vW8xk-CMNR3vhQiX0uUZ--mnSbjRQQBg6QzleDFaYojRqpjPBRkev5VC_5bx_qoKVaweLMKwbzFlwJHrqsJSuq1fZHxISOoeL21siGYQsQWRzWpusLT3RSTcXDrsAfmSaa0Sy8_XoedyQb_URuUzdTK1fg0vPjVxVnSnEMdTBdk54CYiwCmpcV_0m00
+
+@startuml
+actor FrontEnd
+participant Slim
+participant CarsController
+participant CarsRepository
+collections "__:Car__" as Cars
+database DB
+
+FrontEnd -> Slim : GET /api/cars
+Slim -> CarsController: getCars()
+CarsController -> CarsRepository : queryAllCars()
+CarsRepository -> DB : SQL query
+DB --> CarsRepository: query results
+create Cars
+CarsRepository -> Cars : new Array(query results)
+CarsRepository --> CarsController : carsList array
+CarsController -> Cars : toJSON()
+Cars --> CarsController : JSON
+CarsController --> Slim : JSON
+Slim --> FrontEnd: response
+@enduml

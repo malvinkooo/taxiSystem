@@ -1,0 +1,36 @@
+http://www.plantuml.com/plantuml/uml/ZLDDQ_Cm3BxdLvYUsiFelR3HVQIiOwnTCzWnw8rrC3XsPYk3_lkfDczmdHHobPwFHxArzGIE-bONq91rOkUieTB8ekEoQbG7XaIbLNjLE3Y9pZypr5cjqKqqJzXPhrZoVDLSrFKc0Efw8S17S261u1zu52zFHV4_WhXx2CvY8uw7wakieLDh6yGlOTKl4CPe0SNeF1Op0rxS2v0oT9UXS0G7hLyDCkE1yWBBZmPBv7zwTEV76HxfNl82U_02MBNwV8-AbzYYqGeD3JeCcSq4jqEKHwiCpUL8zAGCaB9cBYMCEmSSj_NzMfvAeIIlJOEdlV7eQ2yBYUc8ZSEuj1lQiPCyGIGievD3tsjQJH1l_v8qGCwx_H-OpMQTDHuv1Dctwl2HlNaWCsFidR97zXEUmqLCip9yl0ic3LUT4zCZsgAHVQl_0000
+
+@startuml
+actor FrontEnd
+participant Slim
+participant OrdersController
+participant OrdersRepository
+participant "__:Order__" as Order
+database DB
+
+FrontEnd -> Slim : POST /api/orders
+activate Slim
+Slim -> OrdersController : order = addOrder(orderParams)
+activate OrdersController
+OrdersController -> OrdersRepository : order = queryAddOrder(orderParams)
+activate OrdersRepository
+OrdersRepository -> DB : SQL query add client
+activate DB
+OrdersRepository -> DB : SQL query add carFeedPoint
+OrdersRepository -> DB : SQL query add destination
+OrdersRepository -> DB : SQL query add order
+OrdersRepository -> DB : SQL query order WHERE id = lastInsertId
+deactivate DB
+create Order
+OrdersRepository -> Order : order = create(query result)
+OrdersRepository -> OrdersController : order
+deactivate OrdersRepository
+OrdersController -> Order : response = toJSON
+activate Order
+Order --> OrdersController : response
+deactivate Order
+OrdersController --> Slim : response
+deactivate OrdersController
+Slim --> FrontEnd : response
+deactivate Slim
+@enduml

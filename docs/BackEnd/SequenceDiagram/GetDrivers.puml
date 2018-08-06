@@ -1,0 +1,21 @@
+http://www.plantuml.com/plantuml/uml/VP91Jm8n48Nl_HKJJd00xZqOGD3468tYVJDsHsrIsdLcaF3lRRExGREhnxvvtslpfYjHP3qUWa6dYU66KzHTh4sJPUzyWr5X7_pXbx1b_qKirzdBAGHYqtCmlu9Y1mktknTOOkENTUisHS_p8MtXdRHJfpCpcF-0dgb9uZNn6Iny7edFwn0kQ8sAhoW4suqP4YLcaxdzqttBcdoSZuLtsS0anw1YN7c7Kv-YmAIgR0jKrGHGUjeu9bJgZ-FtTo9OY7I2DJEUful5OZRc7gigWrsTW0N-jwnirdItVtoubFfdAeeavr7pf4s6azSFS8cPdCARfr13n0F9s9MNhJD9aw9Gj-qywB-6XV8KA2ioAufr_dJV
+
+@startuml
+actor FrontEnd
+participant Slim
+participant DriversController
+FrontEnd -> Slim : GET /api/drivers
+Slim -> DriversController: getDrivers()
+DriversController -> DriversRepository : queryAllDrivers()
+database DB
+DriversRepository -> DB : SQL query
+DB --> DriversRepository: query results
+collections "__:Driver__" as Drivers
+create Drivers
+DriversRepository -> Drivers : new Array(...)
+DriversRepository --> DriversController : drivers array
+DriversController -> Drivers : toJSON()
+Drivers --> DriversController : associative array with correct field names
+DriversController --> Slim : response
+Slim --> FrontEnd: JSON data
+@enduml

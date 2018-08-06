@@ -1,0 +1,33 @@
+http://www.plantuml.com/plantuml/uml/VPDHIyCm58NVyoikU-eUHjy7ogYjEf69BUXZYSr50brJatGmnF_kjUdQZ0HVRyxvpibjkZEMQpiSMyORgpJSQzNPeXEifx5iPCyx2rKhZrU3NCiJQdD7MgtQ5dNijCHU6KdGyzNfggwtJb7NA-1caZF1BV_W1Y7F6BlKWCtjc0vRU40BAUzbAXm-_SxB_LjHrllyvw-yF76Bhkhe86TGap3E3JVmYTQT9pDdlN326mOJIWYlwYTy3QZF_sK4UmecOqP6qEhrsV7W_R4e2v220cQenymOwJVnQXD1enbQomJwhaRZqYbUn0q9CsaJ7xUEUMBVuB8WFp-mHhUz5A38NdK6QGTMFLKlXoHOwqI8TmYpOu7Js_FoV5y87SNacd-YqBcyqHrsWdwxNm00
+
+@startuml
+actor FrontEnd
+participant Slim
+participant DriversController
+participant DriversRepository
+participant "__:Driver__" as Driver
+database DB
+
+FrontEnd -> Slim : Get /api/drivers/{DRIVER_ID}
+activate Slim
+Slim -> DriversController : driver = getDriver(DRIVER_ID)
+activate DriversController
+DriversController -> DriversRepository : driver = queryDriver(DRIVER_ID)
+activate DriversRepository
+DriversRepository -> DB : SQL query WHERE id = DRIVER_ID
+activate DB
+DB --> DriversRepository : query result
+deactivate DB
+create Driver
+DriversRepository -> Driver : create (query result)
+DriversRepository --> DriversController: driver
+deactivate DriversRepository
+DriversController -> Driver : response = toJSON()
+activate Driver
+Driver --> DriversController
+deactivate Driver
+DriversController --> Slim : response
+deactivate DriversController
+Slim --> FrontEnd : response
+deactivate Slim
+@enduml

@@ -1,0 +1,33 @@
+http://www.plantuml.com/plantuml/uml/VPDFQ-im4CJl-XHBJiaX-1ve2QdTFwNKr3wyer6jfGWSovNMXL3wtRkLurYnnRjgPtupkzXxHz9IVso4hCbOkBUcfQnLekDdNUjEjWHbeuzN3xbLQDqTIwrf6hIHOO6TSPgHfwlXggfsNb1LAv1k40ibIRvBXv0UX1WhmFRM9yCE7f0WaPrEZ6SdttcHPaNrbFxyrTPVad0ewVNicnTaXhV23NmW-UbwP6mcncAl1OVPy_q2zcUFzlH_UdYO1OdfwO5vvTlBm89_ZrcHWLOC7uaJaA_5ycsyq-2twFg6XCBGL5kyz8cMy6_CE0lN8MiJSKGkVZvAa1pVF_I4qHpMcTOXBqxckSnVr_DB3lPe-28r4ZL-NLDKw5eGlPPDbpyaRlHCiSTMyJ_r2m00
+
+@startuml
+actor FrontEnd
+participant Slim
+participant OrdersController
+participant OrdersRepository
+participant "__:Order__" as Order
+database DB
+
+FrontEnd -> Slim : Get /api/orders/{ORDER_ID}
+activate Slim
+Slim -> OrdersController : order = getOrder(ORDER_ID)
+activate OrdersController
+OrdersController -> OrdersRepository : order = queryOrder(ORDER_ID)
+activate OrdersRepository
+OrdersRepository -> DB : SQL query WHERE id = ORDER_ID
+activate DB
+DB --> OrdersRepository : query result
+deactivate DB
+create Order
+OrdersRepository -> Order : create (query result)
+OrdersRepository --> OrdersController: order
+deactivate OrdersRepository
+OrdersController -> Order : response = toJSON()
+activate Order
+Order --> OrdersController
+deactivate Order
+OrdersController --> Slim : response
+deactivate OrdersController
+Slim --> FrontEnd : response
+deactivate Slim
+@enduml

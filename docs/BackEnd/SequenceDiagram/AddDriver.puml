@@ -1,0 +1,33 @@
+http://www.plantuml.com/plantuml/uml/XLDDJm8n4BttLqmumO5m9y4WWX5Z15aJZvkHzj2a--6qIyA_TsIYMpAh7ddpFjvqXsLCIAchWi5ZQWZkgQdJfhQcPTWVVOjrWYBuwWfOapyvYdVCfIO4HqFJWskRwDdqV3KTbULS66Kv0emWFup5XEyO7QnNndpNWEdD9HtciDyLhp33ri-i-7yrzYTCJlfTQ4nNtLWh2bW0MYlpiK1x9ApYfBVIcoc4G_IAUSX7v-Xy-r-IVYM5N99MR5syF8bh9b_zpXSka8jTIB3evV3si3bim5i60yQqhQEZjBN6kjpuIAvlE1mZOBwrYCPvz4Hh__v2UG_zFbgN5-78jk5zk4fg7elTixoLMWIcWnLw0rrYABa_p26T4iXvikhd7wQL_IqlNMsxAdm2
+
+@startuml
+actor FrontEnd
+participant Slim
+participant DriversController
+participant DriversRepository
+participant "__:Driver__" as Driver
+database DB
+
+FrontEnd -> Slim : POST /api/drivers
+activate Slim
+Slim -> DriversController : driver = addDriver(driverParams)
+activate DriversController
+DriversController -> DriversRepository : driver = queryAddDriver(driverParams)
+activate DriversRepository
+DriversRepository -> DB : SQL query
+activate DB
+DriversRepository -> DB : query result = SQL query WHERE id = lastInsertId
+deactivate DB
+create Driver
+DriversRepository -> Driver : driver = create(query result)
+DriversRepository -> DriversController : driver
+deactivate DriversRepository
+DriversController -> Driver : response = toJSON
+activate Driver
+Driver --> DriversController : response
+deactivate Driver
+DriversController --> Slim : response
+deactivate DriversController
+Slim --> FrontEnd : response
+deactivate Slim
+@enduml

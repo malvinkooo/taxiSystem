@@ -1,0 +1,23 @@
+http://www.plantuml.com/plantuml/uml/VP51JyCm38Nl-HNMJkCmxPu3se21X2OcAFVAj1QAb2R5SONwxqdIZMfLuDOyV-_rMTu5GPQXimeRyGoFx9qSNAlwA9l6zEW4AckwA-74BN6uZoXxQuaBmpVgVJ0nSbHDOXentWLOrRNEG5sl0CCPLYqAVc0WUBXJwj81DhVvrw3XwV0EM-pDrazybkDuMKJ39yaahc_KSZexvdQWuMiW7lVMphu54tsnM2Ihr-D4g_ZS5DBEOS0K1Yj1DKmeTCQAkPC66XnzmvuPn_LLHAbDON7GuBDqD440Kyu_wqTQ_7DrUlbTzg_G11M2vija87rdyN8wdUhtyU2aTkJQeRC_
+
+@startuml
+actor FrontEnd
+participant Slim
+participant OrdersController
+participant OrdersRepository
+collections "__:Order__" as Orders
+database DB
+
+FrontEnd -> Slim : GET /api/orders
+Slim -> OrdersController: getOrders()
+OrdersController -> OrdersRepository : queryAllOrders()
+OrdersRepository -> DB : SQL query
+DB --> OrdersRepository: query results
+create Orders
+OrdersRepository -> Orders : new Array(query results)
+OrdersRepository --> OrdersController : ordersList array
+OrdersController -> Orders : toJSON()
+Orders --> OrdersController : JSON
+OrdersController --> Slim : JSON
+Slim --> FrontEnd: response
+@enduml
