@@ -1,4 +1,4 @@
-http://www.plantuml.com/plantuml/uml/ZLDDQ_Cm3BxdLvYUsiFelR3HVQIiOwnTCzWnw8rrC3XsPYk3_lkfDczmdHHobPwFHxArzGIE-bONq91rOkUieTB8ekEoQbG7XaIbLNjLE3Y9pZypr5cjqKqqJzXPhrZoVDLSrFKc0Efw8S17S261u1zu52zFHV4_WhXx2CvY8uw7wakieLDh6yGlOTKl4CPe0SNeF1Op0rxS2v0oT9UXS0G7hLyDCkE1yWBBZmPBv7zwTEV76HxfNl82U_02MBNwV8-AbzYYqGeD3JeCcSq4jqEKHwiCpUL8zAGCaB9cBYMCEmSSj_NzMfvAeIIlJOEdlV7eQ2yBYUc8ZSEuj1lQiPCyGIGievD3tsjQJH1l_v8qGCwx_H-OpMQTDHuv1Dctwl2HlNaWCsFidR97zXEUmqLCip9yl0ic3LUT4zCZsgAHVQl_0000
+http://www.plantuml.com/plantuml/uml/hPL1Rnen48Nl_XKM9pYWt2ErIXE8cgegD5Jg4KtMSt2xUBUsYPH_trcFs4oO1Q4LjzX-xyryG-ozInbYtkzg0rLkedsCJSZBu4nBsxxoBOHiDxNVVTXOHOSnFP0qDdMDSU3m6TicUOfy-t0usMvlYs2xdLX8B5QAHVIllOGNIlC01m7zPHnaU864Td5lp072pZ-NtksjNQysl-mDjFwcAUrrkFuLCZ9SKP7w68oSHMy_MN2kd4xBnXeYxDAiZz4ZKL4KVpmQ4VzlZ_7jooKrn6ID2gGYYtkAtVpypf5TtxQgFORy7aH38jNyH4T_ZKCfFLc4OvySjLz3oayXOQJbT7P99U6_h9w2WlY8wDQDlpwQ31yFA5D6OpfCsGV8lWbNfnJPuo5bo3X6lWJNfcEQaLZiLZowsB2PqIAcVPqFbvjlDiUUkzJ3F2fKZF3tr-NpqleUrLs8A0EFGQk8VNUdgSK3neQfp9mTKlW9vnZoyfhCvqpbMMSXMMXrKg_QE_UIIqxzdYgN17tvWrLUG0QYpSstpUg7aL63WAmJ_tHyfCYKaFcxixdCSv118iWXSQzQfdw0eV4e3qk6HlB-LOsOsYOaL3QXDvsscFhFyh2nqvax36w_g_y3
 
 @startuml
 actor FrontEnd
@@ -6,6 +6,8 @@ participant Slim
 participant OrdersController
 participant OrdersRepository
 participant "__:Order__" as Order
+participant "__:Driver__" as Driver
+participant "__:Car__" as Car
 database DB
 
 FrontEnd -> Slim : POST /api/orders
@@ -14,21 +16,70 @@ Slim -> OrdersController : order = addOrder(orderParams)
 activate OrdersController
 OrdersController -> OrdersRepository : order = queryAddOrder(orderParams)
 activate OrdersRepository
+
 OrdersRepository -> DB : SQL query add client
 activate DB
-OrdersRepository -> DB : SQL query add carFeedPoint
-OrdersRepository -> DB : SQL query add destination
-OrdersRepository -> DB : SQL query add order
-OrdersRepository -> DB : SQL query order WHERE id = lastInsertId
+DB --> OrdersRepository : ok
 deactivate DB
+OrdersRepository -> DB : clientId = lastInsertId()
+activate DB
+DB --> OrdersRepository : clientId
+deactivate DB
+OrdersRepository -> DB : SQL query add carFeedPoint
+activate DB
+DB --> OrdersRepository : ok
+deactivate DB
+OrdersRepository -> DB : carFeedPointId = lastInsertId()
+activate DB
+DB --> OrdersRepository : carFeedPointId
+deactivate DB
+OrdersRepository -> DB : SQL query add destination
+activate DB
+DB --> OrdersRepository : ok
+deactivate DB
+OrdersRepository -> DB : destinationId = lastInsertId()
+activate DB
+DB --> OrdersRepository : destinationId
+deactivate DB
+OrdersRepository -> DB : SQL query add order
+activate DB
+DB --> OrdersRepository : ok
+deactivate DB
+OrdersRepository -> DB : lastId = lastInsertId()
+activate DB
+DB --> OrdersRepository : lastId
+deactivate DB
+
+OrdersRepository -> OrdersRepository : query result = queryOrder(lastId)
+activate OrdersRepository
+OrdersRepository -> DB : query result = SQL query WHERE id = lastId
+activate DB
+DB --> OrdersRepository : query result
+deactivate DB
+
 create Order
 OrdersRepository -> Order : order = create(query result)
+create Driver
+Order -> Driver : create(query result)
+create Car
+Driver -> Car : create(query result)
+
 OrdersRepository -> OrdersController : order
 deactivate OrdersRepository
-OrdersController -> Order : response = toJSON
+
+OrdersController -> Order : objectData = toJSON
 activate Order
-Order --> OrdersController : response
+Order -> Driver : toJSON()
+activate Driver
+Driver -> Car : toJSON()
+activate Car
+Car --> Driver : data
+deactivate Car
+Driver --> Order : data
+deactivate Driver
+Order --> OrdersController : data
 deactivate Order
+
 OrdersController --> Slim : response
 deactivate OrdersController
 Slim --> FrontEnd : response

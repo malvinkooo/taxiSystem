@@ -1,4 +1,4 @@
-http://www.plantuml.com/plantuml/uml/TL9DJyCm3BtdLrWxRGUq-wIXmIXY2B6n8d6iJ9D3fBGfIOgqVy_R2kdIqgFjz_5iUUC3kz1MHd0PhAD7P-kGrL8qQEjIDrm7oeskaiQMdTy2wAmnoer6HzLOho5tIaQpebXXN1GpOdy62ic1FzahUhWNui-QRculZhIYmpv_foKtUbb2zXnHVtDGNQ0B1jWq35Z0qffOIapcA0xikFABI1_6Jqj83fQ8ab-jSgUxQTt1xca9NQm9hVpjfLEAHFGdm1sGdFAj2RJkkVJnb1qpqX9DmpxiQgzSs4aXrRLgwTHliB41klsrEk3yscunf4pS6fQJ5qZXqHC6ZKLY60VxdEzVank21kpOhUSDB4S-yOF-PQJexez0YR-VqjAdswXQjfNv0G00
+http://www.plantuml.com/plantuml/uml/bLDDR_8m3BxdLrYSu82u8p6nCQPjcWQZhxHZvJKvH4kJBaadyU_dhYLg3HrwBmZ7puSVgrw7Y3xMfH5OHEVXmJiRjrQAYfvreIkq4JAZoy731dtO4D0xOvG_QnrKvO8ckUEWDSdp9RNpV08O6g2G6F43WuBxEo5ErZ2_-NM49UntsJzOOAKN1Sas8-flZAeTgFaXB1k6M8I55Q2Kr9bIiKUFPPWbEXz_M98a2v4alshbZxUZkZpxi2HTYabQsTjBgzIDcFZK5eIONnh0VGgfUi0nSOCXFabOjNziK9xAwUowH-9UzU6yBenNeJRnjALcHQtUV-w7o_NMzVwuFMn1ftJoUYecnx99DJPQuLNtUda1wPDeWTE-oOnHnhxHF-mPF7cIGULiK6GStNEsUntibcY4vMvz7hCyyqcNTud1PBlx8qewN4xh7UjQMLcNvWS0
 
 @startuml
 actor FrontEnd
@@ -14,10 +14,21 @@ Slim -> CarsController : car = addCar(carParams)
 activate CarsController
 CarsController -> CarsRepository : car = queryAddCar(carParams)
 activate CarsRepository
-CarsRepository -> DB : SQL query
+CarsRepository -> DB : SQL query addCar
 activate DB
-CarsRepository -> DB : query result = SQL query WHERE id = lastInsertId
+DB --> CarsRepository : ok
 deactivate DB
+CarsRepository -> DB : lastId = lastInsertId()
+activate DB
+DB --> CarsRepository : lastId
+deactivate DB
+CarsRepository -> CarsRepository : query result = queryCar(lastId)
+activate CarsRepository
+CarsRepository -> DB : query result = SQL query WHERE id = lastId
+activate DB
+DB --> CarsRepository : query result
+deactivate DB
+deactivate CarsRepository
 create Car
 CarsRepository -> Car : car = create(query result)
 CarsRepository -> CarsController : car

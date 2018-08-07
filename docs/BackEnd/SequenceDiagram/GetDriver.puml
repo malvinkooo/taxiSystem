@@ -1,4 +1,4 @@
-http://www.plantuml.com/plantuml/uml/VPDHIyCm58NVyoikU-eUHjy7ogYjEf69BUXZYSr50brJatGmnF_kjUdQZ0HVRyxvpibjkZEMQpiSMyORgpJSQzNPeXEifx5iPCyx2rKhZrU3NCiJQdD7MgtQ5dNijCHU6KdGyzNfggwtJb7NA-1caZF1BV_W1Y7F6BlKWCtjc0vRU40BAUzbAXm-_SxB_LjHrllyvw-yF76Bhkhe86TGap3E3JVmYTQT9pDdlN326mOJIWYlwYTy3QZF_sK4UmecOqP6qEhrsV7W_R4e2v220cQenymOwJVnQXD1enbQomJwhaRZqYbUn0q9CsaJ7xUEUMBVuB8WFp-mHhUz5A38NdK6QGTMFLKlXoHOwqI8TmYpOu7Js_FoV5y87SNacd-YqBcyqHrsWdwxNm00
+http://www.plantuml.com/plantuml/uml/TPDHQy8m58NVyoikFkc3z5tO46stESR6MjWUIsOk8r2RBec2ZFtttPgcZII-I6tE-Swvj-tQMAxjyT0mlhTAmuDMhIrQmJgwBVUouws5gf67gnkvbYVKPajQhPe6TUgqn4uPIT3prUcihbTEKTSpu6QGHvejzmAwOe9R_iKDGhvXp9U4vVsb6wpW4Iral9EPSE7PRrxkFegotkL__MZon2swGVeVSiP34CQvuGw-qRhp-SXPJ9nu_XX62T4YmeIV8-hpxOp45cDSdx4XQFN-udZm-LIK1KX10ICqO6uOwPStgZc2HdDiB1COklOQfqw98YEHC8Ds7k8Mdh3btauU-ZSPKjJKK_8h31j6rkJpc2fIgKwr1cbBLZrNRw_pQF438TqXpau5-hTpoWjzCVGY9jVu4QQTxYrUOolei_q7
 
 @startuml
 actor FrontEnd
@@ -6,6 +6,7 @@ participant Slim
 participant DriversController
 participant DriversRepository
 participant "__:Driver__" as Driver
+participant "__:Car__" as Car
 database DB
 
 FrontEnd -> Slim : Get /api/drivers/{DRIVER_ID}
@@ -20,6 +21,8 @@ DB --> DriversRepository : query result
 deactivate DB
 create Driver
 DriversRepository -> Driver : create (query result)
+create Car
+Driver -> Car : create
 DriversRepository --> DriversController: driver
 deactivate DriversRepository
 DriversController -> Driver : response = toJSON()

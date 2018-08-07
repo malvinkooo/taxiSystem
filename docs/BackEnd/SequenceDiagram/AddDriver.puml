@@ -1,4 +1,4 @@
-http://www.plantuml.com/plantuml/uml/XLDDJm8n4BttLqmumO5m9y4WWX5Z15aJZvkHzj2a--6qIyA_TsIYMpAh7ddpFjvqXsLCIAchWi5ZQWZkgQdJfhQcPTWVVOjrWYBuwWfOapyvYdVCfIO4HqFJWskRwDdqV3KTbULS66Kv0emWFup5XEyO7QnNndpNWEdD9HtciDyLhp33ri-i-7yrzYTCJlfTQ4nNtLWh2bW0MYlpiK1x9ApYfBVIcoc4G_IAUSX7v-Xy-r-IVYM5N99MR5syF8bh9b_zpXSka8jTIB3evV3si3bim5i60yQqhQEZjBN6kjpuIAvlE1mZOBwrYCPvz4Hh__v2UG_zFbgN5-78jk5zk4fg7elTixoLMWIcWnLw0rrYABa_p26T4iXvikhd7wQL_IqlNMsxAdm2
+http://www.plantuml.com/plantuml/uml/fLHDJm8n4BttLpISu42uas2G3wF62B8c7ZV3jeVgibtRGiA_TzPXsK9hG-A5xBRluxq1PceT6BVVbGmAfmr_CBfooqgm6ezLeMge7CzAjRiuM1XraCRE4MjqMKeJkzt8Mbk5eiUBsrwUZmcHvpqEzWGFC7De0VZ413ZOWfLyCMEi3Sc7Tx_P-9YlLzax7q6jHeBScpxg04vI-kO3uM5ov1A3JpW8GVTzEbg3WPqTT59Xx-04JS81-2RVUscEzxSv-JCCHHkd6KfdRo-asXNmX6OCGSC_Kkal9gI7JRYKODsJu1DwgAmq-DeVtEf4z2ktk5sCJlsCjFlIjKCyJP2K_pkxzWlwU5nkbboTYufumNJ2gvf29hAnmiZk9ZKH_rT4fBvlEcYLvj3A81VVa1Z5XrxfVqYwHyZpW-ljfopS0XnWUAUVizKhknGBCoSuLBA13UCkVbP_7c71196GiMRTui5PrhgoCkHv15e_o3hlrpYJTjLKLW8tyWy0
 
 @startuml
 actor FrontEnd
@@ -6,6 +6,7 @@ participant Slim
 participant DriversController
 participant DriversRepository
 participant "__:Driver__" as Driver
+participant "__:Car__" as Car
 database DB
 
 FrontEnd -> Slim : POST /api/drivers
@@ -14,17 +15,36 @@ Slim -> DriversController : driver = addDriver(driverParams)
 activate DriversController
 DriversController -> DriversRepository : driver = queryAddDriver(driverParams)
 activate DriversRepository
-DriversRepository -> DB : SQL query
+DriversRepository -> DB : SQL query addDriver
 activate DB
-DriversRepository -> DB : query result = SQL query WHERE id = lastInsertId
+DB --> DriversRepository : ok
 deactivate DB
+DriversRepository -> DB : lastId = lastInsertId()
+activate DB
+DB --> DriversRepository : lastId
+deactivate DB
+
+DriversRepository -> DriversRepository : query result = queryDriver(lastId)
+activate DriversRepository
+DriversRepository -> DB : SQL query driver WHERE id = lastId
+activate DB
+DB --> DriversRepository : query result
+deactivate DB
+deactivate DriversRepository
+
 create Driver
 DriversRepository -> Driver : driver = create(query result)
+create Car
+Driver -> Car : create(query result)
 DriversRepository -> DriversController : driver
 deactivate DriversRepository
-DriversController -> Driver : response = toJSON
+DriversController -> Driver : objectData = toJSON
 activate Driver
-Driver --> DriversController : response
+Driver -> Car : objectData = toJSON
+activate Car
+Car --> Driver : objectData
+deactivate Car
+Driver --> DriversController : objectData
 deactivate Driver
 DriversController --> Slim : response
 deactivate DriversController
