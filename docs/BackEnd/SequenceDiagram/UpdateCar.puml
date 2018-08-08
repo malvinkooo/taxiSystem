@@ -1,4 +1,4 @@
-http://www.plantuml.com/plantuml/uml/bPDFIyD04CNl-HHBJorOUYyerRHYHRIs5ezXJ0PPsFnnToCKyRlxrcqRDussNWBPcVVUp0zcOYnfM-SgejIMMbphih2p8eigFCjKLbHOiL8o3nvYqYP6eowLOdrGMd9L6WcxJL3g9SaOvIJf2JAkCSh8qWiP5jEhADf5Y-75Tw8OYyNwIOoeagCKhgEF-7APpAUVRbJvJfRzOEu3JMieg24IvwAkaC8ezhtypBqlI5Dk1erJQwFm5-wjlVRkRpNhpVh4Y81C-8i8G83jwl7Ecsu75yyti-LCo0nXthrn13LeXf0UyUwYeyZOUM5OstaMPVpRcAWqSQTpUMNhUFmC-JSApQPM5cODamP6EFzH97kxraAfvkr07LFW1JhVqlVomKbimU0Ff9qGeNBNWCLiURjwk0zWEKbtajEqeWxyctjgTuUTsqj2--uKFRMg16R8mhERS97LkVe2
+http://www.plantuml.com/plantuml/uml/ZPFHJy8m4CRV-rSqFB54mZk91Xce6AC84X-NSpkJnh7EQqT2ZF-xLpisLlR02u7sxlTzzt6T6Wjagrqk8BMQv1tfmYwAJ9Hyh59LGc7b9bUxpa4CP68k99tdI6TNQoorKOmxTAu6IJBXwoGPI32kK6HWuGCColbCYAEq7DtyAyg9N6tVv1XADKwPElw9RzV9SlxhhAezMFJ6t0Vt1AQucvlajQnALa6-7FhsAtU-0eATYLfIC570OdftheR-NI4TjfT8XCc8WCWQynbpDwzFdbexb-yFY_L2gepLFBv5ScpSC-gpfxz4XgU5eTnHBmTZbmptNmg3n3-7qKKYlZSG8loKUeyK3doFba_gsGXDbTjZW2uwpue4yWOmGeYKi8wj9weOsd_O5mvFmL7Vk7qBSk8zz1kKDw9kQLdLwiVDotCRLEEqNyjr1M9d2ktY1zK1hbvvBc_UpCGDNkh28BTrtyUK4-K7_WS0
 
 @startuml
 actor FrontEnd
@@ -14,23 +14,24 @@ Slim -> CarsController : car = updateCar(CAR_ID, carParams)
 activate CarsController
 CarsController -> CarsRepository : car = queryUpdateCar(CAR_ID, carParams)
 activate CarsRepository
+
 CarsRepository -> DB : SQL query update WHERE id = CAR_ID
 activate DB
-DB --> CarsRepository
-CarsRepository --> CarsController : lastInsertId
-deactivate CarsRepository
+DB --> CarsRepository : ok
 deactivate DB
-CarsController -> CarsRepository : car = getCar(lastInsertId)
-activate CarsRepository
-CarsRepository -> DB : result = SQL query WHERE id = lastInsertId
+CarsRepository --> DB : lastId = lastInsertId()
 activate DB
-DB --> CarsRepository : result
+DB --> CarsRepository : lastId
 deactivate DB
+ref over CarsRepository
+GetCar query result = queryCar(lastId)
+end ref
+
 create Car
-CarsRepository -> Car : create(result)
+CarsRepository -> Car : car = create(query result)
 CarsRepository --> CarsController : car
 deactivate CarsRepository
-CarsController -> Car : data = toJSON
+CarsController -> Car : data = toJSON()
 activate Car
 Car --> CarsController : data
 deactivate Car

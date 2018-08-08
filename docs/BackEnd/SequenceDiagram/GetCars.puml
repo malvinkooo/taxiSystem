@@ -1,11 +1,11 @@
-http://www.plantuml.com/plantuml/uml/TP51JyCm38Nl-HNMJkCmxTu3sXW32KqWAFVAf1QAb2N5SONsxt72UeW2j_Qzpy_FxIu9iindRz1AP7ZW6EGOHZEfxAoRC0ZqtfqhuO2S3Wfoz9wuiTveYibftCNOJ5XnCIHO3KEdzZ2i05C1pOY27vW8xk-CMNR3vhQiX0uUZ--mnSbjRQQBg6QzleDFaYojRqpjPBRkev5VC_5bx_qoKVaweLMKwbzFlwJHrqsJSuq1fZHxISOoeL21siGYQsQWRzWpusLT3RSTcXDrsAfmSaa0Sy8_XoedyQb_URuUzdTK1fg0vPjVxVnSnEMdTBdk54CYiwCmpcV_0m00
+http://www.plantuml.com/plantuml/uml/RL7DIiD04BxFKmmzjOVIUmvI-wCWHT5w3sCor8LjDivEXBwzEss2Bkij-VwNMKSbqU7iWHeDWWyIEjrtBVG9TethgLCyUdVEW2r9t2QX1EzP2kgD-n2T1hbarAokgqJNzGmfcX1QKlgWoBZR04pLkBoxDcA5Z_jtN57lLWr910EDpDihFB4QD5z0pfWsdvCYlmQMoxttaoFZpR7R9DNnzN1JGlfT5ZbZ30h7mMi4y27q6OQUkvD-GYDCocOlgmnDNJV9F4jS07Sj59RYyMPFmC55HHAXopWb1wSnkVTtWOQduylpV07KgFl-i_V_HXD3ovduEhSe62yvUQxV1awdhkozVUWYmpeb36V_0m00
 
 @startuml
 actor FrontEnd
 participant Slim
 participant CarsController
 participant CarsRepository
-collections "__:Car__" as Cars
+participant "__:Car__" as Car
 database DB
 
 FrontEnd -> Slim : GET /api/cars
@@ -13,11 +13,22 @@ Slim -> CarsController: getCars()
 CarsController -> CarsRepository : queryAllCars()
 CarsRepository -> DB : SQL query
 DB --> CarsRepository: query results
-create Cars
-CarsRepository -> Cars : new Array(query results)
+
+loop query result length
+create Car
+CarsRepository -> Car : create(query results)
+end
+
 CarsRepository --> CarsController : carsList array
-CarsController -> Cars : toJSON()
-Cars --> CarsController : JSON
+
+loop carsList array length
+CarsController -> Car : toJSON()
+activate Car
+Car --> CarsController : JSON
+deactivate Car
+end
+
+
 CarsController --> Slim : JSON
 Slim --> FrontEnd: response
 @enduml

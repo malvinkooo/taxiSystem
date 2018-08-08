@@ -1,4 +1,4 @@
-http://www.plantuml.com/plantuml/uml/TPDHQy8m58NVyoikFkc3z5tO46stESR6MjWUIsOk8r2RBec2ZFtttPgcZII-I6tE-Swvj-tQMAxjyT0mlhTAmuDMhIrQmJgwBVUouws5gf67gnkvbYVKPajQhPe6TUgqn4uPIT3prUcihbTEKTSpu6QGHvejzmAwOe9R_iKDGhvXp9U4vVsb6wpW4Iral9EPSE7PRrxkFegotkL__MZon2swGVeVSiP34CQvuGw-qRhp-SXPJ9nu_XX62T4YmeIV8-hpxOp45cDSdx4XQFN-udZm-LIK1KX10ICqO6uOwPStgZc2HdDiB1COklOQfqw98YEHC8Ds7k8Mdh3btauU-ZSPKjJKK_8h31j6rkJpc2fIgKwr1cbBLZrNRw_pQF438TqXpau5-hTpoWjzCVGY9jVu4QQTxYrUOolei_q7
+http://www.plantuml.com/plantuml/uml/VPD1Qm8n48Nl-HM39ps8Tw55TBUjfRHqXVQuf6OeWNLtcqH1Ilzx9usxYKpeGT7DUz-yDvgLTTAuuw4HSkyw0tUcQrtPAj7JOxtNlMmTx1fzk7fG67r2OpUaDLtJeCcTLjXtLXFqV7KwgUjbKDJr1AIzo9bc8mS1VH9AElaXBKAn5c882VFRlsomX7jqi92zNgWmVF5TLDktiggtnO-lfa_IOIZYtyZ9In0ckE46Fj65y-d8cKKExyzXD84j8ftmTKHp_cy6soB7-HbhWkvUdm8FtX_AgWIjQC08JPXhGVfvFjg5OD0U6oSKfgwzmPY91ubb2NFHJbFSR21iv60d3tsBXXmrzoiDAqmJybqnMnhHX-gxrY9joNMFkvVdALiyIyc5lWkzGaoMAJRDz-3vSw67VtZCp7qfr8kzQxp8t1blmWfRHLV_5m00
 
 @startuml
 actor FrontEnd
@@ -27,6 +27,10 @@ DriversRepository --> DriversController: driver
 deactivate DriversRepository
 DriversController -> Driver : response = toJSON()
 activate Driver
+Driver -> Car : toJSON()
+activate Car
+Car --> Driver
+deactivate Car
 Driver --> DriversController
 deactivate Driver
 DriversController --> Slim : response

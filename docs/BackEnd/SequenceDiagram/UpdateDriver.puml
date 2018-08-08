@@ -1,11 +1,10 @@
-http://www.plantuml.com/plantuml/uml/dPHFIyD04CNl-ocMdbgmz5web9Y84T6QMZs6iHba8N_YxgHGnE_kredfnYHLUkbXzytxlNbakpG4cgei5R2bGijhNUGKv8aeGPFQgX9oakjKPQq3NwiTQdDbjRf8KzHzjn6MXL5Kw7thTXJ7SrR4yKY2gUKY0O9NC2XzJuYV679w-KsNSxdQFCaPb6gMiFtimu_2vo2AG__p45xjW92Z7dxiP3UcjU5fkP1LQOd8ad5ZTL4BLg0XCvEZSNVbhZiZsxkxoFSAzNvp3jSjiuiuS3qBMZ_UCQDUJhxS154WLMBP3ScnzeGTctBglo43XQPWACmDQWeJaU1myDQbTqPzRqXrRIxppAuqcYebkJYMvhRb0lvLMEFuQykjncEo_ZXyQ0rOEsQVIP_uv3Tzklp1kja12EpQLDok7-vvuKxi0JmFT-5znFer3yuuOdx4TgBvI-AAoo8to9FEYrzYdbHP-WK0
+http://www.plantuml.com/plantuml/uml/bPD1J_9048Rl-olc28c4UnC9mLR56CNoeKUpqZ7PMBhhx9Q46F-xKxQmnMqCtuMKwRplCpETcLedoTMRKiYrqmJNf2kNLOKm75PhPMJbO5cgpKaW9RL5ibUSIxeiaVhUvcYqLMow4uLqyarQX7Gcn041eydU6H9OhFx1M1erBhnq_9Ncy-SiVvsdtqrXQYiT-ZAQ7rR69R2DLyCbr8Q9w5C6HwkBDc4XIMxiC1Z7xKGHHiPzTP6VDT9kzP_SQ50YPZJW6PEMJ_SUqdO7BxTPde4g67v4TRndWcMZlh8Jq1-Ym9FK6Bld9b1Aw-RCy0-LHUA_W-5P83Z8Vz44uJjepeqbuWQT3xRD4jgwT8S1jwFrhaE1LG7iTPvX-5PhmZ3-OD8pX3yNhTjLp0qrnUirclWOE7stV7mOX4xwDY_SIND7NMhil4zi5CShIveH6brPzChEBKsPogV_0m00
 
 @startuml
 actor FrontEnd
 participant Slim
 participant DriversController
 participant DriversRepository
-participant "__:Driver__" as Driver
 database DB
 
 FrontEnd -> Slim : PUT /api/drivers/{DRIVER_ID}
@@ -14,26 +13,31 @@ Slim -> DriversController : driver = updateDriver(DRIVER_ID, driverParams)
 activate DriversController
 DriversController -> DriversRepository : driver = queryUpdateDriver(DRIVER_ID, driverParams)
 activate DriversRepository
+
 DriversRepository -> DB : SQL query update WHERE id = DRIVER_ID
 activate DB
-DB --> DriversRepository
-DriversRepository --> DriversController : lastInsertId
-deactivate DriversRepository
+DB --> DriversRepository: ok
 deactivate DB
-DriversController -> DriversRepository : driver = getDriver(lastInsertId)
-activate DriversRepository
-DriversRepository -> DB : result = SQL query WHERE id = lastInsertId
+DriversRepository --> DB: lastId = lastInsertId()
 activate DB
-DB --> DriversRepository : result
+DB --> DriversRepository : lastId
 deactivate DB
-create Driver
-DriversRepository -> Driver : create(result)
+
+ref over DriversRepository
+GetDriver query result = queryDriver(lastId)
+end ref
+
+ref over DriversRepository
+GetDriver driver = create Driver
+end ref
+
 DriversRepository --> DriversController : driver
 deactivate DriversRepository
-DriversController -> Driver : data = toJSON
-activate Driver
-Driver --> DriversController : data
-deactivate Driver
+
+ref over DriversController
+->Driver toJSON()
+end ref
+
 DriversController --> Slim : data
 deactivate DriversController
 Slim --> FrontEnd : response

@@ -1,0 +1,44 @@
+http://www.plantuml.com/plantuml/uml/ZPF1JW8n48RlVOevGYBXJg8XkAjYZE0YyMWgEoQDIxjEkoJ4-EuENSfM2uOBWRRpVVs7pjWwIQvPLqAkd26u8QDThajHyx9QgLfg1ujAhNyjpAX4ijTyb4nL8HtPBB0sLZ5oAqhfv9kq2Db4Y220mPNdmWZco-UXhDNG-CBXrwp8yk9rcdtlxgGsqc5xWzq7boLsHlXIk8IcPXdw0xs0WOjsUov9hcs_WoOf4d2GHMaYsMU3j5qUCPuI9fr9u2pC9gnOF3sq-7qYUBdBYnnKoTfWwRZSLwuQdBZjXoWnEdfQMadhfcnelsYBn3zx_RCyeVgFIn2-WzaWfTblqVcrVKv2srGkTBNjPuli2zGbCEWiMlXpLeI7bdU0DFi_xodAaWYxkwJFA231cVl5xB4N1KXVM3S6kp69bGdNd-E2mv2E66fheot6TNvMngpagVu1
+
+@startuml
+actor FrontEnd
+participant Slim
+participant OrdersController
+participant OrdersRepository
+database DB
+
+FrontEnd -> Slim : PUT/api/orders/{ORDER_ID}
+activate Slim
+Slim -> OrdersController : order = updateOrder(ORDER_ID , orderParams)
+activate OrdersController
+OrdersController -> OrdersRepository : order = queryUpdateOrder(ORDER_ID, orderParams)
+activate OrdersRepository
+OrdersRepository -> DB : SQL query update WHERE id = ORDER_ID
+activate DB
+DB --> OrdersRepository : ok
+deactivate DB
+OrdersRepository -> DB : lastId = lastInsertId()
+activate DB
+DB --> OrdersRepository : lastId
+deactivate DB
+
+ref over OrdersRepository
+GetOrder query result = queryOrder(lastId)
+end ref
+
+ref over OrdersRepository
+GetOrder order = create Order
+end ref
+
+OrdersRepository --> OrdersController : order
+deactivate OrdersRepository
+
+ref over OrdersController
+-> Order toJSON()
+end ref
+
+OrdersController --> Slim : data
+deactivate OrdersController
+Slim --> FrontEnd: response
+deactivate Slim
+@enduml

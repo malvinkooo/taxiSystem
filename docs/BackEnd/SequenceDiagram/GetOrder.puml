@@ -1,4 +1,4 @@
-http://www.plantuml.com/plantuml/uml/VPDFQ-im4CJl-XHBJiaX-1ve2QdTFwNKr3wyer6jfGWSovNMXL3wtRkLurYnnRjgPtupkzXxHz9IVso4hCbOkBUcfQnLekDdNUjEjWHbeuzN3xbLQDqTIwrf6hIHOO6TSPgHfwlXggfsNb1LAv1k40ibIRvBXv0UX1WhmFRM9yCE7f0WaPrEZ6SdttcHPaNrbFxyrTPVad0ewVNicnTaXhV23NmW-UbwP6mcncAl1OVPy_q2zcUFzlH_UdYO1OdfwO5vvTlBm89_ZrcHWLOC7uaJaA_5ycsyq-2twFg6XCBGL5kyz8cMy6_CE0lN8MiJSKGkVZvAa1pVF_I4qHpMcTOXBqxckSnVr_DB3lPe-28r4ZL-NLDKw5eGlPPDbpyaRlHCiSTMyJ_r2m00
+http://www.plantuml.com/plantuml/uml/XLLDQrin4BphLuYSd8FntT2I9i_f1w5kxKEF3zLQYk1PUfNaG2ZzxzrgPNNZLV5HsfdHl9t1lalPn7mwJieSSeZwCGQVDzwg6Q_TmSt6PxsVtF7LnJPQYEa1eJ5C4yJES0TpI0ubNruDRyPnNG3ZUADD8h10F4mEVAuGEaYCYOy0zajmFg_VMHiXfShW8y4R86NdJNR1Nz3OHBAYUswcwT1pzC-0iYQRxoQ17kwLEgzLBz-MRUgrVWzPhypiLg7iQ_Lhknisk_7ZyFjl5ExPPA355ppoBfUE6eMgt-WVaCjqSTQuRHeoAw5JjNbcJFld2UBB5NKMjb12zU4UzVPVdqXBV_kmsMsqioX-Lco2Y5K8N_Oz4Jz2EarPMU0aTOZG3FLSq0H5Ad31nMuhlPQD-4YgvyRgabZV69NTNXNWpMjyTdcDJdriJ3fVDwq8I6R_Y-yiizF6MXYMYko6h1wB1P-RWq-0hSZXqtxxUN5PCoLZ4T2MO4MGLMQCGVfH2L6HC3-81oIydsZl5Lu3ZkLlTC4oUgbE8vbvzsFn6n5IzSItDOskBsAGfLvLP4TwnQW_bAmOWiOb2nP9xG-iJooQwWwyFHsdFm00
 
 @startuml
 actor FrontEnd
@@ -6,6 +6,11 @@ participant Slim
 participant OrdersController
 participant OrdersRepository
 participant "__:Order__" as Order
+participant "__:Client__" as Client
+participant "__:CarFeedPoint:Address__" as CarFeedPoint
+participant "__:Destination:Address__" as Destination
+participant "__:Driver__" as Driver
+participant "__:Car__" as Car
 database DB
 
 FrontEnd -> Slim : Get /api/orders/{ORDER_ID}
@@ -18,14 +23,53 @@ OrdersRepository -> DB : SQL query WHERE id = ORDER_ID
 activate DB
 DB --> OrdersRepository : query result
 deactivate DB
+
 create Order
 OrdersRepository -> Order : create (query result)
+create Client
+Order -> Client : create(query result)
+create CarFeedPoint
+Order -> CarFeedPoint : create(query result)
+create Destination
+Order -> Destination : create(query result)
+create Driver
+Order -> Driver : create(query result)
+create Car
+Driver -> Car : create(query result)
+
 OrdersRepository --> OrdersController: order
 deactivate OrdersRepository
+
 OrdersController -> Order : response = toJSON()
 activate Order
+
+Order -> Client : toJSON()
+activate Client
+Client --> Order
+deactivate Client
+
+Order -> CarFeedPoint : toJSON()
+activate CarFeedPoint
+CarFeedPoint --> Order
+deactivate CarFeedPoint
+
+Order -> Destination : toJSON()
+activate Destination
+Destination --> Order
+deactivate Destination
+
+Order -> Driver : toJSON()
+activate Driver
+Driver -> Car : toJSON()
+activate Car
+Car --> Driver
+deactivate Car
+Driver --> Order
+deactivate Driver
+
 Order --> OrdersController
 deactivate Order
+
 OrdersController --> Slim : response
 deactivate OrdersController
 Slim --> FrontEnd : response

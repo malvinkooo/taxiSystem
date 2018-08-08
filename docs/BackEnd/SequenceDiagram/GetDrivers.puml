@@ -1,21 +1,36 @@
-http://www.plantuml.com/plantuml/uml/VP91Jm8n48Nl_HKJJd00xZqOGD3468tYVJDsHsrIsdLcaF3lRRExGREhnxvvtslpfYjHP3qUWa6dYU66KzHTh4sJPUzyWr5X7_pXbx1b_qKirzdBAGHYqtCmlu9Y1mktknTOOkENTUisHS_p8MtXdRHJfpCpcF-0dgb9uZNn6Iny7edFwn0kQ8sAhoW4suqP4YLcaxdzqttBcdoSZuLtsS0anw1YN7c7Kv-YmAIgR0jKrGHGUjeu9bJgZ-FtTo9OY7I2DJEUful5OZRc7gigWrsTW0N-jwnirdItVtoubFfdAeeavr7pf4s6azSFS8cPdCARfr13n0F9s9MNhJD9aw9Gj-qywB-6XV8KA2ioAufr_dJV
+http://www.plantuml.com/plantuml/uml/VLFBQiD03BphAqHEyI7axaD9ysYXX9OslPLYr4Ia2nklgrKA-VlAzPeahCdDgndDZ8GyYqgYnuC7sceGV91GwwhUGMDbjtKDrOeRxmvNXQMuNvQuCAu4xrc6q3TkGdGcUhf2HrLLTeog6Y75HCyu2-e9zWKxKlgYoBYS0_GXSNBtdmrBV5ozuvGQDzrrvj3M3S-ZbhXdJTLn0HbkJVa4vl1pP3dTUtzkpLbjwzouczTrnmTxJeO4anuAnwFN2E13QAvgwBdUwpTiXKavAGnw9inyE-xuKkQZ_YnwZGNr0jPbhrijR3Smv3QqKfD9Qr-xg4WYT4eJPVKqrgszcvo6fytByxZ8udO0sECYIc8DXqkJv7Rdux6ncr17JaTZG7zX9RPss5uVp4p8VfG_
 
 @startuml
 actor FrontEnd
 participant Slim
 participant DriversController
+participant DriversRepository
+participant "__:Driver__" as Driver
+participant "__:Car__" as Car
+database DB
+
 FrontEnd -> Slim : GET /api/drivers
 Slim -> DriversController: getDrivers()
 DriversController -> DriversRepository : queryAllDrivers()
-database DB
 DriversRepository -> DB : SQL query
 DB --> DriversRepository: query results
-collections "__:Driver__" as Drivers
-create Drivers
-DriversRepository -> Drivers : new Array(...)
-DriversRepository --> DriversController : drivers array
-DriversController -> Drivers : toJSON()
-Drivers --> DriversController : associative array with correct field names
+
+loop query result length
+create Driver
+DriversRepository -> Driver : create(query result[n])
+create Car
+Driver -> Car : create(query result[n])
+end
+
+DriversRepository --> DriversController : driversList array
+
+loop driversList array length
+DriversController -> Driver : toJSON()
+Driver -> Car : toJSON
+Car --> Driver
+Driver --> DriversController
+end
+
 DriversController --> Slim : response
 Slim --> FrontEnd: JSON data
 @enduml

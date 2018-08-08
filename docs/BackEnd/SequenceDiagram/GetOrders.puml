@@ -1,11 +1,10 @@
-http://www.plantuml.com/plantuml/uml/VP51JyCm38Nl-HNMJkCmxPu3se21X2OcAFVAj1QAb2R5SONwxqdIZMfLuDOyV-_rMTu5GPQXimeRyGoFx9qSNAlwA9l6zEW4AckwA-74BN6uZoXxQuaBmpVgVJ0nSbHDOXentWLOrRNEG5sl0CCPLYqAVc0WUBXJwj81DhVvrw3XwV0EM-pDrazybkDuMKJ39yaahc_KSZexvdQWuMiW7lVMphu54tsnM2Ihr-D4g_ZS5DBEOS0K1Yj1DKmeTCQAkPC66XnzmvuPn_LLHAbDON7GuBDqD440Kyu_wqTQ_7DrUlbTzg_G11M2vija87rdyN8wdUhtyU2aTkJQeRC_
+http://www.plantuml.com/plantuml/uml/RLBBJiD03BpxAto4GzHx3bLv52HKKK7u0PEOij8sktWTfFmzpgEAkkGKxNWy7irabvH4kxC7gZK8FabeTTys40rsjOlKAbRUdQ-0epGiwS6e4hndMHc-Smp9cMGF3IbzKc9yl0Uu7C1YE-fYYS_x3znGT9imRi88spY_KkA9TG9lRY6VBXlBQHF_wLZwE--NlOnZUsRCcDNROMA3FOiLjLaCXLFdDG7u4E8LXfxRatw3y1U6NvR_MTJ2f3pXm1Q3KOSlhFXQYS1iJY4TN58a4Ufd6pcyOYNhhDYE46fugOwlbank9ujtAMpWpoqPU6cq74A8eKqCEvEmV-eF
 
 @startuml
 actor FrontEnd
 participant Slim
 participant OrdersController
 participant OrdersRepository
-collections "__:Order__" as Orders
 database DB
 
 FrontEnd -> Slim : GET /api/orders
@@ -13,11 +12,21 @@ Slim -> OrdersController: getOrders()
 OrdersController -> OrdersRepository : queryAllOrders()
 OrdersRepository -> DB : SQL query
 DB --> OrdersRepository: query results
-create Orders
-OrdersRepository -> Orders : new Array(query results)
+
+loop query result length
+ref over OrdersRepository
+create Order
+end ref
+end
+
 OrdersRepository --> OrdersController : ordersList array
-OrdersController -> Orders : toJSON()
-Orders --> OrdersController : JSON
+
+loop ordersList array length
+ref over OrdersController
+->Order toJSON()
+end ref
+end
+
 OrdersController --> Slim : JSON
 Slim --> FrontEnd: response
 @enduml
