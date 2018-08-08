@@ -1,0 +1,104 @@
+http://www.plantuml.com/plantuml/uml/dLN1Rjim3BtxAtpqXlK7ScgHOi1sQ8iE_G3LP581ikI9yeOYoBzFfL9530UlsCMftwCU7nzT-vgIYMcPN7SRxI-C_USh2B_zLRyriRkFq22be8Bz3K14ecxhBFfKovZlyd7Q1fzYS2wNinuzuXp8fX1V5R_CfQKiE-EbkPHaJAWoeeKBN5WbB-QI3HXYGcao9tfV0arPrutE4FMNIeVkC65w2N3i3G2pGtYxFfXe9lfqflUO6leRQ2hIq83B32QXEFAb5z97uQcntPZwkM1yLNrRyiOvtRmmxmE9UKJ9qmTCdbpAn-KWfi_SC1es9s7foW2KIkq6q652eIDoB0pRQuuVgxVL_AIip8uzAbmPbVojTgjJ5PPrdleVHMPQ-07u9_VGf0fN797EwJrY9Ik2bZnxbsf7wNubTDL8HTyC8QdLIUGE_j7bQNqczOZp4dOMNHQmiEcjJ_MUKbdgtJ8zOzpa-sZzljBFqNXGwDvGSDPZNZCjqvniy8ycNpVzpWLp5WUaCLhcgqOT9ONlF-xlXelqrxoE9XlSPBCLyMP2vOwM-5TyVWbUeH_rA5wrAnxB4hBDCitPEt_Ctkpp7nNdDzLk6z6m0xw_9CCqErGqv_4L4Hw2PUNJTxETB5b_qjMifMJyYD9-pFfoY-KHMUW32porQD99DZaTkMl4tQfY2Oi5_tVXgxwlqSCokJy0
+
+@startuml
+Driver *-down- Car
+Order *-down- Driver
+Order *- Address
+Client *-down- Order
+CarsController - CarsRepository
+CarsController -up- Car
+CarsRepository -up- Car
+DriversController - DriversRepository
+DriversController -up- Driver
+DriversRepository -up- Driver
+OrdersController - Order
+OrdersController -up- OrdersRepository
+OrdersRepository -up- Order
+
+class OrdersController{
+{method} addOrder(orderParams)
+{method} getOrder(orderId)
+{method} getOrders()
+{method} updateOrder(orderId, orderParams)
+}
+class OrdersRepository {
+{method} queryOrder(orderId)
+{method} queryAllOrders()
+{method} queryAddOrder(rderParams)
+{method} queryUpdateOrder(orderId, orderParams)
+}
+
+class CarsController{
+{method} getCar(carId)
+{method} getCars()
+{method} addCar(carParams)
+{method} deleteCar(carId)
+{method} updateCar(carId, carParams)
+}
+class CarsRepository {
+{method} queryCar(carId)
+{method} queryAllCars()
+{method} queryAddCar(carParams)
+{method} queryDeleteCar(carId)
+{method} queryUpdateCar(carId, carParams)
+}
+
+class DriversController {
+{method} getDriver(driverId)
+{method} getDrivers()
+{method} addDriver(driverParams)
+{methos} deleteDriver(driverId)
+{method} updateDriver(driverId, driverParams)
+}
+class DriversRepository {
+{method} queryDriver(driverId)
+{method} queryAllDrivers()
+{method} queryAddDriver(driverParams)
+{method} queryDeleteDriver(driverId)
+{method} queryUpdateDriver(driverId, driverParams)
+}
+
+class Car {
+{field} id: int
+{field} stateCarNumber: string
+{field} brand: string
+{field} gasolineConsumptionRatio: float
+{field} description: string
+{method} toJSON()
+}
+class Driver {
+{field} id: int
+{field} car: :Car
+{field} name: string
+{field} surname: string
+{field} phone: string
+{field} description: string
+{method} toJSON()
+}
+
+class Order {
+{field} id: int
+{field} driver: :Driver
+{field} client: :Client
+{field} dateOfCreation: date
+{field} dateOfCompletion: date
+{field} carFeedPoint: :Address
+{field} destination: :Address
+{field} distance: int
+{field} rate: float
+{field} status: string
+{method} toJSON()
+}
+class Address {
+{field} title: string
+{field} lat
+{field} lng
+{method} toJSON()
+}
+class Client {
+{field} name: string
+{field} surname: string
+{field} phone: string
+{method} toJSON()
+}
+@enduml
