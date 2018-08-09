@@ -1,4 +1,4 @@
-http://www.plantuml.com/plantuml/uml/ZLF9JiCm4BtxAwoUaaFLUwMYGba4GhGGxj6G35946eUnMwb_pmjkipX4ub9rnczvCuxNrf6umxvKb3aZ-bvCvUwgNDLe5rbHK-LqKXRxGMD3OZS0YYbBbj7H6zV65f0x3OvcQRh4SPhEDDa6g79oz46MzUsDKXThFR_wTTHBlTicxtf1TR788Dj4B8xas0TgVe0Dme05h5vfodESH2Xs9BItSKSFuWzBI0P3j9BV1vRJzQHkEFkmX2x6X5Ro-koLpX4xFhO0nFol0EPBvTm3JecNPDrZhbV-JsLPK4RnlpmyD_1Hmf_Q75d2wHxOeNEUHDWUIdTPKRCVBnOhneL2GgbC-BoZSNPqkulpmAWl78ye4_VU2n_c3U2jAHngWqN1sPcdPFlIRQjDE_RhCmFJaLFtFKymUcZ_LOFIliGnhNi2QsmNR_S7
+http://www.plantuml.com/plantuml/uml/ZLDBJy904BxlhvXmAWV2dGI3uYCQ8sYzDoCTausbMsSN4lwzNotITWk95zBPcUyn3nO-i8RTjZ2y2KxfNbqPxihSL7Ys6rjn6IWjxBRti6JrInIgAmhHGUfDAkSjw0wzr2ZBPaXdsOZOruKcvy0Vx8LkRupvawR9rQyYpMYzIjzfofMTRa1RMxHx3j8OgdzG6va12hKq9yvpP184QrRU-d4BZ-ptGr16JPmeltUYX-lBl57l_H2yQ1DSwUjpmtIqsE8n1LHCpXbmNoQNJk4bye9zUCnftdoKNXHXClwNHeEDT8pA9xczQDpTWmIyT2U3C6aunaQmHo3DmEU5XNLL-v3pwm5AnLSE7K8-kATqzPBqLr43XtfTP2GwK6eFyGmYeZsU8o2dEnx0sjjTO3xuq_q0
 
 @startuml
 actor FrontEnd
@@ -24,11 +24,9 @@ DB --> CarsRepository : lastId
 deactivate DB
 
 ref over CarsRepository
-GetCar query result = queryCar(lastId)
+GetCar car = queryCar(lastId)
 end ref
 
-create Car
-CarsRepository -> Car : car = create(query result)
 CarsRepository --> CarsController : car
 deactivate CarsRepository
 CarsController -> Car : response = toJSON()

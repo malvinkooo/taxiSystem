@@ -1,4 +1,4 @@
-http://www.plantuml.com/plantuml/uml/ZLJFJy8m5BxthsWuRGV2dGI3W1gD4NJUbyVwJARREjkEXF_UDqkpufleXMpjz-FxtbgMre5nNLq9A9msyjRenjqqIhIqN1Pb2usJMLNMPmiRKnxGs3LXZQugD6ExBzXgMvBeyMntakTpZyZpYGHxWZFC6WA0deG21tkmA3Sh8K98ERtwpYRdShVDNkKCsdAcl7lVfpo0Gv--_o4uJqvSpv0B2Khv_SGlxS10RTD1YlTcAsJ21n2RV7PeZjT_EV4PSj7UQKNIsVEZLnqAH48hGQ3fBwdqXr0OOI-uL63TlP8B_z1ODFIQfFzrylGVRiBWczI4vHHnX-4apK_j3DgkSc64f_bvtLHWeoIf2L4O70OutiSlnX_5avBO9mrAQmWonAKt8exYnxmkdhXu6Bm_vyN9zVuT2xS11vJUwOTi-vImuyDYNsJvfZrmEkuKvus7majo8a_6sWsNsQ1jTMEHyoA2lz8zA_mTSEPm_vVOgAwklW00
+http://www.plantuml.com/plantuml/uml/ZLDDJyCm3BtdLrWxjOTfzqb3OmmG2B51kLTcCL94svGacxH_Zwa7NPOLkBKlx-CvaUS-e0lRkbAu2TR1ZRDDk6wqQXas6zDY4w2eJ1q1IsTsvFmLSvsjAdBdJf-fjTwmwJuw7PNbL1XbEGBq1xhI6F0LFS5oeTHt3HXVTEamXVMgU849jcQYnV-hiTbX8EdNqPYUT6EjA606gBMSPmAjqM7jyzugdIn1E2GTyJZaOqjkV_bdKd9B2T8bBTYwU7eGrtw08wE5Oj9ue9LzLveYxc1AXJxSQPZ9H-F9yM-M_pT9v2Tfoj4RMEQc4dLBuO2UNfwWcJZcYXeDxAFETV_rnQCoIVxmque51kH2mTuNgySiFvqagXzpayR3DLcNbZnNh5y4HxwrZQTKToIGTM3LpqQdodvtvjntMrUV
 
 @startuml
 actor FrontEnd
@@ -6,7 +6,6 @@ participant Slim
 participant DriversController
 participant DriversRepository
 participant "__:Driver__" as Driver
-participant "__:Car__" as Car
 database DB
 
 FrontEnd -> Slim : POST /api/drivers
@@ -25,22 +24,18 @@ DB --> DriversRepository : lastId
 deactivate DB
 
 ref over DriversRepository
-Get Driver: query result = queryDriver(lastId)
+Get Driver: driver = queryDriver(lastId)
 end ref
 
-create Driver
-DriversRepository -> Driver : driver = create(query result)
-create Car
-Driver -> Car : create(query result)
 DriversRepository --> DriversController : driver
 deactivate DriversRepository
-DriversController -> Driver : objectData = toJSON()
-activate Driver
-Driver -> Car : objectData = toJSON()
-activate Car
-Car --> Driver : objectData
-deactivate Car
-Driver --> DriversController : objectData
+
+DriversController -> Driver : data = toJSON()
+ref over Driver
+Get Driver: data = toJSON()
+end ref
+
+Driver --> DriversController : data
 deactivate Driver
 DriversController --> Slim : response
 deactivate DriversController

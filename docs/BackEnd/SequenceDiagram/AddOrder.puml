@@ -1,4 +1,4 @@
-http://www.plantuml.com/plantuml/uml/hPL1Rnen48Nl_XKM9pYWt2ErIXE8cgegD5Jg4KtMSt2xUBUsYPH_trcFs4oO1Q4LjzX-xyryG-ozInbYtkzg0rLkedsCJSZBu4nBsxxoBOHiDxNVVTXOHOSnFP0qDdMDSU3m6TicUOfy-t0usMvlYs2xdLX8B5QAHVIllOGNIlC01m7zPHnaU864Td5lp072pZ-NtksjNQysl-mDjFwcAUrrkFuLCZ9SKP7w68oSHMy_MN2kd4xBnXeYxDAiZz4ZKL4KVpmQ4VzlZ_7jooKrn6ID2gGYYtkAtVpypf5TtxQgFORy7aH38jNyH4T_ZKCfFLc4OvySjLz3oayXOQJbT7P99U6_h9w2WlY8wDQDlpwQ31yFA5D6OpfCsGV8lWbNfnJPuo5bo3X6lWJNfcEQaLZiLZowsB2PqIAcVPqFbvjlDiUUkzJ3F2fKZF3tr-NpqleUrLs8A0EFGQk8VNUdgSK3neQfp9mTKlW9vnZoyfhCvqpbMMSXMMXrKg_QE_UIIqxzdYgN17tvWrLUG0QYpSstpUg7aL63WAmJ_tHyfCYKaFcxixdCSv118iWXSQzQfdw0eV4e3qk6HlB-LOsOsYOaL3QXDvsscFhFyh2nqvax36w_g_y3
+http://www.plantuml.com/plantuml/uml/hPJ1Q_904CNl-rSidlGWteKMQwt5Z_9fczx3r9t2qcGtdLq5__kEkqWIDm497ZFxvZVl1MOMpWFvGra8s7jBSatM-1UZHCLblTSL62-pGfUjmfOKadjcATcYGEfu_C3AEit8K-jnbEVp8CZpaGGNnKA1XozmA5TB8IuMvFGnJ9PpkTjcdt86bPxP03-RrKVm6Aq55QklRN5dqCi72Kg5rt4ex82WT9CQamHAK8o_3jR0_nwGJaytp6Z-5v40USXgoTZi_IqYpxxblj1eV0tYdyIgQO-Z7w6m8UqV4h4RnVOBS7vZ719_ZYStJQhxs_Dk3WMqHbGxg-yVhGKV7h2c38-fq7bjm6jhxfwomHuUiW4Pc34kmRtJXJI3OuMc98yW_9RsY9JkuYlwK6jlT5pdo9e8D4eoeMjl-szFmq8wjV_CSBi23sp4st_Pzl-LTVPBKTTIZMkJyNNQvIoYHTVq-kGIkieQXwd_MXyERsYwtEpkni0K2xPsA8i_
 
 @startuml
 actor FrontEnd
@@ -6,8 +6,6 @@ participant Slim
 participant OrdersController
 participant OrdersRepository
 participant "__:Order__" as Order
-participant "__:Driver__" as Driver
-participant "__:Car__" as Car
 database DB
 
 FrontEnd -> Slim : POST /api/orders
@@ -50,35 +48,19 @@ activate DB
 DB --> OrdersRepository : lastId
 deactivate DB
 
-OrdersRepository -> OrdersRepository : query result = queryOrder(lastId)
-activate OrdersRepository
-OrdersRepository -> DB : query result = SQL query WHERE id = lastId
-activate DB
-DB --> OrdersRepository : query result
-deactivate DB
-
-create Order
-OrdersRepository -> Order : order = create(query result)
-create Driver
-Order -> Driver : create(query result)
-create Car
-Driver -> Car : create(query result)
+ref over OrdersRepository
+GetOrder order = queryOrder(lastId)
+end ref
 
 OrdersRepository -> OrdersController : order
 deactivate OrdersRepository
 
-OrdersController -> Order : objectData = toJSON
-activate Order
-Order -> Driver : toJSON()
-activate Driver
-Driver -> Car : toJSON()
-activate Car
-Car --> Driver : data
-deactivate Car
-Driver --> Order : data
-deactivate Driver
+OrdersController -> Order : data = toJSON
+ref over Order
+GerOrder data = toJSON()
+end ref
 Order --> OrdersController : data
-deactivate Order
+
 
 OrdersController --> Slim : response
 deactivate OrdersController
