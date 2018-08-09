@@ -1,4 +1,4 @@
-http://www.plantuml.com/plantuml/uml/VLFBQiD03BphAqHEyI7axaD9ysYXX9OslPLYr4Ia2nklgrKA-VlAzPeahCdDgndDZ8GyYqgYnuC7sceGV91GwwhUGMDbjtKDrOeRxmvNXQMuNvQuCAu4xrc6q3TkGdGcUhf2HrLLTeog6Y75HCyu2-e9zWKxKlgYoBYS0_GXSNBtdmrBV5ozuvGQDzrrvj3M3S-ZbhXdJTLn0HbkJVa4vl1pP3dTUtzkpLbjwzouczTrnmTxJeO4anuAnwFN2E13QAvgwBdUwpTiXKavAGnw9inyE-xuKkQZ_YnwZGNr0jPbhrijR3Smv3QqKfD9Qr-xg4WYT4eJPVKqrgszcvo6fytByxZ8udO0sECYIc8DXqkJv7Rdux6ncr17JaTZG7zX9RPss5uVp4p8VfG_
+http://www.plantuml.com/plantuml/uml/VL9DIyD04BtFhnXwQW-bznoazaD1YgBr9XB6TgWBssoSdGZzzqvCrhPiy9Pzy-PzX9b79T7cw85s6WJl95IwhlPG6-nshgPASUlTyGfOYVjcYKlZIl2UPMZwmdM8paHFLzDHMHOTeon7IB6dPvmb9O9zmPwKFYWohXO0AIHERtwpOO7twrUSKUrc-yuSMjpcUTG23wmzEfv0DhUbl84vV3KifrllpwivgrrT67VxlEduOC_fa62lXyAnyHe1V0Zr5OQUguD-mawOb7k5OSyEDD-EExwKUQlU9qbZIKd0jkprtmhR3Gov3VrIa-b_-yP5HHAXKzSenrEjNEIoY8Q7xTFZU9B5_HlOyo9CuWt6Irqom_FvMF4wL97xix51kh42MqDixm_c9jGS_Gy0
 
 @startuml
 actor FrontEnd
@@ -26,7 +26,7 @@ DriversRepository --> DriversController : driversList array
 
 loop driversList array length
 DriversController -> Driver : toJSON()
-Driver -> Car : toJSON
+Driver -> Car : toJSON()
 Car --> Driver
 Driver --> DriversController
 end
