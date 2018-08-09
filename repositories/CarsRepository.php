@@ -5,16 +5,24 @@ class CarsRepository {
     $this->db = $db;
   }
 
-  public function getCars() {
+  public function queryAllCars() {
     $stm = $this->db->prepare("SELECT * FROM cars_list");
     $stm->execute();
-    return $stm->fetchAll(PDO::FETCH_ASSOC);
+    $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC);
+    $carsList = array();
+    foreach ($queryResult as $car) {
+      $carsList[] = new Car($car);
+    }
+
+    return $carsList;
   }
 
-  public function getCar($id) {
+  public function queryCar($id) {
     $stm = $this->db->prepare("SELECT * FROM cars_list WHERE id = ?");
     $stm->execute(array($id));
-    return $stm->fetchAll(PDO::FETCH_ASSOC)[0];
+    $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC)[0];
+
+    return new Car($queryResult);
   }
 
   public function addCar($car) {
