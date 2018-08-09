@@ -1,4 +1,4 @@
-http://www.plantuml.com/plantuml/uml/ZLDDJyCm3BtdLrWxjOTfzqb3OmmG2B51kLTcCL94svGacxH_Zwa7NPOLkBKlx-CvaUS-e0lRkbAu2TR1ZRDDk6wqQXas6zDY4w2eJ1q1IsTsvFmLSvsjAdBdJf-fjTwmwJuw7PNbL1XbEGBq1xhI6F0LFS5oeTHt3HXVTEamXVMgU849jcQYnV-hiTbX8EdNqPYUT6EjA606gBMSPmAjqM7jyzugdIn1E2GTyJZaOqjkV_bdKd9B2T8bBTYwU7eGrtw08wE5Oj9ue9LzLveYxc1AXJxSQPZ9H-F9yM-M_pT9v2Tfoj4RMEQc4dLBuO2UNfwWcJZcYXeDxAFETV_rnQCoIVxmque51kH2mTuNgySiFvqagXzpayR3DLcNbZnNh5y4HxwrZQTKToIGTM3LpqQdodvtvjntMrUV
+http://www.plantuml.com/plantuml/uml/ZLDVJy8m47_lfxZmD19nxoGOHDHeZA3pVJdfcJIEjRQ5X6_lpLF7A5DUoBZx_VbTsvk6Y3vkrfN2LRGURhojutMjbUEoMHc7TOIYCkjEOUxDbdouOgotLKN-MFUPd0s6HNUTxg0inu8eom5W-8OhZH5VCH3CPqhzn83HnPSxZ66vA5uWHsToBVfDOhF5I9Al-M5ucesvme09eDRIpwIqH8_hC6obqicI2fka8-wRV6p8xox_TKfEAHLjd6OiNJmzY6exm9xGJ35er9FAlYjD7MolIuKXtccOo4SToFFVR7Ygaz0Ft9IdDx2CJIbdJRzxQ8B9H6ceL9uNH71BKHhdZXzgdYkgDR2kEZRBdo-W4ouv__wh5WcCo46ZlIyMZrboauUJdXY-Fp7RfNcFPMntn5DmjWwqpqi8iYdC-btsbDckrPJpSl1F
 
 @startuml
 actor FrontEnd
@@ -23,16 +23,19 @@ activate DB
 DB --> DriversRepository : lastId
 deactivate DB
 
-ref over DriversRepository
-Get Driver: driver = queryDriver(lastId)
+ref over DriversRepository, DB
+driver = queryDriver(lastId)
+
+//See GetDriver.puml//
 end ref
 
 DriversRepository --> DriversController : driver
 deactivate DriversRepository
 
 DriversController -> Driver : data = toJSON()
+activate Driver
 ref over Driver
-Get Driver: data = toJSON()
+//See GetDriver.puml//
 end ref
 
 Driver --> DriversController : data

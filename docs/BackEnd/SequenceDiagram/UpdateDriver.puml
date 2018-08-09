@@ -1,10 +1,11 @@
-http://www.plantuml.com/plantuml/uml/bPD1J_9048Rl-olc28c4UnC9mLR56CNoeKUpqZ7PMBhhx9Q46F-xKxQmnMqCtuMKwRplCpETcLedoTMRKiYrqmJNf2kNLOKm75PhPMJbO5cgpKaW9RL5ibUSIxeiaVhUvcYqLMow4uLqyarQX7Gcn041eydU6H9OhFx1M1erBhnq_9Ncy-SiVvsdtqrXQYiT-ZAQ7rR69R2DLyCbr8Q9w5C6HwkBDc4XIMxiC1Z7xKGHHiPzTP6VDT9kzP_SQ50YPZJW6PEMJ_SUqdO7BxTPde4g67v4TRndWcMZlh8Jq1-Ym9FK6Bld9b1Aw-RCy0-LHUA_W-5P83Z8Vz44uJjepeqbuWQT3xRD4jgwT8S1jwFrhaE1LG7iTPvX-5PhmZ3-OD8pX3yNhTjLp0qrnUirclWOE7stV7mOX4xwDY_SIND7NMhil4zi5CShIveH6brPzChEBKsPogV_0m00
+http://www.plantuml.com/plantuml/uml/bPFHJy8m4CRV-rVSuqZ0lY_H4DnKZ57SH1zDPMVIEDRQ5X9Y_DyzrZ4PdQ9ls_M-x_UrlOwj4yQjbYKJ2wSCN1XLkRGgcAQoN4WjAWTvAPUTGcBa6eqzfrwZoX9Dtsg6Mbb9ffkULLO89rw4HKWcZEseC3ghOH33RFu0N6Z92-_6Fv9i-fXcpzFaSvjLheL3dwnMa398HJPU3QUmqaH4tnArLiEcOIQCMDh1jt6umw12o72h-yZt5PhD_9_SuEnOKAh14oBbzpSUqkmEdgxIB0LP4Bn5xNbF6Cb6VR5ZK6-im4vhYAsvCPJ2kYan_4TbqT1lDFWJ27Ro0nep-0gAUaF9SBlUFTJcEBtJW37ESqIuHESNJZGDDESCQQB8j_S8VvqN2dVqHlf7WHo44vJJgUlyxZOAhlPmeyUo--gFUMjS6BStO_ku0b7GtBmfKhHFCwOuLYkwRb9s7-2OmbBgBm00
 
 @startuml
 actor FrontEnd
 participant Slim
 participant DriversController
 participant DriversRepository
+participant Driver
 database DB
 
 FrontEnd -> Slim : PUT /api/drivers/{DRIVER_ID}
@@ -23,20 +24,22 @@ activate DB
 DB --> DriversRepository : lastId
 deactivate DB
 
-ref over DriversRepository
-GetDriver query result = queryDriver(lastId)
-end ref
+ref over DriversRepository, DB
+driver = queryDriver(lastId)
 
-ref over DriversRepository
-GetDriver driver = create Driver
+//See GetDriver.puml//
 end ref
 
 DriversRepository --> DriversController : driver
 deactivate DriversRepository
 
-ref over DriversController
-->Driver toJSON()
+DriversController -> Driver: data = toJSON()
+activate Driver
+ref over Driver
+//See GetDriver.puml//
 end ref
+Driver --> DriversController :  data
+deactivate Driver
 
 DriversController --> Slim : data
 deactivate DriversController

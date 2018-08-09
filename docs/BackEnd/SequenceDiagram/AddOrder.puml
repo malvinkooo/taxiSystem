@@ -1,4 +1,4 @@
-http://www.plantuml.com/plantuml/uml/hPJ1Q_904CNl-rSidlGWteKMQwt5Z_9fczx3r9t2qcGtdLq5__kEkqWIDm497ZFxvZVl1MOMpWFvGra8s7jBSatM-1UZHCLblTSL62-pGfUjmfOKadjcATcYGEfu_C3AEit8K-jnbEVp8CZpaGGNnKA1XozmA5TB8IuMvFGnJ9PpkTjcdt86bPxP03-RrKVm6Aq55QklRN5dqCi72Kg5rt4ex82WT9CQamHAK8o_3jR0_nwGJaytp6Z-5v40USXgoTZi_IqYpxxblj1eV0tYdyIgQO-Z7w6m8UqV4h4RnVOBS7vZ719_ZYStJQhxs_Dk3WMqHbGxg-yVhGKV7h2c38-fq7bjm6jhxfwomHuUiW4Pc34kmRtJXJI3OuMc98yW_9RsY9JkuYlwK6jlT5pdo9e8D4eoeMjl-szFmq8wjV_CSBi23sp4st_Pzl-LTVPBKTTIZMkJyNNQvIoYHTVq-kGIkieQXwd_MXyERsYwtEpkni0K2xPsA8i_
+http://www.plantuml.com/plantuml/uml/XP9FRy8m3CNl-HGH9v1WlIDjOl_53WEjkrSUyQH8eIbsGEBRptKtEjgENUtdvv-jj-04bFRRO62J8jadYcLwB9sffEmtle8osJpuxLbXHGw9xqLACGIaWUORLf6zM1xFcgEYcAkWA4OMk14R1ma-WD4-t1dpWs1dDxhPpkrwbR_R32gVHJMlOVq14ZPegX9r5qicLM-lBJYdtR4Mra2mvKbhqpkeMn3xtc6_x7TxfEFjvHszlnZ2JniFIBtMj7w4sDbDy5YcQOrFo8my_Lx9kw1BFR91-PLO_UTtnjg01k2qB1afBTt4c2pB4Uqp9krULHABB6ljkwwNNcuSNZZyp-_AU9q5eKpn9L-zZhl_wznuGgP1vCPpDiYfYtgOPWYk3I8XLx5ax9_NwZMEEdHAyl2WPdSXh0Bz1G00
 
 @startuml
 actor FrontEnd
@@ -15,51 +15,26 @@ activate OrdersController
 OrdersController -> OrdersRepository : order = queryAddOrder(orderParams)
 activate OrdersRepository
 
-OrdersRepository -> DB : SQL query add client
-activate DB
-DB --> OrdersRepository : ok
-deactivate DB
-OrdersRepository -> DB : clientId = lastInsertId()
-activate DB
-DB --> OrdersRepository : clientId
-deactivate DB
-OrdersRepository -> DB : SQL query add carFeedPoint
-activate DB
-DB --> OrdersRepository : ok
-deactivate DB
-OrdersRepository -> DB : carFeedPointId = lastInsertId()
-activate DB
-DB --> OrdersRepository : carFeedPointId
-deactivate DB
-OrdersRepository -> DB : SQL query add destination
-activate DB
-DB --> OrdersRepository : ok
-deactivate DB
-OrdersRepository -> DB : destinationId = lastInsertId()
-activate DB
-DB --> OrdersRepository : destinationId
-deactivate DB
-OrdersRepository -> DB : SQL query add order
-activate DB
-DB --> OrdersRepository : ok
-deactivate DB
-OrdersRepository -> DB : lastId = lastInsertId()
-activate DB
-DB --> OrdersRepository : lastId
-deactivate DB
+ref over OrdersRepository, DB
+Add client, addresses, order sql queries
+end ref
 
-ref over OrdersRepository
-GetOrder order = queryOrder(lastId)
+ref over OrdersRepository, DB
+order = queryOrder(lastInsertId)
+
+//See GetOrder.puml//
 end ref
 
 OrdersRepository -> OrdersController : order
 deactivate OrdersRepository
 
-OrdersController -> Order : data = toJSON
+OrdersController -> Order : data = toJSON()
+activate Order
 ref over Order
-GerOrder data = toJSON()
+//See GerOrder.puml//
 end ref
 Order --> OrdersController : data
+deactivate Order
 
 
 OrdersController --> Slim : response

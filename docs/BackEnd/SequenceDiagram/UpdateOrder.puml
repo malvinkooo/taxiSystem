@@ -1,10 +1,11 @@
-http://www.plantuml.com/plantuml/uml/ZPF1JW8n48RlVOevGYBXJg8XkAjYZE0YyMWgEoQDIxjEkoJ4-EuENSfM2uOBWRRpVVs7pjWwIQvPLqAkd26u8QDThajHyx9QgLfg1ujAhNyjpAX4ijTyb4nL8HtPBB0sLZ5oAqhfv9kq2Db4Y220mPNdmWZco-UXhDNG-CBXrwp8yk9rcdtlxgGsqc5xWzq7boLsHlXIk8IcPXdw0xs0WOjsUov9hcs_WoOf4d2GHMaYsMU3j5qUCPuI9fr9u2pC9gnOF3sq-7qYUBdBYnnKoTfWwRZSLwuQdBZjXoWnEdfQMadhfcnelsYBn3zx_RCyeVgFIn2-WzaWfTblqVcrVKv2srGkTBNjPuli2zGbCEWiMlXpLeI7bdU0DFi_xodAaWYxkwJFA231cVl5xB4N1KXVM3S6kp69bGdNd-E2mv2E66fheot6TNvMngpagVu1
+http://www.plantuml.com/plantuml/uml/XP91Qp8n48Rl-HLpL5YRkz0YhNx57gfeFPVKJ24GDp4J1IdzxvrDMFpSh7hnaDbvtcV6cL1K8HvsLgXjT07-1LV7MQs5vsUpDLxL4TRMx2uU5a5Ze1V-D3XhCVGKL-WT6KQUogBGAgelHGZJPo7QI1WzfIGOmtBp8PKtqYMK_5cifhFLvtpwsrYQeugOdPeVRYjy695QuH4EdiCmVJ1eCL3byb85jQFX6LhCLO0vh3lVVs7x0uRJfYVnIc2vAn7m6zmHGr6gccLbTePLiBK6wrY1qZeW4HBGtYO9WoIGLygqUyWBzsnj5SMv7WeXvHeHNZ6czmVFToBb6LniOdJZln0QRunzTT7StbmB2qRtjbwy3xhRwuntnpap-prJKA7PvzPUQj5IKDE9feRspCViGTxLXDntUSuJjcJTFm00
 
 @startuml
 actor FrontEnd
 participant Slim
 participant OrdersController
 participant OrdersRepository
+participant Order
 database DB
 
 FrontEnd -> Slim : PUT/api/orders/{ORDER_ID}
@@ -13,29 +14,27 @@ Slim -> OrdersController : order = updateOrder(ORDER_ID , orderParams)
 activate OrdersController
 OrdersController -> OrdersRepository : order = queryUpdateOrder(ORDER_ID, orderParams)
 activate OrdersRepository
-OrdersRepository -> DB : SQL query update WHERE id = ORDER_ID
-activate DB
-DB --> OrdersRepository : ok
-deactivate DB
-OrdersRepository -> DB : lastId = lastInsertId()
-activate DB
-DB --> OrdersRepository : lastId
-deactivate DB
 
-ref over OrdersRepository
-GetOrder query result = queryOrder(lastId)
+ref over OrdersRepository, DB
+Update order, client, addresses sql queries
 end ref
 
-ref over OrdersRepository
-GetOrder order = create Order
+ref over OrdersRepository, DB
+order = queryOrder(lastId)
+
+//See GetOrder.puml//
 end ref
 
 OrdersRepository --> OrdersController : order
 deactivate OrdersRepository
 
-ref over OrdersController
--> Order toJSON()
+OrdersController -> Order : data = toJSON()
+activate Order
+ref over Order
+//See GetOrder.puml//
 end ref
+Order --> OrdersController : data
+deactivate Order
 
 OrdersController --> Slim : data
 deactivate OrdersController
