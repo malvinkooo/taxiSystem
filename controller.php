@@ -3,32 +3,32 @@ use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 require 'vendor/autoload.php';
 require 'functions.php';
-// require 'DriversRepository.php';
+require 'repositories/DriversRepository.php';
+require 'controllers/DriversController.php';
+require 'models/Driver.php';
 require 'repositories/CarsRepository.php';
 require 'controllers/CarsController.php';
 require 'models/Car.php';
 // require 'ClientRepository.php';
 // require 'AddressRepository.php';
 // require 'OrdersRepository.php';
-// $driversList = new DriversRepository($db);
+$driversController = new DriversController($db);
 $carsController = new CarsController($db);
 // $ordersList = new OrdersRepository($db);
 
 $app = new \Slim\App();
 
-// $app->get('/api/drivers', function(Request $req, Response $res){
-//   global $driversList;
-//   $result = $driversList->prepareDrivers( $driversList->getDrivers() );
+$app->get('/api/drivers', function(Request $req, Response $res){
+  global $driversController;
+  $driversList = $driversController->getDrivers();
+  return $res->withStatus(200)->withJson( $driversList );
+});
 
-//   return $res->withStatus(200)->withJson($result);
-// });
-
-// $app->get('/api/drivers/{id}', function(Request $req, Response $res, $args){
-//   global $driversList;
-//   $driver = $driversList->prepareDrivers( $driversList->getDriver($args['id']) )[0];
-
-//   return $res->withStatus(200)->withJson($driver);
-// });
+$app->get('/api/drivers/{id}', function(Request $req, Response $res, $args){
+  global $driversController;
+  $driver = $driversController->getDriver($args['id']);
+  return $res->withStatus(200)->withJson( $driver );
+});
 
 // $app->post('/api/drivers', function(Request $req, Response $res){
 //   global $driversList;

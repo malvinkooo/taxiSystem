@@ -5,7 +5,7 @@ class DriversRepository {
     $this->db = $db;
   }
 
-  public function getDrivers() {
+  public function queryAllDrivers() {
     $stm = $this->db->prepare("SELECT
       drivers.id,
       drivers.name,
@@ -22,10 +22,16 @@ class DriversRepository {
       LEFT OUTER JOIN cars_list AS cars
       ON drivers.carId = cars.id");
     $stm->execute();
-    return $stm->fetchAll(PDO::FETCH_ASSOC);
+    $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC);
+    $driversList = array();
+    foreach ($queryResult as $driver) {
+      $driversList[] = new Driver($driver);
+    }
+
+    return $driversList;
   }
 
-  public function getDriver($id) {
+  public function queryDriver($id) {
     $stm = $this->db->prepare("SELECT
       drivers.id,
       drivers.name,
@@ -43,7 +49,9 @@ class DriversRepository {
       ON drivers.carId = cars.id
       WHERE drivers.id = ?");
     $stm->execute(array($id));
-    return $stm->fetchAll(PDO::FETCH_ASSOC);
+    $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC)[0];
+
+    return new Driver($queryResult);
   }
 
   public function addDriver($driver) {
