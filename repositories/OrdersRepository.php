@@ -3,11 +3,11 @@ class OrdersRepository {
 
   function __construct($db) {
     $this->db = $db;
-    $this->clients = new ClientRepository($db);
-    $this->address = new AddressRepository($db);
+    // $this->clients = new ClientRepository($db);
+    // $this->address = new AddressRepository($db);
   }
 
-  public function getOrders() {
+  public function queryAllOrders() {
     $stm = $this->db->prepare("SELECT
       orders.id,
       orders.dateOfCreation,
@@ -50,10 +50,19 @@ class OrdersRepository {
       LEFT OUTER JOIN address AS destination
       ON orders.destination = destination.id");
     $stm->execute();
-    return $stm->fetchAll(PDO::FETCH_ASSOC);
+    $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC);
+    $ordersList = array();
+    var_dump('<pre>');
+    var_dump($queryResult);
+    var_dump('</pre>');
+    foreach ($queryResult as $order) {
+      $ordersList[] = new Order($order);
+    }
+
+    return $ordersList;
   }
 
-  public function getOrder($id) {
+  public function queryOrder($id) {
     $stm = $this->db->prepare("SELECT
       orders.id,
       orders.dateOfCreation,
@@ -97,7 +106,9 @@ class OrdersRepository {
       ON orders.destination = destination.id
       WHERE orders.id = ?");
     $stm->execute(array($id));
-    return $stm->fetchAll(PDO::FETCH_ASSOC);
+    $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC)[0];
+
+    return new Order($queryResult);
   }
 
   public function addOrder($order) {

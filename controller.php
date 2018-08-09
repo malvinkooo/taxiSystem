@@ -9,12 +9,12 @@ require 'models/Driver.php';
 require 'repositories/CarsRepository.php';
 require 'controllers/CarsController.php';
 require 'models/Car.php';
-// require 'ClientRepository.php';
-// require 'AddressRepository.php';
-// require 'OrdersRepository.php';
+require 'repositories/OrdersRepository.php';
+require 'controllers/OrdersController.php';
+require 'models/Order.php';
 $driversController = new DriversController($db);
 $carsController = new CarsController($db);
-// $ordersList = new OrdersRepository($db);
+$ordersController = new OrdersController($db);
 
 $app = new \Slim\App();
 
@@ -93,19 +93,19 @@ $app->get('/api/cars/{id}', function(Request $req, Response $res, $args){
 
 
 
-// $app->get('/api/orders', function(Request $req, Response $res){
-//   global $ordersList;
-//   $result = $ordersList->prepareOrders( $ordersList->getOrders() );
+$app->get('/api/orders', function(Request $req, Response $res){
+  global $ordersController;
+  $ordersList = $ordersController->getOrders();
 
-//   return $res->withStatus(200)->withJson($result);
-// });
+  return $res->withStatus(200)->withJson( $ordersList );
+});
 
-// $app->get('/api/orders/{id}', function(Request $req, Response $res, $args){
-//   global $ordersList;
-//   $order =  $ordersList->prepareOrders( $ordersList->getOrder($args['id']) )[0];
+$app->get('/api/orders/{id}', function(Request $req, Response $res, $args){
+  global $ordersController;
+  $order = $ordersController->getOrder($args['id']);
 
-//   return $res->withStatus(200)->withJson($order);
-// });
+  return $res->withStatus(200)->withJson( $order );
+});
 
 // $app->post('/api/orders', function(Request $req, Response $res){
 //   $params = $req->getParsedBody();
