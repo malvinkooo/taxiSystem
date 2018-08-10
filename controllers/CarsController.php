@@ -19,16 +19,18 @@ class CarsController {
     return $data;
   }
 
-  public function addCar($id, $params) {
-    //
+  public function addCar($params) {
+    $car = $this->carsRepository->queryAddCar($params);
+    return $car->toJSON();
   }
 
   public function deleteCar($id) {
-    //
+    return $this->carsRepository->queryDeleteCar($id);
   }
 
   public function updateCar($id, $params) {
-    //
+    $car = $this->carsRepository->queryUpdateCar($id, $params);
+    return $car->toJSON();
   }
 }
 ?>

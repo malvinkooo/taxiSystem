@@ -25,7 +25,7 @@ class CarsRepository {
     return new Car($queryResult);
   }
 
-  public function addCar($car) {
+  public function queryAddCar($car) {
     $stm = $this->db->prepare("INSERT INTO cars_list
       (stateCarNumber, gasolineConsumptionRatio, brand, description)
       VALUES
@@ -38,26 +38,28 @@ class CarsRepository {
     );
     $stm->execute($params);
 
-    return (int) $this->db->lastInsertId();
+    return $this->queryCar( $this->db->lastInsertId() );
   }
 
-  public function updateCar($id, $params) {
+  public function queryUpdateCar($id, $params) {
     $stm = $this->db->prepare("UPDATE cars_list SET
       stateCarNumber = :stateCarNumber,
       gasolineConsumptionRatio = :gasolineConsumptionRatio,
       brand = :brand,
       description = :description
       WHERE id = :id");
-    return $stm->execute(array(
+    $stm->execute(array(
       ':stateCarNumber' => $params['stateCarNumber'],
       ':gasolineConsumptionRatio' => $params['gasolineConsumptionRatio'],
       ':brand' => $params['brand'],
       ':description' => $params['description'],
       ':id' => $id
     ));
+
+    return $this->queryCar( $id );
   }
 
-  public function deleteCar($id) {
+  public function queryDeleteCar($id) {
     $stm = $this->db->prepare("DELETE FROM cars_list WHERE id = ?");
     return $stm->execute(array($id));
   }

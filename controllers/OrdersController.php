@@ -6,7 +6,6 @@ class OrdersController {
 
   public function getOrder($id) {
     $order = $this->ordersRepository->queryOrder($id);
-    // var_dump($order);
     return $order->toJSON();
   }
 
@@ -20,11 +19,13 @@ class OrdersController {
   }
 
   public function addOrder($params) {
-    //
+    $order = $this->ordersRepository->queryAddOrder($params);
+    return $order->toJSON();
   }
 
   public function updateOrder($id, $params) {
-    //
+    $order = $this->ordersRepository->queryUpdateOrder($id, $params);
+    return $order->toJSON();
   }
 }
 ?>

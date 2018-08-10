@@ -18,16 +18,18 @@ class DriversController {
     return $data;
   }
 
-  public function AddDriver($id, $params) {
-    //
+  public function AddDriver($params) {
+    $driver = $this->driversRepository->queryAddDriver($params);
+    return $driver->toJSON();
   }
 
   public function deleteDriver($id) {
-    //
+    return $this->driversRepository->queryDeleteDriver($id);
   }
 
   public function updateDriver($id, $params) {
-    //
+    $driver = $this->driversRepository->queryUpdateDriver($id, $params);
+    return $driver->toJSON();
   }
 }
 ?>

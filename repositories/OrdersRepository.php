@@ -3,8 +3,8 @@ class OrdersRepository {
 
   function __construct($db) {
     $this->db = $db;
-    // $this->clients = new ClientRepository($db);
-    // $this->address = new AddressRepository($db);
+    $this->address = new AddressRepository($db);
+    $this->clients = new ClientRepository($db);
   }
 
   public function queryAllOrders() {
@@ -40,7 +40,7 @@ class OrdersRepository {
       destination.lat AS destinationLat
       FROM orders_list AS orders
       LEFT OUTER JOIN drivers_list AS drivers
-      ON orders.id = drivers.id
+      ON orders.driverId = drivers.id
       LEFT OUTER JOIN cars_list AS cars
       ON drivers.carId = cars.id
       LEFT OUTER JOIN client_list clients
@@ -52,9 +52,6 @@ class OrdersRepository {
     $stm->execute();
     $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC);
     $ordersList = array();
-    var_dump('<pre>');
-    var_dump($queryResult);
-    var_dump('</pre>');
     foreach ($queryResult as $order) {
       $ordersList[] = new Order($order);
     }
@@ -111,7 +108,7 @@ class OrdersRepository {
     return new Order($queryResult);
   }
 
-  public function addOrder($order) {
+  public function queryAddOrder($order) {
     $clientId = $this->clients->addClient($order);
 
     $destinationId = $this->address->addAddress(
@@ -141,10 +138,10 @@ class OrdersRepository {
     );
     $addOrder->execute($orderParams);
 
-    return (int) $this->db->lastInsertId();
+    return $this->queryOrder( $this->db->lastInsertId() );
   }
 
-  public function updateOrder($id, $params) {
+  public function queryUpdateOrder($id, $params) {
     $clientId = $this->clients->addClient($params);
 
     $destinationId = $this->address->addAddress(
@@ -179,59 +176,9 @@ class OrdersRepository {
       ':status' => $params['status'],
       ':id' => $id
     );
-    return $addOrder->execute($orderParams);
-  }
+    $addOrder->execute($orderParams);
 
-  public function prepareOrders($orders) {
-    $result = array();
-    foreach($orders as $val) {
-      $order = array();
-      $order_driver = array();
-      $driver_car = array();
-      $carFeedPoint = array();
-      $destination = array();
-
-      $order['id'] = $val['id'];
-      $order['dateOfCreation'] = $val['dateOfCreation'];
-      $order['dateOfCompletion'] = $val['dateOfCompletion'];
-      $order['distance'] = $val['distance'];
-      $order['rate'] = $val['rate'];
-      $order['status'] = $val['status'];
-      $order['clientName'] = $val['clientName'];
-      $order['clientSurname'] = $val['clientSurname'];
-      $order['clientPhone'] = $val['clientPhone'];
-
-      $order_driver['id'] = $val['driverId'];
-      $order_driver['name'] = $val['driverName'];
-      $order_driver['surname'] = $val['driverSurname'];
-      $order_driver['phone'] = $val['driverPhone'];
-      $order_driver['description'] = $val['driverDescription'];
-      $order_driver['status'] = $val['driverStatus'];
-      $order['driver'] = $order_driver;
-
-      $driver_car['id'] = $val['carId'];
-      $driver_car['stateCarNumber'] = $val['stateCarNumber'];
-      $driver_car['gasolineConsumptionRatio'] = $val['gasolineConsumptionRatio'];
-      $driver_car['brand'] = $val['brand'];
-      $driver_car['description'] = $val['carDescription'];
-      $order['driver']['car'] = $driver_car;
-
-      $carFeedPoint['id'] = $val['carFeedPointId'];
-      $carFeedPoint['lng'] = $val['carFeedPointLng'];
-      $carFeedPoint['lat'] = $val['carFeedPointLat'];
-      $carFeedPoint['title'] = $val['carFeedPointTitle'];
-      $order['carFeedPoint'] = $carFeedPoint;
-
-      $destination['id'] = $val['destinationId'];
-      $destination['lng'] = $val['destinationLng'];
-      $destination['lat'] = $val['destinationLat'];
-      $destination['title'] = $val['destinationTitle'];
-      $order['destination'] = $destination;
-
-      $result[] = $order;
-    }
-
-    return $result;
+    return $this->queryOrder($id);
   }
 }
 ?>

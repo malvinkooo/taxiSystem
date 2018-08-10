@@ -54,7 +54,7 @@ class DriversRepository {
     return new Driver($queryResult);
   }
 
-  public function addDriver($driver) {
+  public function queryAddDriver($driver) {
     $stm = $this->db->prepare("INSERT INTO drivers_list
       (name, surname, phone, carId, description)
       VALUES
@@ -68,10 +68,10 @@ class DriversRepository {
     );
     $stm->execute($params);
 
-    return (int) $this->db->lastInsertId();
+    return $this->queryDriver( $this->db->lastInsertId() );
   }
 
-  public function updateDriver($id, $params) {
+  public function queryUpdateDriver($id, $params) {
     $stm = $this->db->prepare("UPDATE drivers_list SET
       name = :name,
       surname = :surname,
@@ -80,7 +80,7 @@ class DriversRepository {
       carId = :car,
       status = :status
       WHERE id = :id");
-    return $stm->execute(array(
+    $stm->execute(array(
       ':name' => $params['name'],
       ':surname' => $params['surname'],
       ':phone' => $params['phone'],
@@ -89,36 +89,13 @@ class DriversRepository {
       ':status' => $params['status'],
       ':id' => (int) $id
     ));
+
+    return $this->queryDriver($id);
   }
 
-  public function deleteDriver($id) {
+  public function queryDeleteDriver($id) {
     $stm = $this->db->prepare("DELETE FROM drivers_list WHERE id = ?");
     return $stm->execute(array($id));
-  }
-
-  public function prepareDrivers($drivers) {
-    $result = array();
-    foreach ($drivers as $val) {
-      $driver = array();
-      $driver_car = array();
-
-      $driver['id'] = $val['id'];
-      $driver['name'] = $val['name'];
-      $driver['surname'] = $val['surname'];
-      $driver['phone'] = $val['phone'];
-      $driver['description'] = $val['description'];
-
-      $driver_car['id'] = $val['carId'];
-      $driver_car['stateCarNumber'] = $val['stateCarNumber'];
-      $driver_car['gasolineConsumptionRatio'] = $val['gasolineConsumptionRatio'];
-      $driver_car['brand'] = $val['brand'];
-      $driver_car['description'] = $val['carDescription'];
-      $driver['car'] = $driver_car;
-
-      $result[] = $driver;
-    }
-
-    return $result;
   }
 }
 ?>

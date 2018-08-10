@@ -20,6 +20,19 @@ class Order {
       'gasolineConsumptionRatio' => $params['gasolineConsumptionRatio'],
       'carDescription' => $params['carDescription']
     ));
+    $this->client = new Client($params);
+    $this->carFeedPoint = new Address(array(
+      'id' => $params['carFeedPointId'],
+      'title' => $params['carFeedPointTitle'],
+      'lat' => $params['carFeedPointLat'],
+      'lng' => $params['carFeedPointLng']
+    ));
+    $this->destination = new Address(array(
+      'id' => $params['destinationId'],
+      'title' => $params['destinationTitle'],
+      'lat' => $params['destinationLat'],
+      'lng' => $params['destinationLng']
+    ));
   }
 
   public function toJSON() {
@@ -30,7 +43,10 @@ class Order {
       'distance' => $this->distance,
       'rate' => $this->rate,
       'status' => $this->status,
-      'driver' => $this->driver->toJSON()
+      'driver' => $this->driver->toJSON(),
+      'client' => $this->client->toJSON(),
+      'carFeedPoint' => $this->carFeedPoint->toJSON(),
+      'destination' => $this->destination->toJSON()
     );
   }
 }
