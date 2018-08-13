@@ -1,6 +1,7 @@
 <?php
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Respect\Validation\Validator as v;
 require 'vendor/autoload.php';
 require 'functions.php';
 require 'repositories/DriversRepository.php';
@@ -24,14 +25,36 @@ $app = new \Slim\App();
 
 $app->get('/api/drivers', function(Request $req, Response $res){
   global $driversController;
-  $driversList = $driversController->getDrivers();
-  return $res->withStatus(200)->withJson( $driversList );
+
+  try {
+    $driversList = $driversController->getDrivers();
+    return $res->withStatus(200)->withJson( $driversList );
+  } catch (DBException $e) {
+    return $res->withStatus(500)->withJson($e->getError());
+  } catch (Exception $e) {
+    $erroObject = array(
+      'error' => 'Внутренняя ошибка сервера.',
+      'message' => $e->getMessage()
+    );
+    return $res->withStatus(500)->withJson($erroObject);
+  }
 });
 
 $app->get('/api/drivers/{id}', function(Request $req, Response $res, $args){
   global $driversController;
-  $driver = $driversController->getDriver($args['id']);
-  return $res->withStatus(200)->withJson( $driver );
+
+  if(V::intVal()->validate($args['id']) && v::min(0)->validate($args['id'])) {
+    try {
+      $driver = $driversController->getDriver($args['id']);
+      return $res->withStatus(200)->withJson( $driver );
+    } catch (DBException $e) {
+      return $res->withStatus(500)->withJson($e->getError());
+    } catch (BadRequestException $e) {
+      return $res->withStatus(404)->withJson($e->getError());
+    }
+  } else {
+    return $res->withStatus(401)->withJson('Переданное значение id не валидно.');
+  }
 });
 
 $app->post('/api/drivers', function(Request $req, Response $res){
