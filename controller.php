@@ -2,6 +2,7 @@
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Respect\Validation\Validator as v;
+use Respect\Validation\Exceptions\ValidationException;
 require 'vendor/autoload.php';
 require 'functions.php';
 require 'repositories/DriversRepository.php';
@@ -30,7 +31,10 @@ $app->get('/api/drivers', function(Request $req, Response $res){
     $driversList = $driversController->getDrivers();
     return $res->withStatus(200)->withJson( $driversList );
   } catch (Exception $e) {
-    return $res->withStatus(500)->withJson($e->getMessage());
+    return $res->withStatus(500)->withJson(array(
+      'code' => 500,
+      'message' => $e->getMessage()
+    ));
   }
 });
 
@@ -47,9 +51,15 @@ $app->get('/api/drivers/{id}', function(Request $req, Response $res, $args){
         'message' => $e->getMainMessage()
       ));
     } catch (NotFoundException $e) {
-      return $res->withStatus(404)->withJson($e->getMessage());
+      return $res->withStatus(404)->withJson(array(
+        'code' => 404,
+        'message' => $e->getMessage()
+      ));
     } catch (Exception $e) {
-      return $res->withStatus(500);
+      return $res->withStatus(500)->withJson(array(
+        'code' => 500,
+        'message' => $e->getMessage()
+      ));
     }
 });
 
