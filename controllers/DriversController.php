@@ -18,7 +18,7 @@ class DriversController {
     return $data;
   }
 
-  public function AddDriver($params) {
+  public function addDriver($params) {
     $driver = $this->driversRepository->queryAddDriver($params);
     return $driver->toJSON();
   }

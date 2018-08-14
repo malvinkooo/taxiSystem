@@ -29,32 +29,28 @@ $app->get('/api/drivers', function(Request $req, Response $res){
   try {
     $driversList = $driversController->getDrivers();
     return $res->withStatus(200)->withJson( $driversList );
-  } catch (DBException $e) {
-    return $res->withStatus(500)->withJson($e->getError());
   } catch (Exception $e) {
-    $erroObject = array(
-      'error' => 'Внутренняя ошибка сервера.',
-      'message' => $e->getMessage()
-    );
-    return $res->withStatus(500)->withJson($erroObject);
+    return $res->withStatus(500)->withJson($e->getMessage());
   }
 });
 
 $app->get('/api/drivers/{id}', function(Request $req, Response $res, $args){
   global $driversController;
 
-  if(V::intVal()->validate($args['id']) && v::min(0)->validate($args['id'])) {
     try {
+      V::intVal()->min(0)->check($args['id']);
       $driver = $driversController->getDriver($args['id']);
       return $res->withStatus(200)->withJson( $driver );
-    } catch (DBException $e) {
-      return $res->withStatus(500)->withJson($e->getError());
-    } catch (BadRequestException $e) {
-      return $res->withStatus(404)->withJson($e->getError());
+    } catch (ValidationException $e) {
+      return $res->withStatus(400)->withJson(array(
+        'code' => 400,
+        'message' => $e->getMainMessage()
+      ));
+    } catch (NotFoundException $e) {
+      return $res->withStatus(404)->withJson($e->getMessage());
+    } catch (Exception $e) {
+      return $res->withStatus(500);
     }
-  } else {
-    return $res->withStatus(401)->withJson('Переданное значение id не валидно.');
-  }
 });
 
 $app->post('/api/drivers', function(Request $req, Response $res){

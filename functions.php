@@ -14,28 +14,14 @@ try {
 }
 
 class DBException extends Exception {
-  function __construct($error, $errorObject) {
-    $this->code = $errorObject[0];
-    $this->message = $errorObject[2];
-    $this->error = $error;
-  }
-
-  public function getError() {
-    return array(
-      'error' => $this->error,
-      'code' => $this->code,
-      'message' => $this->message
-    );
+  function __construct($message) {
+    parent::__construct($message);
   }
 }
 
-class BadRequestException extends Exception {
+class NotFoundException extends Exception {
   function __construct($message) {
-    $this->message = $message;
-  }
-
-  public function getError() {
-    return $this->message;
+    parent::__construct($message);
   }
 }
 

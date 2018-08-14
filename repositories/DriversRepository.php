@@ -22,7 +22,7 @@ class DriversRepository {
       LEFT OUTER JOIN cars_list AS cars
       ON drivers.carId = cars.id");
     if(!$stm->execute()){
-      throw new DBException('Ошибка в SQL апросе при получении списка водителей.', $stm->errorInfo());
+      throw new Exception('Ошибка в SQL апросе при получении списка водителей.');
     }
     $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC);
     $driversList = array();
@@ -50,17 +50,14 @@ class DriversRepository {
       ON drivers.carId = cars.id
       WHERE drivers.id = ?");
     if(!$stm->execute(array($id))) {
-      throw new DBException(
-        'Ошибка в SQL апросе при попытке получить водителя с id '.$id.'.',
-        $stm->errorInfo()
-      );
+      throw new Exception('Ошибка в SQL апросе при попытке получить водителя с id '.$id);
     }
     $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC);
     if(count($queryResult) == 0) {
-      throw new BadRequestException('Неудалось получить запись водителя с id '.$id.'.');
+      throw new NotFoundException('Неудалось получить запись водителя с id '.$id);
     }
 
-    return new Driver($queryResult);
+    return new Driver($queryResult[0]);
   }
 
   public function queryAddDriver($driver) {
