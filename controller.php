@@ -41,26 +41,26 @@ $app->get('/api/drivers', function(Request $req, Response $res){
 $app->get('/api/drivers/{id}', function(Request $req, Response $res, $args){
   global $driversController;
 
-    try {
-      V::intVal()->min(0)->check($args['id']);
-      $driver = $driversController->getDriver($args['id']);
-      return $res->withStatus(200)->withJson( $driver );
-    } catch (ValidationException $e) {
-      return $res->withStatus(400)->withJson(array(
-        'code' => 400,
-        'message' => $e->getMainMessage()
-      ));
-    } catch (NotFoundException $e) {
-      return $res->withStatus(404)->withJson(array(
-        'code' => 404,
-        'message' => $e->getMessage()
-      ));
-    } catch (Exception $e) {
-      return $res->withStatus(500)->withJson(array(
-        'code' => 500,
-        'message' => $e->getMessage()
-      ));
-    }
+  try {
+    V::intVal()->min(0)->check($args['id']);
+    $driver = $driversController->getDriver($args['id']);
+    return $res->withStatus(200)->withJson( $driver );
+  } catch (ValidationException $e) {
+    return $res->withStatus(400)->withJson(array(
+      'code' => 400,
+      'message' => $e->getMainMessage()
+    ));
+  } catch (NotFoundException $e) {
+    return $res->withStatus(404)->withJson(array(
+      'code' => 404,
+      'message' => $e->getMessage()
+    ));
+  } catch (Exception $e) {
+    return $res->withStatus(500)->withJson(array(
+      'code' => 500,
+      'message' => $e->getMessage()
+    ));
+  }
 });
 
 $app->post('/api/drivers', function(Request $req, Response $res){
@@ -85,14 +85,41 @@ $app->delete('/api/drivers/{id}', function(Request $req, Response $res, $args){
 
 $app->get('/api/cars', function(Request $req, Response $res){
   global $carsController;
-  $carsList = $carsController->getCars();
-  return $res->withStatus(200)->withJson( $carsList );
+
+  try {
+    $carsList = $carsController->getCars();
+    return $res->withStatus(200)->withJson( $carsList );
+  } catch (Exception $e) {
+    return $res->withStatus(500)->withJson(array(
+      'code' => 500,
+      'message' => $e->getMessage()
+    ));
+  }
 });
 
 $app->get('/api/cars/{id}', function(Request $req, Response $res, $args){
   global $carsController;
-  $car = $carsController->getCar($args['id']);
-  return $res->withStatus(200)->withJson( $car );
+
+  try {
+    v::intVal()->min(0)->check($args['id']);
+    $car = $carsController->getCar($args['id']);
+    return $res->withStatus(200)->withJson( $car );
+  } catch(ValidationException $e) {
+    return $res->withStatus(400)->withJson(array(
+      'code' => 400,
+      'message' => $e->getMessage()
+    ));
+  } catch (NotFoundException $e) {
+    return $res->withStatus(404)->withJson(array(
+      'code' => 404,
+      'message' => $e->getMessage()
+    ));
+  } catch (Exception $e) {
+    return $res->withStatus(500)->withJson(array(
+      'code' => 500,
+      'message' => $e->getMessage()
+    ));
+  }
 });
 
 $app->post('/api/cars', function(Request $req, Response $res){

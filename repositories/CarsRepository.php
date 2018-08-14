@@ -6,8 +6,10 @@ class CarsRepository {
   }
 
   public function queryAllCars() {
-    $stm = $this->db->prepare("SELECT * FROM cars_list");
-    $stm->execute();
+    $stm = $this->db->prepare("SELECT * FROM cars_lis");
+    if(!$stm->execute()) {
+      throw new DBException('Ошибка в SQL запросе при получении списка машин.');
+    }
     $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC);
     $carsList = array();
     foreach ($queryResult as $car) {
@@ -19,10 +21,15 @@ class CarsRepository {
 
   public function queryCar($id) {
     $stm = $this->db->prepare("SELECT * FROM cars_list WHERE id = ?");
-    $stm->execute(array($id));
-    $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC)[0];
+    if(!$stm->execute(array($id))) {
+      throw new DBException('Ошибка в SQL запросе при попытке получить машину с id '.$id);
+    }
+    $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC);
+    if(count($queryResult) == 0) {
+      throw new NotFoundException('Неудалось получить машину с id '.$id);
+    }
 
-    return new Car($queryResult);
+    return new Car($queryResult[0]);
   }
 
   public function queryAddCar($car) {
