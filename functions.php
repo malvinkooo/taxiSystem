@@ -14,14 +14,14 @@ try {
 }
 
 class DBException extends Exception {
-  function __construct($message) {
-    parent::__construct($message);
+  function __construct($message, $code) {
+    parent::__construct($message, $code);
   }
 }
 
 class NotFoundException extends Exception {
-  function __construct($message) {
-    parent::__construct($message);
+  function __construct($message, $code) {
+    parent::__construct($message, $code);
   }
 }
 

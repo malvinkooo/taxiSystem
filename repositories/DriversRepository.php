@@ -22,14 +22,14 @@ class DriversRepository {
       LEFT OUTER JOIN cars_list AS cars
       ON drivers.carId = cars.id");
     if(!$stm->execute()){
-      throw new DBException('Ошибка в SQL запросе при получении списка водителей.');
+      throw new DBException('Ошибка в SQL запросе при получении списка водителей.', 500);
     }
     $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC);
     $driversList = array();
     foreach ($queryResult as $driver) {
       $driversList[] = new Driver($driver);
     }
-    return $driversList;
+    return $driversLis;
   }
 
   public function queryDriver($id) {
@@ -45,16 +45,16 @@ class DriversRepository {
       cars.gasolineConsumptionRatio,
       cars.brand,
       cars.description AS carDescription
-      FROM drivers_list AS drivers
+      FROM drivers_list AS driver
       LEFT OUTER JOIN cars_list AS cars
       ON drivers.carId = cars.id
       WHERE drivers.id = ?");
     if(!$stm->execute(array($id))) {
-      throw new DBException('Ошибка в SQL запросе при попытке получить водителя с id '.$id);
+      throw new DBException('Ошибка в SQL запросе при попытке получить водителя с id '.$id, 500);
     }
     $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC);
     if(count($queryResult) == 0) {
-      throw new NotFoundException('Неудалось получить запись водителя с id '.$id);
+      throw new NotFoundException('Неудалось получить запись водителя с id '.$id, 404);
     }
 
     return new Driver($queryResult[0]);
