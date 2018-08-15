@@ -29,7 +29,8 @@ class DriversRepository {
     foreach ($queryResult as $driver) {
       $driversList[] = new Driver($driver);
     }
-    return $driversLis;
+
+    return $driversList;
   }
 
   public function queryDriver($id) {
@@ -45,7 +46,7 @@ class DriversRepository {
       cars.gasolineConsumptionRatio,
       cars.brand,
       cars.description AS carDescription
-      FROM drivers_list AS driver
+      FROM drivers_list AS drivers
       LEFT OUTER JOIN cars_list AS cars
       ON drivers.carId = cars.id
       WHERE drivers.id = ?");

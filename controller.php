@@ -2,7 +2,8 @@
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Respect\Validation\Validator as v;
-use Respect\Validation\Exceptions\ValidationException;
+// use Respect\Validation\Exceptions\ValidationException;
+use Respect\Validation\Exceptions\NestedValidationException;
 require 'vendor/autoload.php';
 require 'functions.php';
 require 'repositories/DriversRepository.php';
@@ -22,16 +23,15 @@ $driversController = new DriversController($db);
 $carsController = new CarsController($db);
 $ordersController = new OrdersController($db);
 
-
 $c = new \Slim\Container();
 $c['errorHandler'] = function($c) {
   return function ($req, $res, $e) use ($c) {
     try {
       throw $e;
-    } catch (ValidationException $e) {
+    } catch (NestedValidationException $e) {
       return $res->withStatus(400)->withJson(array(
         'code' => 400,
-        'message' => $e->getMainMessage()
+        'message' => $e->getMessage()
       ));
     } catch (Exception $e) {
       return $res->withStatus($e->getCode())->withJson(array(
@@ -58,13 +58,22 @@ $app->get('/api/drivers', function(Request $req, Response $res){
 $app->get('/api/drivers/{id}', function(Request $req, Response $res, $args){
   global $driversController;
 
-  V::intVal()->min(0)->check($args['id']);
+  V::intVal()->min(1)->check($args['id']);
   $driver = $driversController->getDriver($args['id']);
   return $res->withStatus(200)->withJson( $driver );
 });
 
 $app->post('/api/drivers', function(Request $req, Response $res){
   global $driversController;
+
+  $driverValidator = v::assert('name', v::stringType()->length(2, 20))
+    ->assert('surname', v::stringType()->length(2, 20))
+    ->assert('phone', v::stringType()->length(10))
+    ->assert('car', v::intval()->min(1))
+    ->assert('description', v::stringType()->length(0, 255))
+    ->assert('status', v::stringType()->length(4, 20));
+  $driverValidator->check($req->getParsedBody());
+
   $driver = $driversController->addDriver( $req->getParsedBody() );
   return $res->withStatus(200)->withJson( $driver );
 });
