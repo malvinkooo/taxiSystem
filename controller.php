@@ -66,12 +66,12 @@ $app->get('/api/drivers/{id}', function(Request $req, Response $res, $args){
 $app->post('/api/drivers', function(Request $req, Response $res){
   global $driversController;
 
-  $driverValidator = v::attribute('name', v::stringType()->length(2, 20))
-    ->attribute('surname', v::stringType()->length(2, 20))
-    ->attribute('phone', v::stringType()->length(10))
-    ->attribute('car', v::intval()->min(1))
-    ->attribute('description', v::stringType()->length(0, 255))
-    ->attribute('status', v::stringType()->length(4, 20));
+  $driverValidator = v::key('name', v::stringType()->length(2, 20))
+    ->key('surname', v::stringType()->length(2, 20))
+    ->key('phone', v::stringType()->length(10))
+    ->key('car', v::intval()->min(1))
+    ->key('description', v::stringType()->length(0, 255))
+    ->key('status', v::stringType()->length(4, 20));
   $driverValidator->assert($req->getParsedBody());
 
   $driver = $driversController->addDriver( $req->getParsedBody() );

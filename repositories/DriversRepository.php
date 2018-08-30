@@ -73,7 +73,9 @@ class DriversRepository {
       ':carId' => (int) $driver['car'],
       ':description' => $driver['description']
     );
-    $stm->execute($params);
+    if(!$stm->execute($params)) {
+      throw new DBException('Ошибка в SQL запросе при попытке добавить водителя', 500);
+    }
 
     return $this->queryDriver( $this->db->lastInsertId() );
   }
@@ -102,7 +104,15 @@ class DriversRepository {
 
   public function queryDeleteDriver($id) {
     $stm = $this->db->prepare("DELETE FROM drivers_list WHERE id = ?");
-    return $stm->execute(array($id));
+    if($stm->execute(array($id))) {
+      if($stm->rowCount() === 0) {
+        throw new NotFoundException('Запись с id '.$id.' не существует', 404);
+      } else {
+        return true;
+      }
+    } else {
+      throw new DBException('Ошибка в SQL запросе при попытке удалить водителя с id '.$id, 500);
+    }
   }
 }
 ?>
