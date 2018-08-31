@@ -65,6 +65,7 @@ $app->get('/api/drivers/{id}', function(Request $req, Response $res, $args){
 
 $app->post('/api/drivers', function(Request $req, Response $res){
   global $driversController;
+  $driverParams = $req->getParsedBody();
 
   $driverValidator = v::key('name', v::stringType()->length(2, 20))
     ->key('surname', v::stringType()->length(2, 20))
@@ -72,15 +73,26 @@ $app->post('/api/drivers', function(Request $req, Response $res){
     ->key('car', v::intval()->min(1))
     ->key('description', v::stringType()->length(0, 255))
     ->key('status', v::stringType()->length(4, 20));
-  $driverValidator->assert($req->getParsedBody());
+  $driverValidator->assert($driverParams);
 
-  $driver = $driversController->addDriver( $req->getParsedBody() );
+  $driver = $driversController->addDriver( $driverParams );
   return $res->withStatus(200)->withJson( $driver );
 });
 
 $app->put('/api/drivers/{id}', function(Request $req, Response $res, $args){
   global $driversController;
-  $driver = $driversController->updateDriver($args['id'], $req->getParsedBody());
+  $driverParams = $req->getParsedBody();
+
+  V::intVal()->min(1)->assert($args['id']);
+  $driverValidator = v::key('name', v::stringType()->length(2, 20))
+    ->key('surname', v::stringType()->length(2, 20))
+    ->key('phone', v::stringType()->length(10))
+    ->key('car', v::intval()->min(1))
+    ->key('description', v::stringType()->length(0, 255))
+    ->key('status', v::stringType()->length(4, 20));
+  $driverValidator->assert($driverParams);
+
+  $driver = $driversController->updateDriver($args['id'], $driverParams);
   return $res->withStatus(200)->withJson( $driver );
 });
 

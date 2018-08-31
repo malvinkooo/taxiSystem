@@ -89,7 +89,7 @@ class DriversRepository {
       carId = :car,
       status = :status
       WHERE id = :id");
-    $stm->execute(array(
+    $params = array(
       ':name' => $params['name'],
       ':surname' => $params['surname'],
       ':phone' => $params['phone'],
@@ -97,9 +97,18 @@ class DriversRepository {
       ':car' => $params['car'],
       ':status' => $params['status'],
       ':id' => (int) $id
-    ));
+    );
 
-    return $this->queryDriver($id);
+    if($stm->execute($params)) {
+      if($stm->rowCount() === 0) {
+        throw new NotFoundException('Запись с id '.$id.' не существует', 404);
+      } else {
+        return $this->queryDriver($id);
+      }
+    } else {
+      throw new DBException('Ошибка в SQL запросе при попытке удалить водителя с id '.$id, 500);
+    }
+
   }
 
   public function queryDeleteDriver($id) {
