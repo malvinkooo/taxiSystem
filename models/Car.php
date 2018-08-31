@@ -1,21 +1,13 @@
 <?php
 class Car {
   function __construct($params) {
-    $this->id = $params['id'];
-    $this->stateCarNumber = $params['stateCarNumber'];
-    $this->gasolineConsumptionRatio = $params['gasolineConsumptionRatio'];
-    $this->brand = $params['brand'];
-    $this->description = $params['description'];
+    foreach ($params as $key => $value) {
+      $this->$key = $value;
+    }
   }
 
   public function toJSON() {
-    return array(
-      'id' => $this->id,
-      'stateCarNumber' => $this->stateCarNumber,
-      'gasolineConsumptionRatio' => $this->gasolineConsumptionRatio,
-      'brand' => $this->brand,
-      'description' => $this->description
-    );
+    return get_object_vars($this);
   }
 }
 ?>
