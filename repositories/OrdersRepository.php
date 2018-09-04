@@ -49,7 +49,9 @@ class OrdersRepository {
       ON orders.carFeedPoint = carFeedPoint.id
       LEFT OUTER JOIN address AS destination
       ON orders.destination = destination.id");
-    $stm->execute();
+    if(!$stm->execute()) {
+      throw new DBException('Ошибка в SQL запросе при получении списка заказов.', 500);
+    }
     $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC);
     $ordersList = array();
     foreach ($queryResult as $order) {
@@ -102,9 +104,13 @@ class OrdersRepository {
       LEFT OUTER JOIN address AS destination
       ON orders.destination = destination.id
       WHERE orders.id = ?");
-    $stm->execute(array($id));
+    if(!$stm->execute(array($id))) {
+      throw new DBException('Ошибка в SQL запросе при попытке получить заказ с id '.$id, 500);
+    }
     $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC)[0];
-
+    if(count($queryResult) === 0) {
+      throw new NotFoundException('Неудалось получить запись водителя с id '.$id, 404);
+    }
     return new Order($queryResult);
   }
 
@@ -136,7 +142,9 @@ class OrdersRepository {
       ':rate' => $order['rate'],
       ':status' => 'Новый'
     );
-    $addOrder->execute($orderParams);
+    if(!$addOrder->execute($orderParams)) {
+      throw new DBException('Ошибка в SQL запросе при попытке добавить заказ', 500);
+    }
 
     return $this->queryOrder( $this->db->lastInsertId() );
   }

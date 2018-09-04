@@ -71,7 +71,7 @@ $app->post('/api/drivers', function(Request $req, Response $res){
     ->key('surname', v::stringType()->length(2, 20))
     ->key('phone', v::stringType()->length(10))
     ->key('car', v::intval()->min(1))
-    ->key('description', v::stringType()->length(0, 255))
+    ->key('description', v::stringType()->max(255))
     ->key('status', v::stringType()->length(4, 20));
   $driverValidator->assert($driverParams);
 
@@ -88,7 +88,7 @@ $app->put('/api/drivers/{id}', function(Request $req, Response $res, $args){
     ->key('surname', v::stringType()->length(2, 20))
     ->key('phone', v::stringType()->length(10))
     ->key('car', v::intval()->min(1))
-    ->key('description', v::stringType()->length(0, 255))
+    ->key('description', v::stringType()->max(255))
     ->key('status', v::stringType()->length(4, 20));
   $driverValidator->assert($driverParams);
 
@@ -105,8 +105,6 @@ $app->delete('/api/drivers/{id}', function(Request $req, Response $res, $args){
   return $res->withStatus(200)->withJson( $result );
 });
 
-
-
 $app->get('/api/cars', function(Request $req, Response $res){
   global $carsController;
 
@@ -117,30 +115,47 @@ $app->get('/api/cars', function(Request $req, Response $res){
 $app->get('/api/cars/{id}', function(Request $req, Response $res, $args){
   global $carsController;
 
-  v::intVal()->min(0)->check($args['id']);
+  v::intVal()->min(0)->assert($args['id']);
   $car = $carsController->getCar($args['id']);
   return $res->withStatus(200)->withJson( $car );
 });
 
 $app->post('/api/cars', function(Request $req, Response $res){
   global $carsController;
-  $car = $carsController->addCar( $req->getParsedBody() );
+  $carsParams = $req->getParsedBody();
+
+  $carsValidator = v::key('stateCarNumber', v::length(5, 20))
+    ->key('brand', v::stringType()->length(2, 20))
+    ->key('gasolineConsumptionRatio', v::floatVal()->max(12.00))
+    ->key('description', v::stringType()->max(255));
+  $carsValidator->assert($carsParams);
+
+  $car = $carsController->addCar( $carsParams );
   return $res->withStatus(200)->withJson( $car );
 });
 
 $app->put('/api/cars/{id}', function(Request $req, Response $res, $args){
   global $carsController;
-  $car = $carsController->updateCar($args['id'], $req->getParsedBody());
+   $carsParams = $req->getParsedBody();
+
+  v::intVal()->min(1)->assert($args['id']);
+  $carsValidator = v::key('stateCarNumber', v::length(5, 20))
+    ->key('brand', v::stringType()->length(2, 20))
+    ->key('gasolineConsumptionRatio', v::floatVal()->max(12.00))
+    ->key('description', v::stringType()->max(255));
+  $carsValidator->assert($carsParams);
+
+  $car = $carsController->updateCar($args['id'], $carsParams);
   return $res->withStatus(200)->withJson( $car );
 });
 
 $app->delete('/api/cars/{id}', function(Request $req, Response $res, $args){
   global $carsController;
+
+  V::intVal()->min(1)->assert($args['id']);
   $result = $carsController->deleteCar($args['id']);
   return $res->withStatus(200)->withJson( $result );
 });
-
-
 
 $app->get('/api/orders', function(Request $req, Response $res){
   global $ordersController;
@@ -150,13 +165,32 @@ $app->get('/api/orders', function(Request $req, Response $res){
 
 $app->get('/api/orders/{id}', function(Request $req, Response $res, $args){
   global $ordersController;
+
+  V::intVal()->min(1)->assert($args['id']);
   $order = $ordersController->getOrder($args['id']);
   return $res->withStatus(200)->withJson( $order );
 });
 
 $app->post('/api/orders', function(Request $req, Response $res){
   global $ordersController;
-  $order = $ordersController->addOrder( $req->getParsedBody() );
+  $orderParams = $req->getParsedBody();
+
+  $orderValidator = v::key('driver', v::intVal()->min(1))
+    ->key('clientName', v::stringType()->length(2, 20))
+    ->key('clientSurname', v::stringType()->length(2, 20))
+    ->key('clientPhone', v::stringType()->length(10))
+    ->key('dateOfCreation', v::date())
+    ->key('destination', v::stringType()->max(30))
+    ->key('destinationLng', v::floatVal())
+    ->key('destinationLat', v::floatVal())
+    ->key('carFeedPoint', v::stringType()->max(30))
+    ->key('carFeedPointLng', v::floatval())
+    ->key('carFeedPointLat', v::floatval())
+    ->key('distance', v::intVal())
+    ->key('rate', v::floatval());
+    $orderValidator->assert($orderParams);
+
+  $order = $ordersController->addOrder( $orderParams );
   return $res->withStatus(200)->withJson( $order );
 });
 

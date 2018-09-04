@@ -100,13 +100,9 @@ class DriversRepository {
     );
 
     if($stm->execute($params)) {
-      if($stm->rowCount() === 0) {
-        throw new NotFoundException('Запись с id '.$id.' не существует', 404);
-      } else {
-        return $this->queryDriver($id);
-      }
+      return $this->queryDriver($id);
     } else {
-      throw new DBException('Ошибка в SQL запросе при попытке удалить водителя с id '.$id, 500);
+      throw new DBException('Ошибка в SQL запросе при попытке редактирования записи из таблицы водителей с id '.$id, 500);
     }
 
   }
@@ -115,7 +111,7 @@ class DriversRepository {
     $stm = $this->db->prepare("DELETE FROM drivers_list WHERE id = ?");
     if($stm->execute(array($id))) {
       if($stm->rowCount() === 0) {
-        throw new NotFoundException('Запись с id '.$id.' не существует', 404);
+        throw new NotFoundException('Запись в таблице водителей с id '.$id.' не существует', 404);
       } else {
         return true;
       }
