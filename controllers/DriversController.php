@@ -1,21 +1,25 @@
 <?php
 class DriversController {
-  function __construct($db) {
+  protected $view;
+
+  public function __construct(\Slim\Views\Twig $view, $db) {
+    $this->view = $view;
     $this->driversRepository = new DriversRepository($db);
   }
 
-  public function getDriver($id) {
-    $driver = $this->driversRepository->queryDriver($id);
-    return $driver->toJSON();
-  }
-
-  public function getDrivers() {
+  public function getDrivers($req, $res) {
     $driversList = $this->driversRepository->queryAllDrivers();
     $data = array();
     foreach ($driversList as $driver) {
       $data[] = $driver->toJSON();
     }
-    return $data;
+
+    return $res->withStatus(200)->withJson( $data );
+  }
+
+  public function getDriver($id) {
+    $driver = $this->driversRepository->queryDriver($id);
+    return $driver->toJSON();
   }
 
   public function addDriver($params) {

@@ -109,7 +109,7 @@ class OrdersRepository {
     }
     $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC)[0];
     if(count($queryResult) === 0) {
-      throw new NotFoundException('Неудалось получить запись водителя с id '.$id, 404);
+      throw new NotFoundException('Неудалось получить запись заказа с id '.$id, 404);
     }
     return new Order($queryResult);
   }
@@ -166,7 +166,6 @@ class OrdersRepository {
     $addOrder = $this->db->prepare("UPDATE orders_list SET
       driverId = :driverId,
       clientId = :clientId,
-      dateOfCreation = :dateOfCreation,
       carFeedPoint = :carFeedPoint,
       destination = :destination,
       distance = :distance,
@@ -176,7 +175,6 @@ class OrdersRepository {
     $orderParams = array(
       ':driverId' => $params['driver'],
       ':clientId' => $clientId,
-      ':dateOfCreation' => $params['dateOfCreation'],
       ':carFeedPoint' => $carFeedPointId,
       ':destination' => $destinationId,
       ':distance' => $params['distance'],
@@ -184,9 +182,11 @@ class OrdersRepository {
       ':status' => $params['status'],
       ':id' => $id
     );
-    $addOrder->execute($orderParams);
-
-    return $this->queryOrder($id);
+    if($addOrder->execute($orderParams)) {
+      return $this->queryOrder($id);
+    } else {
+      throw new DBException('Ошибка в SQL запросе при попытке редактирования записи из таблицы аказов с id '.$id, 500);
+    }
   }
 }
 ?>

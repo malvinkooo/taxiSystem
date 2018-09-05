@@ -19,7 +19,7 @@ require 'controllers/OrdersController.php';
 require 'models/Order.php';
 require 'models/Client.php';
 require 'models/Address.php';
-$driversController = new DriversController($db);
+// $driversController = new DriversController($db);
 $carsController = new CarsController($db);
 $ordersController = new OrdersController($db);
 
@@ -46,14 +46,20 @@ $c['phpErrorHandler'] = function ($c) {
     return $res->withStatus(500)->write($error->getMessage());
   };
 };
+
 $app = new \Slim\App($c);
 
-$app->get('/api/drivers', function(Request $req, Response $res){
-  global $driversController;
+$container = $app->getContainer();
+$container['DriversController'] = function($c) {
+    $view = $c->get("view"); // retrieve the 'view' from the container
+    return new DriversController($view, $db);
+};
 
-  $driversList = $driversController->getDrivers();
-  return $res->withStatus(200)->withJson( $driversList );
-});
+
+$app->get('/api/drivers', '\DriversController::getDrivers');
+
+
+
 
 $app->get('/api/drivers/{id}', function(Request $req, Response $res, $args){
   global $driversController;
@@ -196,6 +202,22 @@ $app->post('/api/orders', function(Request $req, Response $res){
 
 $app->put('/api/orders/{id}', function(Request $req, Response $res, $args){
   global $ordersController;
+  $orderParams = $req->getParsedBody();
+
+  $orderValidator = v::key('driver', v::intVal()->min(1))
+    ->key('clientName', v::stringType()->length(2, 20))
+    ->key('clientSurname', v::stringType()->length(2, 20))
+    ->key('clientPhone', v::stringType()->length(10))
+    ->key('destination', v::stringType()->max(30))
+    ->key('destinationLng', v::floatVal())
+    ->key('destinationLat', v::floatVal())
+    ->key('carFeedPoint', v::stringType()->max(30))
+    ->key('carFeedPointLng', v::floatval())
+    ->key('carFeedPointLat', v::floatval())
+    ->key('distance', v::intVal())
+    ->key('status', v::stringType()->max(20))
+    ->key('rate', v::floatval());
+    $orderValidator->assert($orderParams);
   $order = $ordersController->updateOrder($args['id'], $req->getParsedBody());
   return $res->withStatus(200)->withJson( $order );
 });
