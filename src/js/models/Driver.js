@@ -31,16 +31,16 @@ class DriverStatus {
 
 
 class Driver {
-    constructor(id, driverParams) {
-        this._id = id;
+    constructor(driverParams) {
+        this._id = driverParams.id;
         this._name = driverParams.name;
         this._surname = driverParams.surname;
         this._phone = driverParams.phone;
         this._description = driverParams.description;
-        if(driverParams.car) {
-            this._car = driverParams.car;
-            this._car.assign();
-        }
+        // if(driverParams.car) {
+        //     this._car = driverParams.car;
+        //     this._car.assign();
+        // }
         this._currentLocation = "-";
         this._status = DriverStatus.FREE;
         this._emitter = new EventEmitter();

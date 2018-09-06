@@ -21,6 +21,7 @@ class Driver {
       'name' => $this->name,
       'surname' => $this->surname,
       'phone' => $this->phone,
+      'description' => $this->description,
       'car' => $this->car->toJSON()
     );
   }

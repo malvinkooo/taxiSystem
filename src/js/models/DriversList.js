@@ -12,7 +12,11 @@ class DriversList {
                 url: '/api/drivers',
                 dataType:'json',
                 success: function(data) {
-                    resolve(resolve);
+                    this._drivers = {};
+                    for (var i = 0; i < data.length; i++) {
+                        this._drivers[data[i]['id']] = new Driver(data[i]);
+                    }
+                    resolve(this._drivers);
                 },
                 error: function(error) {
                     reject(error);
