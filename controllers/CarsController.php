@@ -39,7 +39,7 @@ class CarsController {
   }
 
   public function deleteCar($req, $res, $args) {
-    V::intVal()->min(1)->assert($args['id']);
+    v::intVal()->min(1)->assert($args['id']);
     $result = $this->carsRepository->queryDeleteCar($args['id']);
 
     return $res->withStatus(200)->withJson( $result );

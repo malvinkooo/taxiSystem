@@ -18,7 +18,7 @@ class OrdersController {
   }
 
   public function getOrder($req, $res, $args) {
-    V::intVal()->min(1)->assert($args['id']);
+    v::intVal()->min(1)->assert($args['id']);
     $order = $this->ordersRepository->queryOrder($args['id']);
 
     return $res->withStatus(200)->withJson( $order->toJSON() );

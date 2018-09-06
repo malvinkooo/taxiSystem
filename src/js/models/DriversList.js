@@ -7,11 +7,18 @@ class DriversList {
     }
 
     getAllDrivers() {
-        var list = [];
-        for (var id in this._drivers) {
-            list.push(this._drivers[id]);
-        }
-        return list;
+        return new Promise(function(resolve, reject){
+            $.ajax({
+                url: '/api/drivers',
+                dataType:'json',
+                success: function(data) {
+                    resolve(resolve);
+                },
+                error: function(error) {
+                    reject(error);
+                }
+            });
+        });
     }
 
     addDriver(driverParams) {
