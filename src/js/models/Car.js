@@ -1,7 +1,7 @@
 class Car {
 
-    constructor(id, carParams) {
-        this._id = id;
+    constructor(carParams) {
+        this._id = carParams.id;
         this._stateCarNumber = carParams.stateCarNumber;
         this._gasolineConsumptionRatio = Number.parseFloat(carParams.gasolineConsumptionRatio);
         this._brand = carParams.brand;
@@ -31,7 +31,7 @@ class Car {
     }
 
     setStateCarNumber(stateCarNumber) {
-    	this._stateCarNumber = stateCarNumber;
+        this._stateCarNumber = stateCarNumber;
         this._emitter.emit("carChanged");
     }
 
@@ -40,7 +40,7 @@ class Car {
     }
 
     setGasolineConsumptionRatio(gasolineConsumptionRatio) {
-    	this._gasolineConsumptionRatio = Number.parseFloat(gasolineConsumptionRatio);
+        this._gasolineConsumptionRatio = Number.parseFloat(gasolineConsumptionRatio);
         this._emitter.emit("carChanged");
     }
 
@@ -49,7 +49,7 @@ class Car {
     }
 
     setBrand(brand) {
-    	this._brand = brand;
+        this._brand = brand;
         this._emitter.emit("carChanged");
     }
 

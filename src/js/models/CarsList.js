@@ -1,18 +1,26 @@
 class CarsList {
 
     constructor() {
-        this._cars = {};
-        this._lastInsertId = 0;
         this._emitter = new EventEmitter();
     }
 
     getAllCars() {
-        var result = [];
-        for(var id in this._cars) {
-            var car = this._cars[id];
-            result.push(car);
-        }
-        return result;
+        return new Promise(function(resolve, reject){
+            $.ajax({
+                url: '/api/cars',
+                type: 'get',
+                success: function(data) {
+                    var list = [];
+                    for (var i = 0; i < data.length; i++) {
+                        list.push( new Car(data[i]) );
+                    }
+                    resolve(list);
+                },
+                error: function(error) {
+                    reject(error);
+                }
+            });
+        });
     }
 
     addCar(carParams) {
@@ -23,7 +31,18 @@ class CarsList {
     }
 
     getCar(id) {
-        return this._cars[id];
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                url: '/api/cars/' + id,
+                type: 'get',
+                success: function(data) {
+                    resolve( new Car(data) );
+                },
+                error: function(error) {
+                    reject(error);
+                }
+            });
+        });
     }
 
     editCar(carParams) {

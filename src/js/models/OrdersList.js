@@ -14,11 +14,22 @@ class OrdersList {
     }
 
     getAllOrders() {
-        var list = [];
-        for(var id in this._orders) {
-            list.push(this._orders[id]);
-        }
-        return list;
+        return new Promise(function(resolve, reject){
+            $.ajax({
+                url: '/api/orders',
+                type: 'get',
+                success: function(data) {
+                    var list = [];
+                    for(var i = 0; i < data.length; i++) {
+                        list.push( new Order(data[i]) );
+                    }
+                    resolve(list);
+                },
+                error: function(error) {
+                    reject(error);
+                }
+            });
+        });
     }
 
     editOrder(orderParams) {
@@ -72,5 +83,5 @@ class OrdersList {
 
     onOrderChanged(fn) {
         this._emitter.subscribe("orderChanged", fn);
-    } 
+    }
 }

@@ -8,6 +8,8 @@ class DriversTable {
         this._driversList.onDriverAdded(this._driverAdded.bind(this));
         this._driversList.onDriverChanged(this._driverChanged.bind(this));
         this._tbody.on("click", "tr", this._onDriverRowClick.bind(this));
+
+        this._showDriversList();
     }
 
     setCarsController(carsController) {
@@ -21,8 +23,6 @@ class DriversTable {
     _showDriversList(){
         var promise = driversList.getAllDrivers();
         promise.then(list => {
-            console.log(list);
-
             this._tbody.html("");
             var statusColorsList = DriverStatus.colorsList;
             for (var i = 0; i < list.length; i++) {
@@ -35,7 +35,7 @@ class DriversTable {
                     +driver.getStatus()+
                     '</button></td><td>'+driver.getCurrentLocation()+
                     '</td><td>'+driver.getCar()+
-                    '</td></tr>').appendTo(this._tbody)
+                    '</td></tr>').appendTo(this._tbody);
             }
         });
     }
@@ -49,8 +49,8 @@ class DriversTable {
 
     _onDriverRowClick(e) {
         var driverId = e.currentTarget.dataset.driverId;
-        var driver = this._driversList.getDriver(driverId);
-        this.showDriver(driver);
+        var promise = this._driversList.getDriver(driverId);
+        promise.then(driver => this.showDriver(driver));
     }
 
     _driverAdded() {

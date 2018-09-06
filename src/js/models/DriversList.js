@@ -1,8 +1,6 @@
 class DriversList {
 
     constructor() {
-        this._drivers = {};
-        this._lastInsertId = 0;
         this._emitter = new EventEmitter();
     }
 
@@ -10,13 +8,13 @@ class DriversList {
         return new Promise(function(resolve, reject){
             $.ajax({
                 url: '/api/drivers',
-                dataType:'json',
+                type: 'get',
                 success: function(data) {
-                    this._drivers = {};
+                    var list = [];
                     for (var i = 0; i < data.length; i++) {
-                        this._drivers[data[i]['id']] = new Driver(data[i]);
+                        list.push( new Driver(data[i]) );
                     }
-                    resolve(this._drivers);
+                    resolve(list);
                 },
                 error: function(error) {
                     reject(error);
@@ -33,7 +31,18 @@ class DriversList {
     }
 
     getDriver(id) {
-        return this._drivers[id];
+        return new Promise(function(resolve, reject){
+            $.ajax({
+                url: '/api/drivers/' + id,
+                type: 'get',
+                success: function(data){
+                    resolve( new Driver(data) );
+                },
+                error: function(error){
+                    reject(error);
+                }
+            });
+        });
     }
 
     editDriver(driverParams) {
