@@ -56,8 +56,11 @@ class DisplayCarPopup {
         this._cleanHTML = false;
         var questionBox = new QuestionMessageBox({
             onAccept: (function(){
-                var result = this._carsController.selectDeleteCar(this._car);
-                if(!result) {
+                var promise = this._carsController.selectDeleteCar(this._car);
+                promise.then(() => {
+                        this._cleanHTML = true;
+                        this._destroy();
+                }).catch(() => {
                     var infoMessage = new InfoMessageBox({
                         onHidden: () => {
                             this._displayCarPopupElement.modal("show");
@@ -66,10 +69,7 @@ class DisplayCarPopup {
                         messageText: "Машина не была удалена успешно. Возможно она закреплена за каким-то водителем."
                     });
                     infoMessage.show();
-                } else {
-                    this._cleanHTML = true;
-                    this._destroy();
-                }
+                });
             }).bind(this),
             onReject: (function(){
                 this._displayCarPopupElement.modal("show");

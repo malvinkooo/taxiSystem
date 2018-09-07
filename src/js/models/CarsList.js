@@ -56,8 +56,20 @@ class CarsList {
     }
 
     deleteCar(id) {
-        delete this._cars[id];
-        this._emitter.emit("carRemoved");
+        return new Promise((function(resolve, reject){
+            $.ajax({
+                url: '/api/cars/' + id,
+                type: 'delete',
+                success: data => {
+                    this._emitter.emit("carRemoved");
+                    resolve();
+                },
+                error: function(error){
+                    reject(error);
+                }
+            });
+        }).bind(this));
+
     }
 
     getCarsCount() {
