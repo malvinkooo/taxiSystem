@@ -10,9 +10,11 @@ class EditCarPopup {
         this._carsController = null;
         this._lastCarId = null;
         this._cleanHTML = true;
-        this._editCarPopupElement.find(".submit").click(this._onEditFormSubmit.bind(this));
         this._editCarFormConstraints = Validation.getCarConstraints();
         this._editCarPopupElement.modal({
+            onApprove: () => {
+                return this._onEditFormSubmit();
+            },
             onHidden: () => {
                 if(this._cleanHTML) {
                     this._onClosed();
@@ -27,6 +29,7 @@ class EditCarPopup {
     }
 
     show(car) {
+        this._cleanHTML = false;
         this._lastCarId = car.getId();
         var elements = this._editCarPopupElement.find("[data-getAttr]");
         for(var i = 0; i < elements.length; i++) {
@@ -59,8 +62,14 @@ class EditCarPopup {
             }
         }
         if(!errors) {
-            this._carsController.editCar(carParams);
-            this._editCarPopupElement.find("form")[0].reset();
+            var promise = this._carsController.editCar(carParams);
+            promise.then(car => {
+                console.log(car);
+                // this._editCarPopupElement.find("form")[0].reset();
+                return false;
+            });
+        } else {
+            return false;
         }
     }
 }

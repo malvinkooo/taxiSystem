@@ -46,13 +46,21 @@ class CarsList {
     }
 
     editCar(carParams) {
-        var car = this._cars[carParams.id];
-        car.setStateCarNumber(carParams.stateCarNumber);
-        car.setBrand(carParams.brand);
-        car.setGasolineConsumptionRatio(carParams.gasolineConsumptionRatio);
-        car.setDescription(carParams.description);
+        return new Promise(function(resolve, reject){
+            $.ajax({
+                url: '/api/cars/' + car.params.id,
+                type: 'put',
+                contentType: "application/json",
+                data: JSON.stringify(carParams),
+                success: function(data) {
+                    resolve(data);
+                },
+                error: function(error) {
+                    reject(error);
+                }
+            });
+        });
         this._emitter.emit("carChanged", car);
-        return car;
     }
 
     deleteCar(id) {

@@ -19,7 +19,7 @@ class CarsController {
     }
 
     editCar(carParams) {
-        var car = this._cars.editCar(carParams);
+        return this._cars.editCar(carParams);
     }
 
     selectDeleteCar(car) {
