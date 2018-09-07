@@ -1,0 +1,26 @@
+http://www.plantuml.com/plantuml/uml/XP9FIyD04CNl-odcg8UIkw2Kk2iMUZ4LFShOdSF0DecRRQ68tztfHfF8B7YTUU_ttlvP3mbZEXw2mNtg8Zp4haskzQQNCU-vnpR1Bl3Xpy16Fb4SxaKRkn0ebhODzTt00ZqRZmdVSI2mjJ6_4R2wosIu0Uksxjb1XJrNFhkhJzjiNbppjh5VbsfymaHZaUmHhoeX84-14esRgubmFHDqSpKHjZw2i3-E5C_slm1zU3N90RKGTq_RaGglZwvnm1vkOO8kcBKH_QhKotXQo4fPfPjQkfIbT2C_JxNqQUX5aQNJ9vhbetrDhPU_zWq0
+
+@startuml
+actor FrontEnd
+participant Slim
+participant DriversController
+participant DriversRepository
+database DB
+
+FrontEnd -> Slim : DELETE /api/driver/{DRIVER_ID}
+activate Slim
+Slim -> DriversController : deleteDriver(DRIVER_ID)
+activate DriversController
+DriversController -> DriversRepository : queryDeleteDriver(DRIVER_ID)
+activate DriversRepository
+DriversRepository -> DB : SQL query WHERE id = DRIVER_ID
+activate DB
+DB --> DriversRepository
+deactivate DB
+DriversRepository --> DriversController
+deactivate DriversRepository
+DriversController --> Slim
+deactivate DriversController
+Slim --> FrontEnd
+deactivate Slim
+@enduml

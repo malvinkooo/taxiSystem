@@ -1,0 +1,48 @@
+http://www.plantuml.com/plantuml/uml/bPFHJy8m4CRV-rVSuqZ0lY_H4DnKZ57SH1zDPMVIEDRQ5X9Y_DyzrZ4PdQ9ls_M-x_UrlOwj4yQjbYKJ2wSCN1XLkRGgcAQoN4WjAWTvAPUTGcBa6eqzfrwZoX9Dtsg6Mbb9ffkULLO89rw4HKWcZEseC3ghOH33RFu0N6Z92-_6Fv9i-fXcpzFaSvjLheL3dwnMa398HJPU3QUmqaH4tnArLiEcOIQCMDh1jt6umw12o72h-yZt5PhD_9_SuEnOKAh14oBbzpSUqkmEdgxIB0LP4Bn5xNbF6Cb6VR5ZK6-im4vhYAsvCPJ2kYan_4TbqT1lDFWJ27Ro0nep-0gAUaF9SBlUFTJcEBtJW37ESqIuHESNJZGDDESCQQB8j_S8VvqN2dVqHlf7WHo44vJJgUlyxZOAhlPmeyUo--gFUMjS6BStO_ku0b7GtBmfKhHFCwOuLYkwRb9s7-2OmbBgBm00
+
+@startuml
+actor FrontEnd
+participant Slim
+participant DriversController
+participant DriversRepository
+participant Driver
+database DB
+
+FrontEnd -> Slim : PUT /api/drivers/{DRIVER_ID}
+activate Slim
+Slim -> DriversController : driver = updateDriver(DRIVER_ID, driverParams)
+activate DriversController
+DriversController -> DriversRepository : driver = queryUpdateDriver(DRIVER_ID, driverParams)
+activate DriversRepository
+
+DriversRepository -> DB : SQL query update WHERE id = DRIVER_ID
+activate DB
+DB --> DriversRepository: ok
+deactivate DB
+DriversRepository --> DB: lastId = lastInsertId()
+activate DB
+DB --> DriversRepository : lastId
+deactivate DB
+
+ref over DriversRepository, DB
+driver = queryDriver(lastId)
+
+//See GetDriver.puml//
+end ref
+
+DriversRepository --> DriversController : driver
+deactivate DriversRepository
+
+DriversController -> Driver: data = toJSON()
+activate Driver
+ref over Driver
+//See GetDriver.puml//
+end ref
+Driver --> DriversController :  data
+deactivate Driver
+
+DriversController --> Slim : data
+deactivate DriversController
+Slim --> FrontEnd : response
+deactivate Slim
+@enduml

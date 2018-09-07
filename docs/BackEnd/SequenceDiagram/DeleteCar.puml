@@ -1,0 +1,26 @@
+http://www.plantuml.com/plantuml/uml/VPB1IWCn48RlUOevwg7iNL1gDn65NjmA7cNSp26G9jjaAXJntHqRPTCiU9tytpUJOTQPCV5nxnME71Cyf1ZO1AicARlHJHWOTjxjBmezfjnBC4NlAIsU1ffYTg8xAOkCxvW9z4QfFpcixivEk05jjkR5G8UJwqP1ky_-VdXxqby_yxWFP2hTpt71BZkBm98d9YbV5V1w1fif6xJ8gbb5TZXIEkd_ZTNd6bwCUYEMtVEscE3rqGm6d8LRAAvP9VkGy6enXR9KPzeMYnLK-TRKVlXtwmrHHSgM9JUVmPmjx9g2bMlv1W00
+
+@startuml
+actor FrontEnd
+participant Slim
+participant CarsController
+participant CarsRepository
+database DB
+
+FrontEnd -> Slim : DELETE /api/cars/{CAR_ID}
+activate Slim
+Slim -> CarsController : deleteCar(CAR_ID)
+activate CarsController
+CarsController -> CarsRepository : queryDeleteCar(CAR_ID)
+activate CarsRepository
+CarsRepository -> DB : SQL query WHERE id = CAR_ID
+activate DB
+DB --> CarsRepository
+deactivate DB
+CarsRepository --> CarsController
+deactivate CarsRepository
+CarsController --> Slim
+deactivate CarsController
+Slim --> FrontEnd
+deactivate Slim
+@enduml

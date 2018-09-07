@@ -3,8 +3,8 @@ CREATE DATABASE taxi_system
 
 CREATE TABLE cars_list (
   id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  state_car_number VARCHAR(20),
-  gasoline_consumption_ratio DECIMAL(4,2),
+  stateCarNumber VARCHAR(20),
+  gasolineConsumptionRatio DECIMAL(4,2),
   brand VARCHAR(20),
   description VARCHAR(250)
 );
@@ -15,18 +15,18 @@ CREATE TABLE drivers_list (
   surname VARCHAR(20),
   phone VARCHAR(20),
   description VARCHAR(250),
-  car_id INT(11) UNSIGNED,
-  current_location INT(11) UNSIGNED,
+  carId INT(11) UNSIGNED,
+  currentLocation INT(11) UNSIGNED,
   status ENUM('На заказе', 'Отсутствует', 'Свободен')
 );
 
 CREATE TABLE orders_list (
   id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  driver_id INT(11) UNSIGNED,
-  client_id INT(11) UNSIGNED,
-  data_create DATE,
-  data_completion DATE,
-  car_feed_point INT(11) UNSIGNED,
+  driverId INT(11) UNSIGNED,
+  clientId INT(11) UNSIGNED,
+  dateOfCreation DATETIME,
+  dateOfCompletion DATETIME,
+  carFeedPoint INT(11) UNSIGNED,
   destination INT(11) UNSIGNED,
   distance INT(10),
   rate DECIMAL(4,2),
@@ -46,3 +46,36 @@ CREATE TABLE address (
   lng DECIMAL(12,10),
   lat DECIMAL(12,10)
 );
+
+INSERT INTO cars_list
+  (id, stateCarNumber, gasolineConsumptionRatio, brand, description)
+  VALUES
+    ('', 'GH121212', '0.12', 'Nissan x3', 'Какое-то описание машины #1'),
+    ('', 'FR3456', '12.14', 'Opel c34', 'Какое-то описание машины #2'),
+    ('', 'GX4532', '1.15', 'Lexus x3', 'Какое-то описание машины #3'),
+    ('', 'UH3456', '4.70', 'Mazda f4', 'Какое-то описание машины #4');
+
+INSERT INTO drivers_list
+  (id, name, surname, phone, description, carId, currentLocation, status)
+  VALUES
+  ('', 'Валентин', 'Петров', '0999999999', 'Какое-то описание про водителя', 4, NULL, 'Свободен'),
+  ('', 'Фродо', 'Беггинс', '0777777777', 'Краткое описание', 3, NULL, 'На заказе'),
+  ('', 'Сэм', 'Пупкинс', '0666666666', 'Описание', NULL, NULL, 'Отсутствует');
+
+INSERT INTO orders_list
+  (id, driverId, clientId, dateOfCreation, dateOfCompletion, carFeedPoint, destination, distance, rate, status)
+  VALUES
+  ('', 1, 1, '2018-07-25 11:15:29', NULL, 1, 2, 1500, '1.10', 'Новый'),
+  ('', 2, 2, '2018-07-01 05:12:17', NULL, 1, 2, 1200, '1.10', 'Новый');
+
+INSERT INTO address
+  (id, title, lng, lat)
+  VALUES
+    ('', 'улица Дерибасовская, 11', '30.7403809', '46.4835766'),
+    ('', 'улица Дерибасовская, 20', '30.7360264', '46.4843170');
+
+INSERT INTO client_list
+  (id, name, surname, phone)
+  VALUES
+  ('', 'Клиент', 'Клиентович', '0999999999'),
+  ('', 'Бильбо', 'Беггинс', '0777777777');

@@ -1,0 +1,43 @@
+http://www.plantuml.com/plantuml/uml/XP91Qp8n48Rl-HLpL5YRkz0YhNx57gfeFPVKJ24GDp4J1IdzxvrDMFpSh7hnaDbvtcV6cL1K8HvsLgXjT07-1LV7MQs5vsUpDLxL4TRMx2uU5a5Ze1V-D3XhCVGKL-WT6KQUogBGAgelHGZJPo7QI1WzfIGOmtBp8PKtqYMK_5cifhFLvtpwsrYQeugOdPeVRYjy695QuH4EdiCmVJ1eCL3byb85jQFX6LhCLO0vh3lVVs7x0uRJfYVnIc2vAn7m6zmHGr6gccLbTePLiBK6wrY1qZeW4HBGtYO9WoIGLygqUyWBzsnj5SMv7WeXvHeHNZ6czmVFToBb6LniOdJZln0QRunzTT7StbmB2qRtjbwy3xhRwuntnpap-prJKA7PvzPUQj5IKDE9feRspCViGTxLXDntUSuJjcJTFm00
+
+@startuml
+actor FrontEnd
+participant Slim
+participant OrdersController
+participant OrdersRepository
+participant Order
+database DB
+
+FrontEnd -> Slim : PUT/api/orders/{ORDER_ID}
+activate Slim
+Slim -> OrdersController : order = updateOrder(ORDER_ID , orderParams)
+activate OrdersController
+OrdersController -> OrdersRepository : order = queryUpdateOrder(ORDER_ID, orderParams)
+activate OrdersRepository
+
+ref over OrdersRepository, DB
+Update order, client, addresses sql queries
+end ref
+
+ref over OrdersRepository, DB
+order = queryOrder(lastId)
+
+//See GetOrder.puml//
+end ref
+
+OrdersRepository --> OrdersController : order
+deactivate OrdersRepository
+
+OrdersController -> Order : data = toJSON()
+activate Order
+ref over Order
+//See GetOrder.puml//
+end ref
+Order --> OrdersController : data
+deactivate Order
+
+OrdersController --> Slim : data
+deactivate OrdersController
+Slim --> FrontEnd: response
+deactivate Slim
+@enduml

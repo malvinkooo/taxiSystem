@@ -1,0 +1,19 @@
+http://www.plantuml.com/plantuml/png/HOv13i9G24Jtd88Bz0AkQdJl6Rv26XBA0gWRuzqbLUngvat8C7FayDnMXOUE2BmviV_yrUNvXyjeToPoBdq1fgGodZ3InHP07LbastfdBxBbe7VtgB0bmFu8fwc3vgu_Bdh7LohOjyniLBC_
+
+@startuml
+class Order
+class Driver
+class Car
+class Address {
+ title : string
+ lat : number
+ lng : number
+}
+class Client
+
+Order -- Client
+Order -- Address
+
+Order -- Driver
+Driver -- Car
+@enduml

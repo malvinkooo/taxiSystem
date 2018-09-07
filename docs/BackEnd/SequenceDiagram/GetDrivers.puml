@@ -1,0 +1,36 @@
+http://www.plantuml.com/plantuml/uml/VL9DIyD04BtFhnXwQW-bznoazaD1YgBr9XB6TgWBssoSdGZzzqvCrhPiy9Pzy-PzX9b79T7cw85s6WJl95IwhlPG6-nshgPASUlTyGfOYVjcYKlZIl2UPMZwmdM8paHFLzDHMHOTeon7IB6dPvmb9O9zmPwKFYWohXO0AIHERtwpOO7twrUSKUrc-yuSMjpcUTG23wmzEfv0DhUbl84vV3KifrllpwivgrrT67VxlEduOC_fa62lXyAnyHe1V0Zr5OQUguD-mawOb7k5OSyEDD-EExwKUQlU9qbZIKd0jkprtmhR3Gov3VrIa-b_-yP5HHAXKzSenrEjNEIoY8Q7xTFZU9B5_HlOyo9CuWt6Irqom_FvMF4wL97xix51kh42MqDixm_c9jGS_Gy0
+
+@startuml
+actor FrontEnd
+participant Slim
+participant DriversController
+participant DriversRepository
+participant "__:Driver__" as Driver
+participant "__:Car__" as Car
+database DB
+
+FrontEnd -> Slim : GET /api/drivers
+Slim -> DriversController: getDrivers()
+DriversController -> DriversRepository : queryAllDrivers()
+DriversRepository -> DB : SQL query
+DB --> DriversRepository: query results
+
+loop query result length
+create Driver
+DriversRepository -> Driver : create(query result[n])
+create Car
+Driver -> Car : create(query result[n])
+end
+
+DriversRepository --> DriversController : driversList array
+
+loop driversList array length
+DriversController -> Driver : toJSON()
+Driver -> Car : toJSON()
+Car --> Driver
+Driver --> DriversController
+end
+
+DriversController --> Slim : response
+Slim --> FrontEnd: JSON data
+@enduml

@@ -1,0 +1,42 @@
+http://www.plantuml.com/plantuml/uml/ZL9DJm8n4BttLqmuGGBkdKI30Yh6AB8IZvlAZid6PLlRGaAC_zrNAq8B9bm8dPdtiMzcO9qqRhMiXLmuPUZQgCQDcr9ebAj5fMNZAA-hPLGOIcE763IghjaSj6QibQr0jubQhQBeerqKBPBM3ufIElagBTFeIeYjDFKkVXIfJzFvCsLILza2hDddy79MJ4PVtcgrbew3CVy3J68AQ83ed5OQAencEy2xlZwLHYvjPyUKV57y17loNN_i7oisc_b94aao8dv30oc0Dt-w3wo_pkdbTZmRKrL2BT3lA14RCBrZzjIxA7b_C9NRwjNIkWd8mv_6ii6ptJb9960J8M7uZTIQJJBVzSszr7nUWQ0ZiYndfXjsA9vfd6EM2SOfWEemg7zslMyZXXnV9r3-_c37gRlyyQ4Txyg3ZcjvL29seB2xuMGweGlNwyUtvm-8OQiLDW5OVEe3P89mlW40
+
+@startuml
+actor FrontEnd
+participant Slim
+participant CarsController
+participant CarsRepository
+participant "__:Car__" as Car
+database DB
+
+FrontEnd -> Slim : PUT /api/cars/{CAR_ID}
+activate Slim
+Slim -> CarsController : car = updateCar(CAR_ID, carParams)
+activate CarsController
+CarsController -> CarsRepository : car = queryUpdateCar(CAR_ID, carParams)
+activate CarsRepository
+
+CarsRepository -> DB : SQL query update WHERE id = CAR_ID
+activate DB
+DB --> CarsRepository : ok
+deactivate DB
+CarsRepository --> DB : lastId = lastInsertId()
+activate DB
+DB --> CarsRepository : lastId
+deactivate DB
+
+ref over CarsRepository, DB
+car = queryCar(lastId)
+//See GetCar.puml//
+end ref
+
+CarsRepository --> CarsController : car
+deactivate CarsRepository
+CarsController -> Car : data = toJSON()
+activate Car
+Car --> CarsController : data
+deactivate Car
+CarsController --> Slim : data
+deactivate CarsController
+Slim --> FrontEnd : response
+deactivate Slim
+@enduml

@@ -1,0 +1,42 @@
+http://www.plantuml.com/plantuml/uml/XL9DJy904BtlhvXmWaJidGI3W1gD4RJUcv6EIMFfrjc5X7_lMulGBX0lJNVdVRoTcOdph7wpBWsll5MwLrlvkoetDQwBLL5pvIajYtNdOiRgPW2gBKlHazARrDOLaDjrIhqi6w6SPJrY5u0cPyyVx8JcKsF-h6buy-j88rekqdTAk2wI5MH3n6BBNff0uGDi50OiO6bCdEUez75OilBQ3OxqA7xt2Cde4GV9xutexlQoRlJsI0MwyocqqjVdHcaVySX75u0OdWjWlqmkRU05yPATVynftFnKJXJ7_k1_ZmCtyZ4gdsIteX7-AXHRRGazQGG6nYH9Aa8Fud5xNMExaiG89WijSvBymWZRERgKymC3AwmJydZxb2vU-jt11D9vhy2Ap4uSZYkfucgBlaQC5dg_cA0SDZgcjRPuWhwWGJy0
+
+@startuml
+actor FrontEnd
+participant Slim
+participant CarsController
+participant CarsRepository
+participant "__:Car__" as Car
+database DB
+
+FrontEnd -> Slim : POST /api/cars
+activate Slim
+Slim -> CarsController : car = addCar(carParams)
+activate CarsController
+CarsController -> CarsRepository : car = queryAddCar(carParams)
+activate CarsRepository
+CarsRepository -> DB : SQL query addCar
+activate DB
+DB --> CarsRepository : ok
+deactivate DB
+CarsRepository -> DB : lastId = lastInsertId()
+activate DB
+DB --> CarsRepository : lastId
+deactivate DB
+
+ref over CarsRepository, DB
+car = queryCar(lastId)
+
+//See GetCar.puml//
+end ref
+
+CarsRepository --> CarsController : car
+deactivate CarsRepository
+CarsController -> Car : data = toJSON()
+activate Car
+Car --> CarsController : data
+deactivate Car
+CarsController --> Slim : response
+deactivate CarsController
+Slim --> FrontEnd : response
+deactivate Slim
+@enduml
