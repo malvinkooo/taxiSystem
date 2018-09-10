@@ -64,9 +64,8 @@ class EditCarPopup {
         if(!errors) {
             var promise = this._carsController.editCar(carParams);
             promise.then(car => {
-                console.log(car);
+                // console.log(car);
                 // this._editCarPopupElement.find("form")[0].reset();
-                return false;
             });
         } else {
             return false;

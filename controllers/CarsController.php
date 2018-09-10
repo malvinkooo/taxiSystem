@@ -51,7 +51,7 @@ class CarsController {
    v::intVal()->min(1)->assert($args['id']);
    $carsValidator = v::key('stateCarNumber', v::length(5, 20))
    ->key('brand', v::stringType()->length(2, 20))
-   ->key('gasolineConsumptionRatio', v::floatVal()->max(12.00))
+   ->key('gasolineConsumptionRatio', v::floatVal()->max(20.00))
    ->key('description', v::stringType()->max(255));
    $carsValidator->assert($params);
 

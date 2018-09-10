@@ -37,7 +37,7 @@ class OrderStatus {
 
 class Order {
     constructor(orderParams) {
-        console.log(orderParams);
+        // console.log(orderParams);
         this._driver = new Driver(orderParams.driver);
         this._clientName = orderParams.clientName;
         this._clientPhone = orderParams.clientPhone;

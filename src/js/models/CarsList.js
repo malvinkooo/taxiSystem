@@ -48,11 +48,13 @@ class CarsList {
     editCar(carParams) {
         return new Promise(function(resolve, reject){
             $.ajax({
-                url: '/api/cars/' + car.params.id,
+                url: '/api/cars/' + carParams.id,
                 type: 'put',
                 contentType: "application/json",
                 data: JSON.stringify(carParams),
                 success: function(data) {
+                    console.log(data);
+                    // this._emitter.emit("carChanged", car);
                     resolve(data);
                 },
                 error: function(error) {
@@ -60,7 +62,6 @@ class CarsList {
                 }
             });
         });
-        this._emitter.emit("carChanged", car);
     }
 
     deleteCar(id) {
