@@ -60,7 +60,8 @@ class DisplayCarPopup {
                 promise.then(() => {
                         this._cleanHTML = true;
                         this._destroy();
-                }).catch(() => {
+                }).catch((error) => {
+                    console.log(error);
                     var infoMessage = new InfoMessageBox({
                         onHidden: () => {
                             this._displayCarPopupElement.modal("show");

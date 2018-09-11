@@ -30,8 +30,13 @@ class AddCarForm {
             }
         }
         if(!errors) {
-            this._carsController.addCar(carsParams);
-            this._addCarFormElement.find("form")[0].reset();
+            var promise = this._carsController.addCar(carsParams);
+            promise.then(() => {
+                console.log('Car has been added');
+                this._addCarFormElement.find("form")[0].reset();
+            }).catch(error => {
+                console.log(error.responseText);
+            });
         }
     }
 }

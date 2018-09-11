@@ -24,10 +24,22 @@ class CarsList {
     }
 
     addCar(carParams) {
-        var car = new Car(this._lastInsertId, carParams);
-        this._cars[this._lastInsertId] = car;
-        this._lastInsertId++;
-        this._emitter.emit("carAdded", car);
+        return new Promise((function(resolve, reject){
+            $.ajax({
+                url: '/api/cars',
+                type: 'post',
+                contentType: "application/json",
+                data: JSON.stringify(carParams),
+                success: data => {
+                    var car = new Car(data);
+                    this._emitter.emit("carAdded", car);
+                    resolve(car);
+                },
+                error: error => {
+                    reject(error);
+                }
+            });
+        }).bind(this));
     }
 
     getCar(id) {
@@ -46,22 +58,22 @@ class CarsList {
     }
 
     editCar(carParams) {
-        return new Promise(function(resolve, reject){
+        return new Promise((function(resolve, reject){
             $.ajax({
                 url: '/api/cars/' + carParams.id,
                 type: 'put',
                 contentType: "application/json",
                 data: JSON.stringify(carParams),
-                success: function(data) {
-                    console.log(data);
-                    // this._emitter.emit("carChanged", car);
-                    resolve(data);
+                success: data => {
+                    var car = new Car(data);
+                    this._emitter.emit("carChanged", car);
+                    resolve( car );
                 },
                 error: function(error) {
                     reject(error);
                 }
             });
-        });
+        }).bind(this));
     }
 
     deleteCar(id) {

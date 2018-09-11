@@ -5,9 +5,7 @@ class CarsController {
     }
 
     addCar(carParams) {
-        this._cars.addCar(carParams);
-        var list = this._cars.getAllCars();
-        this._ui.showCarsList(list);
+        return this._cars.addCar(carParams);
     }
 
     getCarsList() {

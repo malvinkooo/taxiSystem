@@ -27,6 +27,8 @@ class CarsTable {
                +car.getStateCarNumber()
                +"</td></tr>");
          }
+      }).catch(error => {
+         console.log(error);
       });
    }
 
@@ -39,7 +41,9 @@ class CarsTable {
    _onCarRowClick(e) {
       var carId = e.currentTarget.dataset.carId;
       var promise = this._carsList.getCar(carId);
-      promise.then(car => this.showCar(car));
+      promise.then(car => this.showCar(car)).catch(error => {
+         console.log(error);
+      });
    }
 
    _carAdded() {

@@ -15,6 +15,9 @@ class EditCarPopup {
             onApprove: () => {
                 return this._onEditFormSubmit();
             },
+            onHide: () => {
+                this._cleanHTML = true;
+            },
             onHidden: () => {
                 if(this._cleanHTML) {
                     this._onClosed();
@@ -64,9 +67,12 @@ class EditCarPopup {
         if(!errors) {
             var promise = this._carsController.editCar(carParams);
             promise.then(car => {
-                // console.log(car);
-                // this._editCarPopupElement.find("form")[0].reset();
+                console.log(car);
+            }).catch(error => {
+                console.log(error);
             });
+            this._editCarPopupElement.find("form")[0].reset();
+            this._cleanHTML = true;
         } else {
             return false;
         }

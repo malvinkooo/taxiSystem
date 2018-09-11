@@ -47,35 +47,43 @@ CREATE TABLE address (
   lat DECIMAL(12,10)
 );
 
+ALTER TABLE drivers_list
+  ADD CONSTRAINT FOREIGN KEY(carId) REFERENCES cars_list(id)
+    ON UPDATE RESTRICT
+    ON DELETE SET NULL;
+
+ALTER TABLE drivers_list
+  ADD UNIQUE (carId);
+
 INSERT INTO cars_list
-  (id, stateCarNumber, gasolineConsumptionRatio, brand, description)
+  (stateCarNumber, gasolineConsumptionRatio, brand, description)
   VALUES
-    ('', 'GH121212', '0.12', 'Nissan x3', 'Какое-то описание машины #1'),
-    ('', 'FR3456', '12.14', 'Opel c34', 'Какое-то описание машины #2'),
-    ('', 'GX4532', '1.15', 'Lexus x3', 'Какое-то описание машины #3'),
-    ('', 'UH3456', '4.70', 'Mazda f4', 'Какое-то описание машины #4');
+    ('GH121212', '0.12', 'Nissan x3', 'Какое-то описание машины #1'),
+    ('FR3456', '12.14', 'Opel c34', 'Какое-то описание машины #2'),
+    ('GX4532', '1.15', 'Lexus x3', 'Какое-то описание машины #3'),
+    ('UH3456', '4.70', 'Mazda f4', 'Какое-то описание машины #4');
 
 INSERT INTO drivers_list
-  (id, name, surname, phone, description, carId, currentLocation, status)
+  (name, surname, phone, description, carId, currentLocation, status)
   VALUES
-  ('', 'Валентин', 'Петров', '0999999999', 'Какое-то описание про водителя', 4, NULL, 'Свободен'),
-  ('', 'Фродо', 'Беггинс', '0777777777', 'Краткое описание', 3, NULL, 'На заказе'),
-  ('', 'Сэм', 'Пупкинс', '0666666666', 'Описание', NULL, NULL, 'Отсутствует');
+  ('Валентин', 'Петров', '0999999999', 'Какое-то описание про водителя', 4, NULL, 'Свободен'),
+  ('Фродо', 'Беггинс', '0777777777', 'Краткое описание', 3, NULL, 'На заказе'),
+  ('Сэм', 'Пупкинс', '0666666666', 'Описание', NULL, NULL, 'Отсутствует');
 
 INSERT INTO orders_list
-  (id, driverId, clientId, dateOfCreation, dateOfCompletion, carFeedPoint, destination, distance, rate, status)
+  (driverId, clientId, dateOfCreation, dateOfCompletion, carFeedPoint, destination, distance, rate, status)
   VALUES
-  ('', 1, 1, '2018-07-25 11:15:29', NULL, 1, 2, 1500, '1.10', 'Новый'),
-  ('', 2, 2, '2018-07-01 05:12:17', NULL, 1, 2, 1200, '1.10', 'Новый');
+  (1, 1, '2018-07-25 11:15:29', NULL, 1, 2, 1500, '1.10', 'Новый'),
+  (2, 2, '2018-07-01 05:12:17', NULL, 1, 2, 1200, '1.10', 'Новый');
 
 INSERT INTO address
-  (id, title, lng, lat)
+  (title, lng, lat)
   VALUES
-    ('', 'улица Дерибасовская, 11', '30.7403809', '46.4835766'),
-    ('', 'улица Дерибасовская, 20', '30.7360264', '46.4843170');
+    ('улица Дерибасовская, 11', '30.7403809', '46.4835766'),
+    ('улица Дерибасовская, 20', '30.7360264', '46.4843170');
 
 INSERT INTO client_list
-  (id, name, surname, phone)
+  (name, surname, phone)
   VALUES
-  ('', 'Клиент', 'Клиентович', '0999999999'),
-  ('', 'Бильбо', 'Беггинс', '0777777777');
+  ('Клиент', 'Клиентович', '0999999999'),
+  ('Бильбо', 'Беггинс', '0777777777');
