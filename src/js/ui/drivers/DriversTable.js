@@ -34,9 +34,11 @@ class DriversTable {
                     +statusColorsList[driver.getStatus()]+'">'
                     +driver.getStatus()+
                     '</button></td><td>'+driver.getCurrentLocation()+
-                    '</td><td>'+driver.getCar()+
+                    '</td><td>'+ (driver.getCar() ? driver.getCar() : '-') +
                     '</td></tr>').appendTo(this._tbody);
             }
+        }).catch(error => {
+            console.log(error);
         });
     }
 

@@ -17,6 +17,7 @@ class DriversList {
                     resolve(list);
                 },
                 error: function(error) {
+                    console.log(error);
                     reject(error);
                 }
             });

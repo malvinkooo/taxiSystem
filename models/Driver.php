@@ -6,7 +6,7 @@ class Driver {
     $this->surname = $params['surname'];
     $this->phone = $params['phone'];
     $this->description = $params['description'];
-    $this->car = new Car(array(
+    $this->car = Car::fromDriverParams(array(
       'id' => $params['carId'],
       'stateCarNumber' => $params['stateCarNumber'],
       'brand' => $params['brand'],
@@ -22,7 +22,7 @@ class Driver {
       'surname' => $this->surname,
       'phone' => $this->phone,
       'description' => $this->description,
-      'car' => $this->car->toJSON()
+      'car' => !is_null($this->car) ? $this->car->toJSON() : null
     );
   }
 }

@@ -37,9 +37,10 @@ class Driver {
         this._surname = driverParams.surname;
         this._phone = driverParams.phone;
         this._description = driverParams.description;
-        if(driverParams.car) {
+        if( !driverParams.car ) {
+            this._car = null;
+        } else {
             this._car = new Car(driverParams.car);
-            this._car.assign();
         }
         this._currentLocation = "-";
         this._status = DriverStatus.FREE;
@@ -109,7 +110,7 @@ class Driver {
     }
 
     getCar() {
-        return this._car;
+        if(this._car) return this._car;
     }
 
     setCar(car) {

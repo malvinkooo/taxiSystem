@@ -39,6 +39,8 @@ class OrdersTable {
                     '</td><td>' + order.getDriver().getFullName() +
                     '</td></tr>').appendTo(this._tbody);
             }
+        }).catch(error => {
+            console.log(error);
         });
 
     }
