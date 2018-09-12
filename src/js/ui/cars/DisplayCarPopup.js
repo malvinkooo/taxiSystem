@@ -1,11 +1,16 @@
 class DisplayCarPopup {
-    constructor() {
+    constructor(carsList) {
         $($("#displayCarPopup").html()).appendTo("body");
         this._displayCarPopupElement = $(".displayCarModal");
         this._car = null;
+        this._carsList = carsList;
         this._carsController = null;
         this._cleanHTML = true;
         this._onCarChangeUnsubscribe = null;
+        this._carsList.onCarChanged(car => {
+            this._car = car;
+            this._repaint();
+        });
         this._displayCarPopupElement.find(".edit-car").click(this._onEditCarButtonClick.bind(this));
         this._displayCarPopupElement.find(".delete-car").click(this._onDeleteCarButtonClick.bind(this));
         this._displayCarPopupElement.modal({

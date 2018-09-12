@@ -11,6 +11,7 @@ class CarsTable {
       this._showCarsList();
    }
 
+
    setCarsController(carsController) {
       this._carsController = carsController;
    }
@@ -33,7 +34,7 @@ class CarsTable {
    }
 
    showCar(car) {
-      var popup = new DisplayCarPopup();
+      var popup = new DisplayCarPopup(this._carsList);
       popup.setCarsController(carsController);
       popup.showCar(car);
    }
