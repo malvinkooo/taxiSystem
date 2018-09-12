@@ -6,7 +6,7 @@ class Car {
         this._gasolineConsumptionRatio = Number.parseFloat(carParams.gasolineConsumptionRatio);
         this._brand = carParams.brand;
         this._description = carParams.description;
-        this._isAssigned = false;
+        this._isDeleted = Boolean( Number(carParams.isDeleted) );
         this._emitter = new EventEmitter();
     }
 
@@ -14,12 +14,8 @@ class Car {
         return this._brand + " " + this._stateCarNumber;
     }
 
-    assign() {
-        this._isAssigned = true;
-    }
-
-    isAssigned() {
-        return this._isAssigned;
+    isDeleted() {
+        return this._isDeleted;
     }
 
     getId() {

@@ -6,7 +6,7 @@ class CarsRepository {
   }
 
   public function queryAllCars() {
-    $stm = $this->db->prepare("SELECT * FROM cars_list");
+    $stm = $this->db->prepare("SELECT * FROM cars_list /*WHERE isDeleted = 0*/");
     if(!$stm->execute()) {
       throw new DBException('Ошибка в SQL запросе при получении списка машин.', 500);
     }
@@ -69,18 +69,15 @@ class CarsRepository {
     } else {
       throw new DBException('Ошибка в SQL запросе при попытке редактирования записи из таблицы машин с id '.$id, 500);
     }
-
-    return $this->queryCar( $id );
   }
 
   public function queryDeleteCar($id) {
-    $stm = $this->db->prepare("DELETE FROM cars_list WHERE id = ?");
+    $stm = $this->db->prepare("UPDATE cars_list SET
+      isDeleted = 1
+      WHERE id = ?");
     if($stm->execute(array($id))) {
-      if($stm->rowCount() === 0) {
-        throw new NotFoundException('Запись в таблице машин с id '.$id.' не существует', 404);
-      } else {
-        return true;
-      }
+      $this ->queryCar($id);
+      return true;
     } else {
       throw new DBException('Ошибка в SQL запросе при попытке удалить машину с id '.$id, 500);
     }

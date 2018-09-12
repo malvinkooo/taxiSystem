@@ -18,6 +18,11 @@ class DisplayCarPopup {
     }
 
     _repaint() {
+        if(this._car.isDeleted()) {
+            this._displayCarPopupElement.find(".status").show();
+            this._displayCarPopupElement.find(".edit-car").addClass("disabled");
+            this._displayCarPopupElement.find(".delete-car").addClass("disabled");
+        }
         var elements = this._displayCarPopupElement.find("[data-getAttr]");
         for(var i = 0; i < elements.length; i++) {
             var element = $(elements[i]);

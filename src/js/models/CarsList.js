@@ -48,7 +48,9 @@ class CarsList {
                 url: '/api/cars/' + id,
                 type: 'get',
                 success: function(data) {
-                    resolve( new Car(data) );
+                    var car = new Car(data);
+                    console.log(car);
+                    resolve( car );
                 },
                 error: function(error) {
                     reject(error);

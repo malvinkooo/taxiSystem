@@ -6,6 +6,7 @@ CREATE TABLE cars_list (
   stateCarNumber VARCHAR(20),
   gasolineConsumptionRatio DECIMAL(4,2),
   brand VARCHAR(20),
+  isDeleted TINYINT(1) DEFAULT 0,
   description VARCHAR(250)
 );
 
