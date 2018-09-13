@@ -291,7 +291,6 @@
                             <th>Фамилия</th>
                             <th>Моб. номер</th>
                             <th>Статус</th>
-                            <th>Текущее место пребывания</th>
                             <th>Автомобиль</th>
                         </tr>
                     </thead>
@@ -651,6 +650,7 @@
 <!-- display driver popup -->
 <script id="displayDriverPopup" type="text/template">
     <div class="ui tiny modal displayDriverModal">
+        <a class="ui ribbon label deletedStatus" style="display: none">Удален</a>
         <a class="ui ribbon label status" data-getAttr="getStatus"></a>
         <i class="close icon"></i>
         <div class="header">
@@ -675,10 +675,6 @@
                             </div>
                         </div>
                         <div class="description" data-getAttr="getDescription">-</div>
-                    </div>
-                    <div class="extra content">
-                        <i class="map marker icon"></i>
-                        <span data-getAttr="getCurrentLocation">-</span>
                     </div>
                 </div>
             </div>
@@ -726,11 +722,6 @@
                 <div class="field">
                     <label>Телефон</label>
                     <input type="text" name="phone" placeholder="Телефон" class="phone" data-getAttr="getPhone">
-                </div>
-                <div class="field ui search currentLocation">
-                    <label>Текущее место пребывания</label>
-                    <input class="prompt" type="text" placeholder="Текущее место пребывания" name="currentLocation" data-getAttr="getCurrentLocation">
-                    <div class="results"></div>
                 </div>
             </div>
             <div class="field">

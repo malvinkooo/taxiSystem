@@ -9,7 +9,7 @@ class OrdersTable {
         this._ordersList.onOrderChanged(this._orderChanged.bind(this));
         this._tbody.on("click", "tr", this._onOrderRowClick.bind(this));
 
-        this._showOrdersList();
+        // this._showOrdersList();
     }
 
     setOrdersController(ordersController) {

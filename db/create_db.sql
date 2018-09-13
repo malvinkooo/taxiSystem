@@ -18,6 +18,7 @@ CREATE TABLE drivers_list (
   description VARCHAR(250),
   carId INT(11) UNSIGNED,
   currentLocation INT(11) UNSIGNED,
+  isDeleted TINYINT(1) DEFAULT 0,
   status ENUM('На заказе', 'Отсутствует', 'Свободен')
 );
 

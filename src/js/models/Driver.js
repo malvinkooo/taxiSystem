@@ -37,6 +37,7 @@ class Driver {
         this._surname = driverParams.surname;
         this._phone = driverParams.phone;
         this._description = driverParams.description;
+        this._isDeleted = Boolean( Number(driverParams.isDeleted) );
         if( !driverParams.car ) {
             this._car = null;
         } else {
@@ -53,6 +54,10 @@ class Driver {
 
     getName() {
         return this._name;
+    }
+
+    isDeleted() {
+        return this._isDeleted;
     }
 
     setName(name) {
@@ -79,15 +84,6 @@ class Driver {
 
     setPhone(phone) {
         this._phone = phone;
-        this._emitter.emit("driverChanged");
-    }
-
-    getCurrentLocation() {
-        return this._currentLocation;
-    }
-
-    setCurrentLocation(currentLocation) {
-        this._currentLocation = currentLocation;
         this._emitter.emit("driverChanged");
     }
 

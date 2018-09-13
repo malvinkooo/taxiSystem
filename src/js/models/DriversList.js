@@ -17,8 +17,14 @@ class DriversList {
                     resolve(list);
                 },
                 error: function(error) {
-                    console.log(error);
-                    reject(error);
+                    var errorInfo = {};
+                    if(error.responseJSON) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке получить список водителей.';
+                    }
+                    reject(errorInfo);
                 }
             });
         });
@@ -40,7 +46,15 @@ class DriversList {
                     resolve( new Driver(data) );
                 },
                 error: function(error){
-                    reject(error);
+                    console.log(error);
+                    var errorInfo = {};
+                    if(error.responseJSON) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке получить информацию о водителе.';
+                    }
+                    reject(errorInfo);
                 }
             });
         });
@@ -60,7 +74,25 @@ class DriversList {
     }
 
     deleteDriver(id) {
-        delete this._drivers[id];
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/api/drivers/' + id,
+                type: 'delete',
+                success: data => {
+                    this._emitter.emit("driverRemoved");
+                    resolve();
+                },
+                error: error => {
+                    var errorInfo = {};
+                    if(errorInfo.responseJSON) {
+                        errorInfo = errorInfo.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке удалить водителя из системы.';
+                    }
+                }
+            });
+        });
     }
 
     getDriverscount() {

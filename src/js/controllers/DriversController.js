@@ -51,14 +51,6 @@ class DriversController {
     }
 
     selectDeleteDriver(driver) {
-        var result;
-        if(driver.getStatus === DriverStatus.FREE) {
-            this._driversList.deleteDriver(driver.getId());
-            result = true;
-        } else {
-            console.log("При удалении водителя что-то пошло не так.");
-            result = false;
-        }
-        return result;
+        return this._driversList.deleteDriver(driver.getId());
     }
 }

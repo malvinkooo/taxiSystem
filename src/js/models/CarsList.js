@@ -114,7 +114,7 @@ class CarsList {
                     this._emitter.emit("carRemoved");
                     resolve();
                 },
-                error: function(error){
+                error: error => {
                     var errorInfo = {};
                     if(error.responseText) {
                         errorInfo = error.responseJSON;

@@ -5,6 +5,7 @@ class Driver {
     $this->name = $params['name'];
     $this->surname = $params['surname'];
     $this->phone = $params['phone'];
+    $this->isDeleted = $params['isDeleted'];
     $this->description = $params['description'];
     $this->car = Car::fromDriverParams($params);
   }
@@ -15,6 +16,7 @@ class Driver {
       'name' => $this->name,
       'surname' => $this->surname,
       'phone' => $this->phone,
+      'isDeleted' => $this->isDeleted,
       'description' => $this->description,
       'car' => !is_null($this->car) ? $this->car->toJSON() : null
     );

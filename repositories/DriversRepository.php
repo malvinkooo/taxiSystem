@@ -12,15 +12,18 @@ class DriversRepository {
       drivers.surname,
       drivers.phone,
       drivers.description,
+      drivers.isDeleted,
       drivers.status,
       cars.id AS carId,
       cars.stateCarNumber,
       cars.gasolineConsumptionRatio,
       cars.brand,
+      cars.isDeleted AS carIsDeleted,
       cars.description AS carDescription
       FROM drivers_list AS drivers
       LEFT OUTER JOIN cars_list AS cars
-      ON drivers.carId = cars.id");
+      ON drivers.carId = cars.id
+      /*WHERE drivers.isDeleted = 0*/");
     if(!$stm->execute()){
       throw new DBException('Ошибка в SQL запросе при получении списка водителей.', 500);
     }
@@ -40,11 +43,13 @@ class DriversRepository {
       drivers.surname,
       drivers.phone,
       drivers.description,
+      drivers.isDeleted,
       drivers.status,
       cars.id AS carId,
       cars.stateCarNumber,
       cars.gasolineConsumptionRatio,
       cars.brand,
+      cars.isDeleted AS carIsDeleted,
       cars.description AS carDescription
       FROM drivers_list AS drivers
       LEFT OUTER JOIN cars_list AS cars
@@ -108,13 +113,12 @@ class DriversRepository {
   }
 
   public function queryDeleteDriver($id) {
-    $stm = $this->db->prepare("DELETE FROM drivers_list WHERE id = ?");
+    $stm = $this->db->prepare("UPDATE drivers_list
+      SET isDeleted = 1
+      WHERE id = ?");
     if($stm->execute(array($id))) {
-      if($stm->rowCount() === 0) {
-        throw new NotFoundException('Запись в таблице водителей с id '.$id.' не существует', 404);
-      } else {
-        return true;
-      }
+      $this->queryDriver($id);
+      return true;
     } else {
       throw new DBException('Ошибка в SQL запросе при попытке удалить водителя с id '.$id, 500);
     }

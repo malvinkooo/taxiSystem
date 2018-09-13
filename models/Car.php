@@ -11,17 +11,19 @@ class Car {
   }
 
   static function fromDriverParams($params) {
-    if( is_null($params['id']) ) {
-      return null;
-    } else {
-      return new Car(array(
+    $result = null;
+    if( !is_null($params['carId']) ) {
+      $result = new Car(array(
         'id' => $params['carId'],
         'stateCarNumber' => $params['stateCarNumber'],
         'brand' => $params['brand'],
+        'isDeleted' => $params['carIsDeleted'],
         'gasolineConsumptionRatio' => $params['gasolineConsumptionRatio'],
         'description' => $params['carDescription']
       ));
     }
+
+    return $result;
   }
 }
 ?>
