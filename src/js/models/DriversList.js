@@ -31,10 +31,29 @@ class DriversList {
     }
 
     addDriver(driverParams) {
-        var driver = new Driver(this._lastInsertId, driverParams);
-        this._drivers[this._lastInsertId] = driver;
-        this._lastInsertId++;
-        this._emitter.emit("driverAdded", driver);
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: "/api/drivers",
+                type: "post",
+                contentType: "application/json",
+                data: JSON.stringify(driverParams),
+                success: data => {
+                    var driver = new Driver(data);
+                    this._emitter.emit('driverAdded', driver);
+                    resolve(driver);
+                },
+                error: error => {
+                    var errorInfo = {};
+                    if(error.responseJSON) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке добавить нового водителя в систему.';
+                    }
+                    reject(errorInfo);
+                }
+            });
+        });
     }
 
     getDriver(id) {

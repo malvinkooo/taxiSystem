@@ -34,6 +34,7 @@ class AddCarForm {
                 }
             }
         }
+
         if(!errors) {
             this._carsController.addCar(carsParams)
                 .then(() => {
