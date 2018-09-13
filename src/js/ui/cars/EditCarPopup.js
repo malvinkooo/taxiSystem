@@ -65,12 +65,13 @@ class EditCarPopup {
             }
         }
         if(!errors) {
-            var promise = this._carsController.editCar(carParams);
-            promise.then(car => {
-                console.log(car);
-            }).catch(error => {
-                console.log(error);
-            });
+            this._carsController.editCar(carParams)
+                // .then(car => console.log(car))
+                .catch(error => {
+                    console.log(error.code);
+                    console.log(error.message);
+                });
+
             this._editCarPopupElement.find("form")[0].reset();
             this._cleanHTML = true;
         } else {

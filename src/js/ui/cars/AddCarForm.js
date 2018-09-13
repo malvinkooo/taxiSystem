@@ -35,17 +35,15 @@ class AddCarForm {
             }
         }
         if(!errors) {
-            var promise = this._carsController.addCar(carsParams);
-            promise.then(() => {
-                console.log('Car has been added');
-                this._addCarFormElement.find("form")[0].reset();
-                this._successMessage.slideDown(800);
-            }).catch(error => {
-                var error = JSON.parse(error.responseText);
-                console.log(error.code);
-                console.log(error.message);
-                this._errorMessage.slideDown(800);
-            });
+            this._carsController.addCar(carsParams)
+                .then(() => {
+                    this._addCarFormElement.find("form")[0].reset();
+                    this._successMessage.slideDown(800);
+                }).catch(error => {
+                    console.log(error.code);
+                    console.log(error.message);
+                    this._errorMessage.slideDown(800);
+                });
         }
     }
 }

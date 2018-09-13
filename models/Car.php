@@ -14,7 +14,13 @@ class Car {
     if( is_null($params['id']) ) {
       return null;
     } else {
-      return new Car($params);
+      return new Car(array(
+        'id' => $params['carId'],
+        'stateCarNumber' => $params['stateCarNumber'],
+        'brand' => $params['brand'],
+        'gasolineConsumptionRatio' => $params['gasolineConsumptionRatio'],
+        'description' => $params['carDescription']
+      ));
     }
   }
 }

@@ -6,13 +6,7 @@ class Driver {
     $this->surname = $params['surname'];
     $this->phone = $params['phone'];
     $this->description = $params['description'];
-    $this->car = Car::fromDriverParams(array(
-      'id' => $params['carId'],
-      'stateCarNumber' => $params['stateCarNumber'],
-      'brand' => $params['brand'],
-      'gasolineConsumptionRatio' => $params['gasolineConsumptionRatio'],
-      'description' => $params['carDescription']
-    ));
+    $this->car = Car::fromDriverParams($params);
   }
 
   public function toJSON() {

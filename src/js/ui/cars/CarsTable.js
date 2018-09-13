@@ -17,20 +17,21 @@ class CarsTable {
    }
 
    _showCarsList() {
-      var promise = this._carsList.getAllCars();
-      promise.then(list => {
-         this._tbody.html("");
-         for(var i = 0; i < list.length; i++) {
-            var car = list[i];
-            this._tbody.append("<tr data-car-id='"+car.getId()+"'><td>"
-               +car.getBrand()+"</td><td>"
-               +car.getGasolineConsumptionRatio()+"</td><td>"
-               +car.getStateCarNumber()
-               +"</td></tr>");
-         }
-      }).catch(error => {
-         console.log(error);
-      });
+      this._carsList.getAllCars()
+         .then(list => {
+            this._tbody.html("");
+            for(var i = 0; i < list.length; i++) {
+               var car = list[i];
+               this._tbody.append("<tr data-car-id='"+car.getId()+"'><td>"
+                  +car.getBrand()+"</td><td>"
+                  +car.getGasolineConsumptionRatio()+"</td><td>"
+                  +car.getStateCarNumber()
+                  +"</td></tr>");
+            }
+         }).catch(error => {
+            console.log(error.code);
+            console.log(error.message);
+         });
    }
 
    showCar(car) {
@@ -41,10 +42,12 @@ class CarsTable {
 
    _onCarRowClick(e) {
       var carId = e.currentTarget.dataset.carId;
-      var promise = this._carsList.getCar(carId);
-      promise.then(car => this.showCar(car)).catch(error => {
-         console.log(error);
-      });
+      this._carsList.getCar(carId)
+         .then(car => this.showCar(car))
+         .catch(error => {
+            console.log(error.code);
+            console.log(error.message);
+         });
    }
 
    _carAdded() {

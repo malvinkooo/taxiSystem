@@ -17,14 +17,21 @@ class CarsList {
                     resolve(list);
                 },
                 error: function(error) {
-                    reject(error);
+                    var errorInfo = {};
+                    if(error.responseText) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке получить список машин.';
+                    }
+                    reject(errorInfo);
                 }
             });
         });
     }
 
     addCar(carParams) {
-        return new Promise((function(resolve, reject){
+        return new Promise((resolve, reject) => {
             $.ajax({
                 url: '/api/cars',
                 type: 'post',
@@ -36,10 +43,17 @@ class CarsList {
                     resolve(car);
                 },
                 error: error => {
-                    reject(error);
+                    var errorInfo = {};
+                    if(error.responseText) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке добавить новую машину в систему.';
+                    }
+                    reject(errorInfo);
                 }
             });
-        }).bind(this));
+        });
     }
 
     getCar(id) {
@@ -49,18 +63,24 @@ class CarsList {
                 type: 'get',
                 success: function(data) {
                     var car = new Car(data);
-                    console.log(car);
                     resolve( car );
                 },
                 error: function(error) {
-                    reject(error);
+                    var errorInfo = {};
+                    if(error.responseText) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке получить информацию о машине.';
+                    }
+                    reject(errorInfo);
                 }
             });
         });
     }
 
     editCar(carParams) {
-        return new Promise((function(resolve, reject){
+        return new Promise((resolve, reject) => {
             $.ajax({
                 url: '/api/cars/' + carParams.id,
                 type: 'put',
@@ -72,14 +92,21 @@ class CarsList {
                     resolve( car );
                 },
                 error: function(error) {
-                    reject(error);
+                    var errorInfo = {};
+                    if(error.responseText) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке отредактировать информацию о машине.';
+                    }
+                    reject(errorInfo);
                 }
             });
-        }).bind(this));
+        });
     }
 
     deleteCar(id) {
-        return new Promise((function(resolve, reject){
+        return new Promise((resolve, reject) => {
             $.ajax({
                 url: '/api/cars/' + id,
                 type: 'delete',
@@ -88,10 +115,17 @@ class CarsList {
                     resolve();
                 },
                 error: function(error){
-                    reject(error);
+                    var errorInfo = {};
+                    if(error.responseText) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке удалить машину из системы.';
+                    }
+                    reject(errorInfo);
                 }
             });
-        }).bind(this));
+        });
 
     }
 
