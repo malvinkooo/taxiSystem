@@ -80,7 +80,6 @@ class DriversList {
     }
 
     editDriver(driverParams) {
-        console.log(driverParams);
         return new Promise((resolve, reject) => {
             $.ajax({
                 url: 'api/drivers/' + driverParams.id,

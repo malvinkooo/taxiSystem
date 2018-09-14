@@ -43,7 +43,7 @@ class DriversTable {
     }
 
     showDriver(driver) {
-        var popup = new DisplayDriverPopup();
+        var popup = new DisplayDriverPopup(driversList);
         popup.setDriversController(this._driversController);
         popup.setCarsController(this._carsController);
         popup.showDriver(driver);

@@ -1,8 +1,13 @@
 class DisplayDriverPopup {
-    constructor() {
+    constructor(driversList) {
         $($("#displayDriverPopup").html()).appendTo("body");
         this._displayDriverPopupElement = $(".displayDriverModal");
         this._driversController = null;
+        this._driversList = driversList;
+        this._driversList.onDriverChanged(driver => {
+            this._driver = driver;
+            this._repaint();
+        });
         this._carsController = null;
         this._driver = null;
         this._cleanHTML = true;
