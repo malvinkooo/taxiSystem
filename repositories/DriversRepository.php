@@ -99,7 +99,7 @@ class DriversRepository {
       ':surname' => $params['surname'],
       ':phone' => $params['phone'],
       ':description' => $params['description'],
-      ':car' => $params['car'],
+      ':car' => ((int) $params['car']) ? ((int) $params['car']) : NULL,
       ':status' => $params['status'],
       ':id' => (int) $id
     );

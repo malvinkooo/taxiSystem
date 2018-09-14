@@ -22,8 +22,7 @@ class DriversController {
     }
 
     editDriver(driverParams) {
-        driverParams.car = this._carsList.getCar(driverParams.car);
-        var driver = this._driversList.editDriver(driverParams);
+        return this._driversList.editDriver(driverParams);
     }
 
     selectDeleteDriver(driver) {

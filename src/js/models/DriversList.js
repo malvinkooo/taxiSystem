@@ -80,16 +80,30 @@ class DriversList {
     }
 
     editDriver(driverParams) {
-        var driver = this._drivers[driverParams.id];
-        driver.setName(driverParams.name);
-        driver.setSurname(driverParams.surname);
-        driver.setPhone(driverParams.phone);
-        driver.setStatus(driverParams.status);
-        driver.setCurrentLocation(driverParams.currentLocation);
-        driver.setDescription(driverParams.description);
-        driver.setCar(driverParams.car);
-        this._emitter.emit("driverChanged", driver);
-        return driver;
+        console.log(driverParams);
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: 'api/drivers/' + driverParams.id,
+                type: 'put',
+                contentType: "application/json",
+                data: JSON.stringify(driverParams),
+                success: (data) => {
+                    var driver = new Driver(data);
+                    this._emitter.emit("driverChanged", driver);
+                    resolve(driver);
+                },
+                error: error => {
+                    var errorInfo = {};
+                    if(error.responseJSON) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке отредактировать информацию о водителе.';
+                    }
+                    reject(errorInfo);
+                }
+            });
+        });
     }
 
     deleteDriver(id) {
@@ -103,8 +117,8 @@ class DriversList {
                 },
                 error: error => {
                     var errorInfo = {};
-                    if(errorInfo.responseJSON) {
-                        errorInfo = errorInfo.responseJSON;
+                    if(error.responseJSON) {
+                        errorInfo = error.responseJSON;
                     } else {
                         errorInfo['code'] = error.status;
                         errorInfo['message'] = 'Ошибка при попытке удалить водителя из системы.';

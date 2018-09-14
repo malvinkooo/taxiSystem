@@ -34,9 +34,10 @@ class DisplayDriverPopup {
         this._displayDriverPopupElement
             .find(".status")
             .addClass(statusDriversList[this._driver.getStatus()]);
+
         this._displayDriverPopupElement
-            .find("[data-car-getAttr]")
-            .html( (this._driver.getCar() ? this._driver.getCar() : '-') );
+            .find("[data-car-getattr]")
+            .html( (this._driver.getCar() ? this._driver.getCar().toString() : '-') );
 
         if(this._driver.isDeleted()) {
             this._displayDriverPopupElement.find(".deletedStatus").show();
