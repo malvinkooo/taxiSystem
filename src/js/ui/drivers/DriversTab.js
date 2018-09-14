@@ -1,11 +1,11 @@
 class DriversTab {
-    constructor(driversTabElement, driversList) {
+    constructor(driversTabElement, driversList, carsList) {
         this._driversTabElement = driversTabElement;
         this._driversTabElement.find(".secondary.menu .item").tab({
             onVisible: this._onAddDriverTabLoaded.bind(this)
         });
         this._driversTable = new DriversTable(this._driversTabElement.find('.tab[data-tab="allDrivers"]'), driversList);
-        this._addDriverForm = new AddDriverForm(this._driversTabElement.find('.tab[data-tab="addDriver"]'));
+        this._addDriverForm = new AddDriverForm(this._driversTabElement.find('.tab[data-tab="addDriver"]'), carsList);
     }
 
     setDriversController(driversController){

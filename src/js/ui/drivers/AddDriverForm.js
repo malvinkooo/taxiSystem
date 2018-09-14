@@ -1,8 +1,9 @@
 class AddDriverForm{
-    constructor(addDriverFormElement){
+    constructor(addDriverFormElement, carsList){
         this._addDriverFormElement = addDriverFormElement;
         this._driversController = null;
         this._carsController = null;
+        this._carsList = carsList;
         this._selectDropDown = this._addDriverFormElement.find("select.cars-list");
         this._addDriverFormElement.find(".submit").click(this._onAddDriverFormSubmit.bind(this));
         this._addDriverFormConstraints = Validation.getAddDriverConstraints();
@@ -23,13 +24,21 @@ class AddDriverForm{
 
     show() {
         this._selectDropDown.html("");
-        var carsList = this._carsController.getCarsList();
-        for(var i = 0; i < carsList.length; i++){
-            var car = carsList[i];
-            this._selectDropDown.append("<option value='"
-                +car.getId()+"'>"+car+"</option>");
-        }
-        this._selectDropDown.dropdown();
+
+        this._carsList.getFreeCars()
+            .then(carsList => {
+                this._selectDropDown.append("<option value='0'>-Не назначать машину</option>");
+                for(var i = 0; i < carsList.length; i++){
+                    var car = carsList[i];
+                    this._selectDropDown.append("<option value='"
+                        +car.getId()+"'>"+car+"</option>");
+                }
+                this._selectDropDown.dropdown();
+            })
+            .catch(error => {
+                console.log(error.code);
+                console.log(error.message);
+            });
     }
 
     _onAddDriverFormSubmit() {

@@ -31,7 +31,7 @@ class DriversController {
     $driverValidator = v::key('name', v::stringType()->length(2, 20))
     ->key('surname', v::stringType()->length(2, 20))
     ->key('phone', v::stringType()->length(10))
-    ->key('car', v::intval()->min(1))
+    ->key('car', v::intval()->min(0))
     ->key('description', v::stringType()->max(255))
     ->key('status', v::stringType()->length(4, 20));
     $driverValidator->assert($params);

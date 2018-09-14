@@ -17,7 +17,6 @@ CREATE TABLE drivers_list (
   phone VARCHAR(20),
   description VARCHAR(250),
   carId INT(11) UNSIGNED,
-  currentLocation INT(11) UNSIGNED,
   isDeleted TINYINT(1) DEFAULT 0,
   status ENUM('На заказе', 'Отсутствует', 'Свободен')
 );
@@ -66,11 +65,11 @@ INSERT INTO cars_list
     ('UH3456', '4.70', 'Mazda f4', 'Какое-то описание машины #4');
 
 INSERT INTO drivers_list
-  (name, surname, phone, description, carId, currentLocation, status)
+  (name, surname, phone, description, carId, status)
   VALUES
-  ('Валентин', 'Петров', '0999999999', 'Какое-то описание про водителя', 4, NULL, 'Свободен'),
-  ('Фродо', 'Беггинс', '0777777777', 'Краткое описание', 3, NULL, 'На заказе'),
-  ('Сэм', 'Пупкинс', '0666666666', 'Описание', NULL, NULL, 'Отсутствует');
+  ('Валентин', 'Петров', '0999999999', 'Какое-то описание про водителя', 4, 'Свободен'),
+  ('Фродо', 'Беггинс', '0777777777', 'Краткое описание', 3, 'На заказе'),
+  ('Сэм', 'Пупкинс', '0666666666', 'Описание', NULL, 'Отсутствует');
 
 INSERT INTO orders_list
   (driverId, clientId, dateOfCreation, dateOfCompletion, carFeedPoint, destination, distance, rate, status)

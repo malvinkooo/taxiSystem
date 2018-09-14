@@ -54,15 +54,23 @@ class EditDriverPopup {
         this._statusListSelectElement.dropdown('set selected', driver.getStatus());
 
         this._carsListSelectElement.html("");
-        var carsList = this._carsController.getCarsList();
-        for(var i = 0; i < carsList.length; i++) {
-            var car = carsList[i];
-            this._carsListSelectElement.append("<option value='"
-            +car.getId()+"'>"
-            +car.getBrand()+ " " + car.getStateCarNumber()
-            +"</option>");
-        }
-        this._carsListSelectElement.dropdown("set selected", driver.getCar().getId());
+        this._carsController.getFreeCarsList()
+            .then(carsList => {
+                this._carsListSelectElement.append("<option value='0'>-Не назначать машину</option>");
+                for(var i = 0; i < carsList.length; i++) {
+                    var car = carsList[i];
+                    this._carsListSelectElement.append("<option value='"
+                        +car.getId()+"'>"
+                        +car.getBrand()+ " " + car.getStateCarNumber()
+                        +"</option>");
+                }
+                this._carsListSelectElement.dropdown("set selected", driver.getCar().getId());
+            })
+            .catch(error => {
+                console.log(error.code);
+                console.log(error.message);
+            });
+
         this._editDriverPopupElement.modal("show");
     }
 

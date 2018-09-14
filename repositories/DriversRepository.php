@@ -75,7 +75,7 @@ class DriversRepository {
       ':name' => $driver['name'],
       ':surname' => $driver['surname'],
       ':phone' => $driver['phone'],
-      ':carId' => (int) $driver['car'],
+      ':carId' => ((int) $driver['car']) ? ((int) $driver['car']) : NULL,
       ':description' => $driver['description']
     );
     if(!$stm->execute($params)) {

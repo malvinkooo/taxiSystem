@@ -16,7 +16,13 @@ class CarsController {
   }
 
   public function getCars($req, $res) {
-    $carsList = $this->carsRepository->queryAllCars();
+    $filter = $req->getQueryParam('filter');
+    if( isset($filter) ) {
+      $carsList = $this->carsRepository->queryFreeCars();
+    } else {
+      $carsList = $this->carsRepository->queryAllCars();
+    }
+
     $data = array();
     foreach ($carsList as $car) {
       $data[] = $car->toJSON();

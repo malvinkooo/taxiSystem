@@ -17,12 +17,42 @@ class CarsList {
                     resolve(list);
                 },
                 error: function(error) {
+                    console.log(error);
                     var errorInfo = {};
-                    if(error.responseText) {
+                    if(error.responseJSON) {
                         errorInfo = error.responseJSON;
                     } else {
                         errorInfo['code'] = error.status;
                         errorInfo['message'] = 'Ошибка при попытке получить список машин.';
+                    }
+                    reject(errorInfo);
+                }
+            });
+        });
+    }
+
+    getFreeCars() {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: 'api/cars',
+                type: 'get',
+                data: {
+                    'filter': 'unassigned'
+                },
+                success: data => {
+                    var list = [];
+                    for(var i = 0; i < data.length; i++) {
+                        list.push( new Car(data[i]) );
+                    }
+                    resolve(list);
+                },
+                error: error => {
+                    var errorInfo = {};
+                    if(error.responseJSON) {
+                        errorInfo = responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке получить список свободных машин.';
                     }
                     reject(errorInfo);
                 }

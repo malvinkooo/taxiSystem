@@ -12,6 +12,10 @@ class CarsController {
         return this._cars.getAllCars();
     }
 
+    getFreeCarsList() {
+        return this._cars.getFreeCars();
+    }
+
     selectMenuItemAllCars() {
         this._ui.showCarsList();
     }
