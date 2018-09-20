@@ -19,7 +19,7 @@ class DriversController {
   }
 
   public function getDriver($req, $res, $args) {
-    V::intVal()->min(1)->assert($args['id']);
+    v::intVal()->min(1)->assert($args['id']);
     $driver = $this->driversRepository->queryDriver($args['id']);
 
     return $res->withStatus(200)->withJson( $driver->toJSON() );
@@ -31,7 +31,7 @@ class DriversController {
     $driverValidator = v::key('name', v::stringType()->length(2, 20))
     ->key('surname', v::stringType()->length(2, 20))
     ->key('phone', v::stringType()->length(10))
-    ->key('car', v::intval()->min(1))
+    ->key('car', v::intval()->min(0))
     ->key('description', v::stringType()->max(255))
     ->key('status', v::stringType()->length(4, 20));
     $driverValidator->assert($params);
@@ -50,11 +50,11 @@ class DriversController {
   public function updateDriver($req, $res, $args) {
     $params = $req->getParsedBody();
 
-    V::intVal()->min(1)->assert($args['id']);
+    v::intVal()->min(1)->assert($args['id']);
     $driverValidator = v::key('name', v::stringType()->length(2, 20))
     ->key('surname', v::stringType()->length(2, 20))
     ->key('phone', v::stringType()->length(10))
-    ->key('car', v::intval()->min(1))
+    ->key('car', v::intval()->min(0))
     ->key('description', v::stringType()->max(255))
     ->key('status', v::stringType()->length(4, 20));
     $driverValidator->assert($params);

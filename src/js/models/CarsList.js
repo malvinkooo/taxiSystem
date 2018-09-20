@@ -1,44 +1,162 @@
 class CarsList {
 
     constructor() {
-        this._cars = {};
-        this._lastInsertId = 0;
         this._emitter = new EventEmitter();
     }
 
     getAllCars() {
-        var result = [];
-        for(var id in this._cars) {
-            var car = this._cars[id];
-            result.push(car);
-        }
-        return result;
+        return new Promise(function(resolve, reject){
+            $.ajax({
+                url: '/api/cars',
+                type: 'get',
+                success: function(data) {
+                    var list = [];
+                    for (var i = 0; i < data.length; i++) {
+                        list.push( new Car(data[i]) );
+                    }
+                    resolve(list);
+                },
+                error: function(error) {
+                    console.log(error);
+                    var errorInfo = {};
+                    if(error.responseJSON) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке получить список машин.';
+                    }
+                    reject(errorInfo);
+                }
+            });
+        });
+    }
+
+    getFreeCars() {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: 'api/cars',
+                type: 'get',
+                data: {
+                    'filter': 'unassigned'
+                },
+                success: data => {
+                    var list = [];
+                    for(var i = 0; i < data.length; i++) {
+                        list.push( new Car(data[i]) );
+                    }
+                    resolve(list);
+                },
+                error: error => {
+                    var errorInfo = {};
+                    if(error.responseJSON) {
+                        errorInfo = responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке получить список свободных машин.';
+                    }
+                    reject(errorInfo);
+                }
+            });
+        });
     }
 
     addCar(carParams) {
-        var car = new Car(this._lastInsertId, carParams);
-        this._cars[this._lastInsertId] = car;
-        this._lastInsertId++;
-        this._emitter.emit("carAdded", car);
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/api/cars',
+                type: 'post',
+                contentType: "application/json",
+                data: JSON.stringify(carParams),
+                success: data => {
+                    var car = new Car(data);
+                    this._emitter.emit("carAdded", car);
+                    resolve(car);
+                },
+                error: error => {
+                    var errorInfo = {};
+                    if(error.responseText) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке добавить новую машину в систему.';
+                    }
+                    reject(errorInfo);
+                }
+            });
+        });
     }
 
     getCar(id) {
-        return this._cars[id];
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                url: '/api/cars/' + id,
+                type: 'get',
+                success: function(data) {
+                    var car = new Car(data);
+                    resolve( car );
+                },
+                error: function(error) {
+                    var errorInfo = {};
+                    if(error.responseText) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке получить информацию о машине.';
+                    }
+                    reject(errorInfo);
+                }
+            });
+        });
     }
 
     editCar(carParams) {
-        var car = this._cars[carParams.id];
-        car.setStateCarNumber(carParams.stateCarNumber);
-        car.setBrand(carParams.brand);
-        car.setGasolineConsumptionRatio(carParams.gasolineConsumptionRatio);
-        car.setDescription(carParams.description);
-        this._emitter.emit("carChanged", car);
-        return car;
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/api/cars/' + carParams.id,
+                type: 'put',
+                contentType: "application/json",
+                data: JSON.stringify(carParams),
+                success: data => {
+                    var car = new Car(data);
+                    this._emitter.emit("carChanged", car);
+                    resolve( car );
+                },
+                error: function(error) {
+                    var errorInfo = {};
+                    if(error.responseText) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке отредактировать информацию о машине.';
+                    }
+                    reject(errorInfo);
+                }
+            });
+        });
     }
 
     deleteCar(id) {
-        delete this._cars[id];
-        this._emitter.emit("carRemoved");
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/api/cars/' + id,
+                type: 'delete',
+                success: data => {
+                    this._emitter.emit("carRemoved");
+                    resolve();
+                },
+                error: error => {
+                    var errorInfo = {};
+                    if(error.responseText) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке удалить машину из системы.';
+                    }
+                    reject(errorInfo);
+                }
+            });
+        });
+
     }
 
     getCarsCount() {

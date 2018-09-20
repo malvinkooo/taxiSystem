@@ -1,45 +1,130 @@
 class DriversList {
 
     constructor() {
-        this._drivers = {};
-        this._lastInsertId = 0;
         this._emitter = new EventEmitter();
     }
 
     getAllDrivers() {
-        var list = [];
-        for (var id in this._drivers) {
-            list.push(this._drivers[id]);
-        }
-        return list;
+        return new Promise(function(resolve, reject){
+            $.ajax({
+                url: '/api/drivers',
+                type: 'get',
+                success: function(data) {
+                    var list = [];
+                    for (var i = 0; i < data.length; i++) {
+                        list.push( new Driver(data[i]) );
+                    }
+                    resolve(list);
+                },
+                error: function(error) {
+                    var errorInfo = {};
+                    if(error.responseJSON) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке получить список водителей.';
+                    }
+                    reject(errorInfo);
+                }
+            });
+        });
     }
 
     addDriver(driverParams) {
-        var driver = new Driver(this._lastInsertId, driverParams);
-        this._drivers[this._lastInsertId] = driver;
-        this._lastInsertId++;
-        this._emitter.emit("driverAdded", driver);
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: "/api/drivers",
+                type: "post",
+                contentType: "application/json",
+                data: JSON.stringify(driverParams),
+                success: data => {
+                    var driver = new Driver(data);
+                    this._emitter.emit('driverAdded', driver);
+                    resolve(driver);
+                },
+                error: error => {
+                    var errorInfo = {};
+                    if(error.responseJSON) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке добавить нового водителя в систему.';
+                    }
+                    reject(errorInfo);
+                }
+            });
+        });
     }
 
     getDriver(id) {
-        return this._drivers[id];
+        return new Promise(function(resolve, reject){
+            $.ajax({
+                url: '/api/drivers/' + id,
+                type: 'get',
+                success: function(data){
+                    resolve( new Driver(data) );
+                },
+                error: function(error){
+                    console.log(error);
+                    var errorInfo = {};
+                    if(error.responseJSON) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке получить информацию о водителе.';
+                    }
+                    reject(errorInfo);
+                }
+            });
+        });
     }
 
     editDriver(driverParams) {
-        var driver = this._drivers[driverParams.id];
-        driver.setName(driverParams.name);
-        driver.setSurname(driverParams.surname);
-        driver.setPhone(driverParams.phone);
-        driver.setStatus(driverParams.status);
-        driver.setCurrentLocation(driverParams.currentLocation);
-        driver.setDescription(driverParams.description);
-        driver.setCar(driverParams.car);
-        this._emitter.emit("driverChanged", driver);
-        return driver;
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: 'api/drivers/' + driverParams.id,
+                type: 'put',
+                contentType: "application/json",
+                data: JSON.stringify(driverParams),
+                success: (data) => {
+                    var driver = new Driver(data);
+                    this._emitter.emit("driverChanged", driver);
+                    resolve(driver);
+                },
+                error: error => {
+                    var errorInfo = {};
+                    if(error.responseJSON) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке отредактировать информацию о водителе.';
+                    }
+                    reject(errorInfo);
+                }
+            });
+        });
     }
 
     deleteDriver(id) {
-        delete this._drivers[id];
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/api/drivers/' + id,
+                type: 'delete',
+                success: data => {
+                    this._emitter.emit("driverRemoved");
+                    resolve();
+                },
+                error: error => {
+                    var errorInfo = {};
+                    if(error.responseJSON) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке удалить водителя из системы.';
+                    }
+                }
+            });
+        });
     }
 
     getDriverscount() {

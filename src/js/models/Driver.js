@@ -31,15 +31,17 @@ class DriverStatus {
 
 
 class Driver {
-    constructor(id, driverParams) {
-        this._id = id;
+    constructor(driverParams) {
+        this._id = driverParams.id;
         this._name = driverParams.name;
         this._surname = driverParams.surname;
         this._phone = driverParams.phone;
         this._description = driverParams.description;
-        if(driverParams.car) {
-            this._car = driverParams.car;
-            this._car.assign();
+        this._isDeleted = Boolean( Number(driverParams.isDeleted) );
+        if( !driverParams.car ) {
+            this._car = null;
+        } else {
+            this._car = new Car(driverParams.car);
         }
         this._currentLocation = "-";
         this._status = DriverStatus.FREE;
@@ -52,6 +54,10 @@ class Driver {
 
     getName() {
         return this._name;
+    }
+
+    isDeleted() {
+        return this._isDeleted;
     }
 
     setName(name) {
@@ -81,15 +87,6 @@ class Driver {
         this._emitter.emit("driverChanged");
     }
 
-    getCurrentLocation() {
-        return this._currentLocation;
-    }
-
-    setCurrentLocation(currentLocation) {
-        this._currentLocation = currentLocation;
-        this._emitter.emit("driverChanged");
-    }
-
     getStatus() {
         return this._status;
     }
@@ -109,7 +106,7 @@ class Driver {
     }
 
     getCar() {
-        return this._car;
+        if(this._car) return this._car;
     }
 
     setCar(car) {

@@ -16,7 +16,13 @@ class CarsController {
   }
 
   public function getCars($req, $res) {
-    $carsList = $this->carsRepository->queryAllCars();
+    $filter = $req->getQueryParam('filter');
+    if( isset($filter) ) {
+      $carsList = $this->carsRepository->queryFreeCars();
+    } else {
+      $carsList = $this->carsRepository->queryAllCars();
+    }
+
     $data = array();
     foreach ($carsList as $car) {
       $data[] = $car->toJSON();
@@ -39,7 +45,7 @@ class CarsController {
   }
 
   public function deleteCar($req, $res, $args) {
-    V::intVal()->min(1)->assert($args['id']);
+    v::intVal()->min(1)->assert($args['id']);
     $result = $this->carsRepository->queryDeleteCar($args['id']);
 
     return $res->withStatus(200)->withJson( $result );
@@ -51,7 +57,7 @@ class CarsController {
    v::intVal()->min(1)->assert($args['id']);
    $carsValidator = v::key('stateCarNumber', v::length(5, 20))
    ->key('brand', v::stringType()->length(2, 20))
-   ->key('gasolineConsumptionRatio', v::floatVal()->max(12.00))
+   ->key('gasolineConsumptionRatio', v::floatVal()->max(20.00))
    ->key('description', v::stringType()->max(255));
    $carsValidator->assert($params);
 

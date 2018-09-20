@@ -1,11 +1,17 @@
 class AddDriverForm{
-    constructor(addDriverFormElement){
+    constructor(addDriverFormElement, carsList){
         this._addDriverFormElement = addDriverFormElement;
         this._driversController = null;
         this._carsController = null;
+        this._carsList = carsList;
         this._selectDropDown = this._addDriverFormElement.find("select.cars-list");
         this._addDriverFormElement.find(".submit").click(this._onAddDriverFormSubmit.bind(this));
         this._addDriverFormConstraints = Validation.getAddDriverConstraints();
+
+        this._successMessage = this._addDriverFormElement.find(".success.message");
+        this._successMessage.find(".close").click(() => this._successMessage.slideUp(600));
+        this._errorMessage = this._addDriverFormElement.find(".error.message");
+        this._errorMessage.find(".close").click(() => this._errorMessage.slideUp(600));
     }
 
     setDriversController(driversController) {
@@ -18,13 +24,21 @@ class AddDriverForm{
 
     show() {
         this._selectDropDown.html("");
-        var carsList = this._carsController.getCarsList();
-        for(var i = 0; i < carsList.length; i++){
-            var car = carsList[i];
-            this._selectDropDown.append("<option value='"
-                +car.getId()+"'>"+car+"</option>");
-        }
-        this._selectDropDown.dropdown();
+
+        this._carsList.getFreeCars()
+            .then(carsList => {
+                this._selectDropDown.append("<option value='0'>-Не назначать машину</option>");
+                for(var i = 0; i < carsList.length; i++){
+                    var car = carsList[i];
+                    this._selectDropDown.append("<option value='"
+                        +car.getId()+"'>"+car+"</option>");
+                }
+                this._selectDropDown.dropdown();
+            })
+            .catch(error => {
+                console.log(error.code);
+                console.log(error.message);
+            });
     }
 
     _onAddDriverFormSubmit() {
@@ -34,6 +48,7 @@ class AddDriverForm{
             var element = $(elements[i]);
             driverParams[element.attr('name')] = element.val();
         }
+
         var errors = validate(driverParams, this._addDriverFormConstraints);
         for(var k = 0; k < elements.length; k++) {
             var field = $(elements[k]).closest(".field");
@@ -46,9 +61,18 @@ class AddDriverForm{
                 }
             }
         }
+
         if(!errors) {
-            this._driversController.addDriver(driverParams);
-            this._addDriverFormElement.find("form")[0].reset();
+            driverParams.status = "Свободен";
+            this._driversController.addDriver(driverParams)
+                .then(() => {
+                    this._addDriverFormElement.find("form")[0].reset();
+                    this._successMessage.slideDown(600);
+                }).catch(error => {
+                    console.log(error.code);
+                    console.log(error.message);
+                    this._errorMessage.slideDown(600);
+                });
         }
     }
 }

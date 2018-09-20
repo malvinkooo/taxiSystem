@@ -26,8 +26,14 @@ class EditDriverPopup {
         this._editDriverPopupElement.find(".submit").click(this._onEditFormSubmit.bind(this));
         this._editDriverPopupConstraints = Validation.getEditDriverConstraints();
         this._editDriverPopupElement.modal({
+            onApprove: () => {
+                return this._onEditFormSubmit();
+            },
+            onHide: () => {
+                this._cleanHTML = true;
+            },
             onHidden: () => {
-                if(this._cleanHtml) {
+                if(this._cleanHTML) {
                     this._onClosed();
                     $(".editDriverModal").remove();
                 }
@@ -54,15 +60,24 @@ class EditDriverPopup {
         this._statusListSelectElement.dropdown('set selected', driver.getStatus());
 
         this._carsListSelectElement.html("");
-        var carsList = this._carsController.getCarsList();
-        for(var i = 0; i < carsList.length; i++) {
-            var car = carsList[i];
-            this._carsListSelectElement.append("<option value='"
-            +car.getId()+"'>"
-            +car.getBrand()+ " " + car.getStateCarNumber()
-            +"</option>");
-        }
-        this._carsListSelectElement.dropdown("set selected", driver.getCar().getId());
+        this._carsController.getFreeCarsList()
+            .then(carsList => {
+                this._carsListSelectElement.append("<option value='0'>-Не назначать машину</option>");
+                for(var i = 0; i < carsList.length; i++) {
+                    var car = carsList[i];
+                    this._carsListSelectElement.append("<option value='"
+                        +car.getId()+"'>"
+                        +car.getBrand()+ " " + car.getStateCarNumber()
+                        +"</option>");
+                }
+
+                this._carsListSelectElement.dropdown("set selected", driver.getCar().getId());
+            })
+            .catch(error => {
+                console.log(error.code);
+                console.log(error.message);
+            });
+
         this._editDriverPopupElement.modal("show");
     }
 
@@ -86,8 +101,18 @@ class EditDriverPopup {
             }
         }
         if(!errors) {
-            this._driversController.editDriver(driverParams);
-            this._editDriverPopupElement.find("form")[0].reset();
+            this._driversController.editDriver(driverParams)
+                .then(() => {
+                    this._editDriverPopupElement.find("form")[0].reset();
+                })
+                .catch(error => {
+                    console.log(error);
+                    console.log(error.code);
+                    console.log(error.message);
+                });
+            this._cleanHTML = true;
+        } else {
+            return false;
         }
     }
 }

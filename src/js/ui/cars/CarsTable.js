@@ -7,35 +7,47 @@ class CarsTable {
       this._carsList.onCarChanged(this._carChanged.bind(this));
       this._carsList.onCarRemoved(this._carRemoved.bind(this));
       this._tbody.on("click", "tr", this._onCarRowClick.bind(this));
+
+      this._showCarsList();
    }
+
 
    setCarsController(carsController) {
       this._carsController = carsController;
    }
 
    _showCarsList() {
-      var list = this._carsList.getAllCars();
-      this._tbody.html("");
-      for(var i = 0; i < list.length; i++) {
-         var car = list[i];
-         this._tbody.append("<tr data-car-id='"+car.getId()+"'><td>"
-            +car.getBrand()+"</td><td>"
-            +car.getGasolineConsumptionRatio()+"</td><td>"
-            +car.getStateCarNumber()
-         +"</td></tr>");
-      }
+      this._carsList.getAllCars()
+         .then(list => {
+            this._tbody.html("");
+            for(var i = 0; i < list.length; i++) {
+               var car = list[i];
+               this._tbody.append("<tr data-car-id='"+car.getId()+"'><td>"
+                  +car.getBrand()+"</td><td>"
+                  +car.getGasolineConsumptionRatio()+"</td><td>"
+                  +car.getStateCarNumber()
+                  +"</td></tr>");
+            }
+         }).catch(error => {
+            console.log(error.code);
+            console.log(error.message);
+         });
    }
 
    showCar(car) {
-      var popup = new DisplayCarPopup();
+      var popup = new DisplayCarPopup(this._carsList);
       popup.setCarsController(carsController);
       popup.showCar(car);
    }
 
    _onCarRowClick(e) {
       var carId = e.currentTarget.dataset.carId;
-      var car = this._carsList.getCar(carId);
-      this.showCar(car);
+      this._carsList.getCar(carId)
+         .then(car => this.showCar(car))
+         .catch(error => {
+            console.log(error.code);
+            console.log(error.message);
+         });
    }
 
    _carAdded() {

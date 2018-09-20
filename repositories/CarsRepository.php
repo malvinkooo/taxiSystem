@@ -6,9 +6,33 @@ class CarsRepository {
   }
 
   public function queryAllCars() {
-    $stm = $this->db->prepare("SELECT * FROM cars_list");
+    $stm = $this->db->prepare("SELECT * FROM cars_list /*WHERE isDeleted = 0*/");
     if(!$stm->execute()) {
       throw new DBException('Ошибка в SQL запросе при получении списка машин.', 500);
+    }
+    $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC);
+    $carsList = array();
+    foreach ($queryResult as $car) {
+      $carsList[] = new Car($car);
+    }
+
+    return $carsList;
+  }
+
+  public function queryFreeCars() {
+    $stm = $this->db->prepare("SELECT
+        cars.id,
+        cars.stateCarNumber,
+        cars.gasolineConsumptionRatio,
+        cars.brand,
+        cars.description,
+        cars.isDeleted
+      FROM cars_list cars
+      LEFT JOIN drivers_list drivers
+      ON cars.id = drivers.carId
+      WHERE drivers.carId IS NULL /*WHERE isDeleted = 0*/");
+    if(!$stm->execute()) {
+      throw new DBException('Ошибка в SQL запросе при получении списка свободных машин машин.', 500);
     }
     $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC);
     $carsList = array();
@@ -69,18 +93,15 @@ class CarsRepository {
     } else {
       throw new DBException('Ошибка в SQL запросе при попытке редактирования записи из таблицы машин с id '.$id, 500);
     }
-
-    return $this->queryCar( $id );
   }
 
   public function queryDeleteCar($id) {
-    $stm = $this->db->prepare("DELETE FROM cars_list WHERE id = ?");
+    $stm = $this->db->prepare("UPDATE cars_list SET
+      isDeleted = 1
+      WHERE id = ?");
     if($stm->execute(array($id))) {
-      if($stm->rowCount() === 0) {
-        throw new NotFoundException('Запись в таблице машин с id '.$id.' не существует', 404);
-      } else {
-        return true;
-      }
+      $this ->queryCar($id);
+      return true;
     } else {
       throw new DBException('Ошибка в SQL запросе при попытке удалить машину с id '.$id, 500);
     }

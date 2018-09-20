@@ -36,8 +36,9 @@ class OrderStatus {
 }
 
 class Order {
-    constructor(id, orderParams, geoService) {
-        this._driver = orderParams.driver;
+    constructor(orderParams) {
+        // console.log(orderParams);
+        this._driver = new Driver(orderParams.driver);
         this._clientName = orderParams.clientName;
         this._clientPhone = orderParams.clientPhone;
         this._dateOfCreation = new Date();
@@ -46,8 +47,8 @@ class Order {
         this._destination = orderParams.destination;
         this._distance = orderParams.distance;
         this._rate = orderParams.rate;
-        this._id = id;
-        this._status = OrderStatus.NEW_ORDER;
+        this._id = orderParams.id;
+        this._status = orderParams.status;
         this._emitter = new EventEmitter();
     }
 

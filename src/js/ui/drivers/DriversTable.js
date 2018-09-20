@@ -8,6 +8,8 @@ class DriversTable {
         this._driversList.onDriverAdded(this._driverAdded.bind(this));
         this._driversList.onDriverChanged(this._driverChanged.bind(this));
         this._tbody.on("click", "tr", this._onDriverRowClick.bind(this));
+
+        this._showDriversList();
     }
 
     setCarsController(carsController) {
@@ -19,25 +21,29 @@ class DriversTable {
     }
 
     _showDriversList(){
-        var list = driversList.getAllDrivers();
-       this._tbody.html("");
-       var statusColorsList = DriverStatus.colorsList;
-       for (var i = 0; i < list.length; i++) {
-            var driver = list[i];
-            $('<tr data-driver-id='+driver.getId()+'><td>'+driver.getName()+
-            '</td><td>'+driver.getSurname()+
-            '</td><td>'+driver.getPhone()+
-            '</td><td><button class="ui button driver-status '
-                +statusColorsList[driver.getStatus()]+'">'
-                +driver.getStatus()+
-            '</button></td><td>'+driver.getCurrentLocation()+
-            '</td><td>'+driver.getCar()+
-            '</td></tr>').appendTo(this._tbody)
-       }
+        driversList.getAllDrivers()
+            .then(list => {
+                this._tbody.html("");
+                var statusColorsList = DriverStatus.colorsList;
+                for (var i = 0; i < list.length; i++) {
+                    var driver = list[i];
+                    $('<tr data-driver-id='+driver.getId()+'><td>'+driver.getName()+
+                        '</td><td>'+driver.getSurname()+
+                        '</td><td>'+driver.getPhone()+
+                        '</td><td><button class="ui button driver-status '
+                        +statusColorsList[driver.getStatus()]+'">'
+                        +driver.getStatus()+
+                        '</button></td><td>'+ (driver.getCar() ? driver.getCar() : '-') +
+                        '</td></tr>').appendTo(this._tbody);
+                }
+            }).catch(error => {
+                console.log(error.code);
+                console.log(error.message);
+            });
     }
 
     showDriver(driver) {
-        var popup = new DisplayDriverPopup();
+        var popup = new DisplayDriverPopup(driversList);
         popup.setDriversController(this._driversController);
         popup.setCarsController(this._carsController);
         popup.showDriver(driver);
@@ -45,8 +51,12 @@ class DriversTable {
 
     _onDriverRowClick(e) {
         var driverId = e.currentTarget.dataset.driverId;
-        var driver = this._driversList.getDriver(driverId);
-        this.showDriver(driver);
+        this._driversList.getDriver(driverId)
+            .then(driver => this.showDriver(driver))
+            .catch(error => {
+                console.log(error);
+                console.log(error.message);
+            });
     }
 
     _driverAdded() {

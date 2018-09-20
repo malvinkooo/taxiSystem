@@ -5,14 +5,9 @@ class Driver {
     $this->name = $params['name'];
     $this->surname = $params['surname'];
     $this->phone = $params['phone'];
+    $this->isDeleted = $params['isDeleted'];
     $this->description = $params['description'];
-    $this->car = new Car(array(
-      'id' => $params['carId'],
-      'stateCarNumber' => $params['stateCarNumber'],
-      'brand' => $params['brand'],
-      'gasolineConsumptionRatio' => $params['gasolineConsumptionRatio'],
-      'description' => $params['carDescription']
-    ));
+    $this->car = Car::fromDriverParams($params);
   }
 
   public function toJSON() {
@@ -21,7 +16,9 @@ class Driver {
       'name' => $this->name,
       'surname' => $this->surname,
       'phone' => $this->phone,
-      'car' => $this->car->toJSON()
+      'isDeleted' => $this->isDeleted,
+      'description' => $this->description,
+      'car' => !is_null($this->car) ? $this->car->toJSON() : null
     );
   }
 }

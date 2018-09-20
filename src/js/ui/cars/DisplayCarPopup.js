@@ -1,11 +1,16 @@
 class DisplayCarPopup {
-    constructor() {
+    constructor(carsList) {
         $($("#displayCarPopup").html()).appendTo("body");
         this._displayCarPopupElement = $(".displayCarModal");
         this._car = null;
+        this._carsList = carsList;
         this._carsController = null;
         this._cleanHTML = true;
         this._onCarChangeUnsubscribe = null;
+        this._carsList.onCarChanged(car => {
+            this._car = car;
+            this._repaint();
+        });
         this._displayCarPopupElement.find(".edit-car").click(this._onEditCarButtonClick.bind(this));
         this._displayCarPopupElement.find(".delete-car").click(this._onDeleteCarButtonClick.bind(this));
         this._displayCarPopupElement.modal({
@@ -18,6 +23,11 @@ class DisplayCarPopup {
     }
 
     _repaint() {
+        if(this._car.isDeleted()) {
+            this._displayCarPopupElement.find(".status").show();
+            this._displayCarPopupElement.find(".edit-car").addClass("disabled");
+            this._displayCarPopupElement.find(".delete-car").addClass("disabled");
+        }
         var elements = this._displayCarPopupElement.find("[data-getAttr]");
         for(var i = 0; i < elements.length; i++) {
             var element = $(elements[i]);
@@ -56,20 +66,22 @@ class DisplayCarPopup {
         this._cleanHTML = false;
         var questionBox = new QuestionMessageBox({
             onAccept: (function(){
-                var result = this._carsController.selectDeleteCar(this._car);
-                if(!result) {
-                    var infoMessage = new InfoMessageBox({
-                        onHidden: () => {
-                            this._displayCarPopupElement.modal("show");
-                            this._cleanHTML = true;
-                        },
-                        messageText: "Машина не была удалена успешно. Возможно она закреплена за каким-то водителем."
+                this._carsController.selectDeleteCar(this._car)
+                    .then(() => {
+                        this._cleanHTML = true;
+                        this._destroy();
+                    }).catch((error) => {
+                        console.log(error.code);
+                        console.log(error.message);
+                        var infoMessage = new InfoMessageBox({
+                            onHidden: () => {
+                                this._displayCarPopupElement.modal("show");
+                                this._cleanHTML = true;
+                            },
+                            messageText: "Машина не была удалена. Попробуйте снова через некоторое время."
+                        });
+                        infoMessage.show();
                     });
-                    infoMessage.show();
-                } else {
-                    this._cleanHTML = true;
-                    this._destroy();
-                }
             }).bind(this),
             onReject: (function(){
                 this._displayCarPopupElement.modal("show");

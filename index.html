@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="src/libs/semantic/semantic.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
     <link rel="stylesheet" href="/src/css/main.css">
+    <link rel="shortcut icon" href="src/img/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -241,10 +242,20 @@
                         <label>Комментарий</label>
                         <textarea name="description" rows="4"></textarea>
                     </div>
+                    <!-- success message -->
                     <div class="ui success message">
-                        <div class="header">Автомобиль добавлен</div>
-                        <p>You're all signed up for the newsletter.</p>
+                      <i class="close icon"></i>
+                      <div class="header">Автомобиль был успешно добавлен!</div>
+                      <p>Посмотреть информацию о ней можно через таблицу машин.</p>
                     </div>
+                    <!-- success message -->
+                    <!-- error message -->
+                    <div class="ui error message">
+                      <i class="close icon"></i>
+                      <div class="header">Что-то пошло не так...</div>
+                      <p>Не удалось добавить машину. Попробуйте снова через некоторое время.</p>
+                    </div>
+                    <!-- error message -->
                     <div class="ui submit blue button">Добавить</div>
                 </form>
             </div>
@@ -280,7 +291,6 @@
                             <th>Фамилия</th>
                             <th>Моб. номер</th>
                             <th>Статус</th>
-                            <th>Текущее место пребывания</th>
                             <th>Автомобиль</th>
                         </tr>
                     </thead>
@@ -347,9 +357,20 @@
                     <label>Комментарий</label>
                     <textarea name="description" rows="4"></textarea>
                 </div>
+                <!-- success message -->
                 <div class="ui success message">
-                    <div class="header">Автомобиль добавлен</div>
+                    <i class="close icon"></i>
+                    <div class="header">Водитель был успешно добавлен!</div>
+                    <p>Посмотреть информацию о нем можно через таблицу водителей.</p>
                 </div>
+                <!-- success message -->
+                <!-- error message -->
+                <div class="ui error message">
+                    <i class="close icon"></i>
+                    <div class="header">Что-то пошло не так...</div>
+                    <p>Не удалось добавить водителя в систему. Попробуйте снова через некоторое время.</p>
+                </div>
+                <!-- error message -->
                 <div class="ui submit green button">Добавить</div>
             </form>
         </div>
@@ -556,7 +577,7 @@
 <!-- display car popup -->
 <script id="displayCarPopup" type="text/template">
     <div class="ui tiny modal displayCarModal">
-        <!-- <a class="ui ribbon label status" data-getAttr="getStatus"></a> -->
+        <a class="ui ribbon label status" style="display: none">Удалена</a>
         <i class="close icon"></i>
         <div class="header">
             Номер в системе <span class="id" data-getAttr="getId"></span>
@@ -640,6 +661,7 @@
 <!-- display driver popup -->
 <script id="displayDriverPopup" type="text/template">
     <div class="ui tiny modal displayDriverModal">
+        <a class="ui ribbon label deletedStatus" style="display: none">Удален</a>
         <a class="ui ribbon label status" data-getAttr="getStatus"></a>
         <i class="close icon"></i>
         <div class="header">
@@ -664,10 +686,6 @@
                             </div>
                         </div>
                         <div class="description" data-getAttr="getDescription">-</div>
-                    </div>
-                    <div class="extra content">
-                        <i class="map marker icon"></i>
-                        <span data-getAttr="getCurrentLocation">-</span>
                     </div>
                 </div>
             </div>
@@ -715,11 +733,6 @@
                 <div class="field">
                     <label>Телефон</label>
                     <input type="text" name="phone" placeholder="Телефон" class="phone" data-getAttr="getPhone">
-                </div>
-                <div class="field ui search currentLocation">
-                    <label>Текущее место пребывания</label>
-                    <input class="prompt" type="text" placeholder="Текущее место пребывания" name="currentLocation" data-getAttr="getCurrentLocation">
-                    <div class="results"></div>
                 </div>
             </div>
             <div class="field">

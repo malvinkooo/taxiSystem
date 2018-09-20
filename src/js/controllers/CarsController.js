@@ -5,13 +5,15 @@ class CarsController {
     }
 
     addCar(carParams) {
-        this._cars.addCar(carParams);
-        var list = this._cars.getAllCars();
-        this._ui.showCarsList(list);
+        return this._cars.addCar(carParams);
     }
 
     getCarsList() {
         return this._cars.getAllCars();
+    }
+
+    getFreeCarsList() {
+        return this._cars.getFreeCars();
     }
 
     selectMenuItemAllCars() {
@@ -19,18 +21,10 @@ class CarsController {
     }
 
     editCar(carParams) {
-        var car = this._cars.editCar(carParams);
+        return this._cars.editCar(carParams);
     }
 
     selectDeleteCar(car) {
-        var result;
-        if(!car.isAssigned()) {
-            this._cars.deleteCar(car.getId());
-            result = true;
-        } else {
-            console.log("При удалении машины что-то пошло не так.");
-            result = false;
-        }
-        return result;
+        return this._cars.deleteCar(car.getId());
     }
 }

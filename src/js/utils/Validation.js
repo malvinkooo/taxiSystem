@@ -67,7 +67,7 @@ class Validation {
                 length: {
                     minimum: 5,
                     maximun: 15,
-                    message: "^Номер автомобиля должен состоять максимум из 15 символов и минимум из 5."
+                    message: "^Номер автомобиля должен состоять максимум из 20 символов и минимум из 5."
                 }
             },
             brand: {
@@ -77,7 +77,7 @@ class Validation {
                 length: {
                     minimum: 3,
                     maximum: 50,
-                    message: "^Марка автомобиля должна состоять максимум из 50 символов и минимум из 4."
+                    message: "^Марка автомобиля должна состоять максимум из 20 символов и минимум из 2."
                 }
             },
             gasolineConsumptionRatio: {
@@ -86,7 +86,7 @@ class Validation {
                 },
                 numericality: {
                     greaterThanOrEqualTo: 0,
-                    message: "^Допустимы только положительные числа."
+                    message: "^Допустимы только положительные числа не больше 12.00."
                 }
             },
             description: {
