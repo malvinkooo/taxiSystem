@@ -29,7 +29,6 @@ class DriverStatus {
     }
 }
 
-
 class Driver {
     constructor(driverParams) {
         this._id = driverParams.id;
@@ -44,7 +43,7 @@ class Driver {
             this._car = new Car(driverParams.car);
         }
         this._currentLocation = "-";
-        this._status = DriverStatus.FREE;
+        this._status = driverParams.status;
         this._emitter = new EventEmitter();
     }
 

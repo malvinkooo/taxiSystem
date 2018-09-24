@@ -23,7 +23,6 @@ class EditDriverPopup {
             "</option>");
         }
         this._statusListSelectElement.dropdown({showOnFocus: false});
-        this._editDriverPopupElement.find(".submit").click(this._onEditFormSubmit.bind(this));
         this._editDriverPopupConstraints = Validation.getEditDriverConstraints();
         this._editDriverPopupElement.modal({
             onApprove: () => {
@@ -62,6 +61,10 @@ class EditDriverPopup {
         this._carsListSelectElement.html("");
         this._carsController.getFreeCarsList()
             .then(carsList => {
+                if (driver.getCar()) {
+                    carsList.push( driver.getCar() );
+                }
+
                 this._carsListSelectElement.append("<option value='0'>-Не назначать машину</option>");
                 for(var i = 0; i < carsList.length; i++) {
                     var car = carsList[i];
@@ -71,7 +74,7 @@ class EditDriverPopup {
                         +"</option>");
                 }
 
-                this._carsListSelectElement.dropdown("set selected", driver.getCar().getId());
+                this._carsListSelectElement.dropdown("set selected", (driver.getCar() ? driver.getCar().getId() : 0) );
             })
             .catch(error => {
                 console.log(error.code);
