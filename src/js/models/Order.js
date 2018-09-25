@@ -37,28 +37,33 @@ class OrderStatus {
 
 class Order {
     constructor(orderParams) {
-        // console.log(orderParams);
-        this._driver = new Driver(orderParams.driver);
-        this._clientName = orderParams.clientName;
-        this._clientPhone = orderParams.clientPhone;
-        this._dateOfCreation = new Date();
+        this._id = orderParams.id;
+        this._driver = orderParams.driver ? new Driver(orderParams.driver) : null;
+        this._client = new Client(orderParams.client);
+        this._dateOfCreation = orderParams.dateOfCreation;
         this._dateOfCompletion = "-";
-        this._carFeedPoint = orderParams.carFeedPoint;
-        this._destination = orderParams.destination;
+        this._carFeedPoint = new Address(
+            orderParams.carFeedPoint.title,
+            orderParams.carFeedPoint.lat,
+            orderParams.carFeedPoint.lng
+        );
+        this._destination = new Address(
+            orderParams.destination.title,
+            orderParams.destination.lat,
+            orderParams.destination.lng
+        );
         this._distance = orderParams.distance;
         this._rate = orderParams.rate;
-        this._id = orderParams.id;
         this._status = orderParams.status;
         this._emitter = new EventEmitter();
     }
 
     getDriver() {
-        return this._driver;
+        if(this._driver) return this._driver;
     }
 
-    setDriver(driver) {
-        this._driver = driver;
-        this._emitter.emit("orderChanged");
+    getClient() {
+        return this._client;
     }
 
     getId() {
@@ -69,45 +74,12 @@ class Order {
         return this._distance;
     }
 
-    setDistance(distance) {
-        this._distance = distance;
-        this._emitter.emit("orderChanged");
-    }
-
     getStatus() {
         return this._status;
     }
 
-    setStatus(status) {
-        this._status = status;
-        this._emitter.emit("orderChanged");
-    }
-
-    getClientName() {
-        return this._clientName;
-    }
-
-    setClientName(clientName) {
-        this._clientName = clientName;
-        this._emitter.emit("orderChanged");
-    }
-
-    getClientPhone() {
-        return this._clientPhone;
-    }
-
-    setClientPhone(clientPhone) {
-        this._clientPhone = clientPhone;
-        this._emitter.emit("orderChanged");
-    }
-
     getDateOfCompletion() {
         return this._dateOfCompletion;
-    }
-
-    setDateOfComplention(dateOfCompletion) {
-        this._dateOfCompletion = dateOfCompletion;
-        this._emitter.emit("orderChanged");
     }
 
     getCarFeedPoint() {
@@ -130,11 +102,6 @@ class Order {
 
     getRate() {
         return this._rate;
-    }
-
-    setRate(rate) {
-        this._rate = rate;
-        this._emitter.emit("orderChanged");
     }
 
     getDateOfCreation() {

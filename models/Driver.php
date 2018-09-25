@@ -23,5 +23,28 @@ class Driver {
       'car' => !is_null($this->car) ? $this->car->toJSON() : null
     );
   }
+
+  static function fromOrderParams($params) {
+    $result = null;
+    if( !is_null($params['driverId']) ) {
+      $result = new Driver(array(
+        'id' => $params['driverId'],
+        'name' => $params['driverName'],
+        'surname' => $params['driverSurname'],
+        'phone' => $params['driverPhone'],
+        'status' => $params['driverStatus'],
+        'isDeleted' => $params['driverIsDeleted'],
+        'description' => $params['driverDescription'],
+        'carId' => $params['carId'],
+        'stateCarNumber' => $params['stateCarNumber'],
+        'brand' => $params['brand'],
+        'gasolineConsumptionRatio' => $params['gasolineConsumptionRatio'],
+        'carDescription' => $params['carDescription'],
+        'carIsDeleted' => $params['carIsDeleted']
+      ));
+    }
+
+    return $result;
+  }
 }
 ?>

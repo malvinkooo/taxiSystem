@@ -28,7 +28,7 @@ class OrdersController {
     }
 
     selectMenuItemAllOrders() {
-        // this._ui.showOrdersList();
+        this._ui.showOrdersList();
     }
 
     editOrder(orderParams) {
