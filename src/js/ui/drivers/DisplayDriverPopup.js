@@ -54,7 +54,6 @@ class DisplayDriverPopup {
 
     _destroy() {
         if(this._cleanHTML) {
-            this._onDriverChangeUnsubscribe();
             $(".displayDriverModal").remove();
         }
     }
@@ -62,7 +61,6 @@ class DisplayDriverPopup {
     showDriver(driver) {
         this._driver = driver;
         this._repaint();
-        this._onDriverChangeUnsubscribe = this._driver.onChange(this._repaint.bind(this));
         this._displayDriverPopupElement.modal("show");
     }
 

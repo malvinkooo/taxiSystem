@@ -45,6 +45,7 @@ class CarsTable {
       this._carsList.getCar(carId)
          .then(car => this.showCar(car))
          .catch(error => {
+            console.log(error);
             console.log(error.code);
             console.log(error.message);
          });
