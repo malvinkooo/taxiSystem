@@ -40,7 +40,6 @@ class Driver {
         this._car = driverParams.car ? new Car(driverParams.car) : null;
         this._currentLocation = "-";
         this._status = driverParams.status;
-        this._emitter = new EventEmitter();
     }
 
     getId() {
@@ -80,10 +79,6 @@ class Driver {
     }
 
     getCar() {
-        if(this._car) return this._car;
-    }
-
-    onChange(fn) {
-        return this._emitter.subscribe("driverChanged", fn);
+        return this._car;
     }
 }

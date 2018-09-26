@@ -55,11 +55,10 @@ class Order {
         this._distance = orderParams.distance;
         this._rate = orderParams.rate;
         this._status = orderParams.status;
-        this._emitter = new EventEmitter();
     }
 
     getDriver() {
-        if(this._driver) return this._driver;
+        return this._driver;
     }
 
     getClient() {
@@ -106,9 +105,5 @@ class Order {
 
     getDateOfCreation() {
         return this._dateOfCreation;
-    }
-
-    onChange(fn) {
-        return this._emitter.subscribe("orderChanged", fn);
     }
 }
