@@ -454,11 +454,7 @@
                     <div class="card" style="width: 100%">
                         <div class="content">
                             <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
-                            <div class="header" data-driver-getAttr="getFullName"></div>
-                            <div class="meta">
-                                <i class="taxi icon"></i>
-                                <span data-driver-getAttr="getCurrentLocation"></span>
-                            </div>
+                            <div class="header" data-driver-getAttr="toString"></div>
                             <div class="description">
                                 <p>
                                     <i class="phone icon"></i>
@@ -475,13 +471,13 @@
                     <div class="card" style="width: 100%;margin-bottom: 30px">
                         <div class="content">
                             <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg">
-                            <div class="header clientName" data-getAttr="getClientName">
+                            <div class="header clientName" data-client-getAttr="toString">
                                 <!-- Клиент -->
                             </div>
                             <div class="description">
                                 <p>
                                     <i class="phone icon"></i>
-                                    <span class="clientPhone" data-getAttr="getClientPhone"></span>
+                                    <span class="clientPhone" data-client-getAttr="getPhone"></span>
                                 </p>
                             </div>
                         </div>

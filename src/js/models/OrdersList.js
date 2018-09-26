@@ -26,7 +26,14 @@ class OrdersList {
                     resolve(list);
                 },
                 error: function(error) {
-                    reject(error);
+                    var errorInfo = {};
+                    if(error.responseJSON) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке получить список заказов.';
+                    }
+                    reject(errorInfo);
                 }
             });
         });
@@ -48,7 +55,26 @@ class OrdersList {
     }
 
     getOrder(id) {
-        return this._orders[id];
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                url: '/api/orders/' + id,
+                type: 'get',
+                success: function(data) {
+                    resolve( new Order(data) );
+                },
+                error: function(error) {
+                    console.log(error);
+                    var errorInfo = {};
+                    if(error.responseJSON) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке получить информацию о заказе.';
+                    }
+                    reject(errorInfo);
+                }
+            });
+        });
     }
 
     getOrdersCount() {

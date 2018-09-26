@@ -6,12 +6,10 @@ class DisplayOrderPopup {
         this._driversController = null;
         this._cleanHTML = true;
         this._order = null;
-        this._onOrderChangeUnsubscribe = null;
         this._displayOrderPopupElement.find(".edit-order").click(this._onEditOrderButtonClick.bind(this));
         this._displayOrderPopupElement.modal({
             onHidden: (function() {
                 if(this._cleanHTML) {
-                    this._onOrderChangeUnsubscribe();
                     $(".displayOrderModal").remove();
                 }
             }).bind(this)
@@ -27,6 +25,7 @@ class DisplayOrderPopup {
     }
 
     _repaint() {
+        var driver = this._order.getDriver();
         var statusColorsList = OrderStatus.colorsList;
         for (var j in statusColorsList) {
             this._displayOrderPopupElement
@@ -38,12 +37,24 @@ class DisplayOrderPopup {
             var getAttr = $(elements[i]).attr("data-getAttr");
             $(elements[i]).html(this._order[getAttr]()+'');
         }
+
         var driverElements = this._displayOrderPopupElement.find("[data-driver-getAttr]");
         for(var k = 0; k < driverElements.length; k++) {
             var driverGetAttr = $(driverElements[k]).attr("data-driver-getAttr");
-            $(driverElements[k]).html(this._order.getDriver()[driverGetAttr]());
+            console.log(driverGetAttr);
+            $(driverElements[k]).html( driver ? driver[driverGetAttr]() : '-' );
         }
-        this._displayOrderPopupElement.find("[data-car-getAttr]").html(this._order.getDriver().getCar().toString());
+
+        var clientElements = this._displayOrderPopupElement.find("[data-client-getAttr]");
+        for(var k = 0; k < clientElements.length; k++) {
+            var clientGetAttr = $(clientElements[k]).attr("data-client-getAttr");
+            $(clientElements[k]).html(this._order.getClient()[clientGetAttr]());
+        }
+
+        this._displayOrderPopupElement.find("[data-car-getAttr]").html(
+            driver && driver.getCar() ? this._order.getDriver().getCar().toString() : '-'
+        );
+
         this._displayOrderPopupElement
             .find(".status")
             .addClass(statusColorsList[this._order.getStatus()]);
@@ -52,7 +63,6 @@ class DisplayOrderPopup {
     showOrder(order) {
         this._order = order;
         this._repaint();
-        this._onOrderChangeUnsubscribe = this._order.onChange(this._repaint.bind(this));
         this._displayOrderPopupElement.modal("show");
     }
 
