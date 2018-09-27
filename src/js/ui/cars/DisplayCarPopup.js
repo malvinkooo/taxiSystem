@@ -6,7 +6,6 @@ class DisplayCarPopup {
         this._carsList = carsList;
         this._carsController = null;
         this._cleanHTML = true;
-        this._onCarChangeUnsubscribe = null;
         this._carsList.onCarChanged(car => {
             this._car = car;
             this._repaint();
@@ -39,13 +38,11 @@ class DisplayCarPopup {
     showCar(car) {
         this._car = car;
         this._repaint();
-        this._onCarChangeUnsubscribe = this._car.onChange(this._repaint.bind(this));
         this._displayCarPopupElement.modal("show");
     }
 
     _destroy() {
         if(this._cleanHTML) {
-            this._onCarChangeUnsubscribe();
             $(".displayCarModal").remove();
         }
     }

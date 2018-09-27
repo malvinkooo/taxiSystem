@@ -7,19 +7,7 @@ class Order {
     $this->distance = $params['distance'];
     $this->rate = $params['rate'];
     $this->status = $params['status'];
-    $this->driver = new Driver(array(
-      'id' => $params['driverId'],
-      'name' => $params['driverName'],
-      'surname' => $params['driverSurname'],
-      'phone' => $params['driverPhone'],
-      'status' => $params['driverStatus'],
-      'description' => $params['driverDescription'],
-      'carId' => $params['carId'],
-      'stateCarNumber' => $params['stateCarNumber'],
-      'brand' => $params['brand'],
-      'gasolineConsumptionRatio' => $params['gasolineConsumptionRatio'],
-      'carDescription' => $params['carDescription']
-    ));
+    $this->driver = Driver::fromOrderParams($params);
     $this->client = new Client($params);
     $this->carFeedPoint = new Address(array(
       'id' => $params['carFeedPointId'],
@@ -43,7 +31,7 @@ class Order {
       'distance' => $this->distance,
       'rate' => $this->rate,
       'status' => $this->status,
-      'driver' => $this->driver->toJSON(),
+      'driver' => !is_null($this->driver) ? $this->driver->toJSON() : null,
       'client' => $this->client->toJSON(),
       'carFeedPoint' => $this->carFeedPoint->toJSON(),
       'destination' => $this->destination->toJSON()

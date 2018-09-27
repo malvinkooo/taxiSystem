@@ -9,7 +9,7 @@ class OrdersTable {
         this._ordersList.onOrderChanged(this._orderChanged.bind(this));
         this._tbody.on("click", "tr", this._onOrderRowClick.bind(this));
 
-        // this._showOrdersList();
+        this._showOrdersList();
     }
 
     setOrdersController(ordersController) {
@@ -21,28 +21,29 @@ class OrdersTable {
     }
 
     _showOrdersList() {
-        var promise = this._ordersList.getAllOrders();
-        promise.then(list => {
-            this._tbody.html('');
-            var statusColorsList = OrderStatus.colorsList;
-            for(var i=0; i < list.length; i++) {
-                var order = list[i];
-                $('<tr data-order-id='+ order.getId() +'><td>'+ order.getClientName() +
-                    '</td><td>' + order.getClientPhone() +
-                    '</td><td>' + order.getCarFeedPoint() +
-                    '</td><td>' + order.getDestination() +
-                    '</td><td>' + order.getDistance() +
-                    '</td><td>' + order.getRate() +
-                    '</td><td><button class="ui button order-status '+statusColorsList[order.getStatus()]+'">' + order.getStatus() +
-                    '</button></td><td>' + order.getDateOfCreation() +
-                    '</td><td>' + order.getDateOfCompletion() +
-                    '</td><td>' + order.getDriver().getFullName() +
-                    '</td></tr>').appendTo(this._tbody);
-            }
-        }).catch(error => {
-            console.log(error);
-        });
-
+        this._ordersList.getAllOrders()
+            .then(list => {
+                this._tbody.html('');
+                var statusColorsList = OrderStatus.colorsList;
+                for(var i=0; i < list.length; i++) {
+                    var order = list[i];
+                    var driver = order.getDriver();
+                    var client = order.getClient();
+                    var carFeedPoint = order.getCarFeedPoint();
+                    var destination = order.getDestination();
+                    $('<tr data-order-id='+ order.getId() +'><td>'+ client +
+                        '</td><td>' + order.getCarFeedPoint() +
+                        '</td><td>' + order.getDestination() +
+                        '</td><td>' + order.getRate() +
+                        '</td><td><button class="ui button order-status '+statusColorsList[order.getStatus()]+'">' + order.getStatus() +
+                        '</button></td><td>' + order.getDateOfCreation() +
+                        '</td><td>' + order.getDateOfCompletion() +
+                        '</td><td>' + (driver ? driver : '-') +
+                        '</td></tr>').appendTo(this._tbody);
+                }
+            }).catch(error => {
+                console.log(error);
+            });
     }
 
     showOrder(order) {
@@ -54,8 +55,12 @@ class OrdersTable {
 
     _onOrderRowClick(e) {
         var orderId = e.currentTarget.dataset.orderId;
-        var order = this._ordersList.getOrder(orderId);
-        this.showOrder(order);
+        this._ordersList.getOrder(orderId)
+            .then(order => this.showOrder(order))
+            .catch(error => {
+                console.log(error);
+                console.log(error.message);
+            });
     }
 
     _orderAdded() {

@@ -68,15 +68,16 @@ class DriversRepository {
 
   public function queryAddDriver($driver) {
     $stm = $this->db->prepare("INSERT INTO drivers_list
-      (name, surname, phone, carId, description)
+      (name, surname, phone, carId, description, status)
       VALUES
-      (:name, :surname, :phone, :carId, :description)");
+      (:name, :surname, :phone, :carId, :description, :status)");
     $params = array(
       ':name' => $driver['name'],
       ':surname' => $driver['surname'],
       ':phone' => $driver['phone'],
       ':carId' => ((int) $driver['car']) ? ((int) $driver['car']) : NULL,
-      ':description' => $driver['description']
+      ':description' => $driver['description'],
+      ':status' => 'Свободен'
     );
     if(!$stm->execute($params)) {
       throw new DBException('Ошибка в SQL запросе при попытке добавить водителя', 500);

@@ -7,7 +7,6 @@ class Car {
         this._brand = carParams.brand;
         this._description = carParams.description;
         this._isDeleted = Boolean( Number(carParams.isDeleted) );
-        this._emitter = new EventEmitter();
     }
 
     toString() {
@@ -56,9 +55,5 @@ class Car {
     setDescription(description) {
         this._description = description;
         this._emitter.emit("carChanged");
-    }
-
-    onChange(fn) {
-        return this._emitter.subscribe("carChanged", fn);
     }
 }

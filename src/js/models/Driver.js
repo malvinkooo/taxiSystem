@@ -29,7 +29,6 @@ class DriverStatus {
     }
 }
 
-
 class Driver {
     constructor(driverParams) {
         this._id = driverParams.id;
@@ -38,14 +37,9 @@ class Driver {
         this._phone = driverParams.phone;
         this._description = driverParams.description;
         this._isDeleted = Boolean( Number(driverParams.isDeleted) );
-        if( !driverParams.car ) {
-            this._car = null;
-        } else {
-            this._car = new Car(driverParams.car);
-        }
+        this._car = driverParams.car ? new Car(driverParams.car) : null;
         this._currentLocation = "-";
-        this._status = DriverStatus.FREE;
-        this._emitter = new EventEmitter();
+        this._status = driverParams.status;
     }
 
     getId() {
@@ -60,61 +54,31 @@ class Driver {
         return this._isDeleted;
     }
 
-    setName(name) {
-        this._name = name;
-        this._emitter.emit("driverChanged");
-    }
-
     getSurname() {
         return this._surname;
     }
 
-    setSurname(surname) {
-        this._surname = surname;
-        this._emitter.emit("driverChanged");
+    toString() {
+        return this._name + " " + this._surname;
     }
 
     getFullName() {
-        return this._surname + " " + this._name;
+        return this.toString();
     }
 
     getPhone() {
         return this._phone;
     }
 
-    setPhone(phone) {
-        this._phone = phone;
-        this._emitter.emit("driverChanged");
-    }
-
     getStatus() {
         return this._status;
-    }
-
-    setStatus(status) {
-        this._status = status;
-        this._emitter.emit("driverChanged");
     }
 
     getDescription() {
         return this._description;
     }
 
-    setDescription(description) {
-        this._description = description;
-        this._emitter.emit("driverChanged");
-    }
-
     getCar() {
-        if(this._car) return this._car;
-    }
-
-    setCar(car) {
-        this._car = car;
-        this._emitter.emit("driverChanged");
-    }
-
-    onChange(fn) {
-        return this._emitter.subscribe("driverChanged", fn);
+        return this._car;
     }
 }
