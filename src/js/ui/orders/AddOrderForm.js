@@ -19,21 +19,21 @@ class AddOrderForm {
         this._addOrderFormElement.find('.submit').click(this._onAddOrderFormSubmit.bind(this));
         this._addOrderFormConstraints = Validation.getOrderConstraints();
         this._addOrderFormElement
-            .find(".carFeedPoint .map.marker")
-            .click(this._onShowMapClick.bind(
-                this,
-                this._addOrderFormElement.find("input[name='carFeedPoint']"),
-                this._addOrderFormElement.find(".carFeedPoint input.lat"),
-                this._addOrderFormElement.find(".carFeedPoint input.lng")
+        .find(".carFeedPoint .map.marker")
+        .click(this._onShowMapClick.bind(
+            this,
+            this._addOrderFormElement.find("input[name='carFeedPoint']"),
+            this._addOrderFormElement.find(".carFeedPoint input.lat"),
+            this._addOrderFormElement.find(".carFeedPoint input.lng")
             )
         );
         this._addOrderFormElement
-            .find(".destination .map.marker")
-            .click(this._onShowMapClick.bind(
-                this,
-                this._addOrderFormElement.find("input[name='destination']"),
-                this._addOrderFormElement.find(".destination input.lat"),
-                this._addOrderFormElement.find(".destination input.lng")
+        .find(".destination .map.marker")
+        .click(this._onShowMapClick.bind(
+            this,
+            this._addOrderFormElement.find("input[name='destination']"),
+            this._addOrderFormElement.find(".destination input.lat"),
+            this._addOrderFormElement.find(".destination input.lng")
             )
         );
     }
@@ -66,22 +66,31 @@ class AddOrderForm {
             }
         }
         if(!errors) {
-            this._ordersController.addOrder(orderParams);
-            this._addOrderFormElement.find('form')[0].reset();
+            console.log(orderParams);
+            // this._ordersController.addOrder(orderParams);
+            // this._addOrderFormElement.find('form')[0].reset();
         }
     }
 
     show() {
         this._selectDropDown.html("");
-        var driversList = this._driversController.getDriversList();
-        for(var i = 0; i < driversList.length; i++) {
-            var driver = driversList[i];
-            this._selectDropDown.append("<option value='"
-                +driver.getId()+"'>"
-                +driver.getFullName()
-            +"</option>");
-        }
-        this._selectDropDown.dropdown();
+
+        this._driversController.getFreeDrivers()
+            .then(driversList => {
+                console.log(driversList);
+                // for(var i = 0; i < driversList.length; i++) {
+                //     var driver = driversList[i];
+                //     this._selectDropDown.append("<option value='"
+                //         +driver.getId()+"'>"
+                //         +driver.getFullName()
+                //         +"</option>");
+                // }
+                // this._selectDropDown.dropdown();
+            })
+            .catch(error => {
+                console.log(error);
+                console.log(error.message);
+            });
     }
 
     _onSetDriverAutomaticallyChecked() {

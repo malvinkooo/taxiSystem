@@ -30,6 +30,35 @@ class DriversList {
         });
     }
 
+    getFreeDrivers() {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/api/drivers',
+                type: 'get',
+                data: {
+                    'filter': 'anassigned'
+                },
+                success: data => {
+                    var list = [];
+                    for (var i = 0; i < data.length; i++) {
+                        list.push( new Order(data[i]) );
+                    }
+                    resolve(list);
+                },
+                error: error => {
+                    var errorInfo = {};
+                    if(error.responseJSON) {
+                        errorInfo = responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке получить список свободных водителей.';
+                    }
+                    reject(errorInfo);
+                }
+            });
+        });
+    }
+
     addDriver(driverParams) {
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -129,17 +158,6 @@ class DriversList {
 
     getDriverscount() {
         return Object.keys(this._drivers).length;
-    }
-
-    getFreeDrivers() {
-        var list = [];
-        for(var id in this._drivers) {
-            var driver = this._drivers[id];
-            if(driver.getStatus() === DriverStatus.FREE) {
-                list.push(driver);
-            }
-        }
-        return list;
     }
 
     getFreeDriversCount() {

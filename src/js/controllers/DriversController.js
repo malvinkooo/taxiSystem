@@ -9,6 +9,10 @@ class DriversController {
         return this._driversList.getAllDrivers();
     }
 
+    getFreeDrivers() {
+        return this._driversList.getFreeDrivers();
+    }
+
     selectMenuItemAllDrivers() {
         this._ui.showDriversList();
     }

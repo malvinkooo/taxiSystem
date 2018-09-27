@@ -17,6 +17,21 @@ class Validation {
                     message: "^Имя должно состоять максимум из 20 символов и минимум из 2."
                 }
             },
+            clientSurname: {
+                presence: {
+                    allowEmpty: false,
+                    message: "^Пожалуйста, заполните это поле."
+                },
+                format: {
+                    pattern: /[А-Яа-я-ёЁ]*/,
+                    message: "^Имя может состоять только из букв."
+                },
+                length: {
+                    minimum: 2,
+                    maximum: 20,
+                    message: "^Фамилия должна состоять максимум из 20 символов и минимум из 2."
+                }
+            },
             clientPhone: {
                 presence: {
                     allowEmpty: false,

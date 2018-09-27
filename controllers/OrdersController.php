@@ -39,7 +39,7 @@ class OrdersController {
     ->key('carFeedPointLng', v::floatval())
     ->key('carFeedPointLat', v::floatval())
     ->key('distance', v::intVal())
-    ->key('rate', v::floatval());
+    ->key('rate', v::floatval()->min(0));
     $orderValidator->assert($params);
 
     $order = $this->ordersRepository->queryAddOrder($params);
@@ -63,7 +63,7 @@ class OrdersController {
     ->key('carFeedPointLat', v::floatval())
     ->key('distance', v::intVal())
     ->key('status', v::stringType()->max(20))
-    ->key('rate', v::floatval());
+    ->key('rate', v::floatval()->min(0));
     $orderValidator->assert($params);
 
     $order = $this->ordersRepository->queryUpdateOrder($args['id'], $params);
