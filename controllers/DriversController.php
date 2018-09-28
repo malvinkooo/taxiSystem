@@ -9,7 +9,13 @@ class DriversController {
   }
 
   public function getDrivers($req, $res) {
-    $driversList = $this->driversRepository->queryAllDrivers();
+    $filter = $req->getQueryParam('filter');
+    if( isset($filter) ) {
+      $driversList = $this->driversRepository->queryFreeDrivers();
+    } else {
+      $driversList = $this->driversRepository->queryAllDrivers();
+    }
+
     $data = array();
     foreach ($driversList as $driver) {
       $data[] = $driver->toJSON();

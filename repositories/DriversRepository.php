@@ -36,6 +36,27 @@ class DriversRepository {
     return $driversList;
   }
 
+  public function queryFreeDrivers() {
+    $stm = $this->db->prepare("SELECT
+      drivers.id,
+      drivers.name,
+      drivers.surname,
+      drivers.phone,
+      drivers.description,
+      drivers.isDeleted,
+      drivers.status,
+      cars.id AS carId,
+      cars.stateCarNumber,
+      cars.gasolineConsumptionRatio,
+      cars.brand,
+      cars.isDeleted AS carIsDeleted,
+      cars.description AS carDescription
+      FROM drivers_list AS drivers
+      LEFT OUTER JOIN cars_list AS cars
+      ON drivers.carId = cars.id
+      WHERE orders.driverId IS NULL /*WHERE drivers.isDeleted = 0*/");
+  }
+
   public function queryDriver($id) {
     $stm = $this->db->prepare("SELECT
       drivers.id,
