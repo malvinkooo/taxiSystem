@@ -52,9 +52,27 @@ class DriversRepository {
       cars.isDeleted AS carIsDeleted,
       cars.description AS carDescription
       FROM drivers_list AS drivers
-      LEFT OUTER JOIN cars_list AS cars
+      LEFT JOIN cars_list AS cars
       ON drivers.carId = cars.id
-      WHERE orders.driverId IS NULL /*WHERE drivers.isDeleted = 0*/");
+      WHERE
+        drivers.status = 'Свободен'
+      AND
+        drivers.isDeleted = 0
+      AND
+        drivers.carId IS NOT NULL
+      AND cars.isDeleted = 0");
+
+    if(!$stm->execute()) {
+      throw new DBException('Ошибка в SQL запросе при получении списка свободных водителей.', 500);
+    }
+
+    $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC);
+    $driversList = array();
+    foreach ($queryResult as $driver) {
+      $driversList[] = new Driver($driver);
+    }
+
+    return $driversList;
   }
 
   public function queryDriver($id) {

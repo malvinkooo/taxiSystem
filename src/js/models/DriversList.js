@@ -36,12 +36,12 @@ class DriversList {
                 url: '/api/drivers',
                 type: 'get',
                 data: {
-                    'filter': 'anassigned'
+                    'filter': 'unassigned'
                 },
                 success: data => {
                     var list = [];
                     for (var i = 0; i < data.length; i++) {
-                        list.push( new Order(data[i]) );
+                        list.push( new Driver(data[i]) );
                     }
                     resolve(list);
                 },

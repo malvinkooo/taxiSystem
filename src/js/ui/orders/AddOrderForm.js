@@ -78,14 +78,14 @@ class AddOrderForm {
         this._driversController.getFreeDrivers()
             .then(driversList => {
                 console.log(driversList);
-                // for(var i = 0; i < driversList.length; i++) {
-                //     var driver = driversList[i];
-                //     this._selectDropDown.append("<option value='"
-                //         +driver.getId()+"'>"
-                //         +driver.getFullName()
-                //         +"</option>");
-                // }
-                // this._selectDropDown.dropdown();
+                for(var i = 0; i < driversList.length; i++) {
+                    var driver = driversList[i];
+                    this._selectDropDown.append("<option value='"
+                        +driver.getId()+"'>"
+                        +driver.getFullName()
+                        +"</option>");
+                }
+                this._selectDropDown.dropdown();
             })
             .catch(error => {
                 console.log(error);
