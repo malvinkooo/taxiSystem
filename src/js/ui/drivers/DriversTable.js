@@ -27,7 +27,9 @@ class DriversTable {
                 var statusColorsList = DriverStatus.colorsList;
                 for (var i = 0; i < list.length; i++) {
                     var driver = list[i];
-                    $('<tr data-driver-id='+driver.getId()+'><td>'+driver.getName()+
+                    $('<tr data-driver-id="' +driver.getId()+ '"'
+                        +(driver.isDeleted() ? 'class="disabled"' : '')+
+                        '><td>'+driver.getName()+
                         '</td><td>'+driver.getSurname()+
                         '</td><td>'+driver.getPhone()+
                         '</td><td><button class="ui button driver-status '
