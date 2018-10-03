@@ -13,18 +13,12 @@ class OrdersController {
     addOrder(orderParams) {
         if(orderParams.isSetDriverAutomatically === true) {
             orderParams.driver = this._drivers.getRandomFreeDriver();
-        } else {
-            orderParams.driver = this._drivers.getDriver(orderParams.driver);
         }
-
-        // orderParams.driver.setStatus(DriverStatus.BUSY);
 
         return GeoService.getDistance(orderParams.carFeedPoint, orderParams.destination)
             .then((distance) => {
                 orderParams.distance = distance;
-
                 return this._orders.addOrder(orderParams);
-
             });
     }
 

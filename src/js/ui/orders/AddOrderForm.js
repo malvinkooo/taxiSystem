@@ -66,7 +66,6 @@ class AddOrderForm {
             }
         }
         if(!errors) {
-            console.log(orderParams);
             this._ordersController.addOrder(orderParams)
                 .then(() => {
                     this._addOrderFormElement.find('form')[0].reset();

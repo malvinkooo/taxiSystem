@@ -5,7 +5,6 @@ class OrdersList {
     }
 
     addOrder(orderParams) {
-        console.log( orderParams );
         return new Promise((resolve, reject) => {
             $.ajax({
                 url: '/api/orders',
@@ -25,7 +24,7 @@ class OrdersList {
                         errorInfo['code'] = error.status;
                         errorInfo['message'] = 'Ошибка при попытке добавит ьновый заказ.';
                     }
-                    reject(errorInfo);
+                    reject(error);
                 }
             });
         });

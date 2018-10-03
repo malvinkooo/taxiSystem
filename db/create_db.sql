@@ -25,7 +25,7 @@ CREATE TABLE orders_list (
   id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   driverId INT(11) UNSIGNED,
   clientId INT(11) UNSIGNED,
-  dateOfCreation DATETIME,
+  dateOfCreation DATETIME DEFAULT CURRENT_TIMESTAMP,
   dateOfCompletion DATETIME,
   carFeedPoint INT(11) UNSIGNED,
   destination INT(11) UNSIGNED,

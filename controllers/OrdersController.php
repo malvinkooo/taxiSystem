@@ -31,22 +31,21 @@ class OrdersController {
     ->key('clientName', v::stringType()->length(2, 20))
     ->key('clientSurname', v::stringType()->length(2, 20))
     ->key('clientPhone', v::stringType()->length(4, 15))
-    ->key('dateOfCreation', v::date())
 
     ->key('destination', v::key('text', v::stringType()->max(30))
         ->key('lng', v::floatval())
         ->key('lat', v::floatval()))
     ->key('carFeedPoint', v::key('text', v::stringType()->max(30))
-        ->key('carFeedPointLng', v::floatval())
-        ->key('carFeedPointLat', v::floatval()))
+        ->key('lng', v::floatval())
+        ->key('lat', v::floatval()))
 
-    ->key('distance', v::intVal())
+    ->key('distance', v::floatval())
     ->key('rate', v::floatval()->min(0));
     $orderValidator->assert($params);
 
-    // $order = $this->ordersRepository->queryAddOrder($params);
+    $order = $this->ordersRepository->queryAddOrder($params);
 
-    return $res->withStatus(200)->withJson( $params );
+    return $res->withStatus(200)->withJson( $order );
   }
 
   public function updateOrder($req, $res, $args) {

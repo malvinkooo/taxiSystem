@@ -121,25 +121,16 @@ class OrdersRepository {
   public function queryAddOrder($order) {
     $clientId = $this->clients->addClient($order);
 
-    $destinationId = $this->address->addAddress(
-      $order['destination'],
-      $order['destinationLng'],
-      $order['destinationLat']
-    );
-    $carFeedPointId = $this->address->addAddress(
-      $order['carFeedPoint'],
-      $order['carFeedPointLng'],
-      $order['carFeedPointLat']
-    );
+    $destinationId = $this->address->addAddress($order['destination']);
+    $carFeedPointId = $this->address->addAddress($order['carFeedPoint']);
 
     $addOrder = $this->db->prepare("INSERT INTO orders_list
-      (driverId, clientId, dateOfCreation, carFeedPoint, destination, distance, rate, status)
+      (driverId, clientId, carFeedPoint, destination, distance, rate, status)
       VALUES
-      (:driverId, :clientId, :dateOfCreation, :carFeedPoint, :destination, :distance, :rate, :status)");
+      (:driverId, :clientId, :carFeedPoint, :destination, :distance, :rate, :status)");
     $orderParams = array(
       ':driverId' => $order['driver'],
       ':clientId' => $clientId,
-      ':dateOfCreation' => $order['dateOfCreation'],
       ':carFeedPoint' => $carFeedPointId,
       ':destination' => $destinationId,
       ':distance' => $order['distance'],
