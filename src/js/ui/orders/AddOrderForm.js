@@ -67,8 +67,14 @@ class AddOrderForm {
         }
         if(!errors) {
             console.log(orderParams);
-            // this._ordersController.addOrder(orderParams);
-            // this._addOrderFormElement.find('form')[0].reset();
+            this._ordersController.addOrder(orderParams)
+                .then(() => {
+                    this._addOrderFormElement.find('form')[0].reset();
+                })
+                .catch(error => {
+                    console.log(error);
+                    console.log(error.message);
+                });
         }
     }
 

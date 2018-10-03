@@ -16,15 +16,16 @@ class OrdersController {
         } else {
             orderParams.driver = this._drivers.getDriver(orderParams.driver);
         }
-        orderParams.driver.setStatus(DriverStatus.BUSY);
-        GeoService.getDistance(orderParams.carFeedPoint, orderParams.destination).then((distance) => {
-            orderParams.distance = distance;
-            this._orders.addOrder(orderParams, geoService);
-            var list = this._orders.getAllOrders();
-            this._ui.showOrdersList(list);
-        }).catch((error) => {
-            console.error('Error occured while getting a distance, see details: ', error);
-        });
+
+        // orderParams.driver.setStatus(DriverStatus.BUSY);
+
+        return GeoService.getDistance(orderParams.carFeedPoint, orderParams.destination)
+            .then((distance) => {
+                orderParams.distance = distance;
+
+                return this._orders.addOrder(orderParams);
+
+            });
     }
 
     selectMenuItemAllOrders() {
