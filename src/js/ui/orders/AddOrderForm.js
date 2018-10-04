@@ -69,10 +69,10 @@ class AddOrderForm {
             this._ordersController.addOrder(orderParams)
                 .then(() => {
                     this._addOrderFormElement.find('form')[0].reset();
+                    this.show();
                 })
                 .catch(error => {
-                    console.log(error);
-                    console.log(error.message);
+                    console.dir(error);
                 });
         }
     }

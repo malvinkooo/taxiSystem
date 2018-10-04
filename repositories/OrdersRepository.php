@@ -137,7 +137,11 @@ class OrdersRepository {
       ':rate' => $order['rate'],
       ':status' => 'Новый'
     );
-    if(!$addOrder->execute($orderParams)) {
+
+    $setDriverStatus = $this->db->prepare('UPDATE drivers_list
+      SET status = "На заказе"
+      WHERE id = ?');
+    if(!$setDriverStatus->execute(array($order['driver'])) || !$addOrder->execute($orderParams)) {
       throw new DBException('Ошибка в SQL запросе при попытке добавить заказ', 500);
     }
 

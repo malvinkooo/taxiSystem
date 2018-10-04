@@ -22,7 +22,7 @@ class OrdersList {
                         errorInfo = error.responseJSON;
                     } else {
                         errorInfo['code'] = error.status;
-                        errorInfo['message'] = 'Ошибка при попытке добавит ьновый заказ.';
+                        errorInfo['message'] = 'Ошибка при попытке добавить новый заказ.';
                     }
                     reject(error);
                 }
