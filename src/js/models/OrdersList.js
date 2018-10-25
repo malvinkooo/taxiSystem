@@ -1,16 +1,33 @@
 class OrdersList {
 
     constructor() {
-        this._orders = {};
-        this._lastInsertId = 0;
         this._emitter = new EventEmitter();
     }
 
-    addOrder(orderParams, geoService) {
-        var order = new Order(this._lastInsertId, orderParams, geoService);
-        this._orders[this._lastInsertId] = order;
-        this._lastInsertId++;
-        this._emitter.emit("orderAdded", order);
+    addOrder(orderParams) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/api/orders',
+                type: 'post',
+                contentType: "application/json",
+                data: JSON.stringify(orderParams),
+                success: data => {
+                    var order = new Order(data);
+                    this._emitter.emit("orderAdded", order);
+                    resolve(order);
+                },
+                error: error => {
+                    var errorInfo = {};
+                    if(error.responseJSON) {
+                        errorInfo = error.responseJSON;
+                    } else {
+                        errorInfo['code'] = error.status;
+                        errorInfo['message'] = 'Ошибка при попытке добавить новый заказ.';
+                    }
+                    reject(error);
+                }
+            });
+        });
     }
 
     getAllOrders() {

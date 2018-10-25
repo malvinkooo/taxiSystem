@@ -30,6 +30,14 @@ class Address {
         return this._text;
     }
 
+    toJSON() {
+        return {
+            text: this._text,
+            lng: this._lng,
+            lat: this._lat
+        };
+    }
+
     isValid() {
         return Boolean(this._text && (typeof this._lat == "number" && !isNaN(this._lat)) && (typeof this._lng == "number" && !isNaN(this._lng)));
     }

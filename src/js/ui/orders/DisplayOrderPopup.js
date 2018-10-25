@@ -41,7 +41,6 @@ class DisplayOrderPopup {
         var driverElements = this._displayOrderPopupElement.find("[data-driver-getAttr]");
         for(var k = 0; k < driverElements.length; k++) {
             var driverGetAttr = $(driverElements[k]).attr("data-driver-getAttr");
-            console.log(driverGetAttr);
             $(driverElements[k]).html( driver ? driver[driverGetAttr]() : '-' );
         }
 

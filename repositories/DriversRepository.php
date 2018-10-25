@@ -36,6 +36,45 @@ class DriversRepository {
     return $driversList;
   }
 
+  public function queryFreeDrivers() {
+    $stm = $this->db->prepare("SELECT
+      drivers.id,
+      drivers.name,
+      drivers.surname,
+      drivers.phone,
+      drivers.description,
+      drivers.isDeleted,
+      drivers.status,
+      cars.id AS carId,
+      cars.stateCarNumber,
+      cars.gasolineConsumptionRatio,
+      cars.brand,
+      cars.isDeleted AS carIsDeleted,
+      cars.description AS carDescription
+      FROM drivers_list AS drivers
+      LEFT JOIN cars_list AS cars
+      ON drivers.carId = cars.id
+      WHERE
+        drivers.status = 'Свободен'
+      AND
+        drivers.isDeleted = 0
+      AND
+        drivers.carId IS NOT NULL
+      AND cars.isDeleted = 0");
+
+    if(!$stm->execute()) {
+      throw new DBException('Ошибка в SQL запросе при получении списка свободных водителей.', 500);
+    }
+
+    $queryResult = $stm->fetchAll(PDO::FETCH_ASSOC);
+    $driversList = array();
+    foreach ($queryResult as $driver) {
+      $driversList[] = new Driver($driver);
+    }
+
+    return $driversList;
+  }
+
   public function queryDriver($id) {
     $stm = $this->db->prepare("SELECT
       drivers.id,

@@ -22,7 +22,8 @@ class CarsTable {
             this._tbody.html("");
             for(var i = 0; i < list.length; i++) {
                var car = list[i];
-               this._tbody.append("<tr data-car-id='"+car.getId()+"'><td>"
+               this._tbody.append("<tr data-car-id='"+car.getId()+ "'"
+                  +(car.isDeleted() ? 'class="disabled"' : '')+"'><td>"
                   +car.getBrand()+"</td><td>"
                   +car.getGasolineConsumptionRatio()+"</td><td>"
                   +car.getStateCarNumber()

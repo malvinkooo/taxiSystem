@@ -121,32 +121,27 @@ class OrdersRepository {
   public function queryAddOrder($order) {
     $clientId = $this->clients->addClient($order);
 
-    $destinationId = $this->address->addAddress(
-      $order['destination'],
-      $order['destinationLng'],
-      $order['destinationLat']
-    );
-    $carFeedPointId = $this->address->addAddress(
-      $order['carFeedPoint'],
-      $order['carFeedPointLng'],
-      $order['carFeedPointLat']
-    );
+    $destinationId = $this->address->addAddress($order['destination']);
+    $carFeedPointId = $this->address->addAddress($order['carFeedPoint']);
 
     $addOrder = $this->db->prepare("INSERT INTO orders_list
-      (driverId, clientId, dateOfCreation, carFeedPoint, destination, distance, rate, status)
+      (driverId, clientId, carFeedPoint, destination, distance, rate, status)
       VALUES
-      (:driverId, :clientId, :dateOfCreation, :carFeedPoint, :destination, :distance, :rate, :status)");
+      (:driverId, :clientId, :carFeedPoint, :destination, :distance, :rate, :status)");
     $orderParams = array(
       ':driverId' => $order['driver'],
       ':clientId' => $clientId,
-      ':dateOfCreation' => $order['dateOfCreation'],
       ':carFeedPoint' => $carFeedPointId,
       ':destination' => $destinationId,
       ':distance' => $order['distance'],
       ':rate' => $order['rate'],
       ':status' => 'Новый'
     );
-    if(!$addOrder->execute($orderParams)) {
+
+    $setDriverStatus = $this->db->prepare('UPDATE drivers_list
+      SET status = "На заказе"
+      WHERE id = ?');
+    if(!$setDriverStatus->execute(array($order['driver'])) || !$addOrder->execute($orderParams)) {
       throw new DBException('Ошибка в SQL запросе при попытке добавить заказ', 500);
     }
 
